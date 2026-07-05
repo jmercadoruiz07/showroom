@@ -1,0 +1,26 @@
+{
+  "name": "showroom",
+  "version": "1.0.0",
+  "description": "A static website structured explicitly for print, digital and design-forward 3D project showcases.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmercadoruiz07/showroom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jmercadoruiz07/showroom/issues"
+  },
+  "homepage": "https://github.com/jmercadoruiz07/showroom#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.0"
+  }
+}
