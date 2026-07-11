@@ -1,0 +1,95 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| 404 Page — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Minimal 404 page with back link.
+|
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Page Not Found" description="Page not found. Return to the JMR Visuals portfolio.">
+  <main class="not-found" id="main-content">
+    <h1 class="not-found-code text-display">404</h1>
+    <h2 class="not-found-title text-xl">Page Not Found</h2>
+    <p class="not-found-message text-body">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="/" class="not-found-link text-mono">
+      ← Back to Portfolio
+    </a>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--header-height));
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+  }
+
+  .not-found-code {
+    font-size: var(--type-hero);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--line-height-tighter);
+    margin: 0 0 var(--space-lg);
+    color: var(--color-oxide);
+  }
+
+  .not-found-title {
+    font-size: var(--type-xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 var(--space-md);
+    color: var(--color-ink);
+  }
+
+  .not-found-message {
+    font-size: var(--type-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-soot);
+    max-width: 40ch;
+    margin: 0 0 var(--space-xl);
+  }
+
+  .not-found-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--type-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-ink);
+    transition: color var(--duration-fast) var(--ease-quick),
+                gap var(--duration-fast) var(--ease-quick);
+  }
+
+  .not-found-link:hover {
+    color: var(--color-oxide);
+    gap: var(--space-md);
+  }
+
+  [data-theme="dark"] .not-found-link {
+    color: var(--color-deep-text);
+  }
+
+  [data-theme="dark"] .not-found-link:hover {
+    color: var(--color-oxide);
+  }
+
+  @media (max-width: 768px) {
+    .not-found-code {
+      font-size: var(--type-2xl);
+    }
+
+    .not-found-title {
+      font-size: var(--type-lg);
+    }
+  }
+</style>

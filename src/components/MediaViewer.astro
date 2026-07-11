@@ -1,0 +1,282 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| MediaViewer — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Lightbox overlay for project images.
+| Dark semi-transparent backdrop, image scales to fit viewport.
+| Keyboard navigation (Escape, arrows), click-to-close.
+|
+*/
+interface Props {
+  images: string[];
+  title: string;
+}
+
+const { images, title } = Astro.props;
+---
+
+<div class="media-viewer" id="media-viewer" role="dialog" aria-label={`${title} image viewer`} aria-hidden="true">
+  <div class="viewer-backdrop" aria-hidden="true"></div>
+
+  <button class="viewer-close" aria-label="Close viewer" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <button class="viewer-nav viewer-prev" aria-label="Previous image" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <button class="viewer-nav viewer-next" aria-label="Next image" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+
+  <div class="viewer-content">
+    <img class="viewer-image" src="" alt="" />
+  </div>
+
+  <div class="viewer-counter text-mono">
+    <span class="viewer-current">1</span> / <span class="viewer-total">{images.length}</span>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const viewer = document.getElementById('media-viewer');
+    if (!viewer) return;
+
+    const backdrop = viewer.querySelector('.viewer-backdrop') as HTMLElement;
+    const closeBtn = viewer.querySelector('.viewer-close') as HTMLElement;
+    const prevBtn = viewer.querySelector('.viewer-prev') as HTMLElement;
+    const nextBtn = viewer.querySelector('.viewer-next') as HTMLElement;
+    const imageEl = viewer.querySelector('.viewer-image') as HTMLImageElement;
+    const currentEl = viewer.querySelector('.viewer-current') as HTMLElement;
+    const images = JSON.parse(viewer.dataset.images || '[]') as string[];
+    const title = viewer.dataset.title || '';
+
+    let currentIndex = 0;
+    let isOpen = false;
+    let triggerElement: HTMLElement | null = null;
+    const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    function getFocusableElements() {
+      return Array.from(viewer.querySelectorAll(focusableSelector)) as HTMLElement[];
+    }
+
+    function trapFocus(e: KeyboardEvent) {
+      if (e.key !== 'Tab' || !isOpen) return;
+      const focusable = getFocusableElements();
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    function open(index: number, trigger?: HTMLElement) {
+      currentIndex = index;
+      triggerElement = trigger || null;
+      updateImage();
+      viewer.setAttribute('aria-hidden', 'false');
+      viewer.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      isOpen = true;
+      closeBtn.focus();
+      document.addEventListener('keydown', trapFocus);
+    }
+
+    function close() {
+      viewer.setAttribute('aria-hidden', 'true');
+      viewer.classList.remove('is-open');
+      document.body.style.overflow = '';
+      isOpen = false;
+      document.removeEventListener('keydown', trapFocus);
+      if (triggerElement && typeof triggerElement.focus === 'function') {
+        triggerElement.focus();
+      }
+    }
+
+    function updateImage() {
+      if (!imageEl) return;
+      imageEl.src = images[currentIndex];
+      imageEl.alt = `${title} - Image ${currentIndex + 1}`;
+      if (currentEl) currentEl.textContent = String(currentIndex + 1);
+    }
+
+    function prev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateImage();
+    }
+
+    function next() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateImage();
+    }
+
+    // Click handlers
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+    prevBtn?.addEventListener('click', prev);
+    nextBtn?.addEventListener('click', next);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function (e) {
+      if (!isOpen) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    // Bind gallery items — make focusable and add keyboard support
+    document.querySelectorAll('.gallery-item').forEach(function (item, index) {
+      const el = item as HTMLElement;
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', `Open image ${index + 1} in viewer`);
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () {
+        open(index, el);
+      });
+      el.addEventListener('keydown', function (e: KeyboardEvent) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(index, el);
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .media-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-base) var(--ease-standard),
+                visibility var(--duration-base) var(--ease-standard);
+  }
+
+  .media-viewer.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .viewer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+  }
+
+  .viewer-close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-bone);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-quick);
+    z-index: 1;
+  }
+
+  .viewer-close:hover {
+    color: var(--color-oxide);
+  }
+
+  .viewer-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-bone);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity var(--duration-fast) var(--ease-quick),
+                color var(--duration-fast) var(--ease-quick);
+    z-index: 1;
+  }
+
+  .viewer-nav:hover {
+    opacity: 1;
+    color: var(--color-oxide);
+  }
+
+  .viewer-prev {
+    left: var(--space-lg);
+  }
+
+  .viewer-next {
+    right: var(--space-lg);
+  }
+
+  .viewer-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .viewer-image {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    user-select: none;
+  }
+
+  .viewer-counter {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--type-xs);
+    color: var(--color-bone);
+    opacity: 0.6;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  @media (max-width: 768px) {
+    .viewer-nav {
+      display: none;
+    }
+
+    .viewer-close {
+      top: var(--space-md);
+      right: var(--space-md);
+    }
+  }
+</style>

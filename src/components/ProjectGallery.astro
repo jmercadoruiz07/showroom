@@ -1,0 +1,247 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| ProjectGallery — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Masonry/staggered grid of project thumbnails using CSS column-count.
+| Varied aspect ratios per item. Category filter bar sticky below header.
+| Staggered entrance animation on scroll.
+|
+*/
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+const allProjects = await getCollection('projects', ({ data }) => !data.featured);
+const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
+
+// Sort by order, then date
+const sortedProjects = [...featuredProjects, ...allProjects].sort((a, b) => {
+  if (a.data.order !== undefined && b.data.order !== undefined) {
+    return a.data.order - b.data.order;
+  }
+  if (a.data.order !== undefined) return -1;
+  if (b.data.order !== undefined) return 1;
+  return b.data.date.getTime() - a.data.date.getTime();
+});
+
+const categories = ['all', 'print', '3d', 'motion'] as const;
+---
+
+<div class="project-gallery">
+  <nav class="category-filter" aria-label="Filter projects by category">
+    <ul class="filter-list">
+      {categories.map((cat) => (
+        <li>
+          <button
+            aria-pressed={cat === 'all'}
+            aria-controls="project-grid"
+            class="filter-btn {cat === 'all' ? 'active' : ''}"
+            data-category={cat}
+          >
+            {cat.toUpperCase()}
+          </button>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="filter-wrapper">
+    <div
+      id="project-grid"
+      class="project-grid masonry reveal-stagger"
+      aria-label="Projects"
+    >
+    {sortedProjects.map((project, index) => (
+      <ProjectCard
+        title={project.data.title}
+        category={project.data.category}
+        thumbnail={project.data.thumbnail}
+        thumbnailAlt={`${project.data.title} thumbnail`}
+        href={`/projects/${project.id}`}
+        featured={project.data.featured}
+        class:list={`reveal-item delay-${index % 8}`}
+      />
+    ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-gallery {
+    padding: var(--space-2xl) var(--space-xl);
+    padding-top: calc(var(--header-height) + var(--space-xl));
+  }
+
+  .filter-wrapper {
+    position: sticky;
+    top: var(--header-height);
+    z-index: var(--z-sticky);
+    background: var(--color-bone);
+    border-bottom: 1px solid var(--color-stone);
+    padding: var(--space-md) var(--space-xl);
+    margin: calc(-1 * var(--space-2xl)) calc(-1 * var(--space-xl)) var(--space-xl);
+    padding-left: calc(var(--space-xl) * 2);
+  }
+
+  [data-theme="dark"] .filter-wrapper {
+    background: var(--color-deep);
+    border-color: var(--color-stone);
+  }
+
+  .category-filter {
+    max-width: var(--max-width-full);
+    margin: 0 auto;
+  }
+
+  .filter-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-xs);
+    margin-bottom: calc(-1 * var(--space-xs));
+  }
+
+  .filter-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+    padding: var(--space-xs) var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-soot);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-quick),
+                border-color var(--duration-fast) var(--ease-quick);
+    white-space: nowrap;
+    scroll-snap-align: start;
+  }
+
+  .filter-btn:hover {
+    color: var(--color-ink);
+  }
+
+  [data-theme="dark"] .filter-btn:hover {
+    color: var(--color-deep-text);
+  }
+
+  .filter-btn.active {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-oxide);
+  }
+
+  [data-theme="dark"] .filter-btn.active {
+    color: var(--color-deep-text);
+  }
+
+  .filter-btn:focus-visible {
+    outline: 2px solid var(--color-oxide);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .project-grid {
+    max-width: var(--max-width-full);
+    margin: 0 auto;
+  }
+
+  /* Reveal item delays */
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(var(--space-md));
+    transition: opacity var(--duration-reveal) var(--ease-standard),
+                transform var(--duration-reveal) var(--ease-standard);
+  }
+
+  .reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .delay-0 { transition-delay: 0ms; }
+  .delay-1 { transition-delay: 100ms; }
+  .delay-2 { transition-delay: 200ms; }
+  .delay-3 { transition-delay: 300ms; }
+  .delay-4 { transition-delay: 400ms; }
+  .delay-5 { transition-delay: 500ms; }
+  .delay-6 { transition-delay: 600ms; }
+  .delay-7 { transition-delay: 700ms; }
+
+  @media (max-width: 768px) {
+    .project-gallery {
+      padding: var(--space-xl) var(--space-md);
+      padding-top: calc(var(--header-height) + var(--space-lg));
+    }
+
+    .filter-wrapper {
+      padding: var(--space-sm) var(--space-md);
+      margin: calc(-1 * var(--space-xl)) calc(-1 * var(--space-md)) var(--space-lg);
+      padding-left: var(--space-md);
+    }
+
+    .filter-btn {
+      font-size: var(--type-2xs);
+      padding: var(--space-2xs) var(--space-xs);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Category filter functionality
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.category;
+
+      // Update active state
+      filterButtons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      // Filter cards
+      projectCards.forEach((card) => {
+        const cardCategory = card.dataset.category;
+        if (category === 'all' || cardCategory === category) {
+          card.style.display = 'block';
+          // Trigger reflow for animation
+          card.offsetHeight;
+          card.classList.add('is-visible');
+        } else {
+          card.classList.remove('is-visible');
+          setTimeout(() => {
+            if (!card.classList.contains('is-visible')) {
+              card.style.display = 'none';
+            }
+          }, 300);
+        }
+      });
+    });
+  });
+</script>

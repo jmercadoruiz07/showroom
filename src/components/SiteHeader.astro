@@ -1,0 +1,224 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| SiteHeader — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Fixed position header with wordmark, navigation, and theme toggle.
+| Transparent background that gains opacity on scroll.
+| Asymmetric padding (more padding-left).
+|
+*/
+---
+
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a href="/" class="wordmark" aria-label="JMR Visuals — Home">
+      <span class="wordmark-text">JMR VISUALS</span>
+    </a>
+
+    <nav class="nav-primary" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/projects" class="nav-link">Projects</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="mailto:hello@jmrvisuals.com" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      aria-label="Toggle dark mode"
+      type="button"
+    >
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    z-index: var(--z-header);
+    background: transparent;
+    transition: background var(--duration-base) var(--ease-standard),
+                box-shadow var(--duration-base) var(--ease-standard);
+  }
+
+  .site-header.scrolled {
+    background: var(--color-bone);
+    box-shadow: 0 1px 0 var(--color-stone);
+  }
+
+  [data-theme="dark"] .site-header.scrolled {
+    background: var(--color-deep);
+    box-shadow: 0 1px 0 var(--color-stone);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: var(--max-width-full);
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    padding-left: calc(var(--space-xl) * 2);
+  }
+
+  .wordmark {
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .wordmark-text {
+    font-family: var(--font-mono);
+    font-size: var(--type-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink);
+    transition: color var(--duration-fast) var(--ease-quick);
+  }
+
+  .wordmark:hover .wordmark-text {
+    color: var(--color-oxide);
+  }
+
+  [data-theme="dark"] .wordmark-text {
+    color: var(--color-deep-text);
+  }
+
+  [data-theme="dark"] .wordmark:hover .wordmark-text {
+    color: var(--color-oxide);
+  }
+
+  .nav-primary {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-family: var(--font-body);
+    font-size: var(--type-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-ink);
+    position: relative;
+    padding: var(--space-xs) 0;
+    transition: color var(--duration-fast) var(--ease-quick);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-oxide);
+    transition: width var(--duration-base) var(--ease-standard);
+  }
+
+  .nav-link:hover {
+    color: var(--color-oxide);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  [data-theme="dark"] .nav-link {
+    color: var(--color-deep-text);
+  }
+
+  [data-theme="dark"] .nav-link:hover {
+    color: var(--color-oxide);
+  }
+
+  .theme-toggle {
+    flex-shrink: 0;
+    margin-left: var(--space-lg);
+  }
+
+  .theme-toggle .icon-sun {
+    display: none;
+  }
+
+  .theme-toggle .icon-moon {
+    display: block;
+  }
+
+  [data-theme="dark"] .theme-toggle .icon-sun {
+    display: block;
+  }
+
+  [data-theme="dark"] .theme-toggle .icon-moon {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .header-inner {
+      padding: 0 var(--space-md);
+      padding-left: var(--space-lg);
+    }
+
+    .nav-list {
+      gap: var(--space-md);
+    }
+
+    .nav-link {
+      font-size: var(--type-xs);
+    }
+  }
+</style>
+
+<script>
+  // Header scroll behavior
+  const header = document.querySelector('.site-header');
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function onScroll() {
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (lastScrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

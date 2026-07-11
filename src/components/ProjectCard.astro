@@ -1,0 +1,223 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| ProjectCard — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Single project thumbnail with title + category. No border-radius, no default drop shadow.
+| Title overlay on hover (slides up from bottom). Slow zoom (scale 1.03 over 500ms).
+| Category tag in Mono font (top-right).
+|
+*/
+import type { ImageMetadata } from 'astro';
+interface Props {
+  title: string;
+  category: 'print' | '3d' | 'motion';
+  thumbnail: string;
+  thumbnailAlt?: string;
+  href: string;
+  featured?: boolean;
+  order?: number;
+}
+
+const {
+  title,
+  category,
+  thumbnail,
+  thumbnailAlt,
+  href,
+  featured = false,
+  order,
+} = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  print: 'PRINT',
+  '3d': '3D',
+  motion: 'MOTION',
+};
+---
+
+<article
+  class="project-card reveal-item"
+  data-category={category}
+  data-order={order}
+  style:delay={order ? `${(order % 8) * 100}ms` : '0ms'}
+>
+  <a href={href} class="card-link" aria-label={`View project: ${title}`}>
+    <div class="card-media" aria-hidden="true">
+      <img
+        src={thumbnail}
+        alt={thumbnailAlt || title}
+        loading="lazy"
+        decoding="async"
+        width="400"
+        height="500"
+      />
+    </div>
+
+    <div class="card-overlay">
+      <span class="card-category text-mono" aria-hidden="true">
+        {categoryLabels[category] || category.toUpperCase()}
+      </span>
+
+      <div class="card-content">
+        <h2 class="card-title text-display">{title}</h2>
+        {featured && <span class="card-featured text-mono">FEATURED</span>}
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+    display: block;
+    break-inside: avoid;
+    margin-bottom: var(--space-md);
+    background: var(--color-paper);
+    overflow: hidden;
+  }
+
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card-media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 500ms var(--ease-standard);
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-md);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 40%,
+      transparent 100%
+    );
+    color: var(--color-bone);
+    opacity: 0;
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+
+  .project-card:hover .card-overlay,
+  .project-card:focus-within .card-overlay {
+    opacity: 1;
+  }
+
+  .project-card:hover .card-media img,
+  .project-card:focus-within .card-media img {
+    transform: scale(1.03);
+  }
+
+  .card-category {
+    font-size: var(--type-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    opacity: 0.8;
+    align-self: flex-start;
+  }
+
+  .card-content {
+    padding-bottom: var(--space-sm);
+  }
+
+  .card-title {
+    font-size: var(--type-lg);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--line-height-snug);
+    margin: 0 0 var(--space-xs);
+    transform: translateY(var(--space-sm));
+    opacity: 0;
+    transition: transform var(--duration-base) var(--ease-standard),
+                opacity var(--duration-base) var(--ease-standard);
+  }
+
+  .project-card:hover .card-title,
+  .project-card:focus-within .card-title {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 50ms;
+  }
+
+  .card-featured {
+    font-size: var(--type-2xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-oxide-muted);
+    opacity: 0;
+    transform: translateY(var(--space-xs));
+    transition: opacity var(--duration-base) var(--ease-standard),
+                transform var(--duration-base) var(--ease-standard);
+  }
+
+  .project-card:hover .card-featured,
+  .project-card:focus-within .card-featured {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 100ms;
+  }
+
+  /* Featured card styling */
+  .project-card.featured .card-media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-card.featured .card-title {
+    font-size: var(--type-xl);
+  }
+
+  @media (max-width: 768px) {
+    .card-overlay {
+      opacity: 1;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        transparent 100%
+      );
+    }
+
+    .card-title {
+      transform: none;
+      opacity: 1;
+    }
+
+    .card-featured {
+      opacity: 1;
+      transform: none;
+    }
+
+    .card-media img {
+      transform: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-media img,
+    .card-overlay,
+    .card-title,
+    .card-featured {
+      transition: none;
+    }
+  }
+</style>

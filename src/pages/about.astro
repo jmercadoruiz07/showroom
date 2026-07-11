@@ -1,0 +1,39 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| About Page — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| About section with portrait bleed, bio, pull quote, and contact CTA.
+|
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+---
+
+<BaseLayout title="About — JMR Visuals" description="Learn more about JMR Visuals, a multidisciplinary designer specializing in print, 3D, and motion design.">
+  <main class="main-content" id="main-content">
+    <AboutSection
+      name="JMR Visuals"
+      title="Designer & 3D Artist"
+      bio="A multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.
+
+With over a decade of experience crafting visual identities, editorial layouts, and immersive 3D experiences, I bridge the gap between traditional design craft and emerging technologies. My work spans brand systems, exhibition design, motion graphics, and real-time 3D applications.
+
+I believe design is a conversation between form and function — where every pixel, every curve, and every interaction serves a purpose. Whether it's a printed monograph that lives on a shelf for decades or a WebGL experience that exists only in the browser, the same principles apply: clarity, intention, and craft."
+      portrait="/images/about-portrait.jpg"
+      portraitAlt="Portrait of JMR Visuals"
+      pullQuote="Design is not just what it looks like. Design is how it works."
+      email="hello@jmrvisuals.com"
+    />
+
+    <ContactBlock email="hello@jmrvisuals.com" />
+  </main>
+</BaseLayout>
+
+<style>
+  .main-content {
+    padding-top: var(--space-xl);
+  }
+</style>

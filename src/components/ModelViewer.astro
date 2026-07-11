@@ -1,0 +1,153 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| ModelViewer — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Astro island wrapper for Google's <model-viewer> web component.
+| Loaded with client:visible for lazy loading.
+| Props: src (GLB path), alt, poster (fallback image).
+| Features: Auto-rotate, user-interactive drag/zoom.
+|
+*/
+interface Props {
+  src: string;
+  alt: string;
+  poster?: string;
+}
+
+const { src, alt, poster } = Astro.props;
+---
+
+<model-viewer
+  src={src}
+  alt={alt}
+  poster={poster}
+  auto-rotate
+  camera-controls
+  interaction-prompt="auto"
+  ar
+  ar-modes="scene-viewer webxr quick-look"
+  environment-image="neutral"
+  shadow-intensity="1"
+  shadow-softness="0.5"
+  loading="lazy"
+  class="model-viewer"
+  aria-label={alt}
+>
+  <div class="poster" slot="poster" style:background-image={poster ? `url(${poster})` : 'none'}>
+    {!poster && <span class="poster-label text-mono">LOADING 3D MODEL</span>}
+  </div>
+  <div class="loading" slot="progress-bar">
+    <div class="loading-shimmer"></div>
+    <div class="loading-bar"></div>
+  </div>
+</model-viewer>
+
+<style>
+  .model-viewer {
+    width: 100%;
+    height: 100%;
+    background: var(--color-paper);
+  }
+
+  .poster {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-soot);
+    font-family: var(--font-mono);
+    font-size: var(--type-sm);
+    letter-spacing: var(--tracking-wide);
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-paper);
+  }
+
+  .poster::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(0.95 0.005 75 / 0.6) 50%,
+      transparent 100%
+    );
+    animation: shimmer 1.8s ease-in-out infinite;
+  }
+
+  .poster-label {
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .loading {
+    width: 100%;
+    height: 4px;
+    background: var(--color-stone);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .loading-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(0.70 0.01 60 / 0.4) 50%,
+      transparent 100%
+    );
+    animation: shimmer 1.8s ease-in-out infinite;
+  }
+
+  .loading-bar {
+    height: 100%;
+    background: var(--color-oxide);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: loading 2s var(--ease-standard) infinite;
+  }
+
+  @keyframes loading {
+    0% { transform: scaleX(0); transform-origin: left; }
+    50% { transform: scaleX(1); transform-origin: left; }
+    50.01% { transform: scaleX(1); transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loading-bar {
+      animation: none;
+      transform: scaleX(1);
+    }
+    .poster::before,
+    .loading-shimmer {
+      animation: none;
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Load model-viewer web component
+  if (!customElements.get('model-viewer')) {
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }
+</script>

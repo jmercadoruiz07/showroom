@@ -25,8 +25,8 @@ Print-inspired: think soot, bone, oxidized copper, and deep ink.
   --color-paper:        oklch(0.93 0.008 75);
   /* Oxide — accent (warm copper) */
   --color-oxide:        oklch(0.55 0.14 45);
-  /* Oxide muted — hover states */
-  --color-oxide-muted:  oklch(0.48 0.10 45);
+  /* Oxide muted — hover states, small text (WCAG AA on bone) */
+  --color-oxide-muted:  oklch(0.42 0.10 45);
   /* Deep — dark sections, footers */
   --color-deep:         oklch(0.12 0.015 60);
   /* Deep text — text on dark backgrounds */

@@ -1,0 +1,57 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| Projects Index — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Lists all projects with category filter.
+|
+*/
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
+---
+
+<BaseLayout title="Projects" description="All projects by JMR Visuals — print, 3D, and motion design.">
+  <main class="projects-page" id="main-content">
+    <header class="projects-header">
+      <h1 class="projects-title text-display">Projects</h1>
+      <p class="projects-subtitle text-body">A selection of print, 3D, and motion design work.</p>
+    </header>
+
+    <ProjectGallery />
+  </main>
+</BaseLayout>
+
+<style>
+  .projects-page {
+    padding-top: var(--header-height);
+  }
+
+  .projects-header {
+    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+    padding-left: calc(var(--space-xl) * 2);
+  }
+
+  .projects-title {
+    font-size: var(--type-hero);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 var(--space-md);
+  }
+
+  .projects-subtitle {
+    font-size: var(--type-md);
+    color: var(--color-soot);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .projects-header {
+      padding: var(--space-2xl) var(--space-md) var(--space-lg);
+    }
+
+    .projects-title {
+      font-size: var(--type-2xl);
+    }
+  }
+</style>

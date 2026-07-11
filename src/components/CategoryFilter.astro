@@ -1,0 +1,127 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| CategoryFilter — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Horizontal scrollable row of text links (not pills/badges). Sticky below header on scroll.
+| Active category underlined in --color-oxide.
+|
+*/
+interface Props {
+  categories?: string[];
+  activeCategory?: string;
+}
+
+const {
+  categories = ['all', 'print', '3d', 'motion'],
+  activeCategory = 'all',
+} = Astro.props;
+---
+
+<nav class="category-filter" aria-label="Filter projects by category">
+  <ul class="filter-list">
+    {categories.map((cat) => (
+      <li>
+        <a
+          href={cat === 'all' ? '/projects' : `/projects?category=${cat}`}
+          aria-current={cat === activeCategory ? 'true' : undefined}
+          class="filter-link {cat === activeCategory ? 'active' : ''}"
+          data-category={cat}
+        >
+          {cat.toUpperCase()}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .category-filter {
+    position: sticky;
+    top: var(--header-height);
+    z-index: var(--z-sticky);
+    background: var(--color-bone);
+    border-bottom: 1px solid var(--color-stone);
+    padding: var(--space-sm) var(--space-xl);
+    padding-left: calc(var(--space-xl) * 2);
+  }
+
+  [data-theme="dark"] .category-filter {
+    background: var(--color-deep);
+    border-color: var(--color-stone);
+  }
+
+  .filter-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--space-xl);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-xs);
+    margin-bottom: calc(-1 * var(--space-xs));
+  }
+
+  .filter-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-link {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-soot);
+    padding: var(--space-xs) 0;
+    border-bottom: 2px solid transparent;
+    transition: color var(--duration-fast) var(--ease-quick),
+                border-color var(--duration-fast) var(--ease-quick);
+    white-space: nowrap;
+    scroll-snap-align: start;
+    text-decoration: none;
+  }
+
+  .filter-link:hover {
+    color: var(--color-ink);
+  }
+
+  [data-theme="dark"] .filter-link:hover {
+    color: var(--color-deep-text);
+  }
+
+  .filter-link.active {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-oxide);
+  }
+
+  [data-theme="dark"] .filter-link.active {
+    color: var(--color-deep-text);
+  }
+
+  .filter-link:focus-visible {
+    outline: 2px solid var(--color-oxide);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .category-filter {
+      padding: var(--space-xs) var(--space-md);
+      padding-left: var(--space-md);
+    }
+
+    .filter-list {
+      gap: var(--space-md);
+    }
+
+    .filter-link {
+      font-size: var(--type-2xs);
+    }
+  }
+</style>

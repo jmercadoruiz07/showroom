@@ -1,0 +1,305 @@
+/*
+|-------------------------------------------------------------------------------
+| Global Styles — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Global utilities, layout helpers, and component-agnostic patterns.
+| Component-specific styles live in their respective .astro files.
+|
+*/
+
+/* ─── Layout Utilities ─────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-width-full);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.prose {
+  max-width: var(--max-width-prose);
+}
+
+/* ─── Full Bleed Utility ───────────────────────────────────────────────────── */
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+/* ─── Asymmetric Grid Helpers ──────────────────────────────────────────────── */
+.grid-asymmetric-60-40 {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-2xl);
+}
+
+.grid-asymmetric-70-30 {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  gap: var(--space-2xl);
+}
+
+.grid-asymmetric-30-70 {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  gap: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+  .grid-asymmetric-60-40,
+  .grid-asymmetric-70-30,
+  .grid-asymmetric-30-70 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Masonry Grid ─────────────────────────────────────────────────────────── */
+.masonry {
+  column-count: 1;
+  column-gap: var(--space-md);
+}
+
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .masonry { column-count: 2; }
+}
+
+@media (min-width: 1024px) {
+  .masonry { column-count: 3; }
+}
+
+@media (min-width: 1440px) {
+  .masonry { column-count: 3; column-gap: var(--space-lg); }
+}
+
+/* ─── Sticky Positioning ───────────────────────────────────────────────────── */
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+/* ─── Scroll Reveal Base ───────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--space-md));
+  transition: opacity var(--duration-reveal) var(--ease-standard),
+              transform var(--duration-reveal) var(--ease-standard);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(var(--space-sm));
+  transition: opacity var(--duration-reveal) var(--ease-standard),
+              transform var(--duration-reveal) var(--ease-standard);
+}
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > *:nth-child(1)  { transition-delay: 0ms; }
+.reveal-stagger > *:nth-child(2)  { transition-delay: 100ms; }
+.reveal-stagger > *:nth-child(3)  { transition-delay: 200ms; }
+.reveal-stagger > *:nth-child(4)  { transition-delay: 300ms; }
+.reveal-stagger > *:nth-child(5)  { transition-delay: 400ms; }
+.reveal-stagger > *:nth-child(6)  { transition-delay: 500ms; }
+.reveal-stagger > *:nth-child(7)  { transition-delay: 600ms; }
+.reveal-stagger > *:nth-child(8)  { transition-delay: 700ms; }
+
+/* ─── Typography Utilities ─────────────────────────────────────────────────── */
+.text-display {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--line-height-tight);
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
+}
+
+.text-ink { color: var(--color-ink); }
+.text-soot { color: var(--color-soot); }
+.text-stone { color: var(--color-stone); }
+.text-oxide { color: var(--color-oxide); }
+.text-deep-text { color: var(--color-deep-text); }
+
+/* ─── Background Utilities ─────────────────────────────────────────────────── */
+.bg-bone { background-color: var(--color-bone); }
+.bg-paper { background-color: var(--color-paper); }
+.bg-deep { background-color: var(--color-deep); }
+
+/* ─── Border Utilities ─────────────────────────────────────────────────────── */
+.border-stone { border-color: var(--color-stone); }
+.border-oxide { border-color: var(--color-oxide); }
+
+/* ─── Focus Ring ───────────────────────────────────────────────────────────── */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-oxide);
+  outline-offset: 2px;
+}
+
+/* ─── Skip Link ────────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-ink);
+  color: var(--color-bone);
+  z-index: var(--z-toast);
+  transition: top var(--duration-fast) var(--ease-quick);
+}
+
+.skip-link:focus {
+  top: var(--space-md);
+}
+
+/* ─── Back to Top ──────────────────────────────────────────────────────────── */
+.back-to-top {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-ink);
+  color: var(--color-bone);
+  border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--space-md));
+  transition: opacity var(--duration-base) var(--ease-standard),
+              visibility var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard),
+              background var(--duration-fast) var(--ease-quick);
+  z-index: var(--z-sticky);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--color-oxide);
+}
+
+.back-to-top svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ─── Theme Toggle ─────────────────────────────────────────────────────────── */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-stone);
+  border-radius: 50%;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  transition: background var(--duration-fast) var(--ease-quick),
+              border-color var(--duration-fast) var(--ease-quick),
+              color var(--duration-fast) var(--ease-quick);
+}
+
+.theme-toggle:hover {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  border-color: var(--color-ink);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ─── Scrollbar Styling ────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bone);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stone);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-soot);
+}
+
+/* ─── Print Styles ─────────────────────────────────────────────────────────── */
+@media print {
+  .no-print,
+  .site-header,
+  .site-footer,
+  .theme-toggle,
+  .back-to-top,
+  .category-filter {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ─── Reduced Motion ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+}

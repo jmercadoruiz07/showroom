@@ -1,0 +1,174 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| HeroSection — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Full-bleed background image (100vw × 90vh) with overlaid title bottom-left.
+| Subtitle/tagline in Body font, offset right. Thin animated line for scroll down.
+| No rounded containers, no cards, no glassmorphism.
+|
+*/
+interface Props {
+  title: string;
+  subtitle?: string;
+  backgroundImage?: string; // Path to image in public/ or remote URL
+  backgroundAlt?: string;
+}
+
+const {
+  title = 'JMR VISUALS',
+  subtitle = 'Print · 3D · Motion Design',
+  backgroundImage = '/hero-default.jpg',
+  backgroundAlt = 'Portfolio hero image',
+} = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-background" aria-hidden="true">
+    <img
+      src={backgroundImage}
+      alt={backgroundAlt}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="hero-content">
+    <h1 id="hero-title" class="hero-title text-display">
+      {title}
+    </h1>
+
+    {subtitle && (
+      <p class="hero-subtitle text-body">
+        {subtitle}
+      </p>
+    )}
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-line"></span>
+      <span class="scroll-text text-mono">SCROLL</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 90vh;
+    min-height: 600px;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+  }
+
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-2xl);
+    padding-left: calc(var(--space-xl) * 2);
+    padding-bottom: var(--space-3xl);
+    color: var(--color-bone);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-title {
+    font-size: var(--type-hero);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--line-height-tighter);
+    margin: 0 0 var(--space-md);
+    max-width: 60ch;
+  }
+
+  .hero-subtitle {
+    font-size: var(--type-lg);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    margin: 0 0 var(--space-2xl);
+    max-width: 40ch;
+    opacity: 0.9;
+  }
+
+  .scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    animation: scrollPulse 2s var(--ease-standard) infinite;
+  }
+
+  .scroll-line {
+    width: 60px;
+    height: 1px;
+    background: currentColor;
+    transform-origin: left center;
+    animation: lineGrow 1.5s var(--ease-standard) infinite;
+  }
+
+  .scroll-text {
+    font-size: var(--type-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes lineGrow {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(1); }
+    100% { transform: scaleX(0); }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: 80vh;
+      min-height: 500px;
+    }
+
+    .hero-content {
+      padding: var(--space-lg);
+      padding-left: var(--space-lg);
+      padding-bottom: var(--space-2xl);
+    }
+
+    .hero-title {
+      font-size: var(--type-2xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--type-md);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-indicator,
+    .scroll-line {
+      animation: none;
+    }
+    .scroll-line {
+      transform: scaleX(1);
+    }
+  }
+</style>

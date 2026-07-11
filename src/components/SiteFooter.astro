@@ -1,0 +1,197 @@
+---
+/*
+|diff
+/*
+|-------------------------------------------------------------------------------
+| SiteFooter — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Full-width dark band with copyright, back-to-top link, and social icons.
+| Uses --color-deep background.
+|
+*/
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <p class="copyright">
+        &copy; {new Date().getFullYear()} JMR Visuals. All rights reserved.
+      </p>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul class="footer-links">
+          <li><a href="/projects" class="footer-link">Projects</a></li>
+          <li><a href="/about" class="footer-link">About</a></li>
+          <li><a href="mailto:hello@jmrvisuals.com" class="footer-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-social">
+      <a href="https://www.artstation.com/jmr_visuals" class="social-link" aria-label="ArtStation" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.5 14.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm11-5.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+      <a href="mailto:hello@jmrvisuals.com" class="social-link" aria-label="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </a>
+    </div>
+
+    <a href="#top" class="back-to-top" aria-label="Back to top">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="15" x2="12" y2="9"></line>
+        <line x1="12" y1="9" x2="6" y2="15"></line>
+      </svg>
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-deep);
+    color: var(--color-deep-text);
+    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+    margin-top: var(--space-3xl);
+  }
+
+  .footer-inner {
+    max-width: var(--max-width-full);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .footer-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .copyright {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    color: var(--color-deep-text);
+    margin: 0;
+    max-width: none;
+  }
+
+  .footer-nav {
+    margin-top: var(--space-sm);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--space-xl);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-link {
+    font-family: var(--font-body);
+    font-size: var(--type-sm);
+    color: var(--color-deep-text);
+    opacity: 0.7;
+    transition: opacity var(--duration-fast) var(--ease-quick),
+                color var(--duration-fast) var(--ease-quick);
+  }
+
+  .footer-link:hover {
+    opacity: 1;
+    color: var(--color-oxide);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--color-deep-text);
+    opacity: 0.6;
+    border-radius: 50%;
+    transition: opacity var(--duration-fast) var(--ease-quick),
+                color var(--duration-fast) var(--ease-quick),
+                background var(--duration-fast) var(--ease-quick);
+  }
+
+  .social-link:hover {
+    opacity: 1;
+    color: var(--color-oxide);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .back-to-top {
+    grid-column: 1 / -1;
+    justify-self: end;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-stone);
+    display: flex;
+    justify-content: flex-end;
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+    color: var(--color-deep-text);
+    width: 48px;
+    height: 48px;
+    border-radius: 0;
+  }
+
+  .back-to-top:hover {
+    background: var(--color-oxide);
+    border-color: var(--color-oxide);
+    color: var(--color-bone);
+  }
+
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: var(--space-2xl) var(--space-md) var(--space-lg);
+    }
+
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .footer-social {
+      justify-content: flex-start;
+    }
+
+    .back-to-top {
+      justify-self: start;
+    }
+
+    .footer-links {
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+  }
+</style>
