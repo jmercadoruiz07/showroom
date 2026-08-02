@@ -1,4 +1,5 @@
 .astro/
+.opencode/
 dist/
 node_modules/
 

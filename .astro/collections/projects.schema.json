@@ -12,9 +12,8 @@
     "category": {
       "type": "string",
       "enum": [
-        "print",
-        "3d",
-        "motion"
+        "renders",
+        "physicalMediums"
       ]
     },
     "tags": {
@@ -34,10 +33,13 @@
         "type": "string"
       }
     },
-    "model": {
+    "video": {
       "type": "string"
     },
-    "modelPoster": {
+    "videoPoster": {
+      "type": "string"
+    },
+    "sourceUrl": {
       "type": "string"
     },
     "tools": {
@@ -48,6 +50,7 @@
       }
     },
     "description": {
+      "default": "",
       "type": "string"
     },
     "featured": {
@@ -65,7 +68,6 @@
     "title",
     "date",
     "category",
-    "thumbnail",
-    "description"
+    "thumbnail"
   ]
 }

@@ -4,7 +4,7 @@ const pages = [
   { name: 'Home', path: '/', title: 'JMR Visuals' },
   { name: 'About', path: '/about/', title: 'About' },
   { name: 'Projects', path: '/projects/', title: 'Projects' },
-  { name: 'Project Detail', path: '/projects/ceramic-form-studies/', title: 'Ceramic Form Studies' },
+  { name: 'Project Detail', path: '/projects/the-aviator/', title: 'The Aviator' },
 ];
 
 for (const { name, path, title } of pages) {

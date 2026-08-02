@@ -22,16 +22,14 @@ export interface GalleryProject {
 
 export const PROJECT_CATEGORIES: Array<ProjectCategory | 'all'> = [
   'all',
-  'print',
-  '3d',
-  'motion',
+  'renders',
+  'physicalMediums',
 ];
 
 const categoryLabels: Record<ProjectCategory | 'all', string> = {
   all: 'ALL',
-  print: 'PRINT',
-  '3d': '3D',
-  motion: 'MOTION',
+  renders: 'RENDERS',
+  physicalMediums: 'PHYSICAL MEDIUMS',
 };
 
 interface ProjectGalleryProps {

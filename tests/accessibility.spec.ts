@@ -5,7 +5,7 @@ const pages = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about/' },
   { name: 'Projects', path: '/projects/' },
-  { name: 'Project Detail', path: '/projects/ceramic-form-studies/' },
+  { name: 'Project Detail', path: '/projects/the-aviator/' },
   { name: '404', path: '/404.html' },
 ];
 

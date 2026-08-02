@@ -11,7 +11,7 @@
 import type { CSSProperties } from 'react';
 import './ProjectCard.css';
 
-export type ProjectCategory = 'print' | '3d' | 'motion';
+export type ProjectCategory = 'renders' | 'physicalMediums';
 
 export interface ProjectCardProps {
   title: string;
@@ -25,9 +25,8 @@ export interface ProjectCardProps {
 }
 
 const categoryLabels: Record<ProjectCategory, string> = {
-  print: 'PRINT',
-  '3d': '3D',
-  motion: 'MOTION',
+  renders: 'RENDERS',
+  physicalMediums: 'PHYSICAL MEDIUMS',
 };
 
 export default function ProjectCard({

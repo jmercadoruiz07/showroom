@@ -12,7 +12,6 @@
 */
 import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
-import ModelViewer from '../../components/ModelViewer.astro';
 import ProjectMedia from '../../components/ProjectMedia';
 
 // Generate static paths for all projects
@@ -25,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, date, category, tags, images, model, modelPoster, tools, description, featured } = project.data;
+const { title, date, category, tags, images, video, videoPoster, tools, description, featured } = project.data;
 
 // Alternate layout based on order or slug
 const isEven = (project.data.order || 0) % 2 === 0;
@@ -34,9 +33,8 @@ const textWidth = isEven ? '40%' : '60%';
 const mediaFirst = isEven;
 
 const categoryLabels: Record<string, string> = {
-  print: 'PRINT',
-  '3d': '3D',
-  motion: 'MOTION',
+  renders: 'RENDERS',
+  physicalMediums: 'PHYSICAL MEDIUMS',
 };
 
 const formatDate = (date: Date) => {
@@ -51,7 +49,7 @@ const formatDate = (date: Date) => {
 <ProjectLayout
   title={title}
   description={description}
-  ogImage={images?.[0] || modelPoster}
+  ogImage={images?.[0] || videoPoster}
 >
   <main id="main-content">
   <article class="project-detail">
@@ -80,21 +78,9 @@ const formatDate = (date: Date) => {
 
     <div class="project-grid" style="--media-width: {mediaWidth}; --text-width: {textWidth};">
       <div class="project-media {mediaFirst ? 'media-first' : 'media-last'}">
-        {model && (
-          <div class="model-container">
-            <ModelViewer
-              src={model}
-              alt={`${title} 3D model`}
-              poster={modelPoster}
-            />
-          </div>
-        )}
-
-        {images && images.length > 0 && (
-          <ProjectMedia images={images} title={title} client:load />
-        )}
-
-        {!model && (!images || images.length === 0) && (
+        {(images && images.length > 0) || video ? (
+          <ProjectMedia images={images} video={video} videoPoster={videoPoster} title={title} client:load />
+        ) : (
           <div class="media-placeholder">
             <p class="text-soot">No media available</p>
           </div>

@@ -8,7 +8,7 @@ test.describe('Project gallery filter', () => {
     await page.locator('#project-grid').scrollIntoViewIfNeeded();
     await expect(page.locator('.project-card').first()).toBeVisible();
 
-    await expect(page.locator('.project-card')).toHaveCount(4);
+    await expect(page.locator('.project-card')).toHaveCount(23);
     const hidden = await page
       .locator('.project-card')
       .evaluateAll((cards) => cards.filter((c) => (c as HTMLElement).offsetParent === null).length);
@@ -17,27 +17,27 @@ test.describe('Project gallery filter', () => {
 
   test('filters to a single category', async ({ page }) => {
     await page.goto('/projects/', { waitUntil: 'networkidle' });
-    const filter3D = page.getByRole('button', { name: '3D' });
-    await filter3D.scrollIntoViewIfNeeded();
-    await filter3D.click({ force: true });
-    await expect(page.locator('.filter-btn.active')).toHaveText('3D');
+    const filterRenders = page.getByRole('button', { name: 'RENDERS' });
+    await filterRenders.scrollIntoViewIfNeeded();
+    await filterRenders.click({ force: true });
+    await expect(page.locator('.filter-btn.active')).toHaveText('RENDERS');
 
-    await expect(page.locator('.project-card[data-category="3d"]')).toBeVisible();
-    await expect(page.locator('.project-card[data-category="print"]')).toHaveCount(2);
-    await expect(page.locator('.project-card[data-category="motion"]')).toHaveCount(1);
+    await expect(page.locator('.project-card[data-category="renders"]').first()).toBeVisible();
+    await expect(page.locator('.project-card[data-category="renders"]')).toHaveCount(15);
+    await expect(page.locator('.project-card[data-category="physicalMediums"]')).toHaveCount(8);
 
-    const printDisplay = await page
-      .locator('.project-card[data-category="print"]')
+    const physicalDisplay = await page
+      .locator('.project-card[data-category="physicalMediums"]')
       .first()
       .evaluate((c) => getComputedStyle(c).display);
-    expect(printDisplay).toBe('none');
+    expect(physicalDisplay).toBe('none');
   });
 
   test('restores all projects when ALL is selected', async ({ page }) => {
     await page.goto('/projects/', { waitUntil: 'networkidle' });
-    const filter3D = page.getByRole('button', { name: '3D' });
-    await filter3D.scrollIntoViewIfNeeded();
-    await filter3D.click({ force: true });
+    const filterRenders = page.getByRole('button', { name: 'RENDERS' });
+    await filterRenders.scrollIntoViewIfNeeded();
+    await filterRenders.click({ force: true });
     const filterAll = page.getByRole('button', { name: 'ALL' });
     await filterAll.scrollIntoViewIfNeeded();
     await filterAll.click({ force: true });
@@ -51,7 +51,7 @@ test.describe('Project gallery filter', () => {
 
 test.describe('Project media lightbox', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/projects/editorial-layout-system/', { waitUntil: 'networkidle' });
+    await page.goto('/projects/ancient-ruins/', { waitUntil: 'networkidle' });
   });
 
   test('opens viewer with correct image and counter', async ({ page }) => {
@@ -60,9 +60,9 @@ test.describe('Project media lightbox', () => {
 
     await expect(page.locator('.viewer-image')).toHaveAttribute(
       'src',
-      '/projects/images/editorial-layout-1.jpg'
+      'https://cdnb.artstation.com/p/assets/images/images/066/046/347/large/jose-mercado-ruiz-untitledddd.jpg?1691911544'
     );
-    await expect(page.locator('.viewer-counter')).toHaveText(/1 \/ 2/);
+    await expect(page.locator('.viewer-counter')).toHaveText(/1 \/ 3/);
   });
 
   test('navigates images with next and prev', async ({ page }) => {
@@ -70,17 +70,17 @@ test.describe('Project media lightbox', () => {
 
     await expect(page.locator('.viewer-image')).toHaveAttribute(
       'src',
-      '/projects/images/editorial-layout-1.jpg'
+      'https://cdnb.artstation.com/p/assets/images/images/066/046/347/large/jose-mercado-ruiz-untitledddd.jpg?1691911544'
     );
     await page.locator('.viewer-next').click();
     await expect(page.locator('.viewer-image')).toHaveAttribute(
       'src',
-      '/projects/images/editorial-layout-2.jpg'
+      'https://cdnb.artstation.com/p/assets/images/images/066/046/353/large/jose-mercado-ruiz-untitledddddd.jpg?1691911562'
     );
-    await expect(page.locator('.viewer-counter')).toHaveText(/2 \/ 2/);
+    await expect(page.locator('.viewer-counter')).toHaveText(/2 \/ 3/);
 
     await page.locator('.viewer-prev').click();
-    await expect(page.locator('.viewer-counter')).toHaveText(/1 \/ 2/);
+    await expect(page.locator('.viewer-counter')).toHaveText(/1 \/ 3/);
   });
 
   test('closes on Escape and returns focus to trigger', async ({ page }) => {
@@ -91,5 +91,41 @@ test.describe('Project media lightbox', () => {
     await page.keyboard.press('Escape');
     await expect(page.locator('.media-viewer')).not.toHaveClass(/is-open/);
     await expect(trigger).toBeFocused();
+  });
+});
+
+test.describe('Project video lightbox', () => {
+  test('plays embedded video with poster', async ({ page }) => {
+    await page.goto('/projects/the-aviator/', { waitUntil: 'networkidle' });
+
+    const videoItem = page.locator('.gallery-item--video').first();
+    await expect(videoItem).toBeVisible();
+    await expect(videoItem.locator('img')).toHaveAttribute(
+      'src',
+      'https://cdna.artstation.com/p/assets/images/images/066/072/822/large/jose-mercado-ruiz-lego-plane-crash.jpg?1691988928'
+    );
+
+    await videoItem.click();
+    await expect(page.locator('.media-viewer')).toHaveClass(/is-open/);
+
+    await expect(page.locator('.viewer-video')).toHaveAttribute(
+      'src',
+      'https://player.vimeo.com/video/909448970'
+    );
+    await expect(page.locator('.viewer-counter')).toHaveText(/1 \/ 3/);
+
+    await page.locator('.viewer-next').click();
+    await expect(page.locator('.viewer-counter')).toHaveText(/2 \/ 3/);
+    await expect(page.locator('.viewer-image')).toHaveAttribute(
+      'src',
+      'https://cdna.artstation.com/p/assets/images/images/066/072/822/large/jose-mercado-ruiz-lego-plane-crash.jpg?1691988928'
+    );
+
+    await page.locator('.viewer-next').click();
+    await expect(page.locator('.viewer-image')).toHaveAttribute(
+      'src',
+      'https://cdna.artstation.com/p/assets/images/images/066/072/818/large/jose-mercado-ruiz-sheesh-comp-omg-copy.jpg?1691988910'
+    );
+    await expect(page.locator('.viewer-counter')).toHaveText(/3 \/ 3/);
   });
 });

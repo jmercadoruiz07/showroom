@@ -3,23 +3,35 @@
 | ProjectMedia — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Scrollable image gallery + lightbox overlay for a single project.
-| Dark backdrop, image scales to fit viewport, keyboard navigation
-| (Escape, arrows), click-to-close, focus returns to the trigger.
+| Scrollable gallery + lightbox overlay for a single project. Supports both
+| images and an embedded video (Vimeo). Dark backdrop, media scales to fit
+| viewport, keyboard navigation (Escape, arrows), click-to-close, focus
+| returns to the trigger.
 |
 */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import './ProjectMedia.css';
 
 interface ProjectMediaProps {
   images: string[];
+  video?: string;
+  videoPoster?: string;
   title: string;
 }
+
+type MediaItem =
+  | { kind: 'video'; src: string; poster?: string }
+  | { kind: 'image'; src: string };
 
 const focusableSelector =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-export default function ProjectMedia({ images, title }: ProjectMediaProps) {
+export default function ProjectMedia({
+  images,
+  video,
+  videoPoster,
+  title,
+}: ProjectMediaProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -27,7 +39,15 @@ export default function ProjectMedia({ images, title }: ProjectMediaProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
-  const total = images.length;
+  const media = useMemo<MediaItem[]>(() => {
+    const items: MediaItem[] = [];
+    if (video) items.push({ kind: 'video', src: video, poster: videoPoster });
+    images.forEach((src) => items.push({ kind: 'image', src }));
+    return items;
+  }, [video, videoPoster, images]);
+
+  const total = media.length;
+  const current = media[currentIndex];
 
   const open = (index: number, trigger: HTMLElement) => {
     triggerRef.current = trigger;
@@ -98,14 +118,18 @@ export default function ProjectMedia({ images, title }: ProjectMediaProps) {
   return (
     <>
       <div className="image-gallery">
-        {images.map((image, index) => (
+        {media.map((item, index) => (
           <figure
-            key={`${image}-${index}`}
-            className="gallery-item"
+            key={`${item.kind}-${item.src}-${index}`}
+            className={`gallery-item${item.kind === 'video' ? ' gallery-item--video' : ''}`}
             data-index={index}
             tabIndex={0}
             role="button"
-            aria-label={`Open image ${index + 1} in viewer`}
+            aria-label={
+              item.kind === 'video'
+                ? `Play video ${index + 1}`
+                : `Open image ${index + 1} in viewer`
+            }
             onClick={(e) => open(index, e.currentTarget)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -114,14 +138,38 @@ export default function ProjectMedia({ images, title }: ProjectMediaProps) {
               }
             }}
           >
-            <img
-              src={image}
-              alt={`${title} - Image ${index + 1}`}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              width="800"
-              height="600"
-            />
+            {item.kind === 'video' ? (
+              <>
+                <img
+                  src={item.poster ?? images[0]}
+                  alt={`${title} - Video ${index + 1}`}
+                  loading="eager"
+                  decoding="async"
+                  width="800"
+                  height="600"
+                />
+                <span className="gallery-play" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                  </svg>
+                </span>
+              </>
+            ) : (
+              <img
+                src={item.src}
+                alt={`${title} - Image ${index + 1}`}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                width="800"
+                height="600"
+              />
+            )}
           </figure>
         ))}
       </div>
@@ -131,7 +179,7 @@ export default function ProjectMedia({ images, title }: ProjectMediaProps) {
         className={`media-viewer${isOpen ? ' is-open' : ''}`}
         id="media-viewer"
         role="dialog"
-        aria-label={`${title} image viewer`}
+        aria-label={`${title} media viewer`}
         aria-hidden={!isOpen}
       >
         <div className="viewer-backdrop" aria-hidden="true" onClick={close} />
@@ -160,7 +208,7 @@ export default function ProjectMedia({ images, title }: ProjectMediaProps) {
           </svg>
         </button>
 
-        <button className="viewer-nav viewer-prev" aria-label="Previous image" type="button" onClick={prev}>
+        <button className="viewer-nav viewer-prev" aria-label="Previous media" type="button" onClick={prev}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -177,7 +225,7 @@ export default function ProjectMedia({ images, title }: ProjectMediaProps) {
           </svg>
         </button>
 
-        <button className="viewer-nav viewer-next" aria-label="Next image" type="button" onClick={next}>
+        <button className="viewer-nav viewer-next" aria-label="Next media" type="button" onClick={next}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -195,11 +243,21 @@ export default function ProjectMedia({ images, title }: ProjectMediaProps) {
         </button>
 
         <div className="viewer-content">
-          <img
-            className="viewer-image"
-            src={isOpen ? images[currentIndex] : undefined}
-            alt={isOpen ? `${title} - Image ${currentIndex + 1}` : ''}
-          />
+          {isOpen && current?.kind === 'video' ? (
+            <iframe
+              className="viewer-video"
+              src={current.src}
+              title={`${title} - Video ${currentIndex + 1}`}
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <img
+              className="viewer-image"
+              src={isOpen && current?.kind === 'image' ? current.src : undefined}
+              alt={isOpen && current?.kind === 'image' ? `${title} - Image ${currentIndex + 1}` : ''}
+            />
+          )}
         </div>
 
         <div className="viewer-counter text-mono">
