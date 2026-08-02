@@ -20,12 +20,20 @@
     "test:all": "npm run build && npx playwright test && node tests/lighthouse-audit.mjs"
   },
   "dependencies": {
+    "@astrojs/react": "^6.0.2",
     "astro": "^7.0.6",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
-    "lighthouse": "^13.4.0"
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "lighthouse": "^13.4.0",
+    "serve": "^14.2.6",
+    "typescript": "^6.0.3"
   }
 }

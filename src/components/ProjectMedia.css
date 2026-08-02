@@ -1,0 +1,140 @@
+/*
+|-------------------------------------------------------------------------------
+| ProjectMedia — Component Styles
+|-------------------------------------------------------------------------------
+|
+| Scrollable gallery column plus fixed lightbox overlay. Dark semi-transparent
+| backdrop, image scales to fit viewport. Nav arrows hidden on small screens.
+|
+*/
+.image-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.gallery-item {
+  margin: 0;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.media-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-base) var(--ease-standard),
+              visibility var(--duration-base) var(--ease-standard);
+}
+
+.media-viewer.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.viewer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+}
+
+.viewer-close {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-bone);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-quick);
+  z-index: 1;
+}
+
+.viewer-close:hover {
+  color: var(--color-oxide);
+}
+
+.viewer-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-bone);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--duration-fast) var(--ease-quick),
+              color var(--duration-fast) var(--ease-quick);
+  z-index: 1;
+}
+
+.viewer-nav:hover {
+  opacity: 1;
+  color: var(--color-oxide);
+}
+
+.viewer-prev {
+  left: var(--space-lg);
+}
+
+.viewer-next {
+  right: var(--space-lg);
+}
+
+.viewer-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-image {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  user-select: none;
+}
+
+.viewer-counter {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--type-xs);
+  color: var(--color-bone);
+  opacity: 0.6;
+  letter-spacing: var(--tracking-wide);
+}
+
+@media (max-width: 768px) {
+  .viewer-nav {
+    display: none;
+  }
+
+  .viewer-close {
+    top: var(--space-md);
+    right: var(--space-md);
+  }
+}

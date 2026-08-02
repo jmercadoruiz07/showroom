@@ -209,6 +209,7 @@
     lastScrollY = window.scrollY;
     if (!ticking) {
       window.requestAnimationFrame(() => {
+        if (!header) return;
         if (lastScrollY > 50) {
           header.classList.add('scrolled');
         } else {

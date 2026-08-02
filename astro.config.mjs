@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sharp from 'sharp';
+import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +12,5 @@ export default defineConfig({
       entrypoint: 'astro/assets/services/sharp',
     },
   },
-  integrations: [],
+  integrations: [react()],
 });

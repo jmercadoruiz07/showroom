@@ -13,7 +13,7 @@
 import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import ModelViewer from '../../components/ModelViewer.astro';
-import MediaViewer from '../../components/MediaViewer.astro';
+import ProjectMedia from '../../components/ProjectMedia';
 
 // Generate static paths for all projects
 export async function getStaticPaths() {
@@ -51,7 +51,7 @@ const formatDate = (date: Date) => {
 <ProjectLayout
   title={title}
   description={description}
-  ogImage={(images?.[0] || modelPoster)?.src}
+  ogImage={images?.[0] || modelPoster}
 >
   <main id="main-content">
   <article class="project-detail">
@@ -91,20 +91,7 @@ const formatDate = (date: Date) => {
         )}
 
         {images && images.length > 0 && (
-          <div class="image-gallery">
-            {images.map((image, index) => (
-              <figure class="gallery-item" data-index={index}>
-                <img
-                  src={image}
-                  alt={`${title} - Image ${index + 1}`}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  width="800"
-                  height="600"
-                />
-              </figure>
-            ))}
-          </div>
+          <ProjectMedia images={images} title={title} client:load />
         )}
 
         {!model && (!images || images.length === 0) && (
@@ -140,10 +127,6 @@ const formatDate = (date: Date) => {
   </article>
   </main>
 </ProjectLayout>
-
-{images && images.length > 0 && (
-  <MediaViewer images={images} title={title} />
-)}
 
 <style>
   .project-detail {
@@ -251,22 +234,6 @@ const formatDate = (date: Date) => {
   .model-container model-viewer {
     width: 100%;
     height: 100%;
-  }
-
-  .image-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-
-  .gallery-item {
-    margin: 0;
-  }
-
-  .gallery-item img {
-    width: 100%;
-    height: auto;
-    display: block;
   }
 
   .media-placeholder {

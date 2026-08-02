@@ -1,0 +1,108 @@
+/*
+|-------------------------------------------------------------------------------
+| ProjectCard — Component Styles
+|-------------------------------------------------------------------------------
+|
+| No border-radius, no default drop shadow. Title overlay on hover (slides up
+| from bottom). Slow zoom (scale 1.03 over 500ms). Category tag in Mono font.
+|
+*/
+.project-card {
+  break-inside: avoid;
+  margin-bottom: var(--space-xl);
+  display: block;
+  overflow: hidden;
+  background-color: var(--color-deep-text);
+  color: var(--color-bone);
+}
+
+.project-card .card-link {
+  display: block;
+  color: inherit;
+}
+
+.card-media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--color-stone);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  transition: background-color var(--duration-reveal) var(--ease-standard);
+}
+
+.card-category {
+  align-self: flex-end;
+  display: inline-block;
+  background: var(--color-deep);
+  color: var(--color-bone);
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color var(--duration-fast) var(--ease-quick);
+}
+
+.card-content {
+  transform: translateY(8px);
+  opacity: 0;
+  transition:
+    transform var(--duration-fast) var(--ease-quick),
+    opacity var(--duration-fast) var(--ease-quick);
+}
+
+.card-title {
+  font-size: 1.4rem;
+  line-height: 1.1;
+  color: var(--color-bone);
+}
+
+.card-featured {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  color: var(--color-oxide);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card .card-link:hover .card-media img {
+    transform: scale(1.03);
+  }
+
+  .project-card .card-link:hover .card-overlay {
+    background-color: rgba(255, 252, 246, 0.06);
+  }
+
+  .project-card .card-link:hover .card-content {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .project-card .card-link:hover .card-category {
+    background-color: var(--color-oxide);
+  }
+}
+
+@media (hover: none) {
+  .project-card .card-content {
+    transform: none;
+    opacity: 1;
+  }
+}

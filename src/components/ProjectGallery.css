@@ -1,0 +1,136 @@
+/*
+|-------------------------------------------------------------------------------
+| ProjectGallery — Component Styles
+|-------------------------------------------------------------------------------
+|
+| Sticky category filter bar below the header. The nav lives inside the sticky
+| wrapper so the bar stays clickable while the grid scrolls beneath it.
+|
+*/
+.project-gallery {
+  padding: var(--space-2xl) var(--space-xl);
+  padding-top: calc(var(--header-height) + var(--space-xl));
+}
+
+.filter-wrapper {
+  position: sticky;
+  top: var(--header-height);
+  z-index: var(--z-sticky);
+  background: var(--color-bone);
+  border-bottom: 1px solid var(--color-stone);
+  padding: var(--space-md) var(--space-xl);
+  margin: 0 calc(-1 * var(--space-xl)) var(--space-xl);
+}
+
+[data-theme="dark"] .filter-wrapper {
+  background: var(--color-deep);
+  border-color: var(--color-stone);
+}
+
+.category-filter {
+  max-width: var(--max-width-full);
+  margin: 0 auto;
+}
+
+.filter-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--space-xs);
+  margin-bottom: calc(-1 * var(--space-xs));
+}
+
+.filter-list::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  flex-shrink: 0;
+  padding: var(--space-xs) var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--type-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-soot);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-quick),
+              border-color var(--duration-fast) var(--ease-quick);
+  white-space: nowrap;
+  scroll-snap-align: start;
+}
+
+.filter-btn:hover {
+  color: var(--color-ink);
+}
+
+[data-theme="dark"] .filter-btn:hover {
+  color: var(--color-deep-text);
+}
+
+.filter-btn.active {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-oxide);
+}
+
+[data-theme="dark"] .filter-btn.active {
+  color: var(--color-deep-text);
+}
+
+.filter-btn:focus-visible {
+  outline: 2px solid var(--color-oxide);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.project-grid {
+  max-width: var(--max-width-full);
+  margin: 0 auto;
+}
+
+/* Reveal item transitions */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(var(--space-md));
+  transition: opacity var(--duration-reveal) var(--ease-standard),
+              transform var(--duration-reveal) var(--ease-standard);
+}
+
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .project-gallery {
+    padding: var(--space-xl) var(--space-md);
+    padding-top: calc(var(--header-height) + var(--space-lg));
+  }
+
+  .filter-wrapper {
+    padding: var(--space-sm) var(--space-md);
+    margin: 0 calc(-1 * var(--space-md)) var(--space-lg);
+  }
+
+  .filter-btn {
+    font-size: var(--type-2xs);
+    padding: var(--space-2xs) var(--space-xs);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
