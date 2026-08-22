@@ -96,27 +96,37 @@ const hasSlides = slides !== undefined && slides.length > 0;
     padding: var(--space-2xl);
     padding-left: calc(var(--space-xl) * 2);
     padding-bottom: var(--space-3xl);
-    color: var(--color-bone);
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    color: var(--color-deep-text);
   }
 
   .hero-title {
+    display: inline;
     font-size: var(--type-hero);
     font-weight: var(--font-weight-black);
     letter-spacing: var(--tracking-tight);
-    line-height: var(--line-height-tighter);
+    line-height: 1.1;
     margin: 0 0 var(--space-md);
     max-width: 60ch;
+    background: var(--color-deep);
+    color: var(--color-deep-text);
+    padding: 0.15em 0.4em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   .hero-subtitle {
+    display: inline;
     font-size: var(--type-lg);
     font-weight: var(--font-weight-regular);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     margin: 0 0 var(--space-2xl);
     max-width: 40ch;
-    opacity: 0.9;
+    background: var(--color-deep);
+    color: var(--color-deep-text);
+    padding: 0.2em 0.5em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   .scroll-indicator {
