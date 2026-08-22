@@ -1,0 +1,103 @@
+/*
+|-------------------------------------------------------------------------------
+| HeroCarousel — Component Styles
+|-------------------------------------------------------------------------------
+|
+| Stacked full-bleed slides crossfaded via opacity. Controls sit bottom-right,
+| mirrored against the title block bottom-left, in bone with the same text
+| shadow as the hero content.
+|
+*/
+.hero-carousel {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+}
+
+.hero-controls {
+  position: absolute;
+  right: calc(var(--space-xl) * 2);
+  bottom: var(--space-3xl);
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  color: var(--color-bone);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero-slide-link {
+  font-size: var(--type-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: currentColor;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color var(--duration-fast) var(--ease-quick);
+}
+
+.hero-slide-link:hover {
+  border-bottom-color: currentColor;
+}
+
+.hero-dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-quick),
+              opacity var(--duration-fast) var(--ease-quick);
+  opacity: 0.7;
+}
+
+.hero-dot:hover {
+  opacity: 1;
+}
+
+.hero-dot.is-active {
+  background: currentColor;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-controls {
+    right: var(--space-lg);
+    bottom: var(--space-2xl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: none;
+  }
+}

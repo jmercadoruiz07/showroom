@@ -4,21 +4,33 @@
 | Home Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Hero section + Project Gallery with category filter.
+| Hero section cycling through featured projects + Project Gallery with
+| category filter.
 |
 */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import { getCollection } from 'astro:content';
+import { sortProjectsByOrder } from '../lib/sort-projects';
 
 const projects = await getCollection('projects');
+
+const featuredSlides = sortProjectsByOrder(
+  projects.filter((project) => project.data.featured),
+).map((project) => ({
+  src: project.data.thumbnail,
+  alt: `${project.data.title} — featured project`,
+  title: project.data.title,
+  href: `/projects/${project.id}`,
+}));
 ---
 
 <BaseLayout title="JMR Visuals — Portfolio" description="Multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.">
   <HeroSection
     title="JMR Visuals"
     subtitle="Multidisciplinary Designer"
+    slides={featuredSlides}
   />
 
   <main class="main-content" id="main-content">

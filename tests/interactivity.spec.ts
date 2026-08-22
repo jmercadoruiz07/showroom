@@ -94,6 +94,65 @@ test.describe('Project media lightbox', () => {
   });
 });
 
+test.describe('Hero featured carousel', () => {
+  const featuredThumbnails = [
+    'https://cdna.artstation.com/p/assets/images/images/066/072/581/large/jose-mercado-ruiz-kl-sheeesh.jpg?1691988051',
+    'https://cdna.artstation.com/p/assets/images/images/066/072/182/large/jose-mercado-ruiz-dhedrtitled.jpg?1691986235',
+    'https://cdnb.artstation.com/p/assets/images/images/066/071/709/large/jose-mercado-ruiz-clay-comparison-1.jpg?1691984501',
+  ];
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+  });
+
+  test('renders featured projects as slides with the first active', async ({ page }) => {
+    await expect(page.locator('.hero-slide')).toHaveCount(3);
+
+    for (const [index, thumbnail] of featuredThumbnails.entries()) {
+      await expect(page.locator(`.hero-slide[data-index="${index}"]`)).toHaveAttribute(
+        'src',
+        thumbnail
+      );
+    }
+
+    await expect(page.locator('.hero-slide.is-active')).toHaveCount(1);
+    await expect(page.locator('.hero-slide[data-index="0"]')).toHaveClass(/is-active/);
+    await expect(page.locator('.hero-slide-link')).toHaveText('Kamino Lost');
+    await expect(page.locator('.hero-slide-link')).toHaveAttribute('href', '/projects/kamino-lost');
+  });
+
+  test('auto-rotates to the next slide', async ({ page }) => {
+    await expect(page.locator('.hero-slide[data-index="1"]')).toHaveClass(
+      /is-active/,
+      { timeout: 12000 }
+    );
+
+    await expect(page.locator('.hero-slide-link')).toHaveText('Viking Mech');
+    await expect(page.locator('.hero-slide-link')).toHaveAttribute('href', '/projects/viking-mech');
+  });
+
+  test('selects a slide from the indicator dots', async ({ page }) => {
+    await page.getByRole('button', { name: 'Show Venator Loop' }).click();
+
+    await expect(page.locator('.hero-slide[data-index="2"]')).toHaveClass(/is-active/);
+    await expect(page.locator('.hero-slide-link')).toHaveText('Venator Loop');
+    await expect(page.locator('.hero-slide-link')).toHaveAttribute('href', '/projects/venator-loop');
+  });
+
+  test('does not auto-rotate when reduced motion is preferred', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.reload({ waitUntil: 'networkidle' });
+
+    await page.waitForTimeout(7000);
+
+    await expect(page.locator('.hero-slide[data-index="0"]')).toHaveClass(/is-active/);
+    await expect(page.locator('.hero-slide-link')).toHaveText('Kamino Lost');
+
+    await page.getByRole('button', { name: 'Show Viking Mech' }).click();
+    await expect(page.locator('.hero-slide[data-index="1"]')).toHaveClass(/is-active/);
+  });
+});
+
 test.describe('Project video lightbox', () => {
   test('plays embedded video with poster', async ({ page }) => {
     await page.goto('/projects/the-aviator/', { waitUntil: 'networkidle' });

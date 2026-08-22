@@ -4,16 +4,21 @@
 | HeroSection — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-bleed background image (100vw × 90vh) with overlaid title bottom-left.
+| Full-bleed background (100vw × 90vh) with overlaid title bottom-left.
 | Subtitle/tagline in Body font, offset right. Thin animated line for scroll down.
+| When `slides` are provided the background becomes an auto-rotating carousel
+| of featured projects; otherwise a single static image is shown.
 | No rounded containers, no cards, no glassmorphism.
 |
 */
+import HeroCarousel, { type HeroSlide } from './HeroCarousel';
+
 interface Props {
   title: string;
   subtitle?: string;
   backgroundImage?: string; // Path to image in public/ or remote URL
   backgroundAlt?: string;
+  slides?: HeroSlide[];
 }
 
 const {
@@ -21,18 +26,25 @@ const {
   subtitle = 'Print · 3D · Motion Design',
   backgroundImage = '/hero-default.jpg',
   backgroundAlt = 'Portfolio hero image',
+  slides,
 } = Astro.props;
+
+const hasSlides = slides !== undefined && slides.length > 0;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-background" aria-hidden="true">
-    <img
-      src={backgroundImage}
-      alt={backgroundAlt}
-      loading="eager"
-      fetchpriority="high"
-    />
-  </div>
+  {hasSlides ? (
+    <HeroCarousel slides={slides} client:load />
+  ) : (
+    <div class="hero-background" aria-hidden="true">
+      <img
+        src={backgroundImage}
+        alt={backgroundAlt}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  )}
 
   <div class="hero-content">
     <h1 id="hero-title" class="hero-title text-display">

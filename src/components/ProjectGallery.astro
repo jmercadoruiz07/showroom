@@ -10,19 +10,13 @@
 */
 import { getCollection } from 'astro:content';
 import ProjectGallery from './ProjectGallery';
+import { sortProjectsByOrder } from '../lib/sort-projects';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.featured);
 const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
 
 // Sort by order, then date
-const sortedProjects = [...featuredProjects, ...allProjects].sort((a, b) => {
-  if (a.data.order !== undefined && b.data.order !== undefined) {
-    return a.data.order - b.data.order;
-  }
-  if (a.data.order !== undefined) return -1;
-  if (b.data.order !== undefined) return 1;
-  return b.data.date.getTime() - a.data.date.getTime();
-});
+const sortedProjects = sortProjectsByOrder([...featuredProjects, ...allProjects]);
 
 const projects = sortedProjects.map((project) => ({
   title: project.data.title,
