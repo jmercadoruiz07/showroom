@@ -54,6 +54,17 @@ import SiteFooter from '../components/SiteFooter.astro';
     <!-- Canonical -->
     <link rel="canonical" href={canonical} />
 
+    <!-- Theme: apply immediately to prevent flash -->
+    <script is:inline>
+      (function () {
+        const STORAGE_KEY = 'theme';
+        const stored = localStorage.getItem(STORAGE_KEY);
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
     <!-- Font Preloads -->
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/PlayfairDisplay-Bold.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/InstrumentSans-Regular.woff2" />
@@ -85,7 +96,7 @@ import SiteFooter from '../components/SiteFooter.astro';
           --line-height-tight: 1.15;
           --line-height-normal: 1.6;
         }
-        [data-theme="dark"] {
+        :root[data-theme="dark"] {
           --color-bone: var(--color-deep);
           --color-paper: oklch(0.18 0.015 60);
           --color-ink: var(--color-deep-text);

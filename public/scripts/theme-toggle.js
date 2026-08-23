@@ -3,11 +3,11 @@
  *
  * Persists preference to localStorage. Respects prefers-color-scheme
  * on first visit. Toggles [data-theme] attribute on <html>.
+ * Handles Astro view transitions by using event delegation.
  */
 (function () {
   const STORAGE_KEY = 'theme';
   const html = document.documentElement;
-  const toggle = document.getElementById('theme-toggle');
 
   function getPreferredTheme() {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -20,6 +20,7 @@
   function applyTheme(theme) {
     html.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY, theme);
+    const toggle = document.getElementById('theme-toggle');
     if (toggle) {
       toggle.setAttribute(
         'aria-label',
@@ -31,13 +32,14 @@
   // Apply stored/system theme immediately
   applyTheme(getPreferredTheme());
 
-  // Toggle on click
-  if (toggle) {
-    toggle.addEventListener('click', function () {
+  // Toggle on click (event delegation for view transitions)
+  document.addEventListener('click', function (e) {
+    const toggle = e.target.closest('#theme-toggle');
+    if (toggle) {
       const current = html.getAttribute('data-theme');
       applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
-  }
+    }
+  });
 
   // Listen for system preference changes
   window
@@ -47,4 +49,9 @@
         applyTheme(e.matches ? 'dark' : 'light');
       }
     });
+
+  // Re-apply theme and update toggle after view transition
+  document.addEventListener('astro:after-swap', function () {
+    applyTheme(getPreferredTheme());
+  });
 })();

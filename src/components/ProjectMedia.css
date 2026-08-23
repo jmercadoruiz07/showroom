@@ -87,7 +87,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-bone);
+  color: var(--color-deep-text);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-bone);
+  color: var(--color-deep-text);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -161,7 +161,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: var(--type-xs);
-  color: var(--color-bone);
+  color: var(--color-deep-text);
   opacity: 0.6;
   letter-spacing: var(--tracking-wide);
 }
