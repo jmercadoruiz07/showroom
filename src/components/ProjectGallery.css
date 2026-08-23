@@ -16,14 +16,18 @@
   position: sticky;
   top: var(--header-height);
   z-index: var(--z-sticky);
-  background: var(--color-bone);
+  background: color-mix(in oklch, var(--color-bone) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--color-stone);
   padding: var(--space-md) var(--space-xl);
   margin: 0 calc(-1 * var(--space-xl)) var(--space-xl);
+  transition: background var(--duration-base) var(--ease-standard),
+              backdrop-filter var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
 }
 
 [data-theme="dark"] .filter-wrapper {
-  background: var(--color-deep);
+  background: color-mix(in oklch, var(--color-deep) 85%, transparent);
   border-color: var(--color-stone);
 }
 
