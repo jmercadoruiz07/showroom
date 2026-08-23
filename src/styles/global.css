@@ -206,6 +206,16 @@
 
 .back-to-top:hover {
   background: var(--color-oxide);
+  color: var(--color-bone);
+}
+
+[data-theme="dark"] .back-to-top:hover {
+  color: var(--color-deep-text) !important;
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--color-oxide);
+  outline-offset: 2px;
 }
 
 .back-to-top svg {

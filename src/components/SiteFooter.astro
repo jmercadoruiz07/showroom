@@ -1,12 +1,10 @@
 ---
 /*
-|diff
-/*
 |-------------------------------------------------------------------------------
 | SiteFooter — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-width dark band with copyright, back-to-top link, and social icons.
+| Full-width dark band with copyright and social icons.
 | Uses --color-deep background.
 |
 */
@@ -53,13 +51,6 @@
         </svg>
       </a>
     </div>
-
-    <a href="#top" class="back-to-top" aria-label="Back to top">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <line x1="18" y1="15" x2="12" y2="9"></line>
-        <line x1="12" y1="9" x2="6" y2="15"></line>
-      </svg>
-    </a>
   </div>
 </footer>
 
@@ -146,31 +137,6 @@
     background: rgba(255, 255, 255, 0.05);
   }
 
-  .back-to-top {
-    grid-column: 1 / -1;
-    justify-self: end;
-    margin-top: var(--space-xl);
-    padding-top: var(--space-xl);
-    border-top: 1px solid var(--color-stone);
-    display: flex;
-    justify-content: flex-end;
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    background: transparent;
-    color: var(--color-deep-text);
-    width: 48px;
-    height: 48px;
-    border-radius: 0;
-  }
-
-  .back-to-top:hover {
-    background: var(--color-oxide);
-    border-color: var(--color-oxide);
-    color: var(--color-bone);
-  }
-
   @media (max-width: 768px) {
     .site-footer {
       padding: var(--space-2xl) var(--space-md) var(--space-lg);
@@ -183,10 +149,6 @@
 
     .footer-social {
       justify-content: flex-start;
-    }
-
-    .back-to-top {
-      justify-self: start;
     }
 
     .footer-links {
