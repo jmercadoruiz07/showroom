@@ -8,8 +8,7 @@
 |
 */
 .project-gallery {
-  padding: var(--space-2xl) var(--space-xl);
-  padding-top: calc(var(--header-height) + var(--space-xl));
+  padding: var(--space-xl);
 }
 
 .filter-wrapper {
