@@ -178,7 +178,7 @@
 /* ─── Back to Top ──────────────────────────────────────────────────────────── */
 .back-to-top {
   position: fixed;
-  bottom: var(--space-xl);
+  bottom: var(--space-3xl);
   right: var(--space-xl);
   width: 48px;
   height: 48px;
