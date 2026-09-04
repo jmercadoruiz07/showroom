@@ -182,9 +182,9 @@ const formatDate = (date: Date) => {
 
   .project-grid {
     display: grid;
-    grid-template-columns: var(--media-width) var(--text-width);
+    grid-template-columns: 3fr 2fr;
     gap: var(--space-3xl);
-    max-width: var(--max-width-full);
+    max-width: 100%;
     margin: 0 auto;
   }
 
@@ -229,7 +229,10 @@ const formatDate = (date: Date) => {
   }
 
   .project-text {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-xl));
     max-width: var(--max-width-prose);
+    align-self: start;
   }
 
   .project-description {
@@ -299,6 +302,10 @@ const formatDate = (date: Date) => {
     }
 
     .project-media {
+      position: static;
+    }
+
+    .project-text {
       position: static;
     }
 
