@@ -28,8 +28,6 @@ const { title, date, category, tags, images, video, videoPoster, tools, descript
 
 // Alternate layout based on order or slug
 const isEven = (project.data.order || 0) % 2 === 0;
-const mediaWidth = isEven ? '60%' : '40%';
-const textWidth = isEven ? '40%' : '60%';
 const mediaFirst = isEven;
 
 const categoryLabels: Record<string, string> = {
@@ -44,6 +42,7 @@ const formatDate = (date: Date) => {
     day: 'numeric',
   }).format(date);
 };
+
 ---
 
 <ProjectLayout
@@ -76,7 +75,7 @@ const formatDate = (date: Date) => {
       )}
     </header>
 
-    <div class="project-grid" style={`--media-width: ${mediaWidth}; --text-width: ${textWidth};`}>
+    <div class="project-grid" style={`grid-template-columns: ${mediaFirst ? '3fr 2fr' : '2fr 3fr'}`}>
       <div class={`project-media ${mediaFirst ? 'media-first' : 'media-last'}`}>
         {(images && images.length > 0) || video ? (
           <ProjectMedia images={images} video={video} videoPoster={videoPoster} title={title} client:load />
@@ -190,18 +189,22 @@ const formatDate = (date: Date) => {
 
   .media-first {
     grid-column: 1;
+    order: 1;
   }
 
   .media-last {
     grid-column: 2;
+    order: 2;
   }
 
   .text-first {
     grid-column: 1;
+    order: 1;
   }
 
   .text-last {
     grid-column: 2;
+    order: 2;
   }
 
   .project-media {
