@@ -26,6 +26,11 @@ const canonical = canonicalURL || Astro.url.href;
 import { ClientRouter } from 'astro:transitions';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+
+import '../styles/global.css';
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/reset.css';
 ---
 
 <!doctype html>
@@ -113,12 +118,6 @@ import SiteFooter from '../components/SiteFooter.astro';
         .skip-link:focus { top: 1rem; }
       `}
     </style>
-
-    <!-- Full Stylesheets -->
-    <link rel="stylesheet" href="/styles/fonts.css" />
-    <link rel="stylesheet" href="/styles/tokens.css" />
-    <link rel="stylesheet" href="/styles/reset.css" />
-    <link rel="stylesheet" href="/styles/global.css" />
 
     <!-- Client-side Router (View Transitions) -->
     <ClientRouter />
