@@ -14,7 +14,17 @@
 <header class="site-header" role="banner">
   <div class="header-inner">
     <a href="/" class="wordmark" aria-label="JMR Visuals — Home">
-      <span class="wordmark-text">JMR VISUALS</span>
+      <svg
+        class="wordmark-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="-0.13 -0.02 1000.25 866.83"
+        aria-hidden="true"
+        fill="currentColor"
+      >
+        <polygon points="286.59 866.32 .92 866.32 -.13 307.43 114.17 307.21 115.01 752.03 172.29 752.03 172.29 114.28 .11 114.28 .11 -.02 286.59 -.02 286.59 866.32"/>
+        <path d="M964.35,339.41l35.77-35.78V-.02h-285.77v866.6h114.29v-475.98h57.18v475.98h114.29v-491.39l-35.77-35.78ZM885.83,276.3h-57.18V114.28h57.18v162.02Z"/>
+        <polygon points="663.48 -.02 567.34 -.02 501.52 65.81 435.7 -.02 337.36 -.02 337.36 866.72 451.65 866.72 451.65 170.22 501.52 220.08 549.43 172.17 550.43 866.81 664.73 866.64 663.48 -.02"/>
+      </svg>
     </a>
 
     <nav class="nav-primary" aria-label="Primary navigation">
@@ -95,27 +105,24 @@
   .wordmark {
     flex-shrink: 0;
     text-decoration: none;
-  }
-
-  .wordmark-text {
-    font-family: var(--font-mono);
-    font-size: var(--type-sm);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-wide);
+    display: inline-flex;
+    align-items: center;
     color: var(--color-ink);
     transition: color var(--duration-fast) var(--ease-quick);
   }
 
-  .wordmark:hover .wordmark-text {
-    color: var(--color-oxide);
-  }
-
-  [data-theme="dark"] .wordmark-text {
+  :global([data-theme="dark"]) .wordmark {
     color: var(--color-deep-text);
   }
 
-  [data-theme="dark"] .wordmark:hover .wordmark-text {
+  .wordmark:hover {
     color: var(--color-oxide);
+  }
+
+  .wordmark-logo {
+    height: 28px;
+    width: auto;
+    display: block;
   }
 
   .nav-primary {
