@@ -53,33 +53,30 @@
   }
 }
 
-/* ─── Masonry Grid ─────────────────────────────────────────────────────────── */
-.masonry {
-  column-count: 1;
-  column-gap: var(--space-md);
-}
-
-.masonry > * {
-  break-inside: avoid;
-  margin-bottom: var(--space-md);
+/* ─── Project Grid ─────────────────────────────────────────────────────────── */
+.project-grid.masonry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: start;
 }
 
 @media (min-width: 640px) {
-  .masonry {
-    column-count: 2;
+  .project-grid.masonry {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .masonry {
-    column-count: 3;
+  .project-grid.masonry {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1440px) {
-  .masonry {
-    column-count: 4;
-    column-gap: var(--space-lg);
+  .project-grid.masonry {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
   }
 }
 

@@ -3,8 +3,9 @@
 | ProjectGallery — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Horizontal pill/tag filter (sticky below header) + masonry grid of project cards.
-| Toggles visibility client-side via React state, no re-render of full list needed.
+| Horizontal pill/tag filter (sticky below header) + responsive grid of project
+| cards that fills row-by-row. Toggles visibility client-side via React state,
+| no re-render of full list needed.
 |
 */
 import { useState } from 'react';
