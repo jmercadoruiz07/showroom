@@ -3,19 +3,17 @@
 | ProjectCard — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Single project thumbnail with title + category. No border-radius, no default drop shadow.
+| Single project thumbnail with title + album. No border-radius, no default drop shadow.
 | Title overlay on hover (slides up from bottom). Slow zoom (scale 1.03 over 500ms).
-| Category tag in Mono font (top-right).
+| Album tag in Mono font (top-right).
 |
 */
 import type { CSSProperties } from 'react';
 import './ProjectCard.css';
 
-export type ProjectCategory = 'renders' | 'physicalMediums';
-
 export interface ProjectCardProps {
   title: string;
-  category: ProjectCategory;
+  album: string;
   thumbnail: string;
   thumbnailAlt?: string;
   href: string;
@@ -24,14 +22,9 @@ export interface ProjectCardProps {
   style?: CSSProperties;
 }
 
-const categoryLabels: Record<ProjectCategory, string> = {
-  renders: 'RENDERS',
-  physicalMediums: 'PHYSICAL MEDIUMS',
-};
-
 export default function ProjectCard({
   title,
-  category,
+  album,
   thumbnail,
   thumbnailAlt,
   href,
@@ -44,7 +37,7 @@ export default function ProjectCard({
     .join(' ');
 
   return (
-    <article className={cardClass} data-category={category} style={style}>
+    <article className={cardClass} data-album={album} style={style}>
       <a href={href} className="card-link" aria-label={`View project: ${title}`}>
         <div className="card-media" aria-hidden="true">
           <img
@@ -59,7 +52,7 @@ export default function ProjectCard({
 
         <div className="card-overlay">
           <span className="card-category text-mono" aria-hidden="true">
-            {categoryLabels[category] || category.toUpperCase()}
+            {album.toUpperCase()}
           </span>
 
           <div className="card-content">

@@ -8,53 +8,56 @@
 |
 */
 import { useState } from 'react';
-import ProjectCard, { type ProjectCategory } from './ProjectCard';
+import ProjectCard from './ProjectCard';
 import './ProjectGallery.css';
 
 export interface GalleryProject {
   title: string;
-  category: ProjectCategory;
+  album: string;
   thumbnail: string;
   thumbnailAlt?: string;
   href: string;
   featured?: boolean;
 }
 
-export const PROJECT_CATEGORIES: Array<ProjectCategory | 'all'> = [
-  'all',
-  'renders',
-  'physicalMediums',
-];
-
-const categoryLabels: Record<ProjectCategory | 'all', string> = {
-  all: 'ALL',
-  renders: 'RENDERS',
-  physicalMediums: 'PHYSICAL MEDIUMS',
-};
+export const ALL_ALBUMS = 'all';
 
 interface ProjectGalleryProps {
   projects: GalleryProject[];
+  albums: string[];
 }
 
-export default function ProjectGallery({ projects }: ProjectGalleryProps) {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory | 'all'>('all');
+export default function ProjectGallery({ projects, albums }: ProjectGalleryProps) {
+  const [activeAlbum, setActiveAlbum] = useState<string>(ALL_ALBUMS);
 
   return (
     <div className="project-gallery">
       <div className="filter-wrapper">
-        <nav className="category-filter" aria-label="Filter projects by category">
+        <nav className="category-filter" aria-label="Filter projects by album">
           <ul className="filter-list">
-            {PROJECT_CATEGORIES.map((category) => (
-              <li key={category}>
+            <li>
+              <button
+                type="button"
+                className={`filter-btn${activeAlbum === ALL_ALBUMS ? ' active' : ''}`}
+                aria-pressed={activeAlbum === ALL_ALBUMS}
+                aria-controls="project-grid"
+                data-album={ALL_ALBUMS}
+                onClick={() => setActiveAlbum(ALL_ALBUMS)}
+              >
+                ALL
+              </button>
+            </li>
+            {albums.map((album) => (
+              <li key={album}>
                 <button
                   type="button"
-                  className={`filter-btn${category === activeCategory ? ' active' : ''}`}
-                  aria-pressed={category === activeCategory}
+                  className={`filter-btn${album === activeAlbum ? ' active' : ''}`}
+                  aria-pressed={album === activeAlbum}
                   aria-controls="project-grid"
-                  data-category={category}
-                  onClick={() => setActiveCategory(category)}
+                  data-album={album}
+                  onClick={() => setActiveAlbum(album)}
                 >
-                  {categoryLabels[category]}
+                  {album.toUpperCase()}
                 </button>
               </li>
             ))}
@@ -69,12 +72,12 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
       >
         {projects.map((project) => {
           const isVisible =
-            activeCategory === 'all' || project.category === activeCategory;
+            activeAlbum === ALL_ALBUMS || project.album === activeAlbum;
           return (
             <ProjectCard
               key={project.href}
               title={project.title}
-              category={project.category}
+              album={project.album}
               thumbnail={project.thumbnail}
               thumbnailAlt={project.thumbnailAlt}
               href={project.href}

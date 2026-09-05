@@ -24,16 +24,12 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, date, category, tags, images, video, videoPoster, tools, description, featured } = project.data;
+const { title, date, albums, tags, images, video, videoPoster, tools, description, featured } = project.data;
+const displayAlbum = albums?.[0] ?? '';
 
 // Alternate layout based on order or slug
 const isEven = (project.data.order || 0) % 2 === 0;
 const mediaFirst = isEven;
-
-const categoryLabels: Record<string, string> = {
-  renders: 'RENDERS',
-  physicalMediums: 'PHYSICAL MEDIUMS',
-};
 
 const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat('en-US', {
@@ -58,7 +54,7 @@ const formatDate = (date: Date) => {
       </a>
 
       <div class="project-meta">
-        <span class="project-category text-mono">{categoryLabels[category] || category.toUpperCase()}</span>
+        <span class="project-category text-mono">{displayAlbum.toUpperCase()}</span>
         <time class="project-date text-mono" datetime={date.toISOString()}>
           {formatDate(date)}
         </time>
@@ -87,11 +83,7 @@ const formatDate = (date: Date) => {
       </div>
 
       <div class={`project-text ${mediaFirst ? 'text-last' : 'text-first'}`}>
-        <div class="project-description text-body">
-          {description.split('\n\n').map((paragraph) => (
-            <p>{paragraph}</p>
-          ))}
-        </div>
+        <div class="project-description text-body" set:html={description} />
 
         {tools && tools.length > 0 && (
           <section class="project-tools">

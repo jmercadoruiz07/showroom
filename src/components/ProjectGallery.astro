@@ -4,8 +4,8 @@
 | ProjectGallery — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Loads project content, sorts by order/date, and renders the interactive
-| category-filtered grid as a React island.
+| Loads project content, sorts by order/date, derives the unique album list,
+| and renders the interactive album-filtered grid as a React island.
 |
 */
 import { getCollection } from 'astro:content';
@@ -20,12 +20,19 @@ const sortedProjects = sortProjectsByOrder([...featuredProjects, ...allProjects]
 
 const projects = sortedProjects.map((project) => ({
   title: project.data.title,
-  category: project.data.category,
+  album: project.data.albums?.[0] ?? '',
   thumbnail: project.data.thumbnail,
   thumbnailAlt: `${project.data.title} thumbnail`,
   href: `/projects/${project.id}`,
   featured: project.data.featured,
 }));
+
+// Derive the unique album list from the loaded projects, preserving the
+// order each album first appears so the filter pills stay stable across
+// re-runs of the scraper.
+const albums = Array.from(
+  new Set(projects.map((project) => project.album).filter((a) => a.length > 0)),
+);
 ---
 
-<ProjectGallery projects={projects} client:load />
+<ProjectGallery projects={projects} albums={albums} client:load />
