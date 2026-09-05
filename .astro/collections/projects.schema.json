@@ -1,73 +1,180 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "title": {
-      "type": "string"
-    },
-    "date": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "category": {
-      "type": "string",
-      "enum": [
-        "renders",
-        "physicalMediums"
-      ]
-    },
-    "tags": {
-      "default": [],
+  "anyOf": [
+    {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "albums": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "images": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "video": {
+            "type": "string"
+          },
+          "videoPoster": {
+            "type": "string"
+          },
+          "sourceUrl": {
+            "type": "string"
+          },
+          "tools": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "default": "",
+            "type": "string"
+          },
+          "featured": {
+            "default": false,
+            "type": "boolean"
+          },
+          "order": {
+            "type": "number"
+          },
+          "stats": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "title",
+          "date",
+          "thumbnail"
+        ]
       }
     },
-    "thumbnail": {
-      "type": "string"
-    },
-    "images": {
-      "default": [],
-      "type": "array",
-      "items": {
-        "type": "string"
+    {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "albums": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "images": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "video": {
+            "type": "string"
+          },
+          "videoPoster": {
+            "type": "string"
+          },
+          "sourceUrl": {
+            "type": "string"
+          },
+          "tools": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "default": "",
+            "type": "string"
+          },
+          "featured": {
+            "default": false,
+            "type": "boolean"
+          },
+          "order": {
+            "type": "number"
+          },
+          "stats": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "title",
+          "date",
+          "thumbnail"
+        ]
       }
-    },
-    "video": {
-      "type": "string"
-    },
-    "videoPoster": {
-      "type": "string"
-    },
-    "sourceUrl": {
-      "type": "string"
-    },
-    "tools": {
-      "default": [],
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "description": {
-      "default": "",
-      "type": "string"
-    },
-    "featured": {
-      "default": false,
-      "type": "boolean"
-    },
-    "order": {
-      "type": "number"
-    },
-    "$schema": {
-      "type": "string"
     }
-  },
-  "required": [
-    "title",
-    "date",
-    "category",
-    "thumbnail"
   ]
 }

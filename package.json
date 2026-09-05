@@ -17,7 +17,8 @@
     "test:a11y": "npx playwright test tests/accessibility.spec.ts",
     "test:crossbrowser": "npx playwright test tests/cross-browser.spec.ts",
     "test:lighthouse": "npm run build && node tests/lighthouse-audit.mjs",
-    "test:all": "npm run build && npx playwright test && node tests/lighthouse-audit.mjs"
+    "test:all": "npm run build && npx playwright test && node tests/lighthouse-audit.mjs",
+    "fetch-portfolio": "node bin/fetchPortfolio.js"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",
