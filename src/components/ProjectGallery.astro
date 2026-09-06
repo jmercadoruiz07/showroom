@@ -21,7 +21,11 @@ const sortedProjects = sortProjectsByOrder([...featuredProjects, ...allProjects]
 const projects = sortedProjects.map((project) => ({
   title: project.data.title,
   album: project.data.albums?.[0] ?? '',
-  thumbnail: project.data.thumbnail,
+  thumbnail: {
+    url: project.data.thumbnail.url,
+    width: project.data.thumbnail.width,
+    height: project.data.thumbnail.height,
+  },
   thumbnailAlt: `${project.data.title} thumbnail`,
   href: `/projects/${project.id}`,
   featured: project.data.featured,

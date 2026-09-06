@@ -12,8 +12,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import './ProjectMedia.css';
 
+export interface ProjectMediaImage {
+  url: string;
+  width?: number | null;
+  height?: number | null;
+}
+
 interface ProjectMediaProps {
-  images: string[];
+  images: ProjectMediaImage[];
   video?: string;
   videoPoster?: string;
   title: string;
@@ -21,7 +27,12 @@ interface ProjectMediaProps {
 
 type MediaItem =
   | { kind: 'video'; src: string; poster?: string }
-  | { kind: 'image'; src: string };
+  | {
+      kind: 'image';
+      src: string;
+      width?: number | null;
+      height?: number | null;
+    };
 
 const focusableSelector =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -42,7 +53,14 @@ export default function ProjectMedia({
   const media = useMemo<MediaItem[]>(() => {
     const items: MediaItem[] = [];
     if (video) items.push({ kind: 'video', src: video, poster: videoPoster });
-    images.forEach((src) => items.push({ kind: 'image', src }));
+    images.forEach((img) =>
+      items.push({
+        kind: 'image',
+        src: img.url,
+        width: img.width,
+        height: img.height,
+      }),
+    );
     return items;
   }, [video, videoPoster, images]);
 
@@ -115,6 +133,8 @@ export default function ProjectMedia({
     }
   }, [isOpen]);
 
+  const firstImageSrc = images[0]?.url;
+
   return (
     <>
       <div className="image-gallery">
@@ -141,7 +161,7 @@ export default function ProjectMedia({
             {item.kind === 'video' ? (
               <>
                 <img
-                  src={item.poster ?? images[0]}
+                  src={item.poster ?? firstImageSrc}
                   alt={`${title} - Video ${index + 1}`}
                   loading="eager"
                   decoding="async"
@@ -166,8 +186,8 @@ export default function ProjectMedia({
                 alt={`${title} - Image ${index + 1}`}
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
-                width="800"
-                height="600"
+                width={item.width ?? 800}
+                height={item.height ?? 600}
               />
             )}
           </figure>
@@ -255,7 +275,17 @@ export default function ProjectMedia({
             <img
               className="viewer-image"
               src={isOpen && current?.kind === 'image' ? current.src : undefined}
-              alt={isOpen && current?.kind === 'image' ? `${title} - Image ${currentIndex + 1}` : ''}
+              alt={
+                isOpen && current?.kind === 'image'
+                  ? `${title} - Image ${currentIndex + 1}`
+                  : ''
+              }
+              width={
+                isOpen && current?.kind === 'image' ? current.width ?? undefined : undefined
+              }
+              height={
+                isOpen && current?.kind === 'image' ? current.height ?? undefined : undefined
+              }
             />
           )}
         </div>

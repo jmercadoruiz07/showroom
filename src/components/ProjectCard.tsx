@@ -11,10 +11,16 @@
 import type { CSSProperties } from 'react';
 import './ProjectCard.css';
 
+export interface ProjectCardThumbnail {
+  url: string;
+  width?: number | null;
+  height?: number | null;
+}
+
 export interface ProjectCardProps {
   title: string;
   album: string;
-  thumbnail: string;
+  thumbnail: ProjectCardThumbnail;
   thumbnailAlt?: string;
   href: string;
   featured?: boolean;
@@ -41,12 +47,12 @@ export default function ProjectCard({
       <a href={href} className="card-link" aria-label={`View project: ${title}`}>
         <div className="card-media" aria-hidden="true">
           <img
-            src={thumbnail}
+            src={thumbnail.url}
             alt={thumbnailAlt || title}
             loading="lazy"
             decoding="async"
-            width="400"
-            height="500"
+            width={thumbnail.width ?? undefined}
+            height={thumbnail.height ?? undefined}
           />
         </div>
 

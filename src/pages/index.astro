@@ -19,7 +19,7 @@ const projects = await getCollection('projects');
 const featuredSlides = sortProjectsByOrder(
   projects.filter((project) => project.data.featured),
 ).map((project) => ({
-  src: project.data.thumbnail,
+  src: project.data.thumbnail.url,
   alt: `${project.data.title} — featured project`,
   title: project.data.title,
   href: `/projects/${project.id}`,

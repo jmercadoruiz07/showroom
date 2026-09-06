@@ -9,13 +9,13 @@
 |
 */
 import { useState } from 'react';
-import ProjectCard from './ProjectCard';
+import ProjectCard, { type ProjectCardThumbnail } from './ProjectCard';
 import './ProjectGallery.css';
 
 export interface GalleryProject {
   title: string;
   album: string;
-  thumbnail: string;
+  thumbnail: ProjectCardThumbnail;
   thumbnailAlt?: string;
   href: string;
   featured?: boolean;

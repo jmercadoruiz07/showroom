@@ -44,7 +44,7 @@ const formatDate = (date: Date) => {
 <ProjectLayout
   title={title}
   description={description}
-  ogImage={images?.[0] || videoPoster}
+  ogImage={images?.[0]?.url || videoPoster}
 >
   <main id="main-content">
   <article class="project-detail">
