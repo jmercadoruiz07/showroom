@@ -51,9 +51,11 @@ export default function ProjectCard({
         </div>
 
         <div className="card-overlay">
-          <span className="card-category text-mono" aria-hidden="true">
-            {album.toUpperCase()}
-          </span>
+          {album ? (
+            <span className="card-category text-mono" aria-hidden="true">
+              {album.toUpperCase()}
+            </span>
+          ) : <div />}
 
           <div className="card-content">
             <h2 className="card-title text-display">{title}</h2>
