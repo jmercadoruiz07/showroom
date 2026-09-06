@@ -42,10 +42,21 @@ export default function ProjectCard({
     .filter(Boolean)
     .join(' ');
 
+  // Falls back to a 1:1 ratio when dimensions are missing so cards still
+  // reserve space and the grid stays stable on first paint.
+  const aspectRatio =
+    thumbnail.width && thumbnail.height
+      ? `${thumbnail.width} / ${thumbnail.height}`
+      : '1 / 1';
+
   return (
     <article className={cardClass} data-album={album} style={style}>
       <a href={href} className="card-link" aria-label={`View project: ${title}`}>
-        <div className="card-media" aria-hidden="true">
+        <div
+          className="card-media"
+          aria-hidden="true"
+          style={{ aspectRatio }}
+        >
           <img
             src={thumbnail.url}
             alt={thumbnailAlt || title}
