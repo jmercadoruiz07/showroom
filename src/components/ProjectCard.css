@@ -11,8 +11,6 @@
 */
 .project-card {
   position: relative;
-  break-inside: avoid;
-  margin-bottom: var(--space-xl);
   display: block;
   overflow: hidden;
   background-color: var(--color-deep-text);
@@ -25,7 +23,6 @@
 }
 
 .card-media {
-  aspect-ratio: 4 / 5;
   overflow: hidden;
   background-color: var(--color-stone);
 }

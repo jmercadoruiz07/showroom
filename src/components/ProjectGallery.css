@@ -100,6 +100,61 @@
   margin: 0 auto;
 }
 
+/*
+|-------------------------------------------------------------------------------
+| Masonry grid — explicit placement via JS shortest-column packer
+|-------------------------------------------------------------------------------
+|
+| The grid defines responsive columns and a small row track height. Each
+| card receives explicit grid-column / grid-row-start / grid-row-end from
+| ProjectGallery.tsx so the browser renders the computed layout without
+| relying on auto-placement heuristics.
+|
+| row-gap must stay 0: a gap would be inserted between every tiny row track
+| and inflate each span. Vertical spacing is folded into the JS row-span
+| using column-gap instead.
+|
+| The column count lives in --masonry-columns so the JS can read it directly.
+| The resolved grid-template-columns also includes implicit tracks created by
+| previously placed cards, which would keep stale columns alive on resize.
+|
+| The tiny row tracks only apply once cards are placed (.is-packed). Before
+| that, cards flow as a regular grid at full height; otherwise they collapse
+| onto the first rows and native lazy-loading fetches every thumbnail.
+|
+*/
+.project-grid.masonry {
+  --masonry-columns: 4;
+  --masonry-row-height: 2px;
+  display: grid;
+  grid-template-columns: repeat(var(--masonry-columns), minmax(0, 1fr));
+  gap: var(--space-md);
+  align-items: start;
+}
+
+.project-grid.masonry.is-packed {
+  grid-auto-rows: var(--masonry-row-height);
+  row-gap: 0;
+}
+
+@media (max-width: 1200px) {
+  .project-grid.masonry {
+    --masonry-columns: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-grid.masonry {
+    --masonry-columns: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-grid.masonry {
+    --masonry-columns: 1;
+  }
+}
+
 /* Reveal item transitions */
 .reveal-item {
   opacity: 0;

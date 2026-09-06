@@ -53,33 +53,6 @@
   }
 }
 
-/* ─── Project Grid ─────────────────────────────────────────────────────────── */
-.project-grid.masonry {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-md);
-  align-items: start;
-}
-
-@media (min-width: 640px) {
-  .project-grid.masonry {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .project-grid.masonry {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1440px) {
-  .project-grid.masonry {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
-  }
-}
-
 /* ─── Sticky Positioning ───────────────────────────────────────────────────── */
 .sticky-top {
   position: sticky;
