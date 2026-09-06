@@ -14,13 +14,37 @@
       "concertina",
       "poem"
     ],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/102/156/341/medium/jose-mercado-ruiz-screenshot-2026-09-05-at-1-07-44-am.jpg?1788534528",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/341/medium/jose-mercado-ruiz-screenshot-2026-09-05-at-1-07-44-am.jpg?1788534528",
+      "width": 1133,
+      "height": 1600
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/102/156/341/large/jose-mercado-ruiz-screenshot-2026-09-05-at-1-07-44-am.jpg?1788534528",
-      "https://cdna.artstation.com/p/assets/images/images/102/156/308/large/jose-mercado-ruiz-img-3242.jpg?1788534436",
-      "https://cdnb.artstation.com/p/assets/images/images/102/156/429/large/jose-mercado-ruiz-1.jpg?1788534739",
-      "https://cdna.artstation.com/p/assets/images/images/102/156/432/large/jose-mercado-ruiz-2.jpg?1788534744",
-      "https://cdnb.artstation.com/p/assets/images/images/102/156/297/large/jose-mercado-ruiz-img-3238.jpg?1788534409"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/341/large/jose-mercado-ruiz-screenshot-2026-09-05-at-1-07-44-am.jpg?1788534528",
+        "width": 1472,
+        "height": 2078
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/156/308/large/jose-mercado-ruiz-img-3242.jpg?1788534436",
+        "width": 4032,
+        "height": 3024
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/429/large/jose-mercado-ruiz-1.jpg?1788534739",
+        "width": 2000,
+        "height": 1414
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/156/432/large/jose-mercado-ruiz-2.jpg?1788534744",
+        "width": 952,
+        "height": 718
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/297/large/jose-mercado-ruiz-img-3238.jpg?1788534409",
+        "width": 4032,
+        "height": 3024
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/Y8Be0P",
     "tools": [],
@@ -47,12 +71,32 @@
       "print",
       "publication"
     ],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/102/156/182/medium/jose-mercado-ruiz-screenshot-2026-09-05-at-1-02-02-am.jpg?1788534214",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/102/156/182/medium/jose-mercado-ruiz-screenshot-2026-09-05-at-1-02-02-am.jpg?1788534214",
+      "width": 1600,
+      "height": 1131
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/102/156/182/large/jose-mercado-ruiz-screenshot-2026-09-05-at-1-02-02-am.jpg?1788534214",
-      "https://cdnb.artstation.com/p/assets/images/images/102/156/017/large/jose-mercado-ruiz-img-3234.jpg?1788533780",
-      "https://cdnb.artstation.com/p/assets/images/images/102/156/021/large/jose-mercado-ruiz-img-3235.jpg?1788533788",
-      "https://cdna.artstation.com/p/assets/images/images/102/156/026/large/jose-mercado-ruiz-img-3236.jpg?1788533796"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/156/182/large/jose-mercado-ruiz-screenshot-2026-09-05-at-1-02-02-am.jpg?1788534214",
+        "width": 2318,
+        "height": 1638
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/017/large/jose-mercado-ruiz-img-3234.jpg?1788533780",
+        "width": 4032,
+        "height": 3024
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/021/large/jose-mercado-ruiz-img-3235.jpg?1788533788",
+        "width": 3024,
+        "height": 4032
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/156/026/large/jose-mercado-ruiz-img-3236.jpg?1788533796",
+        "width": 3024,
+        "height": 4032
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/b0lKqn",
     "tools": [],
@@ -78,14 +122,42 @@
       "collage",
       "mixed media"
     ],
-    "thumbnail": "https://cdna.artstation.com/p/assets/covers/images/102/155/956/medium/jose-mercado-ruiz-jose-mercado-ruiz-postcard-4.jpg?1788533637",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/covers/images/102/155/956/medium/jose-mercado-ruiz-jose-mercado-ruiz-postcard-4.jpg?1788533637",
+      "width": 1131,
+      "height": 1600
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/102/155/858/large/jose-mercado-ruiz-postcard-1.jpg?1788533566",
-      "https://cdnb.artstation.com/p/assets/images/images/102/155/891/large/jose-mercado-ruiz-postcard-3.jpg?1788533466",
-      "https://cdnb.artstation.com/p/assets/images/images/102/155/835/large/jose-mercado-ruiz-jose-print-6.jpg?1788533389",
-      "https://cdna.artstation.com/p/assets/images/images/102/155/844/large/jose-mercado-ruiz-jose-print-7.jpg?1788533401",
-      "https://cdna.artstation.com/p/assets/images/images/102/155/878/large/jose-mercado-ruiz-postcard-2.jpg?1788533442",
-      "https://cdnb.artstation.com/p/assets/images/images/102/155/897/large/jose-mercado-ruiz-postcard-4.jpg?1788533488"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/155/858/large/jose-mercado-ruiz-postcard-1.jpg?1788533566",
+        "width": 2480,
+        "height": 3508
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/155/891/large/jose-mercado-ruiz-postcard-3.jpg?1788533466",
+        "width": 2480,
+        "height": 3508
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/155/835/large/jose-mercado-ruiz-jose-print-6.jpg?1788533389",
+        "width": 2480,
+        "height": 3508
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/155/844/large/jose-mercado-ruiz-jose-print-7.jpg?1788533401",
+        "width": 2480,
+        "height": 3508
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/155/878/large/jose-mercado-ruiz-postcard-2.jpg?1788533442",
+        "width": 2480,
+        "height": 3508
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/155/897/large/jose-mercado-ruiz-postcard-4.jpg?1788533488",
+        "width": 2480,
+        "height": 3508
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/q0e9GL",
     "tools": [],
@@ -93,7 +165,7 @@
     "featured": false,
     "order": 3,
     "stats": {
-      "views": 3,
+      "views": 4,
       "likes": 1,
       "comments": 0
     }
@@ -112,14 +184,42 @@
       "publication",
       "typography"
     ],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/102/155/625/medium/jose-mercado-ruiz-1.jpg?1788533263",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/102/155/625/medium/jose-mercado-ruiz-1.jpg?1788533263",
+      "width": 1200,
+      "height": 1600
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/102/155/625/large/jose-mercado-ruiz-1.jpg?1788533263",
-      "https://cdna.artstation.com/p/assets/images/images/102/155/698/large/jose-mercado-ruiz-6.jpg?1788533192",
-      "https://cdnb.artstation.com/p/assets/images/images/102/155/653/large/jose-mercado-ruiz-3.jpg?1788533140",
-      "https://cdna.artstation.com/p/assets/images/images/102/155/666/large/jose-mercado-ruiz-4.jpg?1788533157",
-      "https://cdna.artstation.com/p/assets/images/images/102/155/686/large/jose-mercado-ruiz-5.jpg?1788533173",
-      "https://cdna.artstation.com/p/assets/images/images/102/155/642/large/jose-mercado-ruiz-2.jpg?1788533118"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/155/625/large/jose-mercado-ruiz-1.jpg?1788533263",
+        "width": 3213,
+        "height": 4284
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/155/698/large/jose-mercado-ruiz-6.jpg?1788533192",
+        "width": 3213,
+        "height": 4284
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/155/653/large/jose-mercado-ruiz-3.jpg?1788533140",
+        "width": 3213,
+        "height": 4284
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/155/666/large/jose-mercado-ruiz-4.jpg?1788533157",
+        "width": 3213,
+        "height": 4284
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/155/686/large/jose-mercado-ruiz-5.jpg?1788533173",
+        "width": 3213,
+        "height": 4284
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/155/642/large/jose-mercado-ruiz-2.jpg?1788533118",
+        "width": 3213,
+        "height": 4284
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/G1eaN3",
     "tools": [],
@@ -146,12 +246,32 @@
       "waves",
       "NoAI"
     ],
-    "thumbnail": "https://cdna.artstation.com/p/assets/covers/images/102/154/840/medium/jose-mercado-ruiz-jose-mercado-ruiz-blue-waves-storyboard-artboard-044.jpg?1788531450",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/covers/images/102/154/840/medium/jose-mercado-ruiz-jose-mercado-ruiz-blue-waves-storyboard-artboard-044.jpg?1788531450",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/102/153/794/large/jose-mercado-ruiz-screenshot-2026-09-04-at-11-36-09-pm.jpg?1788528997",
-      "https://cdnb.artstation.com/p/assets/images/images/102/153/633/large/jose-mercado-ruiz-lonedruida-mood-tests-01.jpg?1788528689",
-      "https://cdnb.artstation.com/p/assets/images/images/102/153/627/large/jose-mercado-ruiz-blue-waves-storyboard-artboard-8.jpg?1788528674",
-      "https://cdnb.artstation.com/p/assets/images/images/102/153/631/large/jose-mercado-ruiz-blue-waves-storyboard-artboard-41.jpg?1788528682"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/153/794/large/jose-mercado-ruiz-screenshot-2026-09-04-at-11-36-09-pm.jpg?1788528997",
+        "width": 2452,
+        "height": 1710
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/153/633/large/jose-mercado-ruiz-lonedruida-mood-tests-01.jpg?1788528689",
+        "width": 2467,
+        "height": 1440
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/153/627/large/jose-mercado-ruiz-blue-waves-storyboard-artboard-8.jpg?1788528674",
+        "width": 4000,
+        "height": 2250
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/153/631/large/jose-mercado-ruiz-blue-waves-storyboard-artboard-41.jpg?1788528682",
+        "width": 4000,
+        "height": 2250
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/xdDJRX",
     "tools": [
@@ -179,11 +299,27 @@
       "bauhaus",
       "mural"
     ],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/102/153/236/medium/jose-mercado-ruiz-bauhaus-mural-02.jpg?1788527963",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/102/153/236/medium/jose-mercado-ruiz-bauhaus-mural-02.jpg?1788527963",
+      "width": 1600,
+      "height": 800
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/102/153/236/large/jose-mercado-ruiz-bauhaus-mural-02.jpg?1788527963",
-      "https://cdna.artstation.com/p/assets/images/images/102/153/254/large/jose-mercado-ruiz-final-mural.jpg?1788527400",
-      "https://cdnb.artstation.com/p/assets/images/images/102/153/267/large/jose-mercado-ruiz-post-submission-mural.jpg?1788527474"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/153/236/large/jose-mercado-ruiz-bauhaus-mural-02.jpg?1788527963",
+        "width": 3308,
+        "height": 1654
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/102/153/254/large/jose-mercado-ruiz-final-mural.jpg?1788527400",
+        "width": 6615,
+        "height": 3308
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/102/153/267/large/jose-mercado-ruiz-post-submission-mural.jpg?1788527474",
+        "width": 3308,
+        "height": 1654
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/vzD253",
     "tools": [],
@@ -205,9 +341,17 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/069/770/574/medium/jose-mercado-ruiz-huyigh-contrast-1.jpg?1700970413",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/069/770/574/medium/jose-mercado-ruiz-huyigh-contrast-1.jpg?1700970413",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/069/770/574/large/jose-mercado-ruiz-huyigh-contrast-1.jpg?1700970413"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/069/770/574/large/jose-mercado-ruiz-huyigh-contrast-1.jpg?1700970413",
+        "width": 3840,
+        "height": 2160
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/kQ3vZn",
     "tools": [
@@ -233,10 +377,22 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/covers/images/066/072/846/medium/jose-mercado-ruiz-jose-mercado-ruiz-lego-plane-crash.jpg?1691989038",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/covers/images/066/072/846/medium/jose-mercado-ruiz-jose-mercado-ruiz-lego-plane-crash.jpg?1691989038",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/072/822/large/jose-mercado-ruiz-lego-plane-crash.jpg?1691988928",
-      "https://cdna.artstation.com/p/assets/images/images/066/072/818/large/jose-mercado-ruiz-sheesh-comp-omg-copy.jpg?1691988910"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/822/large/jose-mercado-ruiz-lego-plane-crash.jpg?1691988928",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/818/large/jose-mercado-ruiz-sheesh-comp-omg-copy.jpg?1691988910",
+        "width": 2560,
+        "height": 1440
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/PXbgxr",
     "tools": [],
@@ -260,9 +416,17 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/072/678/medium/jose-mercado-ruiz-plane-iso-view-1-copy.jpg?1691988672",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/072/678/medium/jose-mercado-ruiz-plane-iso-view-1-copy.jpg?1691988672",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/072/678/large/jose-mercado-ruiz-plane-iso-view-1-copy.jpg?1691988672"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/678/large/jose-mercado-ruiz-plane-iso-view-1-copy.jpg?1691988672",
+        "width": 2560,
+        "height": 1440
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/xDovRO",
     "tools": [
@@ -293,10 +457,22 @@
       "star destroyer",
       "clonewars"
     ],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/072/581/medium/jose-mercado-ruiz-kl-sheeesh.jpg?1691988051",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/581/medium/jose-mercado-ruiz-kl-sheeesh.jpg?1691988051",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/072/581/large/jose-mercado-ruiz-kl-sheeesh.jpg?1691988051",
-      "https://cdna.artstation.com/p/assets/images/images/066/072/586/large/jose-mercado-ruiz-kl-screenshot-progress-4.jpg?1691988014"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/581/large/jose-mercado-ruiz-kl-sheeesh.jpg?1691988051",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/586/large/jose-mercado-ruiz-kl-screenshot-progress-4.jpg?1691988014",
+        "width": 2560,
+        "height": 1400
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/lDlOdO",
     "tools": [
@@ -322,10 +498,22 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/072/452/medium/jose-mercado-ruiz-sheesh-final-hopefully.jpg?1691987719",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/072/452/medium/jose-mercado-ruiz-sheesh-final-hopefully.jpg?1691987719",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/072/452/large/jose-mercado-ruiz-sheesh-final-hopefully.jpg?1691987719",
-      "https://cdnb.artstation.com/p/assets/images/images/066/072/463/large/jose-mercado-ruiz-screenshot-3.jpg?1691987476"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/452/large/jose-mercado-ruiz-sheesh-final-hopefully.jpg?1691987719",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/463/large/jose-mercado-ruiz-screenshot-3.jpg?1691987476",
+        "width": 2557,
+        "height": 1369
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/w0qvdw",
     "tools": [
@@ -351,12 +539,32 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/072/316/medium/jose-mercado-ruiz-edited-br-2.jpg?1691986976",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/072/316/medium/jose-mercado-ruiz-edited-br-2.jpg?1691986976",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/072/316/large/jose-mercado-ruiz-edited-br-2.jpg?1691986976",
-      "https://cdna.artstation.com/p/assets/images/images/066/072/322/large/jose-mercado-ruiz-non-composited-render.jpg?1691986986",
-      "https://cdna.artstation.com/p/assets/images/images/066/072/328/large/jose-mercado-ruiz-comp-clay-bladerunner.jpg?1691986994",
-      "https://cdnb.artstation.com/p/assets/images/images/066/072/333/large/jose-mercado-ruiz-screenshot-5.jpg?1691987006"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/316/large/jose-mercado-ruiz-edited-br-2.jpg?1691986976",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/322/large/jose-mercado-ruiz-non-composited-render.jpg?1691986986",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/328/large/jose-mercado-ruiz-comp-clay-bladerunner.jpg?1691986994",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/333/large/jose-mercado-ruiz-screenshot-5.jpg?1691987006",
+        "width": 2554,
+        "height": 1357
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/rJevL6",
     "tools": [
@@ -384,12 +592,32 @@
       "Mechanical Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/072/182/medium/jose-mercado-ruiz-dhedrtitled.jpg?1691986235",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/072/182/medium/jose-mercado-ruiz-dhedrtitled.jpg?1691986235",
+      "width": 1600,
+      "height": 1600
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/072/182/large/jose-mercado-ruiz-dhedrtitled.jpg?1691986235",
-      "https://cdnb.artstation.com/p/assets/images/images/066/072/185/large/jose-mercado-ruiz-untiyufcrtyfytled.jpg?1691986249",
-      "https://cdnb.artstation.com/p/assets/images/images/066/072/187/large/jose-mercado-ruiz-viking-materials.jpg?1691986262",
-      "https://cdna.artstation.com/p/assets/images/images/066/072/188/large/jose-mercado-ruiz-screen-shot-2021-12-05-at-7-25-38-pm.jpg?1691986273"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/182/large/jose-mercado-ruiz-dhedrtitled.jpg?1691986235",
+        "width": 2160,
+        "height": 2160
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/185/large/jose-mercado-ruiz-untiyufcrtyfytled.jpg?1691986249",
+        "width": 2160,
+        "height": 2160
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/187/large/jose-mercado-ruiz-viking-materials.jpg?1691986262",
+        "width": 2160,
+        "height": 2160
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/188/large/jose-mercado-ruiz-screen-shot-2021-12-05-at-7-25-38-pm.jpg?1691986273",
+        "width": 2880,
+        "height": 1694
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/493PxY",
     "tools": [],
@@ -415,10 +643,22 @@
       "Mechanical Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/072/118/medium/jose-mercado-ruiz-composited-dope-viking-mech-clay-render-copy.jpg?1691985912",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/072/118/medium/jose-mercado-ruiz-composited-dope-viking-mech-clay-render-copy.jpg?1691985912",
+      "width": 1080,
+      "height": 1080
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/072/118/large/jose-mercado-ruiz-composited-dope-viking-mech-clay-render-copy.jpg?1691985912",
-      "https://cdnb.artstation.com/p/assets/images/images/066/072/121/large/jose-mercado-ruiz-sheesh-viking-mech-clay-render-copy-2.jpg?1691985917"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/118/large/jose-mercado-ruiz-composited-dope-viking-mech-clay-render-copy.jpg?1691985912",
+        "width": 1080,
+        "height": 1080
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/121/large/jose-mercado-ruiz-sheesh-viking-mech-clay-render-copy-2.jpg?1691985917",
+        "width": 1080,
+        "height": 1080
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/GeqgKW",
     "tools": [
@@ -449,12 +689,32 @@
       "star destroyer",
       "venator"
     ],
-    "thumbnail": "https://cdna.artstation.com/p/assets/video_clips/images/066/049/030/medium/jose-mercado-ruiz-thumb.jpg?1691921648",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/video_clips/images/066/049/030/medium/jose-mercado-ruiz-thumb.jpg?1691921648",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/071/709/large/jose-mercado-ruiz-clay-comparison-1.jpg?1691984501",
-      "https://cdnb.artstation.com/p/assets/images/images/066/071/713/large/jose-mercado-ruiz-composited-clay-render.jpg?1691984517",
-      "https://cdnb.artstation.com/p/assets/images/images/066/071/717/large/jose-mercado-ruiz-screen-shot-2021-11-10-at-9-54-13-pm.jpg?1691984525",
-      "https://cdnb.artstation.com/p/assets/images/images/066/071/723/large/jose-mercado-ruiz-screen-shot-2021-11-10-at-9-51-26-pm.jpg?1691984539"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/071/709/large/jose-mercado-ruiz-clay-comparison-1.jpg?1691984501",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/071/713/large/jose-mercado-ruiz-composited-clay-render.jpg?1691984517",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/071/717/large/jose-mercado-ruiz-screen-shot-2021-11-10-at-9-54-13-pm.jpg?1691984525",
+        "width": 2880,
+        "height": 1696
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/071/723/large/jose-mercado-ruiz-screen-shot-2021-11-10-at-9-51-26-pm.jpg?1691984539",
+        "width": 2880,
+        "height": 1694
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/g0qV4K",
     "tools": [],
@@ -478,9 +738,17 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/covers/images/066/046/762/medium/jose-mercado-ruiz-jose-mercado-ruiz-cyberpunk-street-race.jpg?1691913574",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/covers/images/066/046/762/medium/jose-mercado-ruiz-jose-mercado-ruiz-cyberpunk-street-race.jpg?1691913574",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/046/713/large/jose-mercado-ruiz-cyberpunk-street-race.jpg?1691913360"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/713/large/jose-mercado-ruiz-cyberpunk-street-race.jpg?1691913360",
+        "width": 3840,
+        "height": 2160
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/zPnkdw",
     "tools": [
@@ -506,10 +774,22 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/072/014/medium/jose-mercado-ruiz-untitleeed.jpg?1691985491",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/072/014/medium/jose-mercado-ruiz-untitleeed.jpg?1691985491",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/072/014/large/jose-mercado-ruiz-untitleeed.jpg?1691985491",
-      "https://cdnb.artstation.com/p/assets/images/images/066/072/019/large/jose-mercado-ruiz-untitleeeeeeed.jpg?1691985510"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/072/014/large/jose-mercado-ruiz-untitleeed.jpg?1691985491",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/072/019/large/jose-mercado-ruiz-untitleeeeeeed.jpg?1691985510",
+        "width": 3840,
+        "height": 2160
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/dK3GoK",
     "tools": [
@@ -535,9 +815,17 @@
       "Vehicles"
     ],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/046/640/medium/jose-mercado-ruiz-untitled.jpg?1691913080",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/046/640/medium/jose-mercado-ruiz-untitled.jpg?1691913080",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/046/640/large/jose-mercado-ruiz-untitled.jpg?1691913080"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/046/640/large/jose-mercado-ruiz-untitled.jpg?1691913080",
+        "width": 3840,
+        "height": 2160
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/Rye58X",
     "tools": [
@@ -563,9 +851,17 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/046/573/medium/jose-mercado-ruiz-dodge-demon-scene-isometric.jpg?1692440392",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/573/medium/jose-mercado-ruiz-dodge-demon-scene-isometric.jpg?1692440392",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/046/573/large/jose-mercado-ruiz-dodge-demon-scene-isometric.jpg?1692440392"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/573/large/jose-mercado-ruiz-dodge-demon-scene-isometric.jpg?1692440392",
+        "width": 1920,
+        "height": 1080
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/XgzD5n",
     "tools": [
@@ -593,11 +889,27 @@
       "Lighting"
     ],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/covers/images/066/046/491/medium/jose-mercado-ruiz-jose-mercado-ruiz-dodge-demon.jpg?1691912254",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/covers/images/066/046/491/medium/jose-mercado-ruiz-jose-mercado-ruiz-dodge-demon.jpg?1691912254",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/046/418/large/jose-mercado-ruiz-dodge-demon-neon-lights-cinematic.jpg?1691912010",
-      "https://cdnb.artstation.com/p/assets/images/images/066/046/425/large/jose-mercado-ruiz-dodge-demon.jpg?1691911999",
-      "https://cdnb.artstation.com/p/assets/images/images/066/046/433/large/jose-mercado-ruiz-dodge-demon-cinematic.jpg?1691912022"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/046/418/large/jose-mercado-ruiz-dodge-demon-neon-lights-cinematic.jpg?1691912010",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/425/large/jose-mercado-ruiz-dodge-demon.jpg?1691911999",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/433/large/jose-mercado-ruiz-dodge-demon-cinematic.jpg?1691912022",
+        "width": 3840,
+        "height": 2160
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/ZazRwX",
     "tools": [],
@@ -621,11 +933,27 @@
       "Environmental Concept Art & Design"
     ],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/046/347/medium/jose-mercado-ruiz-untitledddd.jpg?1691911544",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/347/medium/jose-mercado-ruiz-untitledddd.jpg?1691911544",
+      "width": 1600,
+      "height": 900
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/046/347/large/jose-mercado-ruiz-untitledddd.jpg?1691911544",
-      "https://cdnb.artstation.com/p/assets/images/images/066/046/353/large/jose-mercado-ruiz-untitledddddd.jpg?1691911562",
-      "https://cdna.artstation.com/p/assets/images/images/066/046/360/large/jose-mercado-ruiz-untitledddddddddd.jpg?1691911581"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/347/large/jose-mercado-ruiz-untitledddd.jpg?1691911544",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/046/353/large/jose-mercado-ruiz-untitledddddd.jpg?1691911562",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/046/360/large/jose-mercado-ruiz-untitledddddddddd.jpg?1691911581",
+        "width": 3840,
+        "height": 2160
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/obdZLk",
     "tools": [
@@ -649,10 +977,22 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/800/759/medium/jose-mercado-ruiz-pxl-20230829-084357602-1.jpg?1693826070",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/800/759/medium/jose-mercado-ruiz-pxl-20230829-084357602-1.jpg?1693826070",
+      "width": 1600,
+      "height": 897
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/800/759/large/jose-mercado-ruiz-pxl-20230829-084357602-1.jpg?1693826070",
-      "https://cdnb.artstation.com/p/assets/images/images/066/800/771/large/jose-mercado-ruiz-pxl-20230829-084510638.jpg?1693826044"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/800/759/large/jose-mercado-ruiz-pxl-20230829-084357602-1.jpg?1693826070",
+        "width": 4063,
+        "height": 2278
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/800/771/large/jose-mercado-ruiz-pxl-20230829-084510638.jpg?1693826044",
+        "width": 3072,
+        "height": 3172
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/PXBma1",
     "tools": [],
@@ -674,9 +1014,17 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/802/417/medium/jose-mercado-ruiz-pxl-20230904-113549939.jpg?1693829501",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/417/medium/jose-mercado-ruiz-pxl-20230904-113549939.jpg?1693829501",
+      "width": 1099,
+      "height": 1600
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/802/417/large/jose-mercado-ruiz-pxl-20230904-113549939.jpg?1693829501"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/417/large/jose-mercado-ruiz-pxl-20230904-113549939.jpg?1693829501",
+        "width": 1936,
+        "height": 2819
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/WBx2ly",
     "tools": [],
@@ -698,9 +1046,17 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/802/364/medium/jose-mercado-ruiz-pxl-20230904-113722254.jpg?1693829265",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/802/364/medium/jose-mercado-ruiz-pxl-20230904-113722254.jpg?1693829265",
+      "width": 1600,
+      "height": 1111
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/802/364/large/jose-mercado-ruiz-pxl-20230904-113722254.jpg?1693829265"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/802/364/large/jose-mercado-ruiz-pxl-20230904-113722254.jpg?1693829265",
+        "width": 2869,
+        "height": 1992
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/8bLlrG",
     "tools": [],
@@ -722,9 +1078,17 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/802/160/medium/jose-mercado-ruiz-pxl-20230904-114153353.jpg?1694005674",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/802/160/medium/jose-mercado-ruiz-pxl-20230904-114153353.jpg?1694005674",
+      "width": 1600,
+      "height": 1122
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/802/160/large/jose-mercado-ruiz-pxl-20230904-114153353.jpg?1694005674"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/802/160/large/jose-mercado-ruiz-pxl-20230904-114153353.jpg?1694005674",
+        "width": 3036,
+        "height": 2129
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/BXJmwA",
     "tools": [],
@@ -746,9 +1110,17 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/802/247/medium/jose-mercado-ruiz-pxl-20230904-114247595.jpg?1693829095",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/247/medium/jose-mercado-ruiz-pxl-20230904-114247595.jpg?1693829095",
+      "width": 1600,
+      "height": 1170
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/802/247/large/jose-mercado-ruiz-pxl-20230904-114247595.jpg?1693829095"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/247/large/jose-mercado-ruiz-pxl-20230904-114247595.jpg?1693829095",
+        "width": 2866,
+        "height": 2096
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/xDKzBO",
     "tools": [],
@@ -770,11 +1142,27 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/802/293/medium/jose-mercado-ruiz-pxl-20230904-113628221.jpg?1693829173",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/293/medium/jose-mercado-ruiz-pxl-20230904-113628221.jpg?1693829173",
+      "width": 1129,
+      "height": 1600
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/802/293/large/jose-mercado-ruiz-pxl-20230904-113628221.jpg?1693829173",
-      "https://cdnb.artstation.com/p/assets/images/images/066/802/307/large/jose-mercado-ruiz-pxl-20230904-113655508.jpg?1693829190",
-      "https://cdnb.artstation.com/p/assets/images/images/066/802/313/large/jose-mercado-ruiz-pxl-20230904-113642917.jpg?1693829195"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/293/large/jose-mercado-ruiz-pxl-20230904-113628221.jpg?1693829173",
+        "width": 1887,
+        "height": 2674
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/307/large/jose-mercado-ruiz-pxl-20230904-113655508.jpg?1693829190",
+        "width": 2656,
+        "height": 1822
+      },
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/802/313/large/jose-mercado-ruiz-pxl-20230904-113642917.jpg?1693829195",
+        "width": 2929,
+        "height": 2007
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/8bLlrO",
     "tools": [],
@@ -796,9 +1184,17 @@
     ],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdna.artstation.com/p/assets/images/images/066/799/392/medium/jose-mercado-ruiz-pxl-20211214-054624948.jpg?1693822987",
+    "thumbnail": {
+      "url": "https://cdna.artstation.com/p/assets/images/images/066/799/392/medium/jose-mercado-ruiz-pxl-20211214-054624948.jpg?1693822987",
+      "width": 1205,
+      "height": 1600
+    },
     "images": [
-      "https://cdna.artstation.com/p/assets/images/images/066/799/392/large/jose-mercado-ruiz-pxl-20211214-054624948.jpg?1693822987"
+      {
+        "url": "https://cdna.artstation.com/p/assets/images/images/066/799/392/large/jose-mercado-ruiz-pxl-20211214-054624948.jpg?1693822987",
+        "width": 3072,
+        "height": 4080
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/QXBmb8",
     "tools": [],
@@ -818,9 +1214,17 @@
     "albums": [],
     "categories": [],
     "tags": [],
-    "thumbnail": "https://cdnb.artstation.com/p/assets/images/images/066/801/323/medium/jose-mercado-ruiz-pxl-20230904-112642384.jpg?1693827181",
+    "thumbnail": {
+      "url": "https://cdnb.artstation.com/p/assets/images/images/066/801/323/medium/jose-mercado-ruiz-pxl-20230904-112642384.jpg?1693827181",
+      "width": 1600,
+      "height": 1115
+    },
     "images": [
-      "https://cdnb.artstation.com/p/assets/images/images/066/801/323/large/jose-mercado-ruiz-pxl-20230904-112642384.jpg?1693827181"
+      {
+        "url": "https://cdnb.artstation.com/p/assets/images/images/066/801/323/large/jose-mercado-ruiz-pxl-20230904-112642384.jpg?1693827181",
+        "width": 2941,
+        "height": 2050
+      }
     ],
     "sourceUrl": "https://www.artstation.com/artwork/XgYB1L",
     "tools": [],

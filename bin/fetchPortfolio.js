@@ -29,6 +29,21 @@ async function fetchJsonFromPage(page, url) {
   return response.json();
 }
 
+async function getImageDimensions(page, imageUrl) {
+  try {
+    return await page.evaluate(async (url) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+        img.onerror = () => resolve({ width: null, height: null });
+        img.src = url;
+      });
+    }, imageUrl);
+  } catch (error) {
+    return { width: null, height: null };
+  }
+}
+
 async function fetchArtStationPortfolio(username) {
   const listUrl = `https://www.artstation.com/users/${username}/projects.json`;
   
@@ -123,10 +138,14 @@ async function fetchArtStationPortfolio(username) {
         continue;
       }
 
-      // Extract high-res image URLs from the assets array
+      // Extract high-res images as objects with dimensions
       const images = detailData.assets
         ?.filter(asset => asset.asset_type === 'image')
-        .map(asset => asset.image_url) || [];
+        .map(asset => ({
+          url: asset.image_url,
+          width: asset.width || null,
+          height: asset.height || null
+        })) || [];
 
       // Extract tools/software
       const tools = detailData.software_items
@@ -141,6 +160,17 @@ async function fetchArtStationPortfolio(username) {
         ? detailData.published_at.split('T')[0] 
         : null;
 
+      const thumbnailUrl = detailData.cover_url || projectMeta.cover?.large_image_url;
+      let thumbWidth = detailData.cover_width || projectMeta.cover?.width || null;
+      let thumbHeight = detailData.cover_height || projectMeta.cover?.height || null;
+
+      // If dimensions are missing, use Playwright to measure the image
+      if (thumbnailUrl && (!thumbWidth || !thumbHeight)) {
+        const dims = await getImageDimensions(page, thumbnailUrl);
+        thumbWidth = dims.width;
+        thumbHeight = dims.height;
+      }
+
       // 4. Map the data to the final schema
       const formattedProject = {
         id: hashId,
@@ -149,7 +179,13 @@ async function fetchArtStationPortfolio(username) {
         albums: projectAlbumsMap[hashId] || [],
         categories: categories, 
         tags: detailData.tags || [],
-        thumbnail: detailData.cover_url || projectMeta.cover?.large_image_url,
+        
+        thumbnail: {
+          url: thumbnailUrl,
+          width: thumbWidth,
+          height: thumbHeight
+        },
+        
         images: images,
         sourceUrl: detailData.permalink,
         tools: tools,

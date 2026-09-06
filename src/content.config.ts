@@ -2,6 +2,12 @@ import { defineCollection } from 'astro:content';
 import { file } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const projectImage = z.object({
+  url: z.string(),
+  width: z.number().nullable().optional(),
+  height: z.number().nullable().optional(),
+});
+
 const projects = defineCollection({
   loader: file('./src/content/projects.json'),
   schema: z.object({
@@ -10,8 +16,8 @@ const projects = defineCollection({
     albums: z.array(z.string()).optional().default([]),
     categories: z.array(z.string()).optional().default([]),
     tags: z.array(z.string()).optional().default([]),
-    thumbnail: z.string(),
-    images: z.array(z.string()).optional().default([]),
+    thumbnail: projectImage,
+    images: z.array(projectImage).optional().default([]),
     video: z.string().optional(),
     videoPoster: z.string().optional(),
     sourceUrl: z.string().optional(),
