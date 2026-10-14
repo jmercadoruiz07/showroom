@@ -4,8 +4,7 @@ import { z } from 'astro/zod';
 
 const projectImage = z.object({
   url: z.string(),
-  width: z.number().nullable().optional(),
-  height: z.number().nullable().optional(),
+  alt: z.string().optional(),
 });
 
 const projects = defineCollection({
@@ -14,18 +13,11 @@ const projects = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     albums: z.array(z.string()).optional().default([]),
-    categories: z.array(z.string()).optional().default([]),
+    category: z.string().optional().default('renders'),
     tags: z.array(z.string()).optional().default([]),
-    thumbnail: projectImage,
     images: z.array(projectImage).optional().default([]),
-    video: z.string().optional(),
-    videoPoster: z.string().optional(),
-    sourceUrl: z.string().optional(),
     tools: z.array(z.string()).optional().default([]),
     description: z.string().default(''),
-    featured: z.boolean().optional().default(false),
-    order: z.number().optional(),
-    stats: z.record(z.string(), z.unknown()).optional(),
   }),
 });
 

@@ -1,57 +1,79 @@
 ---
 /*
 |-------------------------------------------------------------------------------
-| Projects Index — JMR Visuals Portfolio
+| Projects Index Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Lists all projects with album filter.
+| Category Filter + Project Gallery
+| All projects displayed with client-side filtering
 |
 */
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectGallery from '../../components/ProjectGallery.astro';
+import CategoryFilter from '../../components/CategoryFilter.astro';
+import ProjectGallery, { type GalleryProject } from '../../components/ProjectGallery.tsx';
+
+const projects = await getCollection('projects');
+const categories = [...new Set(projects.map(p => p.data.category))].sort();
+
+// Get active category from URL query param
+const activeCategory = Astro.url.searchParams.get('category') || 'renders';
+
+const galleryProjects: GalleryProject[] = projects.map(p => ({
+  title: p.data.title,
+  category: p.data.category,
+  thumbnail: {
+    url: p.data.images?.[0]?.url || '/placeholder.jpg',
+    width: 800,
+    height: 600,
+  },
+  thumbnailAlt: p.data.images?.[0]?.alt || p.data.title,
+  href: `/projects/${p.id}/`,
+}));
+
 ---
 
-<BaseLayout title="Projects" description="All projects by JMR Visuals — print, 3D, and motion design.">
-  <main class="projects-page" id="main-content">
+<BaseLayout title="Projects — JMR Visuals" description="All projects by Jose Mercado Ruiz">
+  <main id="main-content">
     <header class="projects-header">
-      <h1 class="projects-title text-display">Projects</h1>
-      <p class="projects-subtitle text-body">A selection of print, 3D, and motion design work.</p>
+      <h1 class="projects-title">PROJECTS</h1>
     </header>
 
-    <ProjectGallery />
+    <CategoryFilter categories={categories} activeCategory={activeCategory} />
+
+    <ProjectGallery
+      projects={galleryProjects}
+      categories={categories}
+      activeCategory={activeCategory}
+      client:visible
+    />
   </main>
 </BaseLayout>
 
 <style>
-  .projects-page {
-    padding-top: var(--header-height);
-  }
-
   .projects-header {
-    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+    padding: var(--space-3xl) var(--space-xl) var(--space-lg);
     padding-left: calc(var(--space-xl) * 2);
   }
 
   .projects-title {
-    font-size: var(--type-hero);
-    font-weight: var(--font-weight-black);
-    letter-spacing: var(--tracking-tight);
-    margin: 0 0 var(--space-md);
-  }
-
-  .projects-subtitle {
-    font-size: var(--type-md);
-    color: var(--color-soot);
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 5vw, 130px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin: 0;
+    color: #ffffff;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .projects-header {
-      padding: var(--space-2xl) var(--space-md) var(--space-lg);
+      padding: var(--space-2xl) var(--space-md) var(--space-md);
+      padding-left: var(--space-md);
     }
 
     .projects-title {
-      font-size: var(--type-2xl);
+      font-size: clamp(2rem, 1.5rem + 4vw, 80px);
     }
   }
 </style>

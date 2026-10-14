@@ -4,37 +4,63 @@
 | Home Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Hero section cycling through featured projects + Project Gallery with
-| album filter.
+| Hero slideshow + Project Gallery with Category Filter
+| Uses View Transitions for smooth navigation
 |
 */
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
-import ProjectGallery from '../components/ProjectGallery.astro';
-import { getCollection } from 'astro:content';
-import { sortProjectsByOrder } from '../lib/sort-projects';
+import CategoryFilter from '../components/CategoryFilter.astro';
+import ProjectGallery, { type GalleryProject } from '../components/ProjectGallery.tsx';
 
 const projects = await getCollection('projects');
 
-const featuredSlides = sortProjectsByOrder(
-  projects.filter((project) => project.data.featured),
-).map((project) => ({
-  src: project.data.thumbnail.url,
-  alt: `${project.data.title} — featured project`,
-  title: project.data.title,
-  href: `/projects/${project.id}`,
+// Extract unique categories from projects
+const categories = [...new Set(projects.map(p => p.data.category))].sort();
+
+// Hero slideshow images - using first image from each project
+const heroSlides = projects
+  .filter(p => p.data.images && p.data.images.length > 0)
+  .slice(0, 5)
+  .map(p => ({
+    src: p.data.images[0].url,
+    alt: p.data.title
+  }));
+
+// Map projects to GalleryProject type
+const galleryProjects: GalleryProject[] = projects.map(p => ({
+  title: p.data.title,
+  category: p.data.category,
+  thumbnail: {
+    url: p.data.images?.[0]?.url || '/placeholder.jpg',
+    width: 800,
+    height: 600,
+  },
+  thumbnailAlt: p.data.images?.[0]?.alt || p.data.title,
+  href: `/projects/${p.id}/`,
 }));
+
 ---
 
-<BaseLayout title="JMR Visuals — Portfolio" description="Multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.">
-  <HeroSection
-    title="JMR Visuals"
-    subtitle="Multidisciplinary Designer"
-    slides={featuredSlides}
-  />
-
+<BaseLayout title="JMR Visuals" description="Portfolio of Jose Mercado Ruiz — 3D Artist, Designer, Creative Technologist">
   <main id="main-content">
-    <ProjectGallery />
+    <HeroSection slides={heroSlides} />
+
+    <section class="projects-section" aria-labelledby="projects-heading">
+      <CategoryFilter categories={categories} />
+
+      <ProjectGallery
+        projects={galleryProjects}
+        categories={categories}
+        client:visible
+      />
+    </section>
   </main>
 </BaseLayout>
 
+<style>
+  .projects-section {
+    padding-top: 0;
+  }
+</style>

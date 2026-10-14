@@ -4,9 +4,9 @@
 | AboutSection — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Two-column asymmetric layout (30% portrait / 70% bio text).
-| Portrait image with no frame, bleeds to edge on one side.
-| Bio in Body font, pull quotes in Display italic. Contact CTA at bottom.
+| Dark theme matching original portfolio.
+| Widescreen name treatment, portrait on left, bio on right.
+| Simple layout with widescreen font for name.
 |
 */
 interface Props {
@@ -15,23 +15,21 @@ interface Props {
   bio?: string;
   portrait?: string;
   portraitAlt?: string;
-  pullQuote?: string;
   email?: string;
 }
 
 const {
-  name = 'JMR Visuals',
-  title = 'Designer & 3D Artist',
-  bio = 'A multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.',
+  name = 'JOSE MERCADO RUIZ',
+  title = '3D Artist / Designer / Creative Technologist',
+  bio = 'A multidisciplinary creative specializing in 3D visualization, print design, and motion graphics. Based in Barcelona, working with clients globally across architecture, product, and brand projects.',
   portrait = '/images/about-portrait.jpg',
-  portraitAlt = 'Portrait of JMR Visuals',
-  pullQuote = 'Design is not just what it looks like. Design is how it works.',
+  portraitAlt = 'Portrait of Jose Mercado Ruiz',
   email = 'hello@jmrvisuals.com',
 } = Astro.props;
 ---
 
 <section class="about-section" aria-labelledby="about-title">
-  <div class="about-grid grid-asymmetric-30-70">
+  <div class="about-grid">
     <div class="about-portrait" aria-hidden="true">
       <img
         src={portrait}
@@ -42,26 +40,17 @@ const {
     </div>
 
     <div class="about-content">
-      <header class="about-header">
-        <span class="about-label text-mono">ABOUT</span>
-        <h2 id="about-title" class="about-title text-display">{name}</h2>
-        <p class="about-role text-body">{title}</p>
-      </header>
+      <h2 id="about-title" class="about-title">{name}</h2>
+      <p class="about-role">{title}</p>
 
-      <div class="about-bio text-body">
+      <div class="about-bio">
         {bio.split('\n\n').map((paragraph) => (
           <p>{paragraph}</p>
         ))}
       </div>
 
-      {pullQuote && (
-        <blockquote class="pull-quote text-display" cite="https://www.artstation.com/jmr_visuals">
-          <p>&ldquo;{pullQuote}&rdquo;</p>
-        </blockquote>
-      )}
-
       <footer class="about-contact">
-        <a href={`mailto:${email}`} class="contact-link text-mono">
+        <a href={`mailto:${email}`} class="contact-link">
           {email}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -77,12 +66,15 @@ const {
   .about-section {
     padding: var(--space-3xl) var(--space-xl);
     padding-left: calc(var(--space-xl) * 2);
+    background: #1d1f1f;
   }
 
   .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-3xl);
     max-width: var(--max-width-full);
     margin: 0 auto;
-    gap: var(--space-3xl);
     align-items: start;
   }
 
@@ -98,38 +90,31 @@ const {
     object-fit: cover;
   }
 
-  .about-header {
-    margin-bottom: var(--space-xl);
-  }
-
-  .about-label {
-    display: inline-block;
-    font-size: var(--type-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--color-oxide-muted);
-    margin-bottom: var(--space-sm);
-  }
-
   .about-title {
-    font-size: var(--type-2xl);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--line-height-tight);
-    margin: 0 0 var(--space-sm);
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 130px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 var(--space-md);
+    color: #ffffff;
   }
 
   .about-role {
-    font-size: var(--type-md);
-    color: var(--color-soot);
-    margin: 0;
-    max-width: none;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 var(--space-xl);
   }
 
   .about-bio {
+    font-family: var(--font-body);
     font-size: var(--type-base);
     line-height: var(--line-height-relaxed);
+    color: #ffffff;
     margin-bottom: var(--space-2xl);
   }
 
@@ -138,50 +123,22 @@ const {
     max-width: none;
   }
 
-  .pull-quote {
-    margin: var(--space-2xl) 0;
-    padding: 0;
-    border: none;
-    font-size: var(--type-xl);
-    font-weight: var(--font-weight-bold);
-    font-style: italic;
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--line-height-snug);
-    color: var(--color-ink);
-    position: relative;
-    padding-left: var(--space-xl);
-  }
-
-  .pull-quote::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--color-oxide);
-  }
-
-  .pull-quote p {
-    margin: 0;
-    max-width: none;
-  }
-
   .about-contact {
     margin-top: var(--space-2xl);
     padding-top: var(--space-xl);
-    border-top: 1px solid var(--color-stone);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .contact-link {
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
-    font-size: var(--type-sm);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-wide);
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--color-ink);
+    color: #ffffff;
     transition: color var(--duration-fast) var(--ease-quick),
                 gap var(--duration-fast) var(--ease-quick);
   }
@@ -189,18 +146,6 @@ const {
   .contact-link:hover {
     color: var(--color-oxide);
     gap: var(--space-md);
-  }
-
-  [data-theme="dark"] .contact-link {
-    color: var(--color-deep-text);
-  }
-
-  [data-theme="dark"] .contact-link:hover {
-    color: var(--color-oxide);
-  }
-
-  [data-theme="dark"] .pull-quote {
-    color: var(--color-deep-text);
   }
 
   @media (max-width: 768px) {
@@ -220,11 +165,11 @@ const {
     }
 
     .about-title {
-      font-size: var(--type-xl);
+      font-size: clamp(2rem, 1.5rem + 4vw, 80px);
     }
 
-    .pull-quote {
-      font-size: var(--type-lg);
+    .about-role {
+      font-size: 16px;
     }
   }
 </style>

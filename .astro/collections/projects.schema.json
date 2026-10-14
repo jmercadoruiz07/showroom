@@ -20,12 +20,9 @@
               "type": "string"
             }
           },
-          "categories": {
-            "default": [],
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "category": {
+            "default": "renders",
+            "type": "string"
           },
           "tags": {
             "default": [],
@@ -33,37 +30,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "thumbnail": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string"
-              },
-              "width": {
-                "anyOf": [
-                  {
-                    "type": "number"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "height": {
-                "anyOf": [
-                  {
-                    "type": "number"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              }
-            },
-            "required": [
-              "url"
-            ]
           },
           "images": {
             "default": [],
@@ -74,40 +40,14 @@
                 "url": {
                   "type": "string"
                 },
-                "width": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "height": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
+                "alt": {
+                  "type": "string"
                 }
               },
               "required": [
                 "url"
               ]
             }
-          },
-          "video": {
-            "type": "string"
-          },
-          "videoPoster": {
-            "type": "string"
-          },
-          "sourceUrl": {
-            "type": "string"
           },
           "tools": {
             "default": [],
@@ -119,26 +59,11 @@
           "description": {
             "default": "",
             "type": "string"
-          },
-          "featured": {
-            "default": false,
-            "type": "boolean"
-          },
-          "order": {
-            "type": "number"
-          },
-          "stats": {
-            "type": "object",
-            "propertyNames": {
-              "type": "string"
-            },
-            "additionalProperties": {}
           }
         },
         "required": [
           "title",
-          "date",
-          "thumbnail"
+          "date"
         ]
       }
     },
@@ -166,12 +91,9 @@
               "type": "string"
             }
           },
-          "categories": {
-            "default": [],
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "category": {
+            "default": "renders",
+            "type": "string"
           },
           "tags": {
             "default": [],
@@ -179,37 +101,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "thumbnail": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string"
-              },
-              "width": {
-                "anyOf": [
-                  {
-                    "type": "number"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "height": {
-                "anyOf": [
-                  {
-                    "type": "number"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              }
-            },
-            "required": [
-              "url"
-            ]
           },
           "images": {
             "default": [],
@@ -220,40 +111,14 @@
                 "url": {
                   "type": "string"
                 },
-                "width": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "height": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
+                "alt": {
+                  "type": "string"
                 }
               },
               "required": [
                 "url"
               ]
             }
-          },
-          "video": {
-            "type": "string"
-          },
-          "videoPoster": {
-            "type": "string"
-          },
-          "sourceUrl": {
-            "type": "string"
           },
           "tools": {
             "default": [],
@@ -265,26 +130,11 @@
           "description": {
             "default": "",
             "type": "string"
-          },
-          "featured": {
-            "default": false,
-            "type": "boolean"
-          },
-          "order": {
-            "type": "number"
-          },
-          "stats": {
-            "type": "object",
-            "propertyNames": {
-              "type": "string"
-            },
-            "additionalProperties": {}
           }
         },
         "required": [
           "title",
-          "date",
-          "thumbnail"
+          "date"
         ]
       }
     }

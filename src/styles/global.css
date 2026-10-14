@@ -53,30 +53,59 @@
   }
 }
 
-/* ─── Project Grid ─────────────────────────────────────────────────────────── */
-.project-grid.masonry {
+/* ─── SimpleGrid — 12-column responsive grid ─────────────────────────────────
+| CSS Grid equivalent of original simpleGrid float-based system.
+| .simple-grid creates a 12-column grid.
+| Children use .col-N to span N columns.
+| Responsive breakpoints match original portfolio.
+|
+*/
+.simple-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-md);
-  align-items: start;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0;
 }
 
-@media (min-width: 640px) {
-  .project-grid.masonry {
-    grid-template-columns: repeat(2, 1fr);
+.simple-grid > * {
+  grid-column: span 12;
+}
+
+@media (min-width: 480px) {
+  .simple-grid > * {
+    grid-column: span 6;
   }
 }
 
-@media (min-width: 1024px) {
-  .project-grid.masonry {
-    grid-template-columns: repeat(3, 1fr);
+@media (min-width: 768px) {
+  .simple-grid > * {
+    grid-column: span 4;
   }
 }
 
-@media (min-width: 1440px) {
-  .project-grid.masonry {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
+@media (min-width: 1200px) {
+  .simple-grid > * {
+    grid-column: span 3;
+  }
+}
+
+/* Column span utilities for explicit control */
+.col-1  { grid-column: span 1; }
+.col-2  { grid-column: span 2; }
+.col-3  { grid-column: span 3; }
+.col-4  { grid-column: span 4; }
+.col-5  { grid-column: span 5; }
+.col-6  { grid-column: span 6; }
+.col-7  { grid-column: span 7; }
+.col-8  { grid-column: span 8; }
+.col-9  { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+@media (max-width: 768px) {
+  .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+  .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    grid-column: span 12;
   }
 }
 

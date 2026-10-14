@@ -4,8 +4,8 @@
 | ContactBlock — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Minimal contact info: email link + custom SVG social icons.
-| Inline layout, footer-adjacent. Icon color transitions to --color-oxide on hover.
+| Minimal contact info: email link + ArtStation social icon.
+| Dark theme matching original portfolio.
 |
 */
 interface Props {
@@ -16,11 +16,11 @@ const { email = 'hello@jmrvisuals.com' } = Astro.props;
 ---
 
 <section class="contact-block" aria-labelledby="contact-title">
-  <h2 id="contact-title" class="contact-title text-display">Get in Touch</h2>
-  <p class="contact-text text-body">Have a project in mind? Let's talk about it.</p>
+  <h2 id="contact-title" class="contact-title">Get in Touch</h2>
+  <p class="contact-text">Have a project in mind? Let's talk about it.</p>
 
   <div class="contact-links">
-    <a href={`mailto:${email}`} class="contact-email text-mono">
+    <a href={`mailto:${email}`} class="contact-email">
       {email}
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -31,20 +31,8 @@ const { email = 'hello@jmrvisuals.com' } = Astro.props;
 
   <div class="contact-social" aria-label="Social links">
     <a href="https://www.artstation.com/jmr_visuals" class="social-link" aria-label="ArtStation" target="_blank" rel="noopener noreferrer">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24-.027L21.973 13.5H8.352l2.028 3.505h13.457zM15.495 9.662l-2.028-3.505h-7.3L8.135 9.662h7.36zm-5.328-5.85L8.136 7.316l-2.028-3.505L0 17.73l2.027 3.505h17.946l2.027-3.505-6.833-11.72z"/>
-      </svg>
-    </a>
-    <a href="https://www.instagram.com" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-      </svg>
-    </a>
-    <a href="https://www.linkedin.com" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+        <path d="M0 23.63l2.703 4.672c0.552 1.094 1.667 1.781 2.885 1.781h17.943l-3.724-6.453zM32 23.661c0-0.641-0.193-1.245-0.516-1.75l-10.516-18.276c-0.557-1.057-1.656-1.719-2.854-1.719h-5.557l16.24 28.135 2.563-4.432c0.5-0.849 0.641-1.224 0.641-1.958zM17.161 19.047l-7.255-12.568-7.26 12.568z"/>
       </svg>
     </a>
   </div>
@@ -54,19 +42,25 @@ const { email = 'hello@jmrvisuals.com' } = Astro.props;
   .contact-block {
     padding: var(--space-3xl) var(--space-xl);
     padding-left: calc(var(--space-xl) * 2);
-    border-top: 1px solid var(--color-stone);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: #1d1f1f;
   }
 
   .contact-title {
-    font-size: var(--type-2xl);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--tracking-tight);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.5rem + 3vw, 80px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin: 0 0 var(--space-md);
+    color: #ffffff;
   }
 
   .contact-text {
-    font-size: var(--type-md);
-    color: var(--color-soot);
+    font-family: var(--font-body);
+    font-size: var(--type-base);
+    line-height: var(--line-height-relaxed);
+    color: rgba(255, 255, 255, 0.7);
     margin: 0 0 var(--space-xl);
     max-width: 40ch;
   }
@@ -79,11 +73,12 @@ const { email = 'hello@jmrvisuals.com' } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
-    font-size: var(--type-sm);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-wide);
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--color-ink);
+    color: #ffffff;
     transition: color var(--duration-fast) var(--ease-quick),
                 gap var(--duration-fast) var(--ease-quick);
   }
@@ -104,36 +99,28 @@ const { email = 'hello@jmrvisuals.com' } = Astro.props;
     justify-content: center;
     width: 44px;
     height: 44px;
-    color: var(--color-ink);
+    color: #ffffff;
     opacity: 0.6;
+    border-radius: 50%;
     transition: opacity var(--duration-fast) var(--ease-quick),
-                color var(--duration-fast) var(--ease-quick);
+                color var(--duration-fast) var(--ease-quick),
+                background var(--duration-fast) var(--ease-quick);
   }
 
   .social-link:hover {
     opacity: 1;
     color: var(--color-oxide);
-  }
-
-  [data-theme="dark"] .contact-email {
-    color: var(--color-deep-text);
-  }
-
-  [data-theme="dark"] .contact-email:hover {
-    color: var(--color-oxide);
-  }
-
-  [data-theme="dark"] .social-link {
-    color: var(--color-deep-text);
-  }
-
-  [data-theme="dark"] .social-link:hover {
-    color: var(--color-oxide);
+    background: rgba(255, 255, 255, 0.05);
   }
 
   @media (max-width: 768px) {
     .contact-block {
       padding: var(--space-2xl) var(--space-md);
+      padding-left: var(--space-md);
+    }
+
+    .contact-title {
+      font-size: clamp(1.5rem, 1rem + 3vw, 50px);
     }
   }
 </style>

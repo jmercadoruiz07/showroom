@@ -3,22 +3,21 @@
 | HeroCarousel — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Auto-rotating hero background cycling through featured projects. Slides
-| crossfade every 6 seconds; a caption links to the project on screen and
-| dots switch slides manually. Rotation pauses on hover/focus and while the
-| tab is hidden, and is disabled for prefers-reduced-motion.
+| Auto-rotating hero background matching original portfolio.
+| Full-bleed background images crossfade every 3 seconds.
+| No captions, no dot navigation, no links.
+| Rotation pauses on hover/focus and while tab is hidden.
+| Disabled for prefers-reduced-motion.
 |
 */
 import { useEffect, useState } from 'react';
 import './HeroCarousel.css';
 
-const ROTATION_INTERVAL_MS = 6000;
+const ROTATION_INTERVAL_MS = 3000;
 
 export interface HeroSlide {
   src: string;
   alt: string;
-  title: string;
-  href: string;
 }
 
 interface HeroCarouselProps {
@@ -50,15 +49,13 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     }, ROTATION_INTERVAL_MS);
 
     return () => window.clearInterval(timer);
-  }, [rotates, isPaused, slides.length, activeIndex]);
-
-  const current = slides[activeIndex];
+  }, [rotates, isPaused, slides.length]);
 
   return (
     <div
       className="hero-carousel"
       aria-roledescription="carousel"
-      aria-label="Featured projects"
+      aria-label="Hero background slideshow"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
@@ -67,7 +64,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
       <div className="hero-slides" aria-hidden="true">
         {slides.map((slide, index) => (
           <img
-            key={slide.href}
+            key={slide.src}
             className={`hero-slide${index === activeIndex ? ' is-active' : ''}`}
             data-index={index}
             src={slide.src}
@@ -77,25 +74,6 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             decoding="async"
           />
         ))}
-      </div>
-
-      <div className="hero-controls">
-        <a className="hero-slide-link text-mono" href={current.href}>
-          {current.title}
-        </a>
-
-        <nav className="hero-dots" aria-label="Featured project slides">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.href}
-              type="button"
-              className={`hero-dot${index === activeIndex ? ' is-active' : ''}`}
-              aria-label={`Show ${slide.title}`}
-              aria-current={index === activeIndex || undefined}
-              onClick={() => setActiveIndex(index)}
-            />
-          ))}
-        </nav>
       </div>
     </div>
   );

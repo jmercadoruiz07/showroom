@@ -9,52 +9,53 @@
 */
 
 :root {
-  /* ─── Color Tokens (OKLCH) ────────────────────────────────────────────────
-  | Warm neutrals with copper accent. Print-inspired palette.
-  | Light mode defaults — dark mode inverts via [data-theme="dark"].
+  /* ─── Color Tokens ────────────────────────────────────────────────────────
+  | Dark theme matching original portfolio: #1d1f1f background, white text,
+  | copper accent. No light mode — dark is default.
   */
 
   /* Ink — primary text, headings */
-  --color-ink:          oklch(0.15 0.01 60);
+  --color-ink:          #ffffff;
   /* Soot — secondary text, captions */
-  --color-soot:         oklch(0.35 0.01 60);
+  --color-soot:         rgba(255, 255, 255, 0.7);
   /* Stone — borders, dividers */
-  --color-stone:        oklch(0.70 0.01 60);
-  /* Bone — page background */
-  --color-bone:         oklch(0.96 0.005 80);
-  /* Paper — card/section backgrounds */
-  --color-paper:        oklch(0.93 0.008 75);
+  --color-stone:        rgba(255, 255, 255, 0.2);
+  /* Bone — page background (original #1d1f1f) */
+  --color-bone:         #1d1f1f;
+  /* Paper — card/section backgrounds (same as bg) */
+  --color-paper:        #1d1f1f;
   /* Oxide — accent (warm copper) */
   --color-oxide:        oklch(0.55 0.14 45);
-  /* Oxide muted — hover states, small text (WCAG AA on bone) */
+  /* Oxide muted — hover states, small text */
   --color-oxide-muted:  oklch(0.42 0.10 45);
-  /* Deep — dark sections, footers */
-  --color-deep:         oklch(0.12 0.015 60);
+  /* Deep — dark sections, footers (same as bone) */
+  --color-deep:         #1d1f1f;
   /* Deep text — text on dark backgrounds */
-  --color-deep-text:    oklch(0.88 0.008 75);
+  --color-deep-text:    #ffffff;
 
   /* ─── Dark Mode Override ──────────────────────────────────────────────────
-     | Invert bone ↔ deep, ink ↔ deep-text. Keep oxide identical.
+     | Dark is default — no light mode. Keep for potential future use.
      */
 }
 
 :root[data-theme="dark"] {
   --color-bone:      var(--color-deep);
-  --color-paper:     oklch(0.18 0.015 60);
+  --color-paper:     #1d1f1f;
   --color-ink:       var(--color-deep-text);
-  --color-soot:      oklch(0.65 0.01 75);
-  --color-stone:     oklch(0.35 0.01 60);
+  --color-soot:      rgba(255, 255, 255, 0.7);
+  --color-stone:     rgba(255, 255, 255, 0.2);
 }
 
 /* ─── Typography Tokens ───────────────────────────────────────────────────
    | Fluid type scale using clamp() for responsive scaling.
-   | Families: Playfair Display (Display), Instrument Sans (Body), JetBrains Mono (Mono).
+   | Families: widescreen (Display), Open Sans (Body), adelle-mono (Mono/UI), sofia_pro (UI labels).
    */
 
 :root {
-  --font-display:    "Playfair Display", Georgia, serif;
-  --font-body:       "Instrument Sans", "Trebuchet MS", sans-serif;
-  --font-mono:       "JetBrains Mono", "Fira Mono", monospace;
+  --font-display:    "widescreen", "Playfair Display", Georgia, serif;
+  --font-body:       "Open Sans", "Instrument Sans", sans-serif;
+  --font-mono:       "adelle-mono", "JetBrains Mono", monospace;
+  --font-ui:         "sofia_pro", "Instrument Sans", sans-serif;
 
   --font-weight-regular: 400;
   --font-weight-medium:  500;
@@ -71,7 +72,7 @@
   --line-height-normal:  1.6;
   --line-height-relaxed: 1.7;
 
-  /* Fluid type scale */
+  /* Fluid type scale — massive display sizes matching original */
   --type-2xs:    clamp(0.556rem, 0.52rem + 0.15vw, 0.65rem);
   --type-xs:     clamp(0.694rem, 0.65rem + 0.2vw, 0.8rem);
   --type-sm:     clamp(0.833rem, 0.78rem + 0.25vw, 0.95rem);
@@ -80,7 +81,9 @@
   --type-lg:     clamp(1.44rem, 1.25rem + 0.8vw, 1.85rem);
   --type-xl:     clamp(1.728rem, 1.4rem + 1.3vw, 2.5rem);
   --type-2xl:    clamp(2.074rem, 1.5rem + 2vw, 3.5rem);
-  --type-hero:   clamp(2.8rem, 1.8rem + 3.5vw, 5.5rem);
+  --type-hero:   clamp(4rem, 3rem + 8vw, 16rem);           /* matches original 16rem h2 */
+  --type-display-xl: clamp(3rem, 2rem + 5vw, 130px);       /* matches original 130px h3 */
+  --type-vertical-name: clamp(2rem, 1.5rem + 3vw, 93.3px); /* for rotated MERCADO_RUIZ */
 
   /* ─── Spacing Tokens ──────────────────────────────────────────────────────
    | 8px base with deliberate generosity. Fluid clamp for responsive breathing room.

@@ -4,91 +4,49 @@
 | SiteFooter — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-width dark band with copyright and social icons.
-| Uses --color-deep background.
+| Minimal dark footer matching original portfolio.
+| Centered mono text, ArtStation link only.
 |
 */
 ---
 
 <footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
-    <div class="footer-main">
-      <p class="copyright">
-        &copy; {new Date().getFullYear()} JMR Visuals. All rights reserved.
-      </p>
-    </div>
-
+    <p class="copyright">
+      &copy; {new Date().getFullYear()} JMR Visuals. All rights reserved.
+    </p>
     <div class="footer-social">
       <a href="https://www.artstation.com/jmr_visuals" class="social-link" aria-label="ArtStation" target="_blank" rel="noopener noreferrer">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
           <path d="M0 23.63l2.703 4.672c0.552 1.094 1.667 1.781 2.885 1.781h17.943l-3.724-6.453zM32 23.661c0-0.641-0.193-1.245-0.516-1.75l-10.516-18.276c-0.557-1.057-1.656-1.719-2.854-1.719h-5.557l16.24 28.135 2.563-4.432c0.5-0.849 0.641-1.224 0.641-1.958zM17.161 19.047l-7.255-12.568-7.26 12.568z"/>
         </svg>
       </a>
-      <!-- <a href="https://www.instagram.com/j.art_47" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-      </a> -->
     </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background: var(--color-deep);
-    color: var(--color-deep-text);
-    padding: var(--space-md) var(--space-lg);
+    background: #1d1f1f;
+    color: rgba(255, 255, 255, 0.5);
+    padding: var(--space-lg) var(--space-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .footer-inner {
     max-width: var(--max-width-full);
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--space-2xl);
-    align-items: center;
-  }
-
-  .footer-main {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
   }
 
   .copyright {
     font-family: var(--font-mono);
     font-size: var(--type-xs);
-    color: var(--color-deep-text);
+    color: rgba(255, 255, 255, 0.5);
     margin: 0;
-    max-width: none;
-  }
-
-  .footer-nav {
-    margin-top: var(--space-sm);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: var(--space-xl);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .footer-link {
-    font-family: var(--font-body);
-    font-size: var(--type-sm);
-    color: var(--color-deep-text);
-    opacity: 0.7;
-    transition: opacity var(--duration-fast) var(--ease-quick),
-                color var(--duration-fast) var(--ease-quick);
-  }
-
-  .footer-link:hover {
-    opacity: 1;
-    color: var(--color-oxide);
   }
 
   .footer-social {
@@ -103,7 +61,7 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    color: var(--color-deep-text);
+    color: rgba(255, 255, 255, 0.5);
     opacity: 0.6;
     border-radius: 50%;
     transition: opacity var(--duration-fast) var(--ease-quick),
@@ -119,21 +77,17 @@
 
   @media (max-width: 768px) {
     .site-footer {
-      padding: var(--space-2xl) var(--space-md) var(--space-lg);
+      padding: var(--space-xl) var(--space-md);
     }
 
     .footer-inner {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
+      flex-direction: column;
+      gap: var(--space-md);
+      text-align: center;
     }
 
     .footer-social {
-      justify-content: flex-start;
-    }
-
-    .footer-links {
-      flex-wrap: wrap;
-      gap: var(--space-md);
+      justify-content: center;
     }
   }
 </style>

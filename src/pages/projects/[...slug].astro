@@ -4,15 +4,19 @@
 | Project Detail Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Split-screen layout (60/40 or 70/30) alternating per project.
-| Media pane: scrollable image gallery or embedded 3D viewer.
-| Text pane: title (Display), description (Body), metadata (Mono).
-| Navigation: "← All Projects" text link.
+| SimpleGrid layout matching original portfolio.
+| Hero: full-width project image (first image)
+| Title: h1 in widescreen, massive (clamp to 130px max)
+| Layout: simpleGrid rows
+|   - Row 1: col-4 (description) + col-8 (longer bio/text)
+|   - Row 2+: col-4 × 3 image grid
+| Description in Open Sans, white
+| Metadata (date, tools) in adelle-mono
+| Images link to full-size (open in new tab)
 |
 */
 import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
-import ProjectMedia from '../../components/ProjectMedia';
 
 // Generate static paths for all projects
 export async function getStaticPaths() {
@@ -24,12 +28,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, date, albums, tags, images, video, videoPoster, tools, description, featured } = project.data;
-const displayAlbum = albums?.[0] ?? '';
-
-// Alternate layout based on order or slug
-const isEven = (project.data.order || 0) % 2 === 0;
-const mediaFirst = isEven;
+const { title, date, albums, tags, images, tools, description, category } = project.data;
 
 const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat('en-US', {
@@ -44,86 +43,98 @@ const formatDate = (date: Date) => {
 <ProjectLayout
   title={title}
   description={description}
-  ogImage={images?.[0]?.url || videoPoster}
+  ogImage={images?.[0]?.url}
 >
   <main id="main-content">
-  <article class="project-detail">
-    <header class="project-header">
-      <a href="/projects" class="back-link text-mono">
-        ← All Projects
-      </a>
+    <article class="project-detail">
+      <header class="project-header">
+        <a href="/projects" class="back-link">
+          ← All Projects
+        </a>
 
-      <div class="project-meta">
-        <span class="project-category text-mono">{displayAlbum.toUpperCase()}</span>
-        <time class="project-date text-mono" datetime={date.toISOString()}>
-          {formatDate(date)}
-        </time>
-      </div>
+        <div class="project-meta">
+          <span class="project-category">{category.toUpperCase()}</span>
+          <time class="project-date" datetime={date.toISOString()}>
+            {formatDate(date)}
+          </time>
+        </div>
 
-      <h1 class="project-title text-display">{title}</h1>
+        <h1 class="project-title">{title}</h1>
 
-      {tags && tags.length > 0 && (
-        <ul class="project-tags" aria-label="Project tags">
-          {tags.map((tag) => (
-            <li><span class="tag text-mono">{tag.toUpperCase()}</span></li>
-          ))}
-        </ul>
-      )}
-    </header>
+        {tags && tags.length > 0 && (
+          <ul class="project-tags" aria-label="Project tags">
+            {tags.map((tag) => (
+              <li><span class="tag">{tag.toUpperCase()}</span></li>
+            ))}
+          </ul>
+        )}
+      </header>
 
-    <div class="project-grid" style={`grid-template-columns: ${mediaFirst ? '3fr 2fr' : '2fr 3fr'}`}>
-      <div class={`project-media ${mediaFirst ? 'media-first' : 'media-last'}`}>
-        {(images && images.length > 0) || video ? (
-          <ProjectMedia images={images} video={video} videoPoster={videoPoster} title={title} client:load />
-        ) : (
-          <div class="media-placeholder">
-            <p class="text-soot">No media available</p>
+      <div class="project-grid">
+        {/* Hero image - full width */}
+        {images && images.length > 0 && (
+          <div class="project-hero-image col-12">
+            <a href={images[0].url} target="_blank" rel="noopener noreferrer" aria-label={`View full-size: ${title}`}>
+              <img src={images[0].url} alt={title} loading="eager" fetchpriority="high" />
+            </a>
           </div>
         )}
-      </div>
 
-      <div class={`project-text ${mediaFirst ? 'text-last' : 'text-first'}`}>
-        <div class="project-description text-body" set:html={description} />
+        {/* Row 1: Description (col-4) + Bio (col-8) */}
+        <div class="project-description col-4">
+          <div class="description-content" set:html={description} />
+        </div>
 
-        {tools && tools.length > 0 && (
-          <section class="project-tools">
-            <h2 class="tools-title text-mono">TOOLS</h2>
-            <ul class="tools-list">
-              {tools.map((tool) => (
-                <li><span class="tool text-mono">{tool}</span></li>
-              ))}
-            </ul>
-          </section>
+        <div class="project-bio col-8">
+          <div class="bio-content">
+            {tools && tools.length > 0 && (
+              <section class="project-tools">
+                <h2 class="tools-title">TOOLS</h2>
+                <ul class="tools-list">
+                  {tools.map((tool) => (
+                    <li><span class="tool">{tool}</span></li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </div>
+        </div>
+
+        {/* Row 2+: Image grid - col-4 × 3 */}
+        {images && images.length > 1 && (
+          images.slice(1).map((image, index) => (
+            <div class="project-image col-4">
+              <a href={image.url} target="_blank" rel="noopener noreferrer" aria-label={`View full-size image ${index + 2}`}>
+                <img src={image.url} alt={`${title} - Image ${index + 2}`} loading="lazy" decoding="async" />
+              </a>
+            </div>
+          ))
         )}
-
-        {featured && (
-          <div class="featured-badge text-mono">FEATURED PROJECT</div>
-        )}
       </div>
-    </div>
-  </article>
+    </article>
   </main>
 </ProjectLayout>
 
 <style>
   .project-detail {
-    padding: var(--space-2xl) var(--space-xl);
-    padding-left: calc(var(--space-xl) * 2);
-    padding-top: calc(var(--header-height) + var(--space-2xl));
+    padding: 0;
+    padding-top: 60px;
   }
 
   .project-header {
-    max-width: var(--max-width-prose);
-    margin: 0 auto var(--space-3xl);
+    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+    padding-left: calc(var(--space-xl) * 2);
+    max-width: 100%;
   }
 
   .back-link {
     display: inline-block;
-    font-size: var(--type-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-wide);
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--color-soot);
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: var(--space-lg);
     transition: color var(--duration-fast) var(--ease-quick);
   }
@@ -140,16 +151,20 @@ const formatDate = (date: Date) => {
 
   .project-category,
   .project-date {
-    font-size: var(--type-sm);
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .project-title {
-    font-size: var(--type-hero);
-    font-weight: var(--font-weight-black);
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--line-height-tighter);
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 5vw, 130px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin: 0 0 var(--space-lg);
-    max-width: 60ch;
+    color: #ffffff;
   }
 
   .project-tags {
@@ -162,94 +177,95 @@ const formatDate = (date: Date) => {
   }
 
   .tag {
+    font-family: var(--font-mono);
     font-size: var(--type-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-wide);
+    font-weight: 400;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--color-oxide-muted);
-    background: var(--color-paper);
+    background: transparent;
     padding: var(--space-2xs) var(--space-sm);
+    border: 1px solid var(--color-oxide-muted);
   }
 
+  /* SimpleGrid layout */
   .project-grid {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--space-3xl);
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0;
     max-width: 100%;
     margin: 0 auto;
+    padding: 0 var(--space-xl);
+    padding-left: calc(var(--space-xl) * 2);
+    padding-bottom: var(--space-3xl);
   }
 
-  .media-first {
-    grid-column: 1;
-    order: 1;
+  .project-grid > * {
+    grid-column: span 12;
   }
 
-  .media-last {
-    grid-column: 2;
-    order: 2;
+  .col-4 {
+    grid-column: span 4;
   }
 
-  .text-first {
-    grid-column: 1;
-    order: 1;
+  .col-8 {
+    grid-column: span 8;
   }
 
-  .text-last {
-    grid-column: 2;
-    order: 2;
+  .col-12 {
+    grid-column: span 12;
   }
 
-  .project-media {
-    top: calc(var(--header-height) + var(--space-xl));
+  @media (max-width: 768px) {
+    .project-grid > *,
+    .col-4,
+    .col-8,
+    .col-12 {
+      grid-column: span 12;
+    }
   }
 
-  .model-container {
-    aspect-ratio: 4 / 3;
-    background: var(--color-paper);
-    margin-bottom: var(--space-lg);
+  .project-hero-image {
+    margin: 0 calc(-1 * var(--space-xl)) var(--space-3xl);
+    margin-left: calc(-1 * var(--space-xl) * 2);
   }
 
-  .model-container model-viewer {
+  .project-hero-image img {
     width: 100%;
-    height: 100%;
-  }
-
-  .media-placeholder {
-    aspect-ratio: 4 / 3;
-    background: var(--color-paper);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .project-text {
-    position: sticky;
-    top: calc(var(--header-height) + var(--space-xl));
-    max-width: var(--max-width-prose);
-    align-self: start;
+    height: auto;
+    display: block;
   }
 
   .project-description {
-    font-size: var(--type-base);
-    line-height: var(--line-height-relaxed);
-    margin-bottom: var(--space-2xl);
+    padding-right: var(--space-xl);
   }
 
-  .project-description p {
+  .description-content {
+    font-family: var(--font-body);
+    font-size: var(--type-base);
+    line-height: var(--line-height-relaxed);
+    color: #ffffff;
+  }
+
+  .description-content p {
     margin-bottom: var(--space-md);
-    max-width: none;
+  }
+
+  .project-bio {
+    padding-left: var(--space-xl);
   }
 
   .project-tools {
-    margin-bottom: var(--space-2xl);
+    margin-top: var(--space-2xl);
     padding-top: var(--space-xl);
-    border-top: 1px solid var(--color-stone);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .tools-title {
-    font-size: var(--type-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-wide);
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--color-oxide-muted);
     margin: 0 0 var(--space-md);
@@ -265,68 +281,56 @@ const formatDate = (date: Date) => {
   }
 
   .tool {
-    font-size: var(--type-sm);
-    color: var(--color-soot);
-    background: var(--color-paper);
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
     padding: var(--space-2xs) var(--space-sm);
   }
 
-  .featured-badge {
-    font-size: var(--type-xs);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--color-oxide-muted);
-    padding: var(--space-xs) var(--space-sm);
-    border: 1px solid var(--color-oxide-muted);
-    display: inline-block;
+  .project-image {
+    margin: 18px 0;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   @media (max-width: 1024px) {
-    .project-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-2xl);
-    }
-
-    .media-first,
-    .media-last,
-    .text-first,
-    .text-last {
-      grid-column: auto;
-    }
-
-    .project-media {
-      position: static;
-    }
-
-    .project-text {
-      position: static;
-    }
-
-    .project-title {
-      font-size: var(--type-2xl);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .project-detail {
-      padding: var(--space-xl) var(--space-md);
-      padding-top: calc(var(--header-height) + var(--space-xl));
+    .project-header {
+      padding: var(--space-2xl) var(--space-md) var(--space-lg);
       padding-left: var(--space-md);
     }
 
-    .project-meta {
-      flex-direction: column;
-      gap: var(--space-xs);
+    .project-grid {
+      padding: 0 var(--space-md);
+      padding-left: var(--space-md);
+    }
+
+    .project-hero-image {
+      margin: 0 calc(-1 * var(--space-md)) var(--space-2xl);
+      margin-left: calc(-1 * var(--space-md));
+    }
+
+    .project-description,
+    .project-bio {
+      padding: 0;
     }
 
     .project-title {
-      font-size: var(--type-xl);
+      font-size: clamp(2rem, 1.5rem + 4vw, 80px);
     }
-  }
 
-  [data-theme="dark"] .tag,
-  [data-theme="dark"] .tool {
-    background: var(--color-paper);
+    .project-category,
+    .project-date {
+      font-size: 16px;
+    }
+
+    .back-link {
+      font-size: 16px;
+    }
   }
 </style>
