@@ -7,7 +7,8 @@
 | over arbitrary imagery. Title is a white plate with bold uppercase display
 | type; category and featured tags are mono labels. Hierarchy: title (P1) >
 | category (P2) > featured (P3).
-| Slow zoom (scale 1.03 over 500ms). Title plate slides up on hover.
+| Slow zoom (scale 1.03 over 500ms). On hover the title slides up and the
+| category tag slides down from the top, both fading in.
 |
 */
 .project-card {
@@ -58,8 +59,11 @@
   letter-spacing: var(--tracking-wide);
   line-height: 1;
   text-transform: uppercase;
-  transition: background-color var(--duration-fast) var(--ease-quick),
-              color var(--duration-fast) var(--ease-quick);
+  transform: translateY(-8px);
+  opacity: 0;
+  transition:
+    transform var(--duration-fast) var(--ease-quick),
+    opacity var(--duration-fast) var(--ease-quick);
 }
 
 .card-content {
@@ -110,13 +114,14 @@
   }
 
   .project-card .card-link:hover .card-category {
-    background-color: var(--color-chalk);
-    color: var(--color-bone);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
 @media (hover: none) {
-  .project-card .card-content {
+  .project-card .card-content,
+  .project-card .card-category {
     transform: none;
     opacity: 1;
   }
