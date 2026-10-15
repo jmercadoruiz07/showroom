@@ -90,6 +90,9 @@
   --max-width-prose: 70ch;
   --max-width-full:  100vw;
   --header-height:   clamp(2.5rem, 3vw, 4rem);
+  /* Vertical wordmark fits the viewport height; the column is as wide as its line box */
+  --wordmark-size:   min(calc(100vh / 8.6), 11vw);
+  --wordmark-width:  calc(var(--wordmark-size) * 0.78);
 
   /* ─── Motion Tokens ───────────────────────────────────────────────────────
    | Easing and duration standards.
@@ -105,6 +108,7 @@
    */
   --z-sticky:    100;
   --z-header:    200;
+  --z-wordmark:  300;
   --z-modal:     500;
   --z-toast:     600;
 }

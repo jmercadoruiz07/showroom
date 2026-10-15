@@ -56,7 +56,7 @@ The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/l
 
 Display sizes at 1728px:
 - Name "JO / SE": 644px, tracking −0.1em, line-height 0.8, two lines, second line indented one space.
-- Vertical "MERCADO RUIZ": 130px, line-height 0.78, rotated so it reads bottom to top.
+- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge, full viewport height, above the header. Font size is `min(100vh / 8.6, 11vw)`, line-height 0.78, reads bottom to top.
 - Nav links: about 30px, uppercase.
 
 ### Layout system
@@ -67,10 +67,10 @@ Hero coordinates (relative to the frame, 1728px wide):
 
 | Element | x | y | Size |
 | :-- | :-- | :-- | :-- |
-| Nav bar (white) | 0 | 0 | 1471 wide, about 51 visible height; second white block from about x 1600 to the right edge |
+| Nav bar (white) | 0 | 0 | full width, about 51 visible height; on the home page it ends where the wordmark column starts |
 | Name "JO SE" | 46 | 41 | font-size 644 |
 | Image column (4 stacked) | 900 | −123, 225, 550, 923 | 571 wide; heights 345, 321, 369, 321 |
-| Vertical title | 1471 | −9 | 106 × 1113 |
+| Vertical title | right edge | top of screen | fixed, `--wordmark-width` wide (0.78 × font size), full viewport height |
 | Hand illustration | −43 | 938 | 1917 × 812, `rotate(171.61deg) scaleY(-1)`, above the name and images |
 | JMR outline logo | 308 | 1568 | 285 × 285 |
 | Quote | 625 | 1744 | 799 wide, 4 lines max |
@@ -86,7 +86,7 @@ Project page frame (`1:2`): blue grain background, very large uppercase section 
 
 ### Navigation
 
-Fixed white bar across the top, links in dark `--color-bone` on white, uppercase `widescreen`. A gap in the bar at x 1471 to about 1600 keeps the vertical title clear. Links are spread wide across the bar. The Figma frames order them differently (HOME, ABOUT, PROJECTS in the homepage frame); the site uses Home, Projects, About.
+Fixed white bar across the top, links in dark `--color-bone` on white, uppercase `widescreen`. On pages with the vertical wordmark (home) the bar stops at the wordmark column (`--wordmark-width`); the home gallery, footer bar and back-to-top button also keep clear of it. Links are spread wide across the bar. The Figma frames order them differently (HOME, ABOUT, PROJECTS in the homepage frame); the site uses Home, Projects, About.
 
 ### Responsive behavior
 

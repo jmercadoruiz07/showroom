@@ -1,0 +1,54 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| VerticalWordmark — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Name set vertically along the right edge of the screen, reading bottom to top.
+| Fixed above all content (including the header) so it stays put while the page
+| scrolls. Size follows the viewport height via --wordmark-size; pages that use
+| it reserve --wordmark-width on their right side.
+|
+*/
+interface Props {
+  text?: string;
+}
+
+const { text = 'Mercado Ruiz' } = Astro.props;
+---
+
+<p class="vertical-wordmark" aria-hidden="true">{text}</p>
+
+<style>
+  .vertical-wordmark {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-wordmark);
+    width: var(--wordmark-width);
+    max-width: none;
+    margin: 0;
+    overflow: hidden;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-hero);
+    font-size: var(--wordmark-size);
+    font-weight: var(--font-weight-black);
+    line-height: 0.78;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-chalk);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Keep right-aligned fixed and footer controls clear of the wordmark column. */
+  :global(body:has(.vertical-wordmark) .back-to-top) {
+    right: calc(var(--space-xl) + var(--wordmark-width));
+  }
+
+  :global(body:has(.vertical-wordmark) .footer-bar) {
+    padding-right: calc(var(--space-lg) + var(--wordmark-width));
+  }
+</style>

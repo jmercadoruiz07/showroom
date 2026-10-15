@@ -4,8 +4,8 @@
 | SiteHeader — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Fixed white navigation bar across the top. A notch on the right leaves room
-| for the vertical title on the home page; below 768px the bar is one piece.
+| Fixed white navigation bar across the top. It stops short of the vertical
+| wordmark column on pages that render one.
 |
 */
 const pathname = Astro.url.pathname;
@@ -32,7 +32,6 @@ const isCurrent = (href: string) =>
       ))}
     </ul>
   </nav>
-  <div class="nav-bar-end" aria-hidden="true"></div>
 </header>
 
 <style>
@@ -46,23 +45,18 @@ const isCurrent = (href: string) =>
     pointer-events: none;
   }
 
-  .nav-primary,
-  .nav-bar-end {
+  .nav-primary {
     position: absolute;
     top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
     background: var(--color-chalk);
-  }
-
-  .nav-primary {
-    left: 0;
-    width: 85.1%;
     pointer-events: auto;
   }
 
-  .nav-bar-end {
-    left: 93%;
-    right: 0;
+  :global(body:has(.vertical-wordmark)) .nav-primary {
+    width: calc(100% - var(--wordmark-width));
   }
 
   .nav-list {
@@ -103,14 +97,6 @@ const isCurrent = (href: string) =>
   }
 
   @media (max-width: 767px) {
-    .nav-primary {
-      width: 100%;
-    }
-
-    .nav-bar-end {
-      display: none;
-    }
-
     .nav-list {
       gap: 6vw;
       padding-left: 5vw;
