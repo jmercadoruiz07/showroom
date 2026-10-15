@@ -49,7 +49,6 @@
   --font-hero-mono:  adelle-mono, "JetBrains Mono", "Fira Mono", monospace;
 
   --font-weight-regular: 400;
-  --font-weight-medium:  500;
   --font-weight-bold:    700;
   --font-weight-black:   900;
 
@@ -57,12 +56,10 @@
   --tracking-wide:   0.04em;
 
   --line-height-tight:   1.15;
-  --line-height-snug:    1.3;
   --line-height-normal:  1.6;
   --line-height-relaxed: 1.7;
 
   /* Fluid type scale */
-  --type-2xs:    clamp(0.556rem, 0.52rem + 0.15vw, 0.65rem);
   --type-xs:     clamp(0.694rem, 0.65rem + 0.2vw, 0.8rem);
   --type-sm:     clamp(0.833rem, 0.78rem + 0.25vw, 0.95rem);
   --type-base:   clamp(1rem, 0.92rem + 0.35vw, 1.125rem);
@@ -102,7 +99,7 @@
   --duration-fast:  200ms;
   --duration-base:  300ms;
   --duration-slow:  500ms;
-  --duration-reveal: 800ms;
+  --duration-zoom: 800ms;
 
   /* ─── Z-Index Scale ───────────────────────────────────────────────────────
    */

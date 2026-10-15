@@ -139,19 +139,6 @@
   }
 }
 
-/* Reveal item transitions */
-.reveal-item {
-  opacity: 0;
-  transform: translateY(var(--space-md));
-  transition: opacity var(--duration-reveal) var(--ease-standard),
-              transform var(--duration-reveal) var(--ease-standard);
-}
-
-.reveal-item.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 @media (max-width: 768px) {
   .project-gallery {
     padding: var(--space-xl) var(--space-md);
@@ -165,13 +152,5 @@
 
   .filter-btn {
     font-size: 0.875rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal-item {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
 }

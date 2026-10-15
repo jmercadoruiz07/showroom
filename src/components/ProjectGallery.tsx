@@ -140,7 +140,7 @@ export default function ProjectGallery({ projects, albums }: ProjectGalleryProps
 
       <div
         id="project-grid"
-        className={`project-grid masonry reveal-stagger is-visible${placement.length > 0 ? ' is-packed' : ''}`}
+        className={`project-grid masonry${placement.length > 0 ? ' is-packed' : ''}`}
         aria-label="Projects"
         ref={setGridEl}
       >
@@ -162,7 +162,6 @@ export default function ProjectGallery({ projects, albums }: ProjectGalleryProps
               thumbnailAlt={project.thumbnailAlt}
               href={project.href}
               featured={project.featured}
-              className="is-visible"
               style={cardStyle}
             />
           );

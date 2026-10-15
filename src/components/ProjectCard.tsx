@@ -38,7 +38,7 @@ export default function ProjectCard({
   className,
   style,
 }: ProjectCardProps) {
-  const cardClass = ['project-card', 'reveal-item', className]
+  const cardClass = ['project-card', className]
     .filter(Boolean)
     .join(' ');
 
