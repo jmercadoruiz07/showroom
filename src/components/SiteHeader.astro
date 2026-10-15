@@ -75,7 +75,13 @@ const isCurrent = (href: string) =>
     list-style: none;
   }
 
+  .nav-list li {
+    margin: 0;
+  }
+
   .nav-link {
+    display: inline-block;
+    padding-top: 0.18em;
     font-family: var(--font-hero);
     font-size: clamp(0.875rem, 1.75vw, 1.75rem);
     font-weight: var(--font-weight-bold);
