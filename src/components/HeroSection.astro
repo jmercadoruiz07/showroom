@@ -4,193 +4,189 @@
 | HeroSection — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-bleed background (100vw × 90vh) with overlaid title bottom-left.
-| Subtitle/tagline in Body font, offset right. Thin animated line for scroll down.
-| When `slides` are provided the background becomes an auto-rotating carousel
-| of featured projects; otherwise a single static image is shown.
-| No rounded containers, no cards, no glassmorphism.
+| Home page collage laid out on the 1728px Figma frame. Every position and size
+| is expressed in --u (one Figma pixel at the current viewport width) so the
+| composition scales with the window. Below 768px the layers stack in flow and
+| the project image column is dropped.
 |
 */
 import HeroCarousel, { type HeroSlide } from './HeroCarousel';
 
 interface Props {
-  title: string;
-  subtitle?: string;
-  backgroundImage?: string; // Path to image in public/ or remote URL
-  backgroundAlt?: string;
-  slides?: HeroSlide[];
+  slides: HeroSlide[];
+  quote: string;
 }
 
-const {
-  title = 'JMR VISUALS',
-  subtitle = 'Print · 3D · Motion Design',
-  backgroundImage = '/hero-default.jpg',
-  backgroundAlt = 'Portfolio hero image',
-  slides,
-} = Astro.props;
-
-const hasSlides = slides !== undefined && slides.length > 0;
+const { slides, quote } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  {hasSlides ? (
-    <HeroCarousel slides={slides} client:load />
-  ) : (
-    <div class="hero-background" aria-hidden="true">
-      <img
-        src={backgroundImage}
-        alt={backgroundAlt}
-        loading="eager"
-        fetchpriority="high"
-      />
-    </div>
-  )}
+  <p class="hero-vertical-title" aria-hidden="true">Mercado Ruiz</p>
 
-  <div class="hero-content">
-    <h1 id="hero-title" class="hero-title text-display">
-      {title}
-    </h1>
+  <HeroCarousel slides={slides} client:load />
 
-    {subtitle && (
-      <p class="hero-subtitle text-body">
-        {subtitle}
-      </p>
-    )}
+  <h1 id="hero-title" class="hero-name">
+    <span aria-hidden="true">{'JO\n SE'}</span>
+    <span class="visually-hidden">José Mercado Ruiz</span>
+  </h1>
 
-    <div class="scroll-indicator" aria-hidden="true">
-      <span class="scroll-line"></span>
-      <span class="scroll-text text-mono">SCROLL</span>
-    </div>
+  <img
+    class="hero-hand"
+    src="/hero/hand-painting.png"
+    alt=""
+    width="1728"
+    height="732"
+    loading="eager"
+  />
+
+  <div class="hero-about">
+    <img
+      class="hero-logo"
+      src="/hero/jmr-outline-logo.png"
+      alt="JMR Visuals logo"
+      width="285"
+      height="285"
+    />
+    <p class="hero-quote">{quote}</p>
   </div>
 </section>
 
 <style>
   .hero {
+    --u: calc(100vw / 1728);
     position: relative;
-    width: 100vw;
-    height: 90vh;
-    min-height: 600px;
-    margin-left: calc(50% - 50vw);
+    height: calc(1960 * var(--u));
+    overflow: hidden;
+    background: var(--color-bone);
+    color: var(--color-chalk);
+  }
+
+  .hero-vertical-title {
+    position: absolute;
+    left: calc(1471 * var(--u));
+    top: calc(-9 * var(--u));
+    width: calc(105.5 * var(--u));
+    height: calc(1113 * var(--u));
+    margin: 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-hero);
+    font-size: calc(130.4 * var(--u));
+    font-weight: var(--font-weight-black);
+    line-height: 0.78;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .hero-name {
+    position: absolute;
+    left: calc(46 * var(--u));
+    top: calc(41 * var(--u));
+    margin: 0;
+    font-family: var(--font-hero);
+    font-size: calc(644.65 * var(--u));
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.1em;
+    line-height: 0.8;
+    text-transform: uppercase;
+    white-space: pre;
+    color: inherit;
+  }
+
+  .hero-hand {
+    position: absolute;
+    left: calc(-43 * var(--u));
+    top: calc(938.5 * var(--u));
+    width: calc(1916.7 * var(--u));
+    height: calc(811.9 * var(--u));
+    max-width: none;
+    transform: rotate(171.61deg) scaleY(-1);
+    pointer-events: none;
+  }
+
+  .hero-about {
+    position: absolute;
+    left: calc(308 * var(--u));
+    top: calc(1568 * var(--u));
+    display: flex;
+    gap: calc(32 * var(--u));
+  }
+
+  .hero-logo {
+    flex: none;
+    width: calc(285 * var(--u));
+    height: calc(285 * var(--u));
+  }
+
+  .hero-quote {
+    width: calc(799 * var(--u));
+    margin: calc(176 * var(--u)) 0 0;
+    font-family: var(--font-hero-mono);
+    font-size: max(0.875rem, calc(22 * var(--u)));
+    line-height: 1.43;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
     overflow: hidden;
   }
 
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .hero-background img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: var(--space-2xl);
-    padding-left: calc(var(--space-xl) * 2);
-    padding-bottom: var(--space-3xl);
-    color: var(--color-deep-text);
-  }
-
-  .hero-title {
-    display: inline;
-    font-size: var(--type-hero);
-    font-weight: var(--font-weight-black);
-    letter-spacing: var(--tracking-tight);
-    line-height: 1.1;
-    margin: 0 0 var(--space-md);
-    max-width: 60ch;
-    background: var(--color-deep);
-    color: var(--color-deep-text);
-    padding: 0.15em 0.4em;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
-
-  .hero-subtitle {
-    display: inline;
-    font-size: var(--type-lg);
-    font-weight: var(--font-weight-regular);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    margin: 0 0 var(--space-2xl);
-    max-width: 40ch;
-    background: var(--color-deep);
-    color: var(--color-deep-text);
-    padding: 0.2em 0.5em;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
-
-  .scroll-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-xs);
-    animation: scrollPulse 2s var(--ease-standard) infinite;
-  }
-
-  .scroll-line {
-    width: 60px;
-    height: 1px;
-    background: currentColor;
-    transform-origin: left center;
-    animation: lineGrow 1.5s var(--ease-standard) infinite;
-  }
-
-  .scroll-text {
-    font-size: var(--type-xs);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    opacity: 0.7;
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-  }
-
-  @keyframes lineGrow {
-    0% { transform: scaleX(0); }
-    50% { transform: scaleX(1); }
-    100% { transform: scaleX(0); }
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .hero {
-      height: 80vh;
-      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      padding: calc(var(--header-height) + 6vw) 0 12vw;
     }
 
-    .hero-content {
-      padding: var(--space-lg);
-      padding-left: var(--space-lg);
-      padding-bottom: var(--space-2xl);
+    .hero-vertical-title {
+      left: auto;
+      right: 2vw;
+      top: calc(var(--header-height) + 3vw);
+      width: auto;
+      height: auto;
+      font-size: 11vw;
     }
 
-    .hero-title {
-      font-size: var(--type-2xl);
+    .hero-name {
+      position: relative;
+      left: auto;
+      top: auto;
+      margin-left: 5vw;
+      font-size: 42vw;
     }
 
-    .hero-subtitle {
-      font-size: var(--type-md);
+    .hero-hand {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: 150vw;
+      height: auto;
+      aspect-ratio: 1728 / 732;
+      margin: -22vw 0 0 -25vw;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-indicator,
-    .scroll-line {
-      animation: none;
+    .hero-about {
+      position: static;
+      flex-direction: column;
+      gap: 6vw;
+      margin-top: 8vw;
+      padding: 0 6vw;
     }
-    .scroll-line {
-      transform: scaleX(1);
+
+    .hero-logo {
+      width: 40vw;
+      height: 40vw;
+    }
+
+    .hero-quote {
+      width: auto;
+      margin: 0;
+      font-size: max(0.875rem, 3.8vw);
+      display: block;
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+      overflow: visible;
     }
   }
 </style>

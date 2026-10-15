@@ -136,6 +136,19 @@
   outline-offset: 2px;
 }
 
+/* ─── Visually Hidden ──────────────────────────────────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ─── Skip Link ────────────────────────────────────────────────────────────── */
 .skip-link {
   position: absolute;
@@ -183,11 +196,7 @@
 
 .back-to-top:hover {
   background: var(--color-oxide);
-  color: var(--color-bone);
-}
-
-[data-theme="dark"] .back-to-top:hover {
-  color: var(--color-deep-text) !important;
+  color: var(--color-deep-text);
 }
 
 .back-to-top:focus-visible {
@@ -198,33 +207,6 @@
 .back-to-top svg {
   width: 24px;
   height: 24px;
-}
-
-/* ─── Theme Toggle ─────────────────────────────────────────────────────────── */
-.theme-toggle {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--color-stone);
-  border-radius: 50%;
-  background: var(--color-paper);
-  color: var(--color-ink);
-  transition: background var(--duration-fast) var(--ease-quick),
-              border-color var(--duration-fast) var(--ease-quick),
-              color var(--duration-fast) var(--ease-quick);
-}
-
-.theme-toggle:hover {
-  background: var(--color-ink);
-  color: var(--color-bone);
-  border-color: var(--color-ink);
-}
-
-.theme-toggle svg {
-  width: 20px;
-  height: 20px;
 }
 
 /* ─── Scrollbar Styling ────────────────────────────────────────────────────── */
@@ -251,7 +233,6 @@
   .no-print,
   .site-header,
   .site-footer,
-  .theme-toggle,
   .back-to-top,
   .category-filter {
     display: none !important;

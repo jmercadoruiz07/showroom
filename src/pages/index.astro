@@ -4,8 +4,8 @@
 | Home Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Hero section cycling through featured projects + Project Gallery with
-| album filter.
+| Hero collage with a random column of project images + Project Gallery
+| with album filter.
 |
 */
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -16,22 +16,18 @@ import { sortProjectsByOrder } from '../lib/sort-projects';
 
 const projects = await getCollection('projects');
 
-const featuredSlides = sortProjectsByOrder(
-  projects.filter((project) => project.data.featured),
-).map((project) => ({
+const heroSlides = sortProjectsByOrder(projects).map((project) => ({
   src: project.data.thumbnail.url,
-  alt: `${project.data.title} — featured project`,
   title: project.data.title,
   href: `/projects/${project.id}`,
 }));
+
+const heroQuote =
+  '‘A Day in 5a’ is a geometric mural exploring the synthesis of typography, grid and the natural environment through a unified modular system. Drawing upon the structural anatomy of Bauhaus design, the composition reduces type and organic elements like sweeping clouds, sun rays, and foliage into a standardized visual language of interlocking arcs, pills, and circles in a vibrant, primary colour palette.';
 ---
 
 <BaseLayout title="JMR Visuals — Portfolio" description="Multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.">
-  <HeroSection
-    title="JMR Visuals"
-    subtitle="Multidisciplinary Designer"
-    slides={featuredSlides}
-  />
+  <HeroSection slides={heroSlides} quote={heroQuote} />
 
   <main id="main-content">
     <ProjectGallery />

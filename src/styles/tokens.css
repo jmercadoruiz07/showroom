@@ -9,41 +9,32 @@
 */
 
 :root {
+  color-scheme: dark;
+
   /* ─── Color Tokens (OKLCH) ────────────────────────────────────────────────
-  | Warm neutrals with copper accent. Print-inspired palette.
-  | Light mode defaults — dark mode inverts via [data-theme="dark"].
+  | Dark-only palette on a cool charcoal page with a copper accent.
   */
 
   /* Ink — primary text, headings */
-  --color-ink:          oklch(0.15 0.01 60);
+  --color-ink:          oklch(0.88 0.008 75);
   /* Soot — secondary text, captions */
-  --color-soot:         oklch(0.35 0.01 60);
+  --color-soot:         oklch(0.65 0.01 75);
   /* Stone — borders, dividers */
-  --color-stone:        oklch(0.70 0.01 60);
+  --color-stone:        oklch(0.35 0.01 60);
   /* Bone — page background */
-  --color-bone:         oklch(0.96 0.005 80);
+  --color-bone:         #191d1f;
   /* Paper — card/section backgrounds */
-  --color-paper:        oklch(0.93 0.008 75);
+  --color-paper:        oklch(0.28 0.008 225);
   /* Oxide — accent (warm copper) */
   --color-oxide:        oklch(0.55 0.14 45);
   /* Oxide muted — hover states, small text (WCAG AA on bone) */
   --color-oxide-muted:  oklch(0.42 0.10 45);
-  /* Deep — dark sections, footers */
+  /* Deep — footers */
   --color-deep:         oklch(0.12 0.015 60);
   /* Deep text — text on dark backgrounds */
   --color-deep-text:    oklch(0.88 0.008 75);
-
-  /* ─── Dark Mode Override ──────────────────────────────────────────────────
-     | Invert bone ↔ deep, ink ↔ deep-text. Keep oxide identical.
-     */
-}
-
-:root[data-theme="dark"] {
-  --color-bone:      var(--color-deep);
-  --color-paper:     oklch(0.18 0.015 60);
-  --color-ink:       var(--color-deep-text);
-  --color-soot:      oklch(0.65 0.01 75);
-  --color-stone:     oklch(0.35 0.01 60);
+  /* Chalk — pure white for hero type and the nav bar */
+  --color-chalk:        #fff;
 }
 
 /* ─── Typography Tokens ───────────────────────────────────────────────────
@@ -55,6 +46,9 @@
   --font-display:    "Playfair Display", Georgia, serif;
   --font-body:       "Instrument Sans", "Trebuchet MS", sans-serif;
   --font-mono:       "JetBrains Mono", "Fira Mono", monospace;
+  /* Adobe Fonts (Typekit) families, loaded in BaseLayout */
+  --font-hero:       widescreen, "Arial Black", "Helvetica Neue", sans-serif;
+  --font-hero-mono:  adelle-mono, "JetBrains Mono", "Fira Mono", monospace;
 
   --font-weight-regular: 400;
   --font-weight-medium:  500;
@@ -99,7 +93,7 @@
    */
   --max-width-prose: 70ch;
   --max-width-full:  100vw;
-  --header-height:   clamp(4rem, 3.5rem + 1.5vw, 5.5rem);
+  --header-height:   clamp(2.5rem, 3vw, 4rem);
 
   /* ─── Motion Tokens ───────────────────────────────────────────────────────
    | Easing and duration standards.
