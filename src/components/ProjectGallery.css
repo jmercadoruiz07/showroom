@@ -17,11 +17,16 @@
   z-index: var(--z-sticky);
   background: var(--color-bone);
   border-bottom: 1px solid var(--color-chalk);
-  padding: var(--space-md) var(--space-xl);
+  display: flex;
+  align-items: center;
+  height: calc(var(--header-height) * 1.2);
+  padding: 0 var(--space-xl);
   margin: 0 calc(-1 * var(--space-xl)) var(--space-xl);
 }
 
 .category-filter {
+  flex: 1;
+  min-width: 0;
   max-width: var(--max-width-full);
   margin: 0 auto;
 }
@@ -46,7 +51,7 @@
 
 .filter-btn {
   flex-shrink: 0;
-  padding: 0.3em 0.7em;
+  padding: 0.38em 0.7em 0.22em;
   font-family: var(--font-hero);
   font-size: clamp(0.875rem, 1.75vw, 1.75rem);
   font-weight: var(--font-weight-bold);
@@ -157,7 +162,7 @@
   }
 
   .filter-wrapper {
-    padding: var(--space-sm) var(--space-md);
+    padding: 0 var(--space-md);
     margin: 0 calc(-1 * var(--space-md)) var(--space-lg);
   }
 
