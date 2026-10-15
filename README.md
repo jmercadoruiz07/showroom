@@ -108,6 +108,6 @@ src/
   content/      projects.json (Adobe Portfolio export)
   layouts/      BaseLayout.astro, ProjectLayout.astro
   pages/        index, about, 404, projects/
-  styles/       tokens.css (design tokens), global.css, reset.css
+  styles/       tokens.css (design tokens), base.css (reset and global utilities)
 public/         hero/, about/, projects/images/
 ```
