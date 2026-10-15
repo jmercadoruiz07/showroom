@@ -50,11 +50,7 @@ const { text = 'Mercado Ruiz' } = Astro.props;
     }
   }
 
-  /* Keep the back-to-top button and footer clear of the wordmark column. */
-  :global(body:has(.vertical-wordmark) .back-to-top) {
-    right: calc(var(--space-xl) + var(--wordmark-width));
-  }
-
+  /* Keep the footer clear of the wordmark column. */
   :global(body:has(.vertical-wordmark) .site-footer) {
     margin-right: var(--wordmark-width);
   }

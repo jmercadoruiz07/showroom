@@ -86,7 +86,7 @@ Project page frame (`1:2`): blue grain background, very large uppercase section 
 
 ### Navigation
 
-Fixed white bar across the top, above all other content, links in dark `--color-bone` on white, uppercase `widescreen`. On pages with the vertical wordmark (home, desktop) the gallery, footer bar and back-to-top button keep clear of the wordmark column (`--wordmark-width`, 0 on mobile). Links are spread wide across the bar. The Figma frames order them differently (HOME, ABOUT, PROJECTS in the homepage frame); the site uses Home, Projects, About.
+Fixed white bar across the top, above all other content, links in dark `--color-bone` on white, uppercase `widescreen`. On pages with the vertical wordmark (home, desktop) the gallery and footer keep clear of the wordmark column (`--wordmark-width`, 0 on mobile). Links are spread wide across the bar. The Figma frames order them differently (HOME, ABOUT, PROJECTS in the homepage frame); the site uses Home, Projects, About.
 
 ### Responsive behavior
 

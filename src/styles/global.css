@@ -95,49 +95,6 @@
   top: var(--space-md);
 }
 
-/* ─── Back to Top ──────────────────────────────────────────────────────────── */
-.back-to-top {
-  position: fixed;
-  bottom: var(--space-xl);
-  right: var(--space-xl);
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-ink);
-  color: var(--color-bone);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(var(--space-md));
-  transition: opacity var(--duration-base) var(--ease-standard),
-              visibility var(--duration-base) var(--ease-standard),
-              transform var(--duration-base) var(--ease-standard),
-              background var(--duration-fast) var(--ease-quick);
-  z-index: var(--z-sticky);
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.back-to-top:hover {
-  background: var(--color-accent);
-  color: var(--color-bone);
-}
-
-.back-to-top:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-.back-to-top svg {
-  width: 24px;
-  height: 24px;
-}
-
 /* ─── Scrollbar Styling ────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 8px;
@@ -160,7 +117,6 @@
 @media print {
   .site-header,
   .site-footer,
-  .back-to-top,
   .category-filter {
     display: none !important;
   }
