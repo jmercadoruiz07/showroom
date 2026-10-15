@@ -60,14 +60,14 @@ interface Slot {
  * Basic shortest-column packer: place each card into the column with the
  * smallest current height, then advance that column's height by the card's
  * row-span. Reads the responsive column count from `--masonry-columns`
- * declared in ProjectGallery.css.
+ * declared in ProjectGallery.module.css.
  */
 function computePlacement(grid: HTMLElement, thumbnails: ProjectCardThumbnail[]): Slot[] {
-  const styles = window.getComputedStyle(grid);
-  const columns = Math.max(1, parseInt(styles.getPropertyValue('--masonry-columns'), 10) || 1);
-  const gap = parseFloat(styles.columnGap) || 0;
+  const computed = window.getComputedStyle(grid);
+  const columns = Math.max(1, parseInt(computed.getPropertyValue('--masonry-columns'), 10) || 1);
+  const gap = parseFloat(computed.columnGap) || 0;
   const columnWidth = (grid.clientWidth - gap * (columns - 1)) / columns;
-  const rowHeight = parseFloat(styles.getPropertyValue('--masonry-row-height')) || 1;
+  const rowHeight = parseFloat(computed.getPropertyValue('--masonry-row-height')) || 1;
 
   const columnHeights = new Array<number>(columns).fill(1);
   return thumbnails.map((thumbnail) => {
