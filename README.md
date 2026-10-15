@@ -56,7 +56,7 @@ The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/l
 
 Display sizes at 1728px:
 - Name "JO / SE": 644px, tracking −0.1em, line-height 0.8, two lines, second line indented one space.
-- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge, full viewport height, above the header. Font size is `min(100vh / 8.6, 11vw)`, line-height 0.78, reads bottom to top.
+- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge below the header, desktop only (hidden below 768px). Font size is `min((100vh - header) / 8.3, 11vw)`, line-height 0.78, reads bottom to top.
 - Nav links: about 30px, uppercase.
 
 ### Layout system
@@ -67,10 +67,10 @@ Hero coordinates (relative to the frame, 1728px wide):
 
 | Element | x | y | Size |
 | :-- | :-- | :-- | :-- |
-| Nav bar (white) | 0 | 0 | full width, about 51 visible height; on the home page it ends where the wordmark column starts |
+| Nav bar (white) | 0 | 0 | full width, about 51 visible height, above everything including the wordmark |
 | Name "JO SE" | 46 | 41 | font-size 644 |
 | Image column (4 stacked) | 900 | −123, 225, 550, 923 | 571 wide; heights 345, 321, 369, 321 |
-| Vertical title | right edge | top of screen | fixed, `--wordmark-width` wide (0.78 × font size), full viewport height |
+| Vertical title | right edge | below the nav bar | fixed, `--wordmark-width` wide (0.78 × font size), fills the viewport below the header |
 | Hand illustration | −43 | 938 | 1917 × 812, `rotate(171.61deg) scaleY(-1)`, above the name and images |
 | JMR outline logo | 308 | 1568 | 285 × 285 |
 | Quote | 625 | 1744 | 799 wide, 4 lines max |
@@ -86,12 +86,12 @@ Project page frame (`1:2`): blue grain background, very large uppercase section 
 
 ### Navigation
 
-Fixed white bar across the top, links in dark `--color-bone` on white, uppercase `widescreen`. On pages with the vertical wordmark (home) the bar stops at the wordmark column (`--wordmark-width`); the home gallery, footer bar and back-to-top button also keep clear of it. Links are spread wide across the bar. The Figma frames order them differently (HOME, ABOUT, PROJECTS in the homepage frame); the site uses Home, Projects, About.
+Fixed white bar across the top, above all other content, links in dark `--color-bone` on white, uppercase `widescreen`. On pages with the vertical wordmark (home, desktop) the gallery, footer bar and back-to-top button keep clear of the wordmark column (`--wordmark-width`, 0 on mobile). Links are spread wide across the bar. The Figma frames order them differently (HOME, ABOUT, PROJECTS in the homepage frame); the site uses Home, Projects, About.
 
 ### Responsive behavior
 
 - 768px and up: the scaled collage above.
-- Below 768px: same pieces, stacked in one column. The image column is dropped (not rendered, no image requests). Name at 42vw, hand 150vw wide and overlapping the name slightly, vertical title pinned to the right edge above the hand, logo and quote stacked with the full quote (no line clamp). The nav bar becomes one full-width bar.
+- Below 768px: same pieces, stacked in one column. The image column is dropped (not rendered, no image requests). Name at 42vw, hand 150vw wide and overlapping the name slightly, logo and quote stacked with the full quote (no line clamp). The vertical title is hidden to keep the full width for images and content. The nav bar becomes one full-width bar.
 - Mobile layout for the masonry and project pages is not designed in Figma yet.
 
 ### Behavior

@@ -4,8 +4,7 @@
 | SiteHeader — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Fixed white navigation bar across the top. It stops short of the vertical
-| wordmark column on pages that render one.
+| Fixed white navigation bar across the top, above all page content.
 |
 */
 const pathname = Astro.url.pathname;
@@ -53,10 +52,6 @@ const isCurrent = (href: string) =>
     height: 100%;
     background: var(--color-chalk);
     pointer-events: auto;
-  }
-
-  :global(body:has(.vertical-wordmark)) .nav-primary {
-    width: calc(100% - var(--wordmark-width));
   }
 
   .nav-list {

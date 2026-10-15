@@ -5,9 +5,10 @@
 |-------------------------------------------------------------------------------
 |
 | Name set vertically along the right edge of the screen, reading bottom to top.
-| Fixed above all content (including the header) so it stays put while the page
+| Fixed below the header and above page content so it stays put while the page
 | scrolls. Size follows the viewport height via --wordmark-size; pages that use
-| it reserve --wordmark-width on their right side.
+| it reserve --wordmark-width on their right side. Hidden below 768px, where
+| --wordmark-width is 0.
 |
 */
 interface Props {
@@ -22,7 +23,7 @@ const { text = 'Mercado Ruiz' } = Astro.props;
 <style>
   .vertical-wordmark {
     position: fixed;
-    top: 0;
+    top: var(--header-height);
     right: 0;
     bottom: 0;
     z-index: var(--z-wordmark);
@@ -41,6 +42,12 @@ const { text = 'Mercado Ruiz' } = Astro.props;
     color: var(--color-chalk);
     pointer-events: none;
     user-select: none;
+  }
+
+  @media (max-width: 767px) {
+    .vertical-wordmark {
+      display: none;
+    }
   }
 
   /* Keep right-aligned fixed and footer controls clear of the wordmark column. */
