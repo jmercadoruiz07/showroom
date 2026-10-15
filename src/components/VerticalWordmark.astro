@@ -8,17 +8,28 @@
 | Fixed below the header and above page content so it stays put while the page
 | scrolls. Size follows the viewport height via --wordmark-size; pages that use
 | it reserve --wordmark-width on their right side. Hidden below 768px, where
-| --wordmark-width is 0.
+| --wordmark-width is 0. The outline variant draws the letters as strokes, with
+| an optional substring filled in.
 |
 */
 interface Props {
   text?: string;
+  outline?: boolean;
+  fill?: string;
 }
 
-const { text = 'Mercado Ruiz' } = Astro.props;
+const { text = 'Mercado Ruiz', outline = false, fill = '' } = Astro.props;
+
+const fillStart = fill ? text.toLowerCase().indexOf(fill.toLowerCase()) : -1;
+const parts =
+  fillStart < 0
+    ? [text]
+    : [text.slice(0, fillStart), text.slice(fillStart, fillStart + fill.length), text.slice(fillStart + fill.length)];
 ---
 
-<p class="vertical-wordmark" aria-hidden="true">{text}</p>
+<p class:list={['vertical-wordmark', { 'is-outline': outline }]} aria-hidden="true">
+  {parts.length === 1 ? text : <>{parts[0]}<span class="is-filled">{parts[1]}</span>{parts[2]}</>}
+</p>
 
 <style>
   .vertical-wordmark {
@@ -42,6 +53,16 @@ const { text = 'Mercado Ruiz' } = Astro.props;
     color: var(--color-chalk);
     pointer-events: none;
     user-select: none;
+  }
+
+  .vertical-wordmark.is-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-chalk);
+  }
+
+  .vertical-wordmark .is-filled {
+    color: #d9d9d9;
+    -webkit-text-stroke: 0;
   }
 
   @media (max-width: 767px) {

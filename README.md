@@ -7,6 +7,7 @@ Figma source of truth: file `Vl3rEa0ebSFcwQGhqgbzNd` (PORTFOLIO), desktop frames
 - Hero: node `36:275`
 - Homepage with divider and masonry: node `32:230`
 - Project page: node `1:2`
+- About page: node `198:32` (1702px wide; built in `AboutSection.astro` and `ContactBlock.astro` with `--u = 100vw / 1702`, the outlined `VerticalWordmark`, and assets in `public/about/`)
 
 ## Commands
 
@@ -56,7 +57,7 @@ The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/l
 
 Display sizes at 1728px:
 - Name "JO / SE": 644px, tracking −0.1em, line-height 0.8, two lines, second line indented one space.
-- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge below the header, desktop only (hidden below 768px). Font size is `min((100vh - header) / 8.3, 11vw)`, line-height 0.78, reads bottom to top.
+- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge below the header, desktop only (hidden below 768px). Font size is `min((100vh - header) / 8.5, 11vw)`, line-height 0.78, reads bottom to top.
 - Nav links: about 30px, uppercase.
 
 ### Layout system
@@ -108,5 +109,5 @@ src/
   layouts/      BaseLayout.astro, ProjectLayout.astro
   pages/        index, about, 404, projects/
   styles/       tokens.css (design tokens), global.css, reset.css
-public/         hero/, projects/images/
+public/         hero/, about/, projects/images/
 ```

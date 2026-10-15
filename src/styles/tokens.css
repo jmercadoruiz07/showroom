@@ -91,7 +91,7 @@
   --max-width-full:  100vw;
   --header-height:   clamp(2.5rem, 3vw, 4rem);
   /* Vertical wordmark fits the space below the header; the column is as wide as its line box. Hidden below 768px. */
-  --wordmark-size:   min(calc((100vh - var(--header-height)) / 8.3), 11vw);
+  --wordmark-size:   min(calc((100vh - var(--header-height)) / 8.5), 11vw);
   --wordmark-width:  calc(var(--wordmark-size) * 0.78);
 
   /* ─── Motion Tokens ───────────────────────────────────────────────────────
