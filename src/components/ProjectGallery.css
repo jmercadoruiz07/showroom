@@ -54,7 +54,7 @@
 
 .filter-btn {
   flex-shrink: 0;
-  padding: 0.38em 0.7em 0.22em;
+  padding: 0.3em 0.7em;
   font-family: var(--font-hero);
   font-size: clamp(0.875rem, 1.75vw, 1.75rem);
   font-weight: var(--font-weight-bold);
