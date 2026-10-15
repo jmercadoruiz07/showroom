@@ -4,8 +4,7 @@
 | SiteFooter — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-width dark band with copyright and social icons.
-| Uses --color-deep background.
+| Full-width band with a white hairline on top, copyright and social icons.
 |
 */
 ---
@@ -37,8 +36,9 @@
 
 <style>
   .site-footer {
-    background: var(--color-deep);
-    color: var(--color-deep-text);
+    background: var(--color-bone);
+    color: var(--color-ink);
+    border-top: 1px solid var(--color-chalk);
     padding: var(--space-md) var(--space-lg);
   }
 
@@ -60,7 +60,9 @@
   .copyright {
     font-family: var(--font-mono);
     font-size: var(--type-xs);
-    color: var(--color-deep-text);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-ink);
     margin: 0;
     max-width: none;
   }
@@ -88,7 +90,7 @@
 
   .footer-link:hover {
     opacity: 1;
-    color: var(--color-oxide);
+    color: var(--color-accent);
   }
 
   .footer-social {
@@ -103,9 +105,8 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    color: var(--color-deep-text);
+    color: var(--color-ink);
     opacity: 0.6;
-    border-radius: 50%;
     transition: opacity var(--duration-fast) var(--ease-quick),
                 color var(--duration-fast) var(--ease-quick),
                 background var(--duration-fast) var(--ease-quick);
@@ -113,8 +114,7 @@
 
   .social-link:hover {
     opacity: 1;
-    color: var(--color-oxide);
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-accent);
   }
 
   @media (max-width: 768px) {

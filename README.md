@@ -40,9 +40,9 @@ Figma source of truth: file `Vl3rEa0ebSFcwQGhqgbzNd` (PORTFOLIO), desktop frames
 | `--color-soot` | `oklch(0.65 0.01 75)` | Secondary text |
 | `--color-stone` | `oklch(0.35 0.01 60)` | Borders |
 | `--color-paper` | `oklch(0.28 0.008 225)` | Image placeholders, panels |
-| `--color-oxide` | `oklch(0.55 0.14 45)` | Accent (copper) |
+| `--color-accent` | `#789da0` | Muted teal for hover, active and focus states (sampled from the Figma nav, not a Figma variable) |
 
-Figma also shows secondary labels at 58% white and an active or hover nav link in a muted teal, about `#789da0` (sampled from the render, not a Figma variable).
+Figma also shows secondary labels at 58% white. The old copper accent is gone.
 
 ### Typography
 
@@ -52,7 +52,7 @@ Figma also shows secondary labels at 58% white and an active or hover nav link i
 | Body copy | NB Akademie Std Medium | `adelle-mono` via `--font-hero-mono` | 22px at 1728px, line-height about 1.43 |
 | Labels | NB Akademie Mono Std Medium | `adelle-mono` | 28px, uppercase, white or 58% white |
 
-The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/layouts/BaseLayout.astro`. Inner pages still use the self-hosted Playfair Display, Instrument Sans and JetBrains Mono from `public/fonts/`.
+The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/layouts/BaseLayout.astro`. `--font-display` is `widescreen` and `--font-body` and `--font-mono` are `adelle-mono` on every page, so utilities like `.text-display` and plain headings (uppercase) follow the hero. Interactive states are inverted blocks (white plate, dark text) or teal text. The self-hosted fonts in `public/fonts/` and `src/styles/fonts.css` are no longer used.
 
 Display sizes at 1728px:
 - Name "JO / SE": 644px, tracking −0.1em, line-height 0.8, two lines, second line indented one space.

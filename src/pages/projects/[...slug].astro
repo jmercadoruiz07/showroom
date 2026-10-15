@@ -120,7 +120,6 @@ const formatDate = (date: Date) => {
   .back-link {
     display: inline-block;
     font-size: var(--type-xs);
-    font-weight: var(--font-weight-medium);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     color: var(--color-soot);
@@ -129,25 +128,35 @@ const formatDate = (date: Date) => {
   }
 
   .back-link:hover {
-    color: var(--color-oxide);
+    color: var(--color-accent);
   }
 
   .project-meta {
     display: flex;
-    gap: var(--space-xl);
+    align-items: center;
+    gap: var(--space-md);
     margin-bottom: var(--space-md);
   }
 
   .project-category,
   .project-date {
     font-size: var(--type-sm);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .project-category {
+    line-height: 1;
+    color: var(--color-bone);
+    background: var(--color-chalk);
+    padding: 0.3em 0.7em;
   }
 
   .project-title {
-    font-size: var(--type-hero);
+    font-size: calc(var(--type-hero) * 1.4);
     font-weight: var(--font-weight-black);
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--line-height-tighter);
+    letter-spacing: -0.06em;
+    line-height: 0.9;
     margin: 0 0 var(--space-lg);
     max-width: 60ch;
   }
@@ -163,11 +172,10 @@ const formatDate = (date: Date) => {
 
   .tag {
     font-size: var(--type-xs);
-    font-weight: var(--font-weight-medium);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    color: var(--color-oxide-muted);
-    background: var(--color-paper);
+    color: var(--color-chalk);
+    border: 1px solid var(--color-chalk);
     padding: var(--space-2xs) var(--space-sm);
   }
 
@@ -243,15 +251,14 @@ const formatDate = (date: Date) => {
   .project-tools {
     margin-bottom: var(--space-2xl);
     padding-top: var(--space-xl);
-    border-top: 1px solid var(--color-stone);
+    border-top: 1px solid var(--color-chalk);
   }
 
   .tools-title {
     font-size: var(--type-xs);
-    font-weight: var(--font-weight-medium);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    color: var(--color-oxide-muted);
+    color: var(--color-soot);
     margin: 0 0 var(--space-md);
   }
 
@@ -266,19 +273,19 @@ const formatDate = (date: Date) => {
 
   .tool {
     font-size: var(--type-sm);
-    color: var(--color-soot);
+    color: var(--color-ink);
     background: var(--color-paper);
     padding: var(--space-2xs) var(--space-sm);
   }
 
   .featured-badge {
     font-size: var(--type-xs);
-    font-weight: var(--font-weight-bold);
     letter-spacing: var(--tracking-wide);
+    line-height: 1;
     text-transform: uppercase;
-    color: var(--color-oxide-muted);
-    padding: var(--space-xs) var(--space-sm);
-    border: 1px solid var(--color-oxide-muted);
+    color: var(--color-bone);
+    background: var(--color-chalk);
+    padding: 0.4em 0.8em;
     display: inline-block;
   }
 
@@ -317,16 +324,12 @@ const formatDate = (date: Date) => {
 
     .project-meta {
       flex-direction: column;
+      align-items: flex-start;
       gap: var(--space-xs);
     }
 
     .project-title {
       font-size: var(--type-xl);
     }
-  }
-
-  .tag,
-  .tool {
-    background: var(--color-paper);
   }
 </style>

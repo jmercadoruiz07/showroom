@@ -101,6 +101,7 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
   line-height: var(--line-height-tight);
+  text-transform: uppercase;
 }
 
 .text-body {
@@ -118,7 +119,7 @@
 .text-ink { color: var(--color-ink); }
 .text-soot { color: var(--color-soot); }
 .text-stone { color: var(--color-stone); }
-.text-oxide { color: var(--color-oxide); }
+.text-accent { color: var(--color-accent); }
 .text-deep-text { color: var(--color-deep-text); }
 
 /* ─── Background Utilities ─────────────────────────────────────────────────── */
@@ -128,11 +129,11 @@
 
 /* ─── Border Utilities ─────────────────────────────────────────────────────── */
 .border-stone { border-color: var(--color-stone); }
-.border-oxide { border-color: var(--color-oxide); }
+.border-accent { border-color: var(--color-accent); }
 
 /* ─── Focus Ring ───────────────────────────────────────────────────────────── */
 .focus-ring:focus-visible {
-  outline: 2px solid var(--color-oxide);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -177,7 +178,6 @@
   justify-content: center;
   background: var(--color-ink);
   color: var(--color-bone);
-  border-radius: 50%;
   opacity: 0;
   visibility: hidden;
   transform: translateY(var(--space-md));
@@ -195,12 +195,12 @@
 }
 
 .back-to-top:hover {
-  background: var(--color-oxide);
-  color: var(--color-deep-text);
+  background: var(--color-accent);
+  color: var(--color-bone);
 }
 
 .back-to-top:focus-visible {
-  outline: 2px solid var(--color-oxide);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 

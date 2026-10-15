@@ -43,6 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
+  text-transform: uppercase;
   font-family: var(--font-display);
   color: var(--color-ink);
 }
@@ -66,7 +67,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-oxide);
+  color: var(--color-accent);
 }
 
 strong, b {
@@ -120,13 +121,13 @@ button {
 
 /* ─── Focus Styles ─────────────────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--color-oxide);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
 /* ─── Selection ────────────────────────────────────────────────────────────── */
 ::selection {
-  background-color: var(--color-oxide);
+  background-color: var(--color-chalk);
   color: var(--color-bone);
 }
 
@@ -169,8 +170,8 @@ pre code {
 blockquote {
   margin: var(--space-xl) 0;
   padding-left: var(--space-lg);
-  border-left: 3px solid var(--color-oxide);
-  font-style: italic;
+  border-left: 3px solid var(--color-chalk);
+  font-style: normal;
   color: var(--color-soot);
 }
 

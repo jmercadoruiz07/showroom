@@ -89,8 +89,8 @@
 .card-featured {
   display: inline-block;
   margin-top: var(--space-sm);
-  background: var(--color-oxide);
-  color: var(--color-chalk);
+  background: var(--color-accent);
+  color: var(--color-bone);
   padding: 0.3em 0.7em;
   font-family: var(--font-hero-mono);
   font-size: clamp(0.75rem, 0.9vw, 0.95rem);

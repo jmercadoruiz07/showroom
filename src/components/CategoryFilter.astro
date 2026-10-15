@@ -5,7 +5,7 @@
 |-------------------------------------------------------------------------------
 |
 | Horizontal scrollable row of text links (not pills/badges). Sticky below header on scroll.
-| Active category underlined in --color-oxide.
+| Active category underlined in --color-accent.
 |
 */
 interface Props {
@@ -101,7 +101,7 @@ const {
 
   .filter-link.active {
     color: var(--color-ink);
-    border-bottom-color: var(--color-oxide);
+    border-bottom-color: var(--color-accent);
   }
 
   .filter-link.active {
@@ -109,7 +109,7 @@ const {
   }
 
   .filter-link:focus-visible {
-    outline: 2px solid var(--color-oxide);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 2px;
   }

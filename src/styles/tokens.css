@@ -25,10 +25,8 @@
   --color-bone:         #191d1f;
   /* Paper — card/section backgrounds */
   --color-paper:        oklch(0.28 0.008 225);
-  /* Oxide — accent (warm copper) */
-  --color-oxide:        oklch(0.55 0.14 45);
-  /* Oxide muted — hover states, small text (WCAG AA on bone) */
-  --color-oxide-muted:  oklch(0.42 0.10 45);
+  /* Accent — muted teal for hover, active and focus states */
+  --color-accent:       #789da0;
   /* Deep — footers */
   --color-deep:         oklch(0.12 0.015 60);
   /* Deep text — text on dark backgrounds */
@@ -39,13 +37,13 @@
 
 /* ─── Typography Tokens ───────────────────────────────────────────────────
    | Fluid type scale using clamp() for responsive scaling.
-   | Families: Playfair Display (Display), Instrument Sans (Body), JetBrains Mono (Mono).
+   | Families: widescreen (Display), adelle-mono (Body and Mono), both from Adobe Fonts.
    */
 
 :root {
-  --font-display:    "Playfair Display", Georgia, serif;
-  --font-body:       "Instrument Sans", "Trebuchet MS", sans-serif;
-  --font-mono:       "JetBrains Mono", "Fira Mono", monospace;
+  --font-display:    var(--font-hero);
+  --font-body:       var(--font-hero-mono);
+  --font-mono:       var(--font-hero-mono);
   /* Adobe Fonts (Typekit) families, loaded in BaseLayout */
   --font-hero:       widescreen, "Arial Black", "Helvetica Neue", sans-serif;
   --font-hero-mono:  adelle-mono, "JetBrains Mono", "Fira Mono", monospace;

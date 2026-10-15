@@ -51,7 +51,7 @@
 
 .gallery-item--video:hover .gallery-play {
   background: rgba(0, 0, 0, 0.1);
-  color: var(--color-oxide);
+  color: var(--color-accent);
 }
 
 .media-viewer {
@@ -96,7 +96,7 @@
 }
 
 .viewer-close:hover {
-  color: var(--color-oxide);
+  color: var(--color-accent);
 }
 
 .viewer-nav {
@@ -120,7 +120,7 @@
 
 .viewer-nav:hover {
   opacity: 1;
-  color: var(--color-oxide);
+  color: var(--color-accent);
 }
 
 .viewer-prev {
