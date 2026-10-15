@@ -15,19 +15,10 @@
   position: sticky;
   top: var(--header-height);
   z-index: var(--z-sticky);
-  background: color-mix(in oklch, var(--color-bone) 85%, transparent);
-  backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--color-stone);
+  background: var(--color-bone);
+  border-bottom: 1px solid var(--color-chalk);
   padding: var(--space-md) var(--space-xl);
   margin: 0 calc(-1 * var(--space-xl)) var(--space-xl);
-  transition: background var(--duration-base) var(--ease-standard),
-              backdrop-filter var(--duration-base) var(--ease-standard),
-              border-color var(--duration-base) var(--ease-standard);
-}
-
-.filter-wrapper {
-  background: color-mix(in oklch, var(--color-deep) 85%, transparent);
-  border-color: var(--color-stone);
 }
 
 .category-filter {
@@ -38,7 +29,7 @@
 .filter-list {
   display: flex;
   flex-wrap: nowrap;
-  gap: var(--space-md);
+  gap: var(--space-2xs);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -55,44 +46,35 @@
 
 .filter-btn {
   flex-shrink: 0;
-  padding: var(--space-xs) var(--space-sm);
-  font-family: var(--font-mono);
-  font-size: var(--type-xs);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-wide);
+  padding: 0.3em 0.7em;
+  font-family: var(--font-hero);
+  font-size: clamp(0.875rem, 1.75vw, 1.75rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
   text-transform: uppercase;
-  color: var(--color-soot);
+  color: color-mix(in srgb, var(--color-chalk) 58%, transparent);
   background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
   cursor: pointer;
   transition: color var(--duration-fast) var(--ease-quick),
-              border-color var(--duration-fast) var(--ease-quick);
+              background-color var(--duration-fast) var(--ease-quick);
   white-space: nowrap;
   scroll-snap-align: start;
 }
 
 .filter-btn:hover {
-  color: var(--color-ink);
-}
-
-.filter-btn:hover {
-  color: var(--color-deep-text);
+  color: var(--color-chalk);
 }
 
 .filter-btn.active {
-  color: var(--color-ink);
-  border-bottom-color: var(--color-oxide);
-}
-
-.filter-btn.active {
-  color: var(--color-deep-text);
+  color: var(--color-bone);
+  background: var(--color-chalk);
 }
 
 .filter-btn:focus-visible {
-  outline: 2px solid var(--color-oxide);
+  outline: 2px solid var(--color-chalk);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
 .project-grid {
@@ -180,8 +162,7 @@
   }
 
   .filter-btn {
-    font-size: var(--type-2xs);
-    padding: var(--space-2xs) var(--space-xs);
+    font-size: 0.875rem;
   }
 }
 

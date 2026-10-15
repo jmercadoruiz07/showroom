@@ -3,9 +3,10 @@
 | ProjectCard — Component Styles
 |-------------------------------------------------------------------------------
 |
-| Ink-plate overlay: every label sits on an opaque plate for guaranteed
-| contrast over arbitrary imagery. Hierarchy: title (P1) > category (P2) >
-| featured (P3). Theme-invariant tokens used throughout.
+| Plate overlay: every label sits on an opaque plate for guaranteed contrast
+| over arbitrary imagery. Title is a white plate with bold uppercase display
+| type; category and featured tags are mono labels. Hierarchy: title (P1) >
+| category (P2) > featured (P3).
 | Slow zoom (scale 1.03 over 500ms). Title plate slides up on hover.
 |
 */
@@ -49,13 +50,16 @@
 .card-category {
   align-self: flex-end;
   display: inline-block;
-  background: var(--color-deep);
-  color: var(--color-deep-text);
-  padding: 4px 10px;
-  font-size: var(--type-2xs);
-  letter-spacing: 0.08em;
+  background: var(--color-bone);
+  color: var(--color-chalk);
+  padding: 0.3em 0.7em;
+  font-family: var(--font-hero-mono);
+  font-size: clamp(0.75rem, 0.9vw, 0.95rem);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
   text-transform: uppercase;
-  transition: background-color var(--duration-fast) var(--ease-quick);
+  transition: background-color var(--duration-fast) var(--ease-quick),
+              color var(--duration-fast) var(--ease-quick);
 }
 
 .card-content {
@@ -68,11 +72,15 @@
 
 .card-title {
   display: inline;
-  font-size: var(--type-lg);
-  line-height: 1.35;
-  color: var(--color-deep-text);
-  background: var(--color-deep);
-  padding: 0.32em 0.55em;
+  font-family: var(--font-hero);
+  font-size: clamp(1.1rem, 1.9vw, 1.9rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--color-bone);
+  background: var(--color-chalk);
+  padding: 0.15em 0.4em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   text-wrap: balance;
@@ -81,11 +89,13 @@
 .card-featured {
   display: inline-block;
   margin-top: var(--space-sm);
-  background: var(--color-oxide-muted);
-  color: var(--color-deep-text);
-  padding: 2px 8px;
-  font-size: var(--type-2xs);
-  letter-spacing: 0.08em;
+  background: var(--color-oxide);
+  color: var(--color-chalk);
+  padding: 0.3em 0.7em;
+  font-family: var(--font-hero-mono);
+  font-size: clamp(0.75rem, 0.9vw, 0.95rem);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -100,7 +110,8 @@
   }
 
   .project-card .card-link:hover .card-category {
-    background-color: var(--color-oxide-muted);
+    background-color: var(--color-chalk);
+    color: var(--color-bone);
   }
 }
 
