@@ -44,6 +44,7 @@ const { slides, quote } = Astro.props;
       alt="JMR Visuals logo"
       width="285"
       height="285"
+      loading="lazy"
     />
     <p class="hero-quote">{quote}</p>
   </div>
@@ -129,9 +130,9 @@ const { slides, quote } = Astro.props;
     }
 
     .hero-hand {
-      left: 50vw;
-      top: 19vw;
-      width: 66vw;
+      left: 45.5vw;
+      top: 20.5vw;
+      width: 72vw;
       height: auto;
       aspect-ratio: 1728 / 732;
       transform: rotate(-90deg);
@@ -146,8 +147,7 @@ const { slides, quote } = Astro.props;
     }
 
     .hero-logo {
-      width: 40vw;
-      height: 40vw;
+      display: none;
     }
 
     .hero-quote {
