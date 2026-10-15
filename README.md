@@ -72,11 +72,11 @@ Hero coordinates (relative to the frame, 1728px wide):
 | Name "JO SE" | 46 | 41 | font-size 644 |
 | Image column (4 stacked) | 900 | −123, 225, 550, 923 | 571 wide; heights 345, 321, 369, 321 |
 | Vertical title | right edge | below the nav bar | fixed, `--wordmark-width` wide (0.78 × font size), fills the viewport below the header |
-| Hand illustration | placed from the right | 1096 | 1917 × 812, `rotate(171.61deg) scaleY(-1)`, above the name and images; it overlaps the bottom of the image column by about 40; its fingertip (1772 from the image's left edge) stops 6px left of the wordmark column |
-| JMR outline logo | 308 | 1726 | 285 × 285 |
-| Quote | 625 | 1902 | 799 wide, 4 lines max |
+| Hand illustration | placed from the right | 1081 | 1917 × 812, `rotate(171.61deg) scaleY(-1)`, above the name and images; it overlaps the bottom of the image column by about 55; its fingertip (1772 from the image's left edge) stops 6px left of the wordmark column |
+| JMR outline logo | 308 | 1711 | 285 × 285 |
+| Quote | 625 | 1887 | 799 wide, 4 lines max |
 
-Hero height is 2118 × `--u`.
+Hero height is 2103 × `--u`.
 
 Homepage frame (`32:230`) below the hero:
 - Divider: 1px white line, 1164 wide, from x 174 to 1338, directly under the logo and quote row.
