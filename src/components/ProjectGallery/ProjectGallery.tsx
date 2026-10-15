@@ -12,7 +12,7 @@
 */
 import type { CSSProperties } from 'react';
 import { useEffect, useState } from 'react';
-import ProjectCard, { type ProjectCardThumbnail } from './ProjectCard';
+import ProjectCard, { type ProjectCardThumbnail } from '../ProjectCard/ProjectCard';
 import styles from './ProjectGallery.module.css';
 
 export interface GalleryProject {
