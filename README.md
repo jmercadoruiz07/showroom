@@ -57,7 +57,7 @@ The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/l
 
 Display sizes at 1728px:
 - Name "JO / SE": 644px, tracking −0.1em, line-height 0.8, two lines, second line indented one space.
-- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge below the header, desktop only (hidden below 768px). Drawn as outlined letters; hovering a letter fills it and the letters either side (CSS only, `:hover` with `+` and `:has`). Font size is `min((100vh - header) / 8.5, 11vw)`, line-height 0.78, reads bottom to top.
+- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge below the header, desktop only (hidden below 768px). Drawn as outlined letters; hovering a letter fills it and the letters either side (CSS only, `:hover` with `+` and `:has`). Font size is `min((100vh - header) / 8.3, 11vw)`, line-height 0.78, reads bottom to top.
 - Nav links: about 30px, uppercase.
 
 ### Layout system
