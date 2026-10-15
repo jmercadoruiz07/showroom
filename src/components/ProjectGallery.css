@@ -41,8 +41,11 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: var(--space-xs);
-  margin-bottom: calc(-1 * var(--space-xs));
+  scrollbar-width: none;
+}
+
+.filter-list li {
+  margin: 0;
 }
 
 .filter-list::-webkit-scrollbar {
