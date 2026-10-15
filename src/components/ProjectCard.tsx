@@ -9,7 +9,7 @@
 |
 */
 import type { CSSProperties } from 'react';
-import './ProjectCard.css';
+import styles from './ProjectCard.module.css';
 
 export interface ProjectCardThumbnail {
   url: string;
@@ -24,7 +24,6 @@ export interface ProjectCardProps {
   thumbnailAlt?: string;
   href: string;
   featured?: boolean;
-  className?: string;
   style?: CSSProperties;
 }
 
@@ -35,13 +34,8 @@ export default function ProjectCard({
   thumbnailAlt,
   href,
   featured = false,
-  className,
   style,
 }: ProjectCardProps) {
-  const cardClass = ['project-card', className]
-    .filter(Boolean)
-    .join(' ');
-
   // Falls back to a 1:1 ratio when dimensions are missing so cards still
   // reserve space and the grid stays stable on first paint.
   const aspectRatio =
@@ -50,10 +44,10 @@ export default function ProjectCard({
       : '1 / 1';
 
   return (
-    <article className={cardClass} data-album={album} style={style}>
-      <a href={href} className="card-link" aria-label={`View project: ${title}`}>
+    <article className={styles.card} data-album={album} style={style}>
+      <a href={href} className={styles.link} aria-label={`View project: ${title}`}>
         <div
-          className="card-media"
+          className={styles.media}
           aria-hidden="true"
           style={{ aspectRatio }}
         >
@@ -67,16 +61,16 @@ export default function ProjectCard({
           />
         </div>
 
-        <div className="card-overlay">
+        <div className={styles.overlay}>
           {album ? (
-            <span className="card-category" aria-hidden="true">
+            <span className={styles.category} aria-hidden="true">
               {album.toUpperCase()}
             </span>
           ) : <div />}
 
-          <div className="card-content">
-            <h2 className="card-title">{title}</h2>
-            {featured && <span className="card-featured">FEATURED</span>}
+          <div className={styles.content}>
+            <h2 className={styles.title}>{title}</h2>
+            {featured && <span className={styles.featured}>FEATURED</span>}
           </div>
         </div>
       </a>

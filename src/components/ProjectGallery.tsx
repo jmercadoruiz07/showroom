@@ -13,7 +13,7 @@
 import type { CSSProperties } from 'react';
 import { useEffect, useState } from 'react';
 import ProjectCard, { type ProjectCardThumbnail } from './ProjectCard';
-import './ProjectGallery.css';
+import styles from './ProjectGallery.module.css';
 
 export interface GalleryProject {
   title: string;
@@ -29,6 +29,8 @@ export const ALL_ALBUMS = 'all';
 interface ProjectGalleryProps {
   projects: GalleryProject[];
   albums: string[];
+  /** Drops the header offset above the filter bar on small screens. */
+  tightTop?: boolean;
 }
 
 /**
@@ -82,7 +84,7 @@ function computePlacement(grid: HTMLElement, thumbnails: ProjectCardThumbnail[])
   });
 }
 
-export default function ProjectGallery({ projects, albums }: ProjectGalleryProps) {
+export default function ProjectGallery({ projects, albums, tightTop = false }: ProjectGalleryProps) {
   const [activeAlbum, setActiveAlbum] = useState<string>(ALL_ALBUMS);
   const [gridEl, setGridEl] = useState<HTMLElement | null>(null);
   const [placement, setPlacement] = useState<Slot[]>([]);
@@ -104,14 +106,14 @@ export default function ProjectGallery({ projects, albums }: ProjectGalleryProps
   }, [gridEl, activeAlbum, projects]);
 
   return (
-    <div className="project-gallery">
-      <div className="filter-wrapper">
-        <nav className="category-filter" aria-label="Filter projects by album">
-          <ul className="filter-list">
+    <div className={`${styles.root}${tightTop ? ` ${styles.tightTop}` : ''}`}>
+      <div className={styles.filterBar}>
+        <nav className={styles.filter} aria-label="Filter projects by album">
+          <ul className={styles.filterList}>
             <li>
               <button
                 type="button"
-                className={`filter-btn${activeAlbum === ALL_ALBUMS ? ' active' : ''}`}
+                className={`${styles.filterButton}${activeAlbum === ALL_ALBUMS ? ` ${styles.isActive}` : ''}`}
                 aria-pressed={activeAlbum === ALL_ALBUMS}
                 aria-controls="project-grid"
                 data-album={ALL_ALBUMS}
@@ -124,7 +126,7 @@ export default function ProjectGallery({ projects, albums }: ProjectGalleryProps
               <li key={album}>
                 <button
                   type="button"
-                  className={`filter-btn${album === activeAlbum ? ' active' : ''}`}
+                  className={`${styles.filterButton}${album === activeAlbum ? ` ${styles.isActive}` : ''}`}
                   aria-pressed={album === activeAlbum}
                   aria-controls="project-grid"
                   data-album={album}
@@ -140,7 +142,7 @@ export default function ProjectGallery({ projects, albums }: ProjectGalleryProps
 
       <div
         id="project-grid"
-        className={`project-grid masonry${placement.length > 0 ? ' is-packed' : ''}`}
+        className={`${styles.grid} ${styles.masonry}${placement.length > 0 ? ` ${styles.isPacked}` : ''}`}
         aria-label="Projects"
         ref={setGridEl}
       >

@@ -8,37 +8,37 @@
 | font counter. Nav arrows hidden on small screens.
 |
 */
-.image-gallery {
+.gallery {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
 }
 
-.gallery-item {
+.item {
   margin: 0;
   cursor: pointer;
 }
 
-.gallery-item img {
+.item img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.gallery-item--video {
+.itemVideo {
   position: relative;
 }
 
-.gallery-item--video img {
+.itemVideo img {
   opacity: 0.8;
   transition: opacity var(--duration-fast) var(--ease-quick);
 }
 
-.gallery-item--video:hover img {
+.itemVideo:hover img {
   opacity: 1;
 }
 
-.gallery-play {
+.play {
   position: absolute;
   inset: 0;
   display: flex;
@@ -50,12 +50,12 @@
               color var(--duration-fast) var(--ease-quick);
 }
 
-.gallery-item--video:hover .gallery-play {
+.itemVideo:hover .play {
   background: rgba(0, 0, 0, 0.1);
   color: var(--color-accent);
 }
 
-.media-viewer {
+.viewer {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
@@ -68,19 +68,19 @@
               visibility var(--duration-base) var(--ease-standard);
 }
 
-.media-viewer.is-open {
+.viewer.isOpen {
   opacity: 1;
   visibility: visible;
 }
 
-.viewer-backdrop {
+.backdrop {
   position: absolute;
   inset: 0;
   background: var(--color-bone);
 }
 
-.viewer-close,
-.viewer-nav {
+.close,
+.nav {
   position: absolute;
   width: 48px;
   height: 48px;
@@ -95,30 +95,30 @@
   z-index: 1;
 }
 
-.viewer-close:hover,
-.viewer-nav:hover {
+.close:hover,
+.nav:hover {
   background: var(--color-accent);
 }
 
-.viewer-close {
+.close {
   top: var(--space-lg);
   right: var(--space-lg);
 }
 
-.viewer-nav {
+.nav {
   top: 50%;
   transform: translateY(-50%);
 }
 
-.viewer-prev {
+.prev {
   left: var(--space-lg);
 }
 
-.viewer-next {
+.next {
   right: var(--space-lg);
 }
 
-.viewer-content {
+.content {
   position: relative;
   max-width: 90vw;
   max-height: 85vh;
@@ -127,14 +127,14 @@
   justify-content: center;
 }
 
-.viewer-image {
+.image {
   max-width: 100%;
   max-height: 85vh;
   object-fit: contain;
   user-select: none;
 }
 
-.viewer-video {
+.video {
   width: 90vw;
   max-width: 1280px;
   height: 85vh;
@@ -142,7 +142,7 @@
   background: #000;
 }
 
-.viewer-counter {
+.counter {
   position: absolute;
   bottom: var(--space-lg);
   left: var(--space-lg);
@@ -154,21 +154,21 @@
   color: var(--color-chalk);
 }
 
-.viewer-total {
+.total {
   color: color-mix(in srgb, var(--color-chalk) 58%, transparent);
 }
 
 @media (max-width: 768px) {
-  .viewer-nav {
+  .nav {
     display: none;
   }
 
-  .viewer-close {
+  .close {
     top: var(--space-md);
     right: var(--space-md);
   }
 
-  .viewer-counter {
+  .counter {
     bottom: var(--space-md);
     left: var(--space-md);
   }

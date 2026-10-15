@@ -4,14 +4,14 @@
 |-------------------------------------------------------------------------------
 |
 | Sticky category filter bar below the header. The nav lives inside the sticky
-| wrapper so the bar stays clickable while the grid scrolls beneath it.
+| bar so it stays clickable while the grid scrolls beneath it.
 |
 */
-.project-gallery {
+.root {
   padding: var(--space-xl);
 }
 
-.filter-wrapper {
+.filterBar {
   position: sticky;
   top: var(--header-height);
   z-index: var(--z-sticky);
@@ -24,14 +24,14 @@
   margin: 0 calc(-1 * var(--space-xl)) var(--space-xl);
 }
 
-.category-filter {
+.filter {
   flex: 1;
   min-width: 0;
   max-width: var(--max-width-full);
   margin: 0 auto;
 }
 
-.filter-list {
+.filterList {
   display: flex;
   flex-wrap: nowrap;
   gap: var(--space-2xs);
@@ -44,15 +44,15 @@
   scrollbar-width: none;
 }
 
-.filter-list li {
+.filterList li {
   margin: 0;
 }
 
-.filter-list::-webkit-scrollbar {
+.filterList::-webkit-scrollbar {
   display: none;
 }
 
-.filter-btn {
+.filterButton {
   flex-shrink: 0;
   padding: 0.3em 0.7em;
   font-family: var(--font-hero);
@@ -71,21 +71,21 @@
   scroll-snap-align: start;
 }
 
-.filter-btn:hover {
+.filterButton:hover {
   color: var(--color-chalk);
 }
 
-.filter-btn.active {
+.filterButton.isActive {
   color: var(--color-bone);
   background: var(--color-chalk);
 }
 
-.filter-btn:focus-visible {
+.filterButton:focus-visible {
   outline: 2px solid var(--color-chalk);
   outline-offset: 2px;
 }
 
-.project-grid {
+.grid {
   max-width: var(--max-width-full);
   margin: 0 auto;
 }
@@ -108,12 +108,12 @@
 | The resolved grid-template-columns also includes implicit tracks created by
 | previously placed cards, which would keep stale columns alive on resize.
 |
-| The tiny row tracks only apply once cards are placed (.is-packed). Before
+| The tiny row tracks only apply once cards are placed (.isPacked). Before
 | that, cards flow as a regular grid at full height; otherwise they collapse
 | onto the first rows and native lazy-loading fetches every thumbnail.
 |
 */
-.project-grid.masonry {
+.grid.masonry {
   --masonry-columns: 3;
   --masonry-row-height: 2px;
   display: grid;
@@ -122,35 +122,45 @@
   align-items: start;
 }
 
-.project-grid.masonry.is-packed {
+.grid.masonry.isPacked {
   grid-auto-rows: var(--masonry-row-height);
   row-gap: 0;
 }
 
 @media (max-width: 768px) {
-  .project-grid.masonry {
+  .grid.masonry {
     --masonry-columns: 2;
   }
 }
 
 @media (max-width: 480px) {
-  .project-grid.masonry {
+  .grid.masonry {
     --masonry-columns: 1;
   }
 }
 
 @media (max-width: 768px) {
-  .project-gallery {
+  .root {
     padding: var(--space-xl) var(--space-md);
     padding-top: calc(var(--header-height) + var(--space-lg));
   }
 
-  .filter-wrapper {
+  .root.tightTop {
+    padding-top: var(--space-xs);
+  }
+
+  .filterBar {
     padding: 0 var(--space-md);
     margin: 0 calc(-1 * var(--space-md)) var(--space-lg);
   }
 
-  .filter-btn {
+  .filterButton {
     font-size: 0.875rem;
+  }
+}
+
+@media print {
+  .filter {
+    display: none !important;
   }
 }

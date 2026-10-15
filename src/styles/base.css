@@ -269,8 +269,7 @@ summary::-webkit-details-marker {
 /* ─── Print Styles ─────────────────────────────────────────────────────────── */
 @media print {
   .site-header,
-  .site-footer,
-  .category-filter {
+  .site-footer {
     display: none !important;
   }
 

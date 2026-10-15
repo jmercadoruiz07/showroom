@@ -32,19 +32,13 @@ const heroQuote =
   <HeroSection slides={heroSlides} quote={heroQuote} />
 
   <main id="main-content" class="home-main">
-    <ProjectGallery />
+    <ProjectGallery tightTop />
   </main>
 </BaseLayout>
 
 <style>
   .home-main {
     padding-right: var(--wordmark-width);
-  }
-
-  @media (max-width: 767px) {
-    .home-main :global(.project-gallery) {
-      padding-top: var(--space-xs);
-    }
   }
 </style>
 

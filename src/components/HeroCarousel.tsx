@@ -11,7 +11,7 @@
 |
 */
 import { useEffect, useState } from 'react';
-import './HeroCarousel.css';
+import styles from './HeroCarousel.module.css';
 
 const SLOT_COUNT = 4;
 const SWAP_INTERVAL_MS = 1800;
@@ -67,11 +67,11 @@ function HeroSlot({ slide }: { slide: HeroSlide }) {
   }, [slide]);
 
   return (
-    <a className="hero-slot" href={slide.href} aria-label={`View ${slide.title}`}>
+    <a className={styles.slot} href={slide.href} aria-label={`View ${slide.title}`}>
       {layers.map((layer) => (
         <img
           key={layer.href}
-          className="hero-slot-image"
+          className={styles.slotImage}
           src={layer.src}
           alt=""
           decoding="async"
@@ -112,7 +112,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
   return (
     <div
-      className="hero-column"
+      className={styles.column}
       role="group"
       aria-label="Featured projects"
       onMouseEnter={() => setIsPaused(true)}
@@ -122,7 +122,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     >
       {visible
         ? visible.map((slide, slot) => <HeroSlot key={slot} slide={slide} />)
-        : Array.from({ length: SLOT_COUNT }, (_, slot) => <div key={slot} className="hero-slot" />)}
+        : Array.from({ length: SLOT_COUNT }, (_, slot) => <div key={slot} className={styles.slot} />)}
     </div>
   );
 }

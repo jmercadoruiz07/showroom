@@ -7,13 +7,13 @@
 | the hero's --u unit. Slots bleed off the top of the hero under the nav bar.
 |
 */
-.hero-column {
+.column {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.hero-slot {
+.slot {
   position: absolute;
   left: calc(900.4 * var(--u));
   width: calc(571 * var(--u));
@@ -22,38 +22,38 @@
   pointer-events: auto;
 }
 
-.hero-slot:nth-child(1) { top: calc(-123 * var(--u));   height: calc(344.8 * var(--u)); }
-.hero-slot:nth-child(2) { top: calc(225.3 * var(--u));  height: calc(321 * var(--u)); }
-.hero-slot:nth-child(3) { top: calc(549.7 * var(--u));  height: calc(369.1 * var(--u)); }
-.hero-slot:nth-child(4) { top: calc(922.6 * var(--u));  height: calc(321 * var(--u)); }
+.slot:nth-child(1) { top: calc(-123 * var(--u));   height: calc(344.8 * var(--u)); }
+.slot:nth-child(2) { top: calc(225.3 * var(--u));  height: calc(321 * var(--u)); }
+.slot:nth-child(3) { top: calc(549.7 * var(--u));  height: calc(369.1 * var(--u)); }
+.slot:nth-child(4) { top: calc(922.6 * var(--u));  height: calc(321 * var(--u)); }
 
-.hero-slot:focus-visible {
+.slot:focus-visible {
   outline: 2px solid var(--color-chalk);
   outline-offset: -4px;
 }
 
-.hero-slot-image {
+.slotImage {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: hero-slot-fade-in var(--duration-slow) var(--ease-standard) both;
+  animation: fadeIn var(--duration-slow) var(--ease-standard) both;
 }
 
-@keyframes hero-slot-fade-in {
+@keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
 @media (max-width: 767px) {
-  .hero-column {
+  .column {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-slot-image {
+  .slotImage {
     animation: none;
   }
 }

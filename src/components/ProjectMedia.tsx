@@ -10,7 +10,7 @@
 |
 */
 import { useEffect, useMemo, useRef, useState } from 'react';
-import './ProjectMedia.css';
+import styles from './ProjectMedia.module.css';
 
 export interface ProjectMediaImage {
   url: string;
@@ -137,11 +137,11 @@ export default function ProjectMedia({
 
   return (
     <>
-      <div className="image-gallery">
+      <div className={styles.gallery}>
         {media.map((item, index) => (
           <figure
             key={`${item.kind}-${item.src}-${index}`}
-            className={`gallery-item${item.kind === 'video' ? ' gallery-item--video' : ''}`}
+            className={`${styles.item}${item.kind === 'video' ? ` ${styles.itemVideo}` : ''}`}
             data-index={index}
             tabIndex={0}
             role="button"
@@ -168,7 +168,7 @@ export default function ProjectMedia({
                   width="800"
                   height="600"
                 />
-                <span className="gallery-play" aria-hidden="true">
+                <span className={styles.play} aria-hidden="true">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="48"
@@ -196,17 +196,17 @@ export default function ProjectMedia({
 
       <div
         ref={viewerRef}
-        className={`media-viewer${isOpen ? ' is-open' : ''}`}
+        className={`${styles.viewer}${isOpen ? ` ${styles.isOpen}` : ''}`}
         id="media-viewer"
         role="dialog"
         aria-label={`${title} media viewer`}
         aria-hidden={!isOpen}
       >
-        <div className="viewer-backdrop" aria-hidden="true" onClick={close} />
+        <div className={styles.backdrop} aria-hidden="true" onClick={close} />
 
         <button
           ref={closeButtonRef}
-          className="viewer-close"
+          className={styles.close}
           aria-label="Close viewer"
           type="button"
           onClick={close}
@@ -228,7 +228,7 @@ export default function ProjectMedia({
           </svg>
         </button>
 
-        <button className="viewer-nav viewer-prev" aria-label="Previous media" type="button" onClick={prev}>
+        <button className={`${styles.nav} ${styles.prev}`} aria-label="Previous media" type="button" onClick={prev}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -245,7 +245,7 @@ export default function ProjectMedia({
           </svg>
         </button>
 
-        <button className="viewer-nav viewer-next" aria-label="Next media" type="button" onClick={next}>
+        <button className={`${styles.nav} ${styles.next}`} aria-label="Next media" type="button" onClick={next}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -262,10 +262,10 @@ export default function ProjectMedia({
           </svg>
         </button>
 
-        <div className="viewer-content">
+        <div className={styles.content}>
           {isOpen && current?.kind === 'video' ? (
             <iframe
-              className="viewer-video"
+              className={styles.video}
               src={current.src}
               title={`${title} - Video ${currentIndex + 1}`}
               allow="autoplay; fullscreen; picture-in-picture"
@@ -273,7 +273,7 @@ export default function ProjectMedia({
             />
           ) : (
             <img
-              className="viewer-image"
+              className={styles.image}
               src={isOpen && current?.kind === 'image' ? current.src : undefined}
               alt={
                 isOpen && current?.kind === 'image'
@@ -290,9 +290,9 @@ export default function ProjectMedia({
           )}
         </div>
 
-        <div className="viewer-counter">
-          <span className="viewer-current">{currentIndex + 1}</span> /{' '}
-          <span className="viewer-total">{total}</span>
+        <div className={styles.counter}>
+          {currentIndex + 1} /{' '}
+          <span className={styles.total}>{total}</span>
         </div>
       </div>
     </>

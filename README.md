@@ -104,7 +104,7 @@ Fixed white bar across the top, above all other content, links in dark `--color-
 
 ```text
 src/
-  components/   HeroSection.astro, HeroCarousel.tsx/.css, SiteHeader.astro, ProjectGallery, ...
+  components/   .astro components with scoped styles; React islands (HeroCarousel, ProjectGallery, ProjectCard, ProjectMedia) with .module.css
   content/      projects.json (Adobe Portfolio export)
   layouts/      BaseLayout.astro, ProjectLayout.astro
   pages/        index, about, 404, projects/

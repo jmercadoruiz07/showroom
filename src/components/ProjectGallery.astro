@@ -12,6 +12,12 @@ import { getCollection } from 'astro:content';
 import ProjectGallery from './ProjectGallery';
 import { sortProjectsByOrder } from '../lib/sort-projects';
 
+interface Props {
+  tightTop?: boolean;
+}
+
+const { tightTop = false } = Astro.props;
+
 const allProjects = await getCollection('projects', ({ data }) => !data.featured);
 const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
 
@@ -39,4 +45,4 @@ const albums = Array.from(
 );
 ---
 
-<ProjectGallery projects={projects} albums={albums} client:load />
+<ProjectGallery projects={projects} albums={albums} tightTop={tightTop} client:load />
