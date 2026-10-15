@@ -5,7 +5,8 @@
 |-------------------------------------------------------------------------------
 |
 | White hairline, a bar with the copyright and social link, and an outlined
-| wordmark sized to the viewport width and cropped by the bottom edge.
+| wordmark that fills the footer width between equal side insets. The footer
+| is a size container so the wordmark scales with its own width, not the page's.
 |
 */
 ---
@@ -28,7 +29,8 @@
 
 <style>
   .site-footer {
-    overflow: hidden;
+    --footer-inset: var(--space-lg);
+    container-type: inline-size;
     background: var(--color-bone);
     border-top: 1px solid var(--color-chalk);
   }
@@ -38,7 +40,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-md);
-    padding: var(--space-sm) var(--space-lg);
+    padding: var(--space-sm) var(--footer-inset);
   }
 
   .copyright {
@@ -63,15 +65,17 @@
     color: var(--color-accent);
   }
 
+  /* 2.402 is the ink width of JOSÉ in em at this letter-spacing, so the text spans the insets exactly. */
   .footer-wordmark {
-    margin: 8vw 0 -10vw;
+    margin: 0;
     max-width: none;
-    padding: 0 var(--space-lg);
+    padding: 0.06em var(--footer-inset) 0.11em;
     font-family: var(--font-hero);
-    font-size: 39vw;
+    font-size: calc((100cqw - 2 * var(--footer-inset)) / 2.402);
     font-weight: var(--font-weight-black);
     letter-spacing: -0.04em;
-    line-height: 0.8;
+    line-height: 1;
+    text-align: center;
     text-transform: uppercase;
     white-space: nowrap;
     color: transparent;
@@ -80,12 +84,11 @@
   }
 
   @media (max-width: 768px) {
-    .footer-bar {
-      padding: var(--space-sm) var(--space-md);
+    .site-footer {
+      --footer-inset: var(--space-md);
     }
 
     .footer-wordmark {
-      padding: 0 var(--space-md);
       -webkit-text-stroke-width: 1px;
     }
   }
