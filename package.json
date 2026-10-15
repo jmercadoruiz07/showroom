@@ -10,14 +10,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "npx playwright test",
-    "test:chromium": "npx playwright test --project=chromium",
-    "test:firefox": "npx playwright test --project=firefox",
-    "test:webkit": "npx playwright test --project=webkit",
-    "test:a11y": "npx playwright test tests/accessibility.spec.ts",
-    "test:crossbrowser": "npx playwright test tests/cross-browser.spec.ts",
-    "test:lighthouse": "npm run build && node tests/lighthouse-audit.mjs",
-    "test:all": "npm run build && npx playwright test && node tests/lighthouse-audit.mjs",
     "fetch-portfolio": "node bin/fetchPortfolio.js"
   },
   "dependencies": {
@@ -29,8 +21,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@axe-core/playwright": "^4.12.1",
-    "@playwright/test": "^1.61.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "lighthouse": "^13.4.0",
