@@ -114,23 +114,17 @@
 |
 */
 .project-grid.masonry {
-  --masonry-columns: 4;
+  --masonry-columns: 3;
   --masonry-row-height: 2px;
   display: grid;
   grid-template-columns: repeat(var(--masonry-columns), minmax(0, 1fr));
-  gap: var(--space-md);
+  gap: var(--space-xs);
   align-items: start;
 }
 
 .project-grid.masonry.is-packed {
   grid-auto-rows: var(--masonry-row-height);
   row-gap: 0;
-}
-
-@media (max-width: 1200px) {
-  .project-grid.masonry {
-    --masonry-columns: 3;
-  }
 }
 
 @media (max-width: 768px) {
