@@ -66,16 +66,16 @@ const { blurb, text, portrait, portraitAlt } = Astro.props;
     background: var(--color-chalk);
   }
 
-  /* 6.22 is the ink width of the heading in em; it spans from the left edge to the photo's right edge. */
+  /* 7.763 is the ink width of the heading in em at 0.03em tracking; it spans from the left edge to the photo's right edge. */
   .about-heading {
     position: absolute;
-    left: calc(-7 * var(--u));
+    left: -0.03em;
     bottom: calc(7 * var(--u));
     margin: 0;
     font-family: var(--font-hero);
-    font-size: calc(1450 * var(--u) / 6.22);
+    font-size: calc(1450 * var(--u) / 7.763);
     font-weight: var(--font-weight-black);
-    letter-spacing: -0.11em;
+    letter-spacing: 0.03em;
     line-height: 0.8;
     text-transform: uppercase;
     white-space: nowrap;
@@ -186,7 +186,7 @@ const { blurb, text, portrait, portraitAlt } = Astro.props;
     .about-hand {
       position: relative;
       left: -26vw;
-      top: -12vw;
+      top: -14vw;
       order: 1;
       transform: rotate(-137.29deg) scaleY(-1);
       z-index: 1;
@@ -202,7 +202,7 @@ const { blurb, text, portrait, portraitAlt } = Astro.props;
       left: auto;
       bottom: auto;
       order: 2;
-      font-size: calc((100vw - 12vw) / 6.22);
+      font-size: calc((100vw - 12vw) / 7.763);
       margin: 0 0 2.5vw -1vw;
     }
   }
