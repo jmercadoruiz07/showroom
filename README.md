@@ -52,7 +52,7 @@ Figma also shows secondary labels at 58% white. The old copper accent is gone.
 | Body copy | NB Akademie Std Medium | `adelle-mono` via `--font-hero-mono` | 22px at 1728px, line-height about 1.43 |
 | Labels | NB Akademie Mono Std Medium | `adelle-mono` | 28px, uppercase, white or 58% white |
 
-The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/layouts/BaseLayout.astro`. `--font-display` is `widescreen` and `--font-body` and `--font-mono` are `adelle-mono` on every page, so utilities like `.text-display` and plain headings (uppercase) follow the hero. Interactive states are inverted blocks (white plate, dark text) or teal text. The self-hosted fonts in `public/fonts/` and `src/styles/fonts.css` are no longer used.
+The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/layouts/BaseLayout.astro`. `--font-display` is `widescreen` and `--font-body` and `--font-mono` are `adelle-mono` on every page, so utilities like `.text-display` and plain headings (uppercase) follow the hero. Interactive states are inverted blocks (white plate, dark text) or teal text.
 
 Display sizes at 1728px:
 - Name "JO / SE": 644px, tracking −0.1em, line-height 0.8, two lines, second line indented one space.
@@ -107,6 +107,6 @@ src/
   content/      projects.json (Adobe Portfolio export)
   layouts/      BaseLayout.astro, ProjectLayout.astro
   pages/        index, about, 404, projects/
-  styles/       tokens.css (design tokens), global.css, fonts.css, reset.css
-public/         fonts/, hero/, projects/images/
+  styles/       tokens.css (design tokens), global.css, reset.css
+public/         hero/, projects/images/
 ```

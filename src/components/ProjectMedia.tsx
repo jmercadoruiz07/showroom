@@ -290,7 +290,7 @@ export default function ProjectMedia({
           )}
         </div>
 
-        <div className="viewer-counter text-mono">
+        <div className="viewer-counter">
           <span className="viewer-current">{currentIndex + 1}</span> /{' '}
           <span className="viewer-total">{total}</span>
         </div>

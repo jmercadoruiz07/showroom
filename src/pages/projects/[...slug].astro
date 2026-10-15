@@ -5,7 +5,7 @@
 |-------------------------------------------------------------------------------
 |
 | Split-screen layout (60/40 or 70/30) alternating per project.
-| Media pane: scrollable image gallery or embedded 3D viewer.
+| Media pane: scrollable image gallery with lightbox, or embedded video.
 | Text pane: title (Display), description (Body), metadata (Mono).
 | Navigation: "← All Projects" text link.
 |
@@ -71,7 +71,7 @@ const formatDate = (date: Date) => {
       )}
     </header>
 
-    <div class="project-grid" style={`grid-template-columns: ${mediaFirst ? '3fr 2fr' : '2fr 3fr'}`}>
+    <div class="project-grid" style={`--columns: ${mediaFirst ? '3fr 2fr' : '2fr 3fr'}`}>
       <div class={`project-media ${mediaFirst ? 'media-first' : 'media-last'}`}>
         {(images && images.length > 0) || video ? (
           <ProjectMedia images={images} video={video} videoPoster={videoPoster} title={title} client:load />
@@ -181,7 +181,7 @@ const formatDate = (date: Date) => {
 
   .project-grid {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: var(--columns);
     gap: var(--space-3xl);
     max-width: 100%;
     margin: 0 auto;
@@ -205,21 +205,6 @@ const formatDate = (date: Date) => {
   .text-last {
     grid-column: 2;
     order: 2;
-  }
-
-  .project-media {
-    top: calc(var(--header-height) + var(--space-xl));
-  }
-
-  .model-container {
-    aspect-ratio: 4 / 3;
-    background: var(--color-paper);
-    margin-bottom: var(--space-lg);
-  }
-
-  .model-container model-viewer {
-    width: 100%;
-    height: 100%;
   }
 
   .media-placeholder {
@@ -300,10 +285,6 @@ const formatDate = (date: Date) => {
     .text-first,
     .text-last {
       grid-column: auto;
-    }
-
-    .project-media {
-      position: static;
     }
 
     .project-text {
