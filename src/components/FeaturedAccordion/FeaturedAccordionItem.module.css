@@ -63,9 +63,9 @@
   z-index: 1;
   opacity: 0;
   background: radial-gradient(
-    ellipse calc(1300 * var(--u)) calc(420 * var(--u)) at top left,
-    color-mix(in srgb, var(--color-chalk) 92%, transparent),
-    color-mix(in srgb, var(--color-chalk) 85%, transparent) 70%,
+    ellipse calc(1000 * var(--u)) calc(340 * var(--u)) at top left,
+    color-mix(in srgb, var(--color-chalk) 78%, transparent),
+    color-mix(in srgb, var(--color-chalk) 70%, transparent) 65%,
     transparent
   );
   transition: opacity var(--duration-slow) var(--ease-standard);
