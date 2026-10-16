@@ -14,6 +14,7 @@
 |
 */
 import OutlinedWordmark from './OutlinedWordmark.astro';
+import SocialLinks from './SocialLinks.astro';
 
 interface Props {
   email: string;
@@ -74,7 +75,10 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
   <div class="about-columns">
     <div class="about-contact">
-      <p>CONTACT</p>
+      <div class="about-contact-heading">
+        <p>CONTACT</p>
+        <SocialLinks />
+      </div>
       <a href={`mailto:${email}`}>{email}</a>
     </div>
     <p class="about-statement">{statement}</p>
@@ -171,6 +175,20 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
   .about-contact p {
     margin: 0;
+  }
+
+  /* The icons' 44px tap targets overhang the text line instead of making the row taller, and the last icon's
+     12px of padding overhangs the column so the glyph ends at its edge. */
+  .about-contact-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1lh;
+  }
+
+  .about-contact-heading :global(.social-links) {
+    margin-block: calc((1lh - 44px) / 2);
+    margin-right: -12px;
   }
 
   .about-contact a {
