@@ -43,7 +43,9 @@ for (const char of text) {
     width: var(--wordmark-width);
     max-width: none;
     margin: 0;
-    overflow: hidden;
+    /* Round letters overshoot the baseline side of the line box, so only the text's length is clipped. */
+    overflow-x: visible;
+    overflow-y: clip;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-family: var(--font-hero);
