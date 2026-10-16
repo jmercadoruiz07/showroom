@@ -8,7 +8,8 @@
 | pixels. A strip is 241 tall and grows to 888 on hover. The text block is
 | anchored to the bottom edge, and its bottom inset moves from 63 to 168 as the
 | strip grows. A white fade on the left keeps the dark text legible over any
-| thumbnail.
+| thumbnail. The image is always the expanded size, centred, so growing the
+| strip reveals more of it instead of scaling it.
 |
 */
 .item {
@@ -27,11 +28,17 @@
   color: inherit;
 }
 
+.link:hover {
+  color: inherit;
+}
+
 .image {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(888 * var(--u));
+  transform: translateY(-50%);
   object-fit: cover;
   display: block;
 }
