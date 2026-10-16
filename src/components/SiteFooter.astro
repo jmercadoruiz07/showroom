@@ -30,8 +30,16 @@
 <style>
   .site-footer {
     --footer-inset: var(--space-lg);
+    --footer-divider-inset: var(--space-xl);
     container-type: inline-size;
     background: var(--color-bone);
+  }
+
+  /* Matches the gallery grid's side gutters so the divider lines up with it. */
+  .site-footer::before {
+    content: '';
+    display: block;
+    margin-inline: var(--footer-divider-inset);
     border-top: 1px solid var(--color-chalk);
   }
 
@@ -95,6 +103,7 @@
   @media (max-width: 768px) {
     .site-footer {
       --footer-inset: var(--space-md);
+      --footer-divider-inset: var(--space-md);
     }
 
     .footer-wordmark {
