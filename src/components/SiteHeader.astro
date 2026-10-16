@@ -4,9 +4,9 @@
 | SiteHeader — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Fixed white navigation bar across the top, above all page content. On pages
-| with a .hero section it is transparent with white links at the top of the
-| page and takes the page background colour as soon as the page scrolls.
+| Fixed navigation bar across the top, above all page content, in the page
+| background colour with white links. On pages with a .hero section it is
+| transparent at the top of the page and fills in as soon as the page scrolls.
 |
 */
 const pathname = Astro.url.pathname;
@@ -74,17 +74,13 @@ const isCurrent = (href: string) =>
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--color-chalk);
+    background: var(--color-bone);
     pointer-events: auto;
     transition: background-color var(--duration-base) var(--ease-standard);
   }
 
-  .site-header[data-hero] .nav-primary {
+  .site-header[data-hero]:not([data-scrolled]) .nav-primary {
     background: transparent;
-  }
-
-  .site-header[data-hero][data-scrolled] .nav-primary {
-    background: var(--color-bone);
   }
 
   .nav-list {
@@ -112,35 +108,22 @@ const isCurrent = (href: string) =>
     letter-spacing: var(--tracking-wide);
     line-height: 1;
     text-transform: uppercase;
-    color: var(--color-bone);
+    color: var(--color-chalk);
     transition: color var(--duration-fast) var(--ease-quick);
   }
 
-  .nav-link:hover,
-  .nav-link[aria-current='page'] {
+  .nav-link:hover {
     color: var(--color-accent);
   }
 
-  .nav-link:focus-visible {
-    outline: 2px solid var(--color-bone);
-    outline-offset: 4px;
-  }
-
-  .site-header[data-hero] .nav-link {
-    color: var(--color-chalk);
-  }
-
-  .site-header[data-hero]:not([data-scrolled]) .nav-link {
-    text-shadow: 0 1px 12px rgb(0 0 0 / 0.35);
-  }
-
-  .site-header[data-hero] .nav-link[aria-current='page'] {
+  .nav-link[aria-current='page'] {
     text-decoration: underline;
     text-underline-offset: 0.3em;
   }
 
-  .site-header[data-hero] .nav-link:focus-visible {
-    outline-color: var(--color-chalk);
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-chalk);
+    outline-offset: 4px;
   }
 
   @media (max-width: 767px) {

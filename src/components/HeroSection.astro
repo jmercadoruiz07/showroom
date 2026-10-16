@@ -42,16 +42,6 @@ const { slides } = Astro.props;
     color: var(--color-chalk);
   }
 
-  /* Darkens the top edge so the transparent nav stays legible over bright images. */
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    height: calc(var(--header-height) * 2.5);
-    background: linear-gradient(to bottom, rgb(0 0 0 / 0.35), transparent);
-    pointer-events: none;
-  }
-
   /* Sized from the window height so both lines fill most of it; clicks fall through to the project link. */
   .hero-name {
     position: absolute;
