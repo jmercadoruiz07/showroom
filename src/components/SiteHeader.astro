@@ -4,7 +4,8 @@
 | SiteHeader — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Fixed white navigation bar across the top, above all page content.
+| Fixed white navigation bar across the top, above all page content. While a
+| .hero section is in view it turns transparent with white links.
 |
 */
 const pathname = Astro.url.pathname;
@@ -33,6 +34,30 @@ const isCurrent = (href: string) =>
   </nav>
 </header>
 
+<script>
+  let observer: IntersectionObserver | undefined;
+
+  function watchHero() {
+    observer?.disconnect();
+
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const hero = document.querySelector('.hero');
+    if (!header) return;
+
+    header.toggleAttribute('data-over-hero', hero !== null);
+    if (!hero) return;
+
+    // Shrinking the viewport by the header height flips the nav once the hero scrolls beneath it.
+    observer = new IntersectionObserver(
+      ([entry]) => header.toggleAttribute('data-over-hero', entry.isIntersecting),
+      { rootMargin: `-${header.offsetHeight}px 0px 0px 0px` },
+    );
+    observer.observe(hero);
+  }
+
+  document.addEventListener('astro:page-load', watchHero);
+</script>
+
 <style>
   .site-header {
     position: fixed;
@@ -52,6 +77,11 @@ const isCurrent = (href: string) =>
     height: 100%;
     background: var(--color-chalk);
     pointer-events: auto;
+    transition: background-color var(--duration-base) var(--ease-standard);
+  }
+
+  .site-header[data-over-hero] .nav-primary {
+    background: transparent;
   }
 
   .nav-list {
@@ -89,6 +119,20 @@ const isCurrent = (href: string) =>
   .nav-link:focus-visible {
     outline: 2px solid var(--color-bone);
     outline-offset: 4px;
+  }
+
+  .site-header[data-over-hero] .nav-link {
+    color: var(--color-chalk);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.35);
+  }
+
+  .site-header[data-over-hero] .nav-link[aria-current='page'] {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  .site-header[data-over-hero] .nav-link:focus-visible {
+    outline-color: var(--color-chalk);
   }
 
   @media (max-width: 767px) {

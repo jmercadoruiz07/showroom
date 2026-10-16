@@ -4,163 +4,71 @@
 | HeroSection — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Home page collage laid out on the 1728px Figma frame. Every position and size
-| is expressed in --u (one Figma pixel at the current viewport width) so the
-| composition scales with the window. Below 768px the layers stack in flow and
-| the project image column is dropped.
+| Full-window hero: a rotating project image behind the name.
 |
 */
 import HeroCarousel, { type HeroSlide } from './HeroCarousel/HeroCarousel';
 
 interface Props {
   slides: HeroSlide[];
-  quote: string;
 }
 
-const { slides, quote } = Astro.props;
+const { slides } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <HeroCarousel slides={slides} client:load />
 
   <h1 id="hero-title" class="hero-name">
-    <span aria-hidden="true">{'JO\n SE'}</span>
+    <span aria-hidden="true">{'JO\nSE'}</span>
     <span class="visually-hidden">José Mercado Ruiz</span>
   </h1>
-
-  <img
-    class="hero-hand"
-    src="/hero/hand-painting.png"
-    alt=""
-    width="1728"
-    height="732"
-    loading="eager"
-  />
-
-  <div class="hero-about">
-    <img
-      class="hero-logo"
-      src="/hero/jmr-outline-logo.png"
-      alt="JMR Visuals logo"
-      width="285"
-      height="285"
-      loading="lazy"
-    />
-    <p class="hero-quote">{quote}</p>
-  </div>
 </section>
 
 <style>
   .hero {
-    --u: calc(100vw / 1728);
     position: relative;
-    height: calc(2103 * var(--u));
+    height: 100vh;
+    height: 100svh;
     overflow: hidden;
     background: var(--color-bone);
     color: var(--color-chalk);
   }
 
-  .hero-name {
+  /* Darkens the top edge so the transparent nav stays legible over bright images. */
+  .hero::after {
+    content: '';
     position: absolute;
-    left: calc(46 * var(--u));
-    top: calc(41 * var(--u));
-    margin: 0;
-    font-family: var(--font-hero);
-    font-size: calc(644.65 * var(--u));
-    font-weight: var(--font-weight-bold);
-    letter-spacing: -0.1em;
-    line-height: 0.8;
-    text-transform: uppercase;
-    white-space: pre;
-    color: inherit;
-  }
-
-  /* The fingertip is 1772 Figma px from the image's left edge; it stops 6px short of the wordmark column. */
-  .hero-hand {
-    position: absolute;
-    left: calc(100vw - var(--wordmark-width) - 6px - 1772 * var(--u));
-    top: calc(1081 * var(--u));
-    width: calc(1916.7 * var(--u));
-    height: calc(811.9 * var(--u));
-    max-width: none;
-    transform: rotate(171.61deg) scaleY(-1);
+    inset: 0 0 auto;
+    height: calc(var(--header-height) * 2.5);
+    background: linear-gradient(to bottom, rgb(0 0 0 / 0.35), transparent);
     pointer-events: none;
   }
 
-  .hero-about {
+  /* Sized from the window height so both lines fill most of it; clicks fall through to the project link. */
+  .hero-name {
     position: absolute;
-    left: calc(308 * var(--u));
-    top: calc(1711 * var(--u));
-    display: flex;
-    align-items: flex-end;
-    gap: calc(32 * var(--u));
-  }
-
-  .hero-logo {
-    flex: none;
-    width: calc(285 * var(--u));
-    height: calc(285 * var(--u));
-  }
-
-  .hero-quote {
-    width: calc(799 * var(--u));
-    margin: 0 0 0.42em;
-    font-family: var(--font-hero-mono);
-    font-size: max(0.875rem, calc(22 * var(--u)));
-    line-height: 1.43;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    overflow: hidden;
+    left: -0.02em;
+    bottom: 9vh;
+    z-index: 1;
+    margin: 0;
+    font-family: var(--font-hero);
+    font-size: min(50vh, 40vw);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.1em;
+    line-height: 0.78;
+    text-transform: uppercase;
+    white-space: pre;
+    color: inherit;
+    pointer-events: none;
   }
 
   @media (max-width: 767px) {
-    .hero {
-      display: flex;
-      flex-direction: column;
-      height: auto;
-      padding: calc(var(--header-height) + 6vw) 0 12vw;
-    }
-
     .hero-name {
-      position: relative;
-      left: auto;
-      top: auto;
-      margin-left: 5vw;
-      font-size: 42vw;
-    }
-
-    .hero-hand {
-      left: 45.5vw;
-      top: 20.5vw;
-      width: 72vw;
-      height: auto;
-      aspect-ratio: 1728 / 732;
-      transform: rotate(-90deg);
-    }
-
-    .hero-about {
-      position: static;
-      align-items: stretch;
-      flex-direction: column;
-      gap: 6vw;
-      margin-top: 8vw;
-      padding: 0 calc(6vw + var(--wordmark-width)) 0 6vw;
-    }
-
-    .hero-logo {
-      display: none;
-    }
-
-    .hero-quote {
-      width: auto;
-      margin: 0;
-      font-size: max(0.875rem, 3.8vw);
-      display: block;
-      -webkit-line-clamp: unset;
-      line-clamp: unset;
-      overflow: visible;
+      bottom: auto;
+      top: calc(var(--header-height) + 4vh);
+      left: 3vw;
+      font-size: min(42vw, 30vh);
     }
   }
 </style>

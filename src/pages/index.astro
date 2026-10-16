@@ -4,7 +4,7 @@
 | Home Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Hero collage with a random column of project images + Project Gallery
+| Full-window hero with a rotating project image + Project Gallery
 | with album filter.
 |
 */
@@ -17,19 +17,19 @@ import { sortProjectsByOrder } from '../utils/sort-projects';
 
 const projects = await getCollection('projects');
 
-const heroSlides = sortProjectsByOrder(projects).map((project) => ({
-  src: project.data.thumbnail.url,
-  title: project.data.title,
-  href: `/projects/${project.id}`,
-}));
-
-const heroQuote =
-  '‘A Day in 5a’ is a geometric mural exploring the synthesis of typography, grid and the natural environment through a unified modular system. Drawing upon the structural anatomy of Bauhaus design, the composition reduces type and organic elements like sweeping clouds, sun rays, and foliage into a standardized visual language of interlocking arcs, pills, and circles in a vibrant, primary colour palette.';
+// Portrait thumbnails would be cropped to a sliver by the full-window hero.
+const heroSlides = sortProjectsByOrder(projects)
+  .filter(({ data: { thumbnail } }) => (thumbnail.width ?? 0) >= (thumbnail.height ?? 0) * 1.3)
+  .map((project) => ({
+    src: project.data.thumbnail.url,
+    title: project.data.title,
+    href: `/projects/${project.id}`,
+  }));
 ---
 
 <BaseLayout title="JMR Visuals — Portfolio" description="Multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.">
   <VerticalWordmark />
-  <HeroSection slides={heroSlides} quote={heroQuote} />
+  <HeroSection slides={heroSlides} />
 
   <main id="main-content" class="home-main">
     <ProjectGallery tightTop />

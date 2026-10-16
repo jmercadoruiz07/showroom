@@ -3,42 +3,33 @@
 | HeroCarousel — Component Styles
 |-------------------------------------------------------------------------------
 |
-| Four stacked image slots positioned from the Figma frame (1728px wide) using
-| the hero's --u unit. Slots bleed off the top of the hero under the nav bar.
+| One image covering the whole hero. The hero's name and nav sit above it.
 |
 */
-.column {
+.carousel {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-}
-
-.slot {
-  position: absolute;
-  left: calc(900.4 * var(--u));
-  width: calc(571 * var(--u));
-  overflow: hidden;
   background: var(--color-paper);
-  pointer-events: auto;
 }
 
-.slot:nth-child(1) { top: calc(-123 * var(--u));   height: calc(344.8 * var(--u)); }
-.slot:nth-child(2) { top: calc(225.3 * var(--u));  height: calc(321 * var(--u)); }
-.slot:nth-child(3) { top: calc(549.7 * var(--u));  height: calc(369.1 * var(--u)); }
-.slot:nth-child(4) { top: calc(922.6 * var(--u));  height: calc(321 * var(--u)); }
+.link {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
 
-.slot:focus-visible {
+.link:focus-visible {
   outline: 2px solid var(--color-chalk);
   outline-offset: -4px;
 }
 
-.slotImage {
+.image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: fadeIn var(--duration-slow) var(--ease-standard) both;
+  animation: fadeIn 1200ms var(--ease-standard) both;
 }
 
 @keyframes fadeIn {
@@ -46,14 +37,8 @@
   to { opacity: 1; }
 }
 
-@media (max-width: 767px) {
-  .column {
-    display: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .slotImage {
+  .image {
     animation: none;
   }
 }

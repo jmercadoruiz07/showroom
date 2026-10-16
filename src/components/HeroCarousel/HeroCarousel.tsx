@@ -3,19 +3,17 @@
 | HeroCarousel — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Column of four project images at the right of the hero. The projects are
-| shuffled in the browser on each page load; one slot at a time then crossfades
-| to the next project in the shuffled order. Rotation pauses on hover/focus and
-| while the tab is hidden, and is disabled for prefers-reduced-motion. Nothing
-| is rendered below the desktop breakpoint.
+| Single project image filling the hero background. The projects are shuffled
+| in the browser on each page load; the image then crossfades to the next
+| project in the shuffled order every few seconds. Rotation pauses on
+| hover/focus and while the tab is hidden, and is disabled for
+| prefers-reduced-motion.
 |
 */
 import { useEffect, useState } from 'react';
 import styles from './HeroCarousel.module.css';
 
-const SLOT_COUNT = 4;
-const SWAP_INTERVAL_MS = 1800;
-const DESKTOP_QUERY = '(min-width: 768px)';
+const SWAP_INTERVAL_MS = 5000;
 
 export interface HeroSlide {
   src: string;
@@ -36,13 +34,6 @@ function shuffled<T>(items: T[]): T[] {
   return result;
 }
 
-// Slot k is replaced on swap k+1, k+5, ...; each swap takes the next project in order.
-function slideIndexForSlot(slot: number, swaps: number, count: number): number {
-  if (swaps <= slot) return slot % count;
-  const lastSwap = slot + 1 + SLOT_COUNT * Math.floor((swaps - slot - 1) / SLOT_COUNT);
-  return (SLOT_COUNT + lastSwap - 1) % count;
-}
-
 function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
 
@@ -57,43 +48,18 @@ function useMediaQuery(query: string): boolean {
   return matches;
 }
 
-function HeroSlot({ slide }: { slide: HeroSlide }) {
-  const [layers, setLayers] = useState<HeroSlide[]>([slide]);
-
-  useEffect(() => {
-    setLayers((current) =>
-      current[current.length - 1].href === slide.href ? current : [current[current.length - 1], slide],
-    );
-  }, [slide]);
-
-  return (
-    <a className={styles.slot} href={slide.href} aria-label={`View ${slide.title}`}>
-      {layers.map((layer) => (
-        <img
-          key={layer.href}
-          className={styles.slotImage}
-          src={layer.src}
-          alt=""
-          decoding="async"
-          onAnimationEnd={() => setLayers((current) => current.slice(-1))}
-        />
-      ))}
-    </a>
-  );
-}
-
 export default function HeroCarousel({ slides }: HeroCarouselProps) {
-  const isDesktop = useMediaQuery(DESKTOP_QUERY);
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   const [order, setOrder] = useState<HeroSlide[] | null>(null);
   const [swaps, setSwaps] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [layers, setLayers] = useState<HeroSlide[]>([]);
 
   useEffect(() => {
     setOrder(shuffled(slides));
   }, [slides]);
 
-  const rotates = order !== null && order.length > SLOT_COUNT && !reducedMotion;
+  const rotates = order !== null && order.length > 1 && !reducedMotion;
 
   useEffect(() => {
     if (!rotates || isPaused) return;
@@ -105,24 +71,48 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     return () => window.clearInterval(timer);
   }, [rotates, isPaused]);
 
-  const visible =
-    isDesktop && order !== null && order.length >= SLOT_COUNT
-      ? Array.from({ length: SLOT_COUNT }, (_, slot) => order[slideIndexForSlot(slot, swaps, order.length)])
-      : null;
+  const current = order && order.length > 0 ? order[swaps % order.length] : null;
+
+  // The previous image stays underneath until the incoming one has finished fading in.
+  useEffect(() => {
+    if (!current) return;
+    setLayers((existing) =>
+      existing[existing.length - 1]?.href === current.href
+        ? existing
+        : [...existing.slice(-1), current],
+    );
+  }, [current]);
+
+  // Fetch the next image ahead of its crossfade so it never fades in empty.
+  useEffect(() => {
+    if (!rotates || !order) return;
+    new Image().src = order[(swaps + 1) % order.length].src;
+  }, [rotates, order, swaps]);
 
   return (
     <div
-      className={styles.column}
+      className={styles.carousel}
       role="group"
-      aria-label="Featured projects"
+      aria-label="Featured project"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
       onBlur={() => setIsPaused(false)}
     >
-      {visible
-        ? visible.map((slide, slot) => <HeroSlot key={slot} slide={slide} />)
-        : Array.from({ length: SLOT_COUNT }, (_, slot) => <div key={slot} className={styles.slot} />)}
+      {current && (
+        <a className={styles.link} href={current.href} aria-label={`View ${current.title}`}>
+          {layers.map((layer) => (
+            <img
+              key={layer.href}
+              className={styles.image}
+              src={layer.src}
+              alt=""
+              decoding="async"
+              onAnimationEnd={() => setLayers((existing) => existing.slice(-1))}
+            />
+          ))}
+        </a>
+      )}
     </div>
   );
 }
