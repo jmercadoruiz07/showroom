@@ -13,7 +13,7 @@ import HeroSection from '../components/HeroSection.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import VerticalWordmark from '../components/VerticalWordmark.astro';
 import { getCollection } from 'astro:content';
-import { sortProjectsByOrder } from '../lib/sort-projects';
+import { sortProjectsByOrder } from '../utils/sort-projects';
 
 const projects = await getCollection('projects');
 
