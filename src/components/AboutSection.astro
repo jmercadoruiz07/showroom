@@ -17,13 +17,12 @@ import OutlinedWordmark from './OutlinedWordmark.astro';
 
 interface Props {
   email: string;
-  altEmail: string;
   statement: string;
   portrait: string;
   portraitAlt: string;
 }
 
-const { email, altEmail, statement, portrait, portraitAlt } = Astro.props;
+const { email, statement, portrait, portraitAlt } = Astro.props;
 
 // Ink gap between each letter pair of the heading in em, measured from widescreen Black at
 // zero tracking. Each pair is pulled to TARGET_GAP so the spacing is uniform and tight.
@@ -75,7 +74,6 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
   <div class="about-contact">
     <p>CONTACT</p>
-    <p>{altEmail}</p>
     <a href={`mailto:${email}`}>{email}</a>
   </div>
   <p class="about-statement">{statement}</p>
