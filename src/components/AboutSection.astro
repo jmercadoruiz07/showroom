@@ -146,17 +146,18 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     transform: rotate(-162.47deg) scaleY(-1);
   }
 
-  /* Contact, statement and portrait share one row from the contact's left edge (x 133.5) to the portrait's
-     right edge (x 1450), with equal gaps between them. */
+  /* Contact, statement and portrait are three equal columns from the contact's left edge (x 133.5) to the
+     portrait's right edge (x 1450). */
   .about-columns {
     position: absolute;
     top: 0;
     left: calc(133.5 * var(--u));
     width: calc(1316.5 * var(--u));
     z-index: 3;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: calc(60 * var(--u));
+    align-items: start;
   }
 
   .about-contact,
@@ -168,10 +169,6 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     line-height: 1.255;
   }
 
-  .about-contact {
-    width: max-content;
-  }
-
   .about-contact p {
     margin: 0;
   }
@@ -181,16 +178,11 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     text-decoration: underline;
   }
 
-  .about-statement {
-    width: calc(447 * var(--u));
-  }
-
   /* The top of the portrait sits under the header. */
   .about-photo {
     position: relative;
-    flex: none;
-    width: calc(395 * var(--u));
-    height: calc(647 * var(--u));
+    width: 100%;
+    aspect-ratio: 395 / 647;
     overflow: hidden;
   }
 
@@ -226,7 +218,6 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
     .about-contact,
     .about-statement {
-      width: auto;
       margin: 0;
       overflow-wrap: anywhere;
     }
@@ -241,9 +232,6 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
     .about-photo {
       grid-area: photo;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 395 / 647;
     }
 
     /* Shifted left so the heading's ink starts at the content edge. */
