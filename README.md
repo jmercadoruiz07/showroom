@@ -20,7 +20,7 @@ The built site has moved on from the early hero frames in places (full-window he
 | `astro dev --background` | Dev server at `localhost:4321` (`astro dev stop`, `status`, `logs`) |
 | `npm run build` | Production build to `dist/` |
 | `npx astro check` | Type check |
-| `npm run fetch-portfolio` | Refresh `src/content/projects.json` from Adobe Portfolio |
+| `npm run fetch-portfolio` | Refresh `src/content/projects.json` from ArtStation (needs `npx playwright install chromium-headless-shell` once) |
 
 ## Design style (use this when prompting)
 
