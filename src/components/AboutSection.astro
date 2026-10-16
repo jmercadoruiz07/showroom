@@ -5,19 +5,21 @@
 |-------------------------------------------------------------------------------
 |
 | Collage laid out on the 1702px Figma About frame, measured in --u (one Figma
-| pixel at the current viewport width): two text columns, the portrait, the
-| hand reaching over an outlined GET IN TOUCH heading, and a white rule that
-| also cuts the hand off. Below 768px the pieces stack in flow.
+| pixel at the current viewport width): contact details and a statement in two
+| text columns, the portrait, and the hand reaching over the outlined GET IN
+| TOUCH heading. The hand is two layers with the heading between them. Below
+| 768px the pieces stack in flow and the heading and hand scale together.
 |
 */
 interface Props {
-  blurb: string;
-  text: string;
+  email: string;
+  altEmail: string;
+  statement: string;
   portrait: string;
   portraitAlt: string;
 }
 
-const { blurb, text, portrait, portraitAlt } = Astro.props;
+const { email, altEmail, statement, portrait, portraitAlt } = Astro.props;
 
 // Ink gap between each letter pair of the heading in em, measured from widescreen Black at
 // zero tracking. Each pair is pulled to TARGET_GAP so the spacing is uniform and tight.
@@ -28,7 +30,7 @@ const TARGET_GAP = 0.05;
 // Calibrated against the rendered heading (browsers drop some pair kerning across spans).
 const NATURAL_INK_WIDTH = 7.224;
 
-const headingWords = [{ text: 'GET' }, { text: 'IN' }, { text: 'TOUCH', filled: [0, 1, 2, 3, 4] }];
+const headingWords = [{ text: 'GET' }, { text: 'IN', filled: [0, 1] }, { text: 'TOUCH', filled: [0, 1] }];
 
 const headingLetters = headingWords.flatMap((word, wordIndex) =>
   [...word.text].map((char, index) => {
@@ -48,30 +50,43 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
 <section class="about" aria-label="About">
   <h1 class="visually-hidden">About José Mercado Ruiz</h1>
 
-  <h2 class="about-heading" aria-label="Get in touch" style={`--ink-width: ${headingInkWidth}`}>
-    <span aria-hidden="true">
-      {headingLetters.map(({ char, kern, filled, startsWord }) => (
-        <>{startsWord && ' '}<span class:list={{ 'is-filled': filled }} style={kern ? `margin-inline-end: ${kern}em` : undefined}>{char}</span></>
-      ))}
-    </span>
-  </h2>
+  <div class="about-touch">
+    <img
+      class="about-hand about-hand-behind"
+      src="/about/hand-behind.png"
+      alt=""
+      width="2050"
+      height="869"
+      loading="eager"
+    />
 
-  <img
-    class="about-hand"
-    src="/hero/hand-painting.png"
-    alt=""
-    width="1728"
-    height="732"
-    loading="eager"
-  />
+    <h2 class="about-heading" aria-label="Get in touch" style={`--ink-width: ${headingInkWidth}`}>
+      <span aria-hidden="true">
+        {headingLetters.map(({ char, kern, filled, startsWord }) => (
+          <>{startsWord && ' '}<span class:list={{ 'is-filled': filled }} style={kern ? `margin-inline-end: ${kern}em` : undefined}>{char}</span></>
+        ))}
+      </span>
+    </h2>
 
-  <p class="about-blurb">{blurb}</p>
-  <p class="about-text">{text}</p>
+    <img
+      class="about-hand about-hand-front"
+      src="/about/hand-front.png"
+      alt=""
+      width="2046"
+      height="893"
+      loading="eager"
+    />
+  </div>
+
+  <div class="about-contact">
+    <p>CONTACT</p>
+    <p>{altEmail}</p>
+    <a href={`mailto:${email}`}>{email}</a>
+  </div>
+  <p class="about-statement">{statement}</p>
 
   <div class="about-photo">
-    <div class="about-photo-crop">
-      <img src={portrait} alt={portraitAlt} loading="eager" decoding="async" />
-    </div>
+    <img src={portrait} alt={portraitAlt} loading="eager" decoding="async" />
   </div>
 </section>
 
@@ -79,30 +94,32 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
   .about {
     --u: calc(100vw / 1702);
     position: relative;
-    height: calc(1092 * var(--u));
+    height: calc(973 * var(--u));
     overflow: hidden;
     background: var(--color-bone);
     color: var(--color-chalk);
   }
 
-  .about::after {
-    content: '';
+  /* Hands and heading share one frame so they scale together: it starts at the top of the hands (y 245 in
+     the design) and ends at the bottom of the heading (y 898). */
+  .about-touch {
     position: absolute;
     left: 0;
-    bottom: 0;
-    width: calc(1450 * var(--u));
-    height: 3px;
-    background: var(--color-chalk);
+    top: calc(245 * var(--u));
+    width: calc(1702 * var(--u));
+    height: calc(653 * var(--u));
+    pointer-events: none;
   }
 
-  /* --ink-width is the heading's ink width in em; it spans from the left edge to the photo's right edge. */
+  /* --ink-width is the heading's ink width in em; the heading spans 1394 design pixels from x 55 to the photo's right edge. */
   .about-heading {
     position: absolute;
-    left: -0.03em;
-    bottom: calc(7 * var(--u));
+    left: calc(55 * var(--u) - 0.03em);
+    bottom: 0;
+    z-index: 1;
     margin: 0;
     font-family: var(--font-hero);
-    font-size: calc(1450 * var(--u) / var(--ink-width));
+    font-size: calc(1394 * var(--u) / var(--ink-width));
     font-weight: var(--font-weight-black);
     line-height: 0.8;
     text-transform: uppercase;
@@ -118,19 +135,32 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
 
   .about-hand {
     position: absolute;
-    left: calc(-136.8 * var(--u));
-    top: calc(463 * var(--u));
-    width: calc(1231.7 * var(--u));
-    height: calc(521.8 * var(--u));
     max-width: none;
-    transform: rotate(-162.29deg) scaleY(-1);
     pointer-events: none;
   }
 
-  .about-blurb,
-  .about-text {
+  .about-hand-behind {
+    left: calc(-83.68 * var(--u));
+    top: calc(145.56 * var(--u));
+    width: calc(1024.627 * var(--u));
+    height: calc(434.044 * var(--u));
+    transform: rotate(-162.29deg) scaleY(-1);
+  }
+
+  .about-hand-front {
+    left: calc(-83.54 * var(--u));
+    top: calc(152.19 * var(--u));
+    z-index: 2;
+    width: calc(1022.763 * var(--u));
+    height: calc(446.275 * var(--u));
+    transform: rotate(-162.47deg) scaleY(-1);
+  }
+
+  .about-contact,
+  .about-statement {
     position: absolute;
     top: calc(150 * var(--u));
+    z-index: 3;
     margin: 0;
     max-width: none;
     font-family: var(--font-hero-mono);
@@ -138,36 +168,37 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
     line-height: 1.255;
   }
 
-  .about-blurb {
-    left: calc(212 * var(--u));
-    width: calc(275 * var(--u));
+  .about-contact {
+    left: calc(133.5 * var(--u));
+    width: calc(353 * var(--u));
   }
 
-  .about-text {
-    left: calc(548 * var(--u));
+  .about-contact p {
+    margin: 0;
+  }
+
+  .about-contact a {
+    display: block;
+    text-decoration: underline;
+  }
+
+  .about-statement {
+    left: calc(547.5 * var(--u));
     width: calc(447 * var(--u));
   }
 
+  /* The top of the portrait sits under the header. */
   .about-photo {
     position: absolute;
     left: calc(1055 * var(--u));
-    top: calc(104 * var(--u));
+    top: 0;
+    z-index: 3;
     width: calc(395 * var(--u));
-    height: calc(543 * var(--u));
-    overflow: hidden;
-  }
-
-  /* The Figma crop frames the full 395x647 box; the top 104px sit under the header. */
-  .about-photo-crop {
-    position: absolute;
-    left: 0;
-    top: calc(-104 * var(--u));
-    width: 100%;
     height: calc(647 * var(--u));
     overflow: hidden;
   }
 
-  .about-photo-crop img {
+  .about-photo img {
     position: absolute;
     left: -29.73%;
     top: -34.4%;
@@ -182,16 +213,11 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
       flex-direction: column;
       gap: 6vw;
       height: auto;
-      padding: calc(var(--header-height) + 6vw) 6vw 0;
+      padding: calc(var(--header-height) + 6vw) 6vw 6vw;
     }
 
-    .about::after {
-      left: 6vw;
-      width: calc(100% - 12vw);
-    }
-
-    .about-blurb,
-    .about-text {
+    .about-contact,
+    .about-statement {
       position: static;
       width: auto;
       font-size: max(0.875rem, 3.8vw);
@@ -203,35 +229,17 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
       top: auto;
       width: 100%;
       height: auto;
-      aspect-ratio: 395 / 543;
+      aspect-ratio: 395 / 647;
     }
 
-    .about-photo-crop {
-      top: calc(-104 / 543 * 100%);
-      height: calc(647 / 543 * 100%);
-    }
-
-    .about-hand {
-      position: relative;
-      left: -26vw;
-      top: -14vw;
-      order: 1;
-      transform: rotate(-137.29deg) scaleY(-1);
-      z-index: 1;
-      align-self: flex-start;
-      width: 120vw;
-      height: auto;
-      aspect-ratio: 1728 / 732;
-      margin: 0 0 -14vw -12vw;
-    }
-
-    .about-heading {
+    .about-touch {
+      --u: calc(88vw / 1394);
       position: relative;
       left: auto;
-      bottom: auto;
-      order: 2;
-      font-size: calc((100vw - 12vw) / var(--ink-width));
-      margin: 0 0 2.5vw -1vw;
+      top: auto;
+      flex: none;
+      order: 1;
+      margin-left: calc(-55 * var(--u));
     }
   }
 </style>
