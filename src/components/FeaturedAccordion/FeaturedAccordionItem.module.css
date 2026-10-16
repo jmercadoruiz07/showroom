@@ -5,7 +5,8 @@
 |
 | Measurements come from the Figma ABOUT frame (node 198:32), where one strip
 | is 1509 design pixels wide; --u (set by FeaturedAccordion) is one of those
-| pixels. A strip is 241 tall and grows to 888 on hover. The text block is
+| pixels. A strip is 241 tall and grows to 888 on hover (60vh from 1400px up).
+| The text block is
 | anchored to the bottom edge, and its bottom inset moves from 63 to 168 as the
 | strip grows. A white fade on the left keeps the dark text legible over any
 | thumbnail. The image is always the expanded size, centred, so growing the
@@ -13,6 +14,7 @@
 |
 */
 .item {
+  --expanded-height: calc(888 * var(--u));
   position: relative;
   height: calc(241 * var(--u));
   overflow: hidden;
@@ -37,7 +39,7 @@
   top: 50%;
   left: 0;
   width: 100%;
-  height: calc(888 * var(--u));
+  height: var(--expanded-height);
   transform: translateY(-50%);
   object-fit: cover;
   display: block;
@@ -98,7 +100,7 @@
 }
 
 .item:has(.link:focus-visible) {
-  height: calc(888 * var(--u));
+  height: var(--expanded-height);
 }
 
 .item:has(.link:focus-visible) .content,
@@ -108,12 +110,18 @@
 
 @media (hover: hover) and (pointer: fine) {
   .item:hover {
-    height: calc(888 * var(--u));
+    height: var(--expanded-height);
   }
 
   .item:hover .content,
   .item:hover .featured {
     bottom: calc(168 * var(--u));
+  }
+}
+
+@media (min-width: 1400px) {
+  .item {
+    --expanded-height: 60vh;
   }
 }
 
