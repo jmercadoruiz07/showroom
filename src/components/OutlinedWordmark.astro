@@ -1,0 +1,80 @@
+---
+/*
+|-------------------------------------------------------------------------------
+| OutlinedWordmark — JMR Visuals Portfolio
+|-------------------------------------------------------------------------------
+|
+| Text drawn as outlined letters; hovering a letter fills it, and with
+| fillNeighbours the letters either side of it fill too. Each letter is generated
+| content because real text would be repainted by a page text selection and
+| disappear. The parent supplies a class that positions and sizes it (font-size,
+| line-height, writing mode), styled with :global since scoped styles do not
+| reach this component's root, and may set --wordmark-stroke-width.
+|
+*/
+interface Props {
+  text: string;
+  fillNeighbours?: boolean;
+  class?: string;
+}
+
+const { text, fillNeighbours = false, class: className } = Astro.props;
+
+// Spaces become a gap before the next letter so "adjacent" always means a visible letter.
+const letters: { char: string; gap: boolean }[] = [];
+let gap = false;
+for (const char of text) {
+  if (char === ' ') {
+    gap = true;
+    continue;
+  }
+  letters.push({ char, gap });
+  gap = false;
+}
+---
+
+<p class:list={['outlined-wordmark', { 'fills-neighbours': fillNeighbours }, className]} aria-hidden="true">
+  {letters.map(({ char, gap }) => (
+    <span class:list={['letter', { 'has-gap': gap }]} data-char={char}></span>
+  ))}
+</p>
+
+<style>
+  .outlined-wordmark {
+    margin: 0;
+    max-width: none;
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: var(--wordmark-stroke-width, 1.5px) var(--color-chalk);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .letter::before {
+    content: attr(data-char);
+  }
+
+  .letter {
+    pointer-events: auto;
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+
+  .has-gap {
+    margin-inline-start: 0.25em;
+  }
+
+  .letter:hover,
+  .fills-neighbours .letter:hover + .letter,
+  .fills-neighbours .letter:has(+ .letter:hover) {
+    color: var(--color-chalk);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .letter {
+      transition: none;
+    }
+  }
+</style>

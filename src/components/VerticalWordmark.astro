@@ -5,35 +5,19 @@
 |-------------------------------------------------------------------------------
 |
 | Name set vertically along the right edge of the screen, reading bottom to top,
-| drawn as outlined letters. Hovering a letter fills it and the letters either
-| side of it. On pages with a .hero section the letters start filled and fade to
-| outlines as the hero scrolls away, finishing when the hero's bottom edge
-| reaches the top of the page. Fixed below the header and above page content so
-| it stays put while the page scrolls. Size follows the viewport height via
-| --wordmark-size; pages that use it reserve --wordmark-gutter on their right
-| side. Hidden below 768px, where --wordmark-gutter is 0.
+| as an OutlinedWordmark whose hovered letter and its neighbours fill. On pages
+| with a .hero section the letters start filled and fade to outlines as the hero
+| scrolls away, finishing when the hero's bottom edge reaches the top of the
+| page. Fixed below the header and above page content so it stays put while the
+| page scrolls. Size follows the viewport height via --wordmark-size; pages that
+| use it reserve --wordmark-gutter on their right side. Hidden below 768px, where
+| --wordmark-gutter is 0.
 |
 */
-const text = 'Mercado Ruiz';
-
-// Spaces become a gap before the next letter so "adjacent" always means a visible letter.
-const letters: { char: string; gap: boolean }[] = [];
-let gap = false;
-for (const char of text) {
-  if (char === ' ') {
-    gap = true;
-    continue;
-  }
-  letters.push({ char, gap });
-  gap = false;
-}
+import OutlinedWordmark from './OutlinedWordmark.astro';
 ---
 
-<p class="vertical-wordmark" aria-hidden="true">
-  {letters.map(({ char, gap }) => (
-    <span class:list={['letter', { 'has-gap': gap }]} data-char={char}></span>
-  ))}
-</p>
+<OutlinedWordmark class="vertical-wordmark" text="Mercado Ruiz" fillNeighbours />
 
 <script>
   let onScroll: (() => void) | undefined;
@@ -62,63 +46,28 @@ for (const char of text) {
 </script>
 
 <style>
-  .vertical-wordmark {
+  /* The class is applied to OutlinedWordmark's root, which this component's scoped styles do not reach. */
+  :global(.vertical-wordmark) {
     position: fixed;
     top: var(--header-height);
     right: var(--wordmark-inset);
     bottom: 0;
     z-index: var(--z-wordmark);
     width: var(--wordmark-width);
-    max-width: none;
-    margin: 0;
     /* Round letters overshoot the baseline side of the line box, so only the text's length is clipped. */
     overflow-x: visible;
     overflow-y: clip;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    font-family: var(--font-hero);
     font-size: var(--wordmark-size);
-    font-weight: var(--font-weight-black);
     line-height: 0.78;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: transparent;
     /* A zero-offset shadow of the glyphs fills them without disturbing the hover colour transition. */
     text-shadow: 0 0 0 color-mix(in srgb, var(--color-chalk) calc(var(--wordmark-fill, 0) * 100%), transparent);
-    -webkit-text-stroke: 1.5px var(--color-chalk);
-    pointer-events: none;
-    user-select: none;
-  }
-
-  /* Generated content is never part of a text selection, which would otherwise repaint the outlined letters and hide them. */
-  .letter::before {
-    content: attr(data-char);
-  }
-
-  .letter {
-    pointer-events: auto;
-    transition: color var(--duration-base) var(--ease-standard);
-  }
-
-  .has-gap {
-    margin-inline-start: 0.25em;
-  }
-
-  .letter:hover,
-  .letter:hover + .letter,
-  .letter:has(+ .letter:hover) {
-    color: var(--color-chalk);
   }
 
   @media (max-width: 767px) {
-    .vertical-wordmark {
+    :global(.vertical-wordmark) {
       display: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .letter {
-      transition: none;
     }
   }
 

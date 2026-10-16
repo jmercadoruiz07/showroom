@@ -5,10 +5,12 @@
 |-------------------------------------------------------------------------------
 |
 | White hairline, a bar with the copyright and social link, and an outlined
-| wordmark that fills the footer width between equal side insets. The footer
-| is a size container so the wordmark scales with its own width, not the page's.
+| wordmark that fills the footer width between equal side insets; hovering a
+| letter fills just that letter. The footer is a size container so the wordmark
+| scales with its own width, not the page's.
 |
 */
+import OutlinedWordmark from './OutlinedWordmark.astro';
 ---
 
 <footer class="site-footer" role="contentinfo">
@@ -24,7 +26,7 @@
     </a>
   </div>
 
-  <p class="footer-wordmark" aria-hidden="true" data-text="Jose"></p>
+  <OutlinedWordmark class="footer-wordmark" text="Jose" />
 </footer>
 
 <style>
@@ -74,28 +76,15 @@
   /* 2.402 is the ink width of JOSE in em at this letter-spacing, so the text spans the insets exactly.
      The box is trimmed to cap height and baseline; the top and bottom padding cover the round letters'
      overshoot (0.016em) and the outline stroke. Clipping stops the font's descender area adding scroll height. */
-  .footer-wordmark {
-    margin: 0;
-    max-width: none;
+  .site-footer :global(.footer-wordmark) {
+    --wordmark-stroke-width: 2px;
     padding: calc(0.016em + 3px) var(--footer-inset);
     overflow: hidden;
-    font-family: var(--font-hero);
     font-size: calc((100cqw - 2 * var(--footer-inset)) / 2.402);
-    font-weight: var(--font-weight-black);
     letter-spacing: -0.04em;
     line-height: 0.92;
     text-box: trim-both cap alphabetic;
     text-align: center;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--color-chalk);
-    user-select: none;
-  }
-
-  /* Generated content is never part of a text selection, which would otherwise repaint the outlined letters and hide them. */
-  .footer-wordmark::before {
-    content: attr(data-text);
   }
 
   @media (max-width: 768px) {
@@ -103,8 +92,8 @@
       --footer-inset: var(--space-md);
     }
 
-    .footer-wordmark {
-      -webkit-text-stroke-width: 1px;
+    .site-footer :global(.footer-wordmark) {
+      --wordmark-stroke-width: 1px;
     }
   }
 </style>
