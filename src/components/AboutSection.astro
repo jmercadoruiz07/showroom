@@ -33,8 +33,6 @@ const TARGET_GAP = 0.05;
 const NATURAL_INK_WIDTH = 7.224;
 
 const HEADING = 'GET IN TOUCH';
-// Letter indices (spaces skipped) of the permanently filled "IN TO".
-const FILLED_LETTERS = [3, 4, 5, 6];
 
 const headingKerns = HEADING.split(' ').flatMap((word) =>
   [...word].map((char, index) => {
@@ -60,7 +58,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     />
 
     <h2 class="about-heading" aria-label="Get in touch" style={`--ink-width: ${headingInkWidth}`}>
-      <OutlinedWordmark text={HEADING} filled={FILLED_LETTERS} kerns={headingKerns} fillNeighbours />
+      <OutlinedWordmark text={HEADING} kerns={headingKerns} fillNeighbours />
     </h2>
 
     <img

@@ -5,44 +5,41 @@
 |-------------------------------------------------------------------------------
 |
 | Text drawn as outlined letters; hovering a letter fills it, and with
-| fillNeighbours the letters either side of it fill too. Letters listed in
-| filled start filled, and kerns adds extra space (em) after a letter; both are
-| indexed over the letters, skipping spaces. Each letter is generated
-| content because real text would be repainted by a page text selection and
-| disappear. The parent supplies a class that positions and sizes it (font-size,
-| line-height, writing mode), styled with :global since scoped styles do not
-| reach this component's root, and may set --wordmark-stroke-width and
-| --wordmark-gap (the space between words).
+| fillNeighbours the letters either side of it fill too. kerns adds extra space
+| (em) after a letter, indexed over the letters skipping spaces. Each letter is
+| generated content because real text would be repainted by a page text
+| selection and disappear. The parent supplies a class that positions and sizes
+| it (font-size, line-height, writing mode), styled with :global since scoped
+| styles do not reach this component's root, and may set --wordmark-stroke-width
+| and --wordmark-gap (the space between words).
 |
 */
 interface Props {
   text: string;
   fillNeighbours?: boolean;
-  filled?: number[];
   kerns?: number[];
   class?: string;
 }
 
-const { text, fillNeighbours = false, filled = [], kerns = [], class: className } = Astro.props;
+const { text, fillNeighbours = false, kerns = [], class: className } = Astro.props;
 
 // Spaces become a gap before the next letter so "adjacent" always means a visible letter.
-const letters: { char: string; gap: boolean; kern: number; isFilled: boolean }[] = [];
+const letters: { char: string; gap: boolean; kern: number }[] = [];
 let gap = false;
 for (const char of text) {
   if (char === ' ') {
     gap = true;
     continue;
   }
-  const index = letters.length;
-  letters.push({ char, gap, kern: kerns[index] ?? 0, isFilled: filled.includes(index) });
+  letters.push({ char, gap, kern: kerns[letters.length] ?? 0 });
   gap = false;
 }
 ---
 
 <p class:list={['outlined-wordmark', { 'fills-neighbours': fillNeighbours }, className]} aria-hidden="true">
-  {letters.map(({ char, gap, kern, isFilled }) => (
+  {letters.map(({ char, gap, kern }) => (
     <span
-      class:list={['letter', { 'has-gap': gap, 'is-filled': isFilled }]}
+      class:list={['letter', { 'has-gap': gap }]}
       data-char={char}
       style={kern ? `margin-inline-end: ${kern}em` : undefined}
     ></span>
@@ -74,11 +71,6 @@ for (const char of text) {
 
   .has-gap {
     margin-inline-start: var(--wordmark-gap, 0.25em);
-  }
-
-  .is-filled {
-    color: var(--color-chalk);
-    -webkit-text-stroke: 0;
   }
 
   .letter:hover,
