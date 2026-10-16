@@ -30,16 +30,14 @@
 <style>
   .site-footer {
     --footer-inset: var(--space-lg);
-    --footer-divider-inset: var(--space-xl);
     container-type: inline-size;
     background: var(--color-bone);
   }
 
-  /* Matches the gallery grid's side gutters so the divider lines up with it. */
   .site-footer::before {
     content: '';
     display: block;
-    margin-inline: var(--footer-divider-inset);
+    margin-inline: var(--grid-gutter);
     border-top: 1px solid var(--color-chalk);
   }
 
@@ -48,7 +46,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-md);
-    padding: var(--space-sm) var(--footer-inset);
+    padding: var(--space-sm) var(--grid-gutter);
   }
 
   .copyright {
@@ -103,7 +101,6 @@
   @media (max-width: 768px) {
     .site-footer {
       --footer-inset: var(--space-md);
-      --footer-divider-inset: var(--space-md);
     }
 
     .footer-wordmark {

@@ -8,7 +8,7 @@
 |
 */
 .root {
-  padding: var(--space-xl);
+  padding: var(--space-xl) var(--grid-gutter);
 }
 
 .filterBar {
@@ -140,7 +140,7 @@
 
 @media (max-width: 768px) {
   .root {
-    padding: var(--space-xl) var(--space-md);
+    padding: var(--space-xl) var(--grid-gutter);
     padding-top: calc(var(--header-height) + var(--space-lg));
   }
 

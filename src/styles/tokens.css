@@ -86,6 +86,8 @@
    */
   --max-width-prose: 70ch;
   --max-width-full:  100vw;
+  /* Side gutter of the gallery grid, shared by the footer divider and bar so they line up with it. */
+  --grid-gutter:     var(--space-xl);
   --header-height:   clamp(2.5rem, 3vw, 4rem);
   /* Vertical wordmark fits the space below the header; the column is as wide as its line box. Hidden below 768px. */
   --wordmark-size:   min(calc((100vh - var(--header-height)) / 8.3), 11vw);
@@ -112,6 +114,12 @@
   --z-header:    200;
   --z-modal:     500;
   --z-toast:     600;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --grid-gutter: var(--space-md);
+  }
 }
 
 @media (max-width: 767px) {
