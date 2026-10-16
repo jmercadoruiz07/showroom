@@ -146,17 +146,17 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     transform: rotate(-162.47deg) scaleY(-1);
   }
 
-  /* Contact, statement and portrait are three equal columns from the contact's left edge (x 133.5) to the
-     portrait's right edge (x 1450). */
+  /* Contact, statement and portrait are three equal columns across the page gutters (the gallery grid's
+     width, leaving room for the vertical wordmark). */
   .about-columns {
     position: absolute;
     top: 0;
-    left: calc(133.5 * var(--u));
-    width: calc(1316.5 * var(--u));
+    left: var(--grid-gutter);
+    right: calc(var(--grid-gutter) + var(--wordmark-gutter));
     z-index: 3;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: calc(60 * var(--u));
+    column-gap: var(--grid-gutter);
     align-items: start;
   }
 
@@ -178,21 +178,19 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     text-decoration: underline;
   }
 
-  /* The top of the portrait sits under the header. */
+  /* The top of the portrait sits under the header; its height is fixed so it stays clear of the heading. */
   .about-photo {
     position: relative;
     width: 100%;
-    aspect-ratio: 395 / 647;
+    height: calc(647 * var(--u));
     overflow: hidden;
   }
 
   .about-photo img {
-    position: absolute;
-    left: -29.73%;
-    top: -34.4%;
-    width: 174.79%;
-    height: 142.52%;
-    max-width: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 85%;
   }
 
   /* Tablet: text beside the portrait, heading and hands below. */
@@ -232,6 +230,18 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
     .about-photo {
       grid-area: photo;
+      height: auto;
+      aspect-ratio: 395 / 647;
+    }
+
+    /* The Figma crop of the portrait. */
+    .about-photo img {
+      position: absolute;
+      left: -29.73%;
+      top: -34.4%;
+      width: 174.79%;
+      height: 142.52%;
+      max-width: none;
     }
 
     /* Shifted left so the heading's ink starts at the content edge. */
