@@ -68,11 +68,13 @@ const { images } = Astro.props;
     color: var(--color-chalk);
   }
 
-  /* Sized from the window height so both lines fill most of it; clicks fall through to the project link. */
+  /* Sized from the window height so both lines fill most of it; clicks fall through to the project link.
+     The letters sit 0.031em below the centre of their line boxes, which the translate offsets. */
   .hero-name {
     position: absolute;
     left: -0.02em;
-    bottom: 9vh;
+    top: 50%;
+    transform: translateY(calc(-50% - 0.031em));
     z-index: 1;
     margin: 0;
     font-family: var(--font-hero);
@@ -137,7 +139,6 @@ const { images } = Astro.props;
     }
 
     .hero-name {
-      bottom: 4vh;
       left: 3vw;
       font-size: 40vw;
     }
