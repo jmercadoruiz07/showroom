@@ -23,6 +23,13 @@ const { slides } = Astro.props;
     <span aria-hidden="true"><span class="hero-name-line">JO</span><span class="hero-name-line">SE</span></span>
     <span class="visually-hidden">José Mercado Ruiz</span>
   </h1>
+
+  <a class="hero-scroll" href="#main-content" aria-label="Scroll to projects">
+    <span class="hero-scroll-label" aria-hidden="true">Scroll</span>
+    <svg class="hero-scroll-arrow" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 4v16M5 13l7 7 7-7" />
+    </svg>
+  </a>
 </section>
 
 <style>
@@ -67,6 +74,46 @@ const { slides } = Astro.props;
     display: block;
   }
 
+  .hero-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 2.5rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    transform: translateX(-50%);
+    font-family: var(--font-hero);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-chalk);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
+  }
+
+  .hero-scroll:focus-visible {
+    outline: 2px solid var(--color-chalk);
+    outline-offset: 4px;
+  }
+
+  .hero-scroll-arrow {
+    filter: drop-shadow(0 1px 8px rgb(0 0 0 / 0.5));
+    animation: hero-scroll-bob 1.8s var(--ease-standard) infinite;
+  }
+
+  @keyframes hero-scroll-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(0.4rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-arrow {
+      animation: none;
+    }
+  }
+
   @media (max-width: 767px) {
     .hero {
       height: 70vh;
@@ -74,7 +121,7 @@ const { slides } = Astro.props;
     }
 
     .hero-name {
-      bottom: 4vh;
+      bottom: 7rem;
       left: 3vw;
       font-size: 40vw;
     }
