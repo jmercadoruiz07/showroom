@@ -13,6 +13,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  footer?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   description = 'Portfolio of JMR Visuals — Print, 3D, and Motion Design',
   ogImage = '/og-default.jpg',
   canonicalURL,
+  footer = true,
 } = Astro.props;
 
 const canonical = canonicalURL || Astro.url.href;
@@ -69,6 +71,6 @@ import '../styles/base.css';
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <SiteHeader />
     <slot />
-    <SiteFooter />
+    {footer && <SiteFooter />}
   </body>
 </html>

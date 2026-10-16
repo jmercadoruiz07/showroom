@@ -11,6 +11,8 @@
 | 768px the pieces stack in flow and the heading and hand scale together.
 |
 */
+import OutlinedWordmark from './OutlinedWordmark.astro';
+
 interface Props {
   email: string;
   altEmail: string;
@@ -30,21 +32,18 @@ const TARGET_GAP = 0.05;
 // Calibrated against the rendered heading (browsers drop some pair kerning across spans).
 const NATURAL_INK_WIDTH = 7.224;
 
-const headingWords = [{ text: 'GET' }, { text: 'IN', filled: [0, 1] }, { text: 'TOUCH', filled: [0, 1] }];
+const HEADING = 'GET IN TOUCH';
+// Letter indices (spaces skipped) of the permanently filled "IN TO".
+const FILLED_LETTERS = [3, 4, 5, 6];
 
-const headingLetters = headingWords.flatMap((word, wordIndex) =>
-  [...word.text].map((char, index) => {
-    const next = word.text[index + 1];
-    return {
-      char,
-      kern: next ? TARGET_GAP - NATURAL_GAP[char + next] : 0,
-      filled: word.filled?.includes(index) ?? false,
-      startsWord: wordIndex > 0 && index === 0,
-    };
+const headingKerns = HEADING.split(' ').flatMap((word) =>
+  [...word].map((char, index) => {
+    const next = word[index + 1];
+    return next ? TARGET_GAP - NATURAL_GAP[char + next] : 0;
   }),
 );
 
-const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) => sum + letter.kern, 0);
+const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => sum + kern, 0);
 ---
 
 <section class="about" aria-label="About">
@@ -61,11 +60,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
     />
 
     <h2 class="about-heading" aria-label="Get in touch" style={`--ink-width: ${headingInkWidth}`}>
-      <span aria-hidden="true">
-        {headingLetters.map(({ char, kern, filled, startsWord }) => (
-          <>{startsWord && ' '}<span class:list={{ 'is-filled': filled }} style={kern ? `margin-inline-end: ${kern}em` : undefined}>{char}</span></>
-        ))}
-      </span>
+      <OutlinedWordmark text={HEADING} filled={FILLED_LETTERS} kerns={headingKerns} fillNeighbours />
     </h2>
 
     <img
@@ -113,24 +108,15 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingLetters.reduce((sum, letter) 
 
   /* --ink-width is the heading's ink width in em; the heading spans 1394 design pixels from x 55 to the photo's right edge. */
   .about-heading {
+    --wordmark-stroke-width: 2px;
+    --wordmark-gap: 0.256em;
     position: absolute;
     left: calc(55 * var(--u) - 0.03em);
     bottom: 0;
     z-index: 1;
     margin: 0;
-    font-family: var(--font-hero);
     font-size: calc(1394 * var(--u) / var(--ink-width));
-    font-weight: var(--font-weight-black);
     line-height: 0.8;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--color-chalk);
-  }
-
-  .about-heading .is-filled {
-    color: var(--color-chalk);
-    -webkit-text-stroke: 0;
   }
 
   .about-hand {
