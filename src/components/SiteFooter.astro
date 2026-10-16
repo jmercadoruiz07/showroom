@@ -66,12 +66,13 @@
   }
 
   /* 2.402 is the ink width of JOSÉ in em at this letter-spacing, so the text spans the insets exactly.
-     The box is trimmed to cap height and baseline; the top padding leaves room for the accent, and the round
-     letters' overshoot below the baseline bleeds off the page. Clipping stops the font's descender area adding scroll height. */
+     The box is trimmed to cap height and baseline; the top padding leaves room for the accent and the bottom
+     padding for the round letters' overshoot (0.016em) and the outline stroke. Clipping stops the font's
+     descender area adding scroll height. */
   .footer-wordmark {
     margin: 0;
     max-width: none;
-    padding: 0.235em var(--footer-inset) 1px;
+    padding: 0.235em var(--footer-inset) calc(0.016em + 3px);
     overflow: hidden;
     font-family: var(--font-hero);
     font-size: calc((100cqw - 2 * var(--footer-inset)) / 2.402);
