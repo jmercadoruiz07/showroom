@@ -101,7 +101,7 @@ const isCurrent = (href: string) =>
 
   .nav-link {
     display: inline-block;
-    padding-top: 0.18em;
+    padding: 0.3em 0;
     font-family: var(--font-hero-mono);
     font-size: var(--nav-font-size);
     font-weight: var(--font-weight-regular);
@@ -109,21 +109,26 @@ const isCurrent = (href: string) =>
     line-height: 1;
     text-transform: uppercase;
     color: var(--color-chalk);
-    transition: color var(--duration-fast) var(--ease-quick);
+    /* The underline is a background that grows from the left edge. */
+    background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 1px;
+    transition: background-size var(--duration-base) var(--ease-standard);
   }
 
-  .nav-link:hover {
-    color: var(--color-accent);
-  }
-
+  .nav-link:hover,
+  .nav-link:focus-visible,
   .nav-link[aria-current='page'] {
-    text-decoration: underline;
-    text-underline-offset: 0.3em;
+    background-size: 100% 1px;
   }
 
   .nav-link:focus-visible {
     outline: 2px solid var(--color-chalk);
     outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link {
+      transition: none;
+    }
   }
 
   @media (max-width: 767px) {
