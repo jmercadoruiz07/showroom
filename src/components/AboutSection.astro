@@ -196,7 +196,8 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
   /* Tablet: text beside the portrait, heading and hands below. */
   @media (max-width: 1399px) {
     .about {
-      --touch-font-size: 5.75rem;
+      /* Capped so the heading's ink stays clear of the vertical wordmark on narrow tablets. */
+      --touch-font-size: min(5.75rem, calc((90vw - var(--wordmark-gutter)) / var(--ink-width)));
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, min(36vw, 24rem));
       grid-template-rows: auto 1fr auto;
@@ -252,6 +253,29 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
       top: auto;
       width: 100%;
       margin-left: calc(-55 * var(--u));
+    }
+  }
+
+  /* Tablet only: the heading and hand rise so the fingertip slightly overlaps the portrait's bottom edge,
+     and the hand sits further left so its flat cut end is off screen. The text stays above the hand. */
+  @media (min-width: 768px) and (max-width: 1399px) {
+    .about-touch {
+      z-index: 1;
+      margin-top: calc(-5vw - 486 * var(--u));
+    }
+
+    .about-hand-behind {
+      left: calc(-168.68 * var(--u));
+    }
+
+    .about-hand-front {
+      left: calc(-168.54 * var(--u));
+    }
+
+    .about-contact,
+    .about-statement {
+      position: relative;
+      z-index: 2;
     }
   }
 
