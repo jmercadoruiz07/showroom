@@ -20,7 +20,7 @@ const { slides } = Astro.props;
   <HeroCarousel slides={slides} client:load />
 
   <h1 id="hero-title" class="hero-name">
-    <span aria-hidden="true">{'JO\nSE'}</span>
+    <span aria-hidden="true"><span class="hero-name-line">JO</span><span class="hero-name-line">SE</span></span>
     <span class="visually-hidden">José Mercado Ruiz</span>
   </h1>
 </section>
@@ -63,12 +63,24 @@ const { slides } = Astro.props;
     pointer-events: none;
   }
 
+  .hero-name-line {
+    display: block;
+  }
+
   @media (max-width: 767px) {
+    .hero {
+      height: 70vh;
+      height: 70svh;
+    }
+
     .hero-name {
-      bottom: auto;
-      top: calc(var(--header-height) + 4vh);
+      bottom: 4vh;
       left: 3vw;
-      font-size: min(42vw, 30vh);
+      font-size: 40vw;
+    }
+
+    .hero-name-line {
+      display: inline;
     }
   }
 </style>
