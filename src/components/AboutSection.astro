@@ -24,11 +24,11 @@ const { blurb, text, portrait, portraitAlt } = Astro.props;
 const NATURAL_GAP: Record<string, number> = {
   GE: 0.095, ET: 0.035, IN: 0.125, TO: 0.015, OU: 0.079, UC: 0.086, CH: 0.072,
 };
-const TARGET_GAP = 0.02;
+const TARGET_GAP = 0.05;
 // Calibrated against the rendered heading (browsers drop some pair kerning across spans).
 const NATURAL_INK_WIDTH = 7.224;
 
-const headingWords = [{ text: 'GET' }, { text: 'IN' }, { text: 'TOUCH', filled: [0, 2, 3] }];
+const headingWords = [{ text: 'GET' }, { text: 'IN' }, { text: 'TOUCH', filled: [0, 1, 2, 3, 4] }];
 
 const headingLetters = headingWords.flatMap((word, wordIndex) =>
   [...word.text].map((char, index) => {
