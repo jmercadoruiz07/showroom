@@ -254,10 +254,19 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
       width: 100%;
       margin-left: calc(-55 * var(--u));
     }
+
+    /* Further left so the hand's flat cut end is off screen. */
+    .about-hand-behind {
+      left: calc(-168.68 * var(--u));
+    }
+
+    .about-hand-front {
+      left: calc(-168.54 * var(--u));
+    }
   }
 
   /* Tablet only: the portrait runs alongside the heading row, which starts just under the statement so the
-     hand never covers text. The hand sits further left so its flat cut end is off screen. */
+     hand never covers text. */
   @media (min-width: 768px) and (max-width: 1399px) {
     .about {
       grid-template-areas: none;
@@ -290,20 +299,13 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
       z-index: 1;
       margin-top: calc(-5vw + 12px);
     }
-
-    .about-hand-behind {
-      left: calc(-168.68 * var(--u));
-    }
-
-    .about-hand-front {
-      left: calc(-168.54 * var(--u));
-    }
   }
 
-  /* Mobile: one column with the heading above the portrait. */
+  /* Mobile: one column with the heading above the portrait. The heading, and so the hand, is sized to fill
+     the content width (90vw). */
   @media (max-width: 767px) {
     .about {
-      --touch-font-size: 2.5rem;
+      --touch-font-size: calc(90vw / var(--ink-width));
       --about-text-size: 1rem;
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: none;
