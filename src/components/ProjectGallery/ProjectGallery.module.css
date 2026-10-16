@@ -56,9 +56,9 @@
   flex-shrink: 0;
   padding: 0.3em 0.7em;
   font-family: var(--font-hero-mono);
-  font-size: clamp(0.875rem, 1.75vw, 1.75rem);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-tight);
+  font-size: var(--type-xs);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
   line-height: 1;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-chalk) 58%, transparent);
@@ -152,10 +152,6 @@
   .filterBar {
     padding: 0 var(--space-md);
     margin: 0 calc(-1 * var(--space-md)) var(--space-lg);
-  }
-
-  .filterButton {
-    font-size: 0.875rem;
   }
 }
 

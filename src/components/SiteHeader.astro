@@ -85,7 +85,7 @@ const isCurrent = (href: string) =>
   }
 
   .nav-list {
-    --nav-font-size: clamp(0.875rem, 1.75vw, 1.75rem);
+    --nav-font-size: var(--type-xs);
     display: flex;
     align-items: center;
     gap: 2.5vw;
@@ -105,8 +105,8 @@ const isCurrent = (href: string) =>
     padding-top: 0.18em;
     font-family: var(--font-hero-mono);
     font-size: var(--nav-font-size);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--tracking-tight);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--tracking-wide);
     line-height: 1;
     text-transform: uppercase;
     color: var(--color-bone);
@@ -139,7 +139,6 @@ const isCurrent = (href: string) =>
 
   @media (max-width: 767px) {
     .nav-list {
-      --nav-font-size: 0.875rem;
       gap: 6vw;
       padding-left: calc(var(--space-md) + 0.7 * var(--nav-font-size));
     }
