@@ -301,11 +301,10 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     }
   }
 
-  /* Mobile: one column with the heading above the portrait. The heading, and so the hand, is sized to fill
-     the content width (90vw). */
+  /* Mobile: one column with the heading above the portrait. The heading and hand are sized from the width
+     of the heading frame (container units), so the heading's ink spans exactly the portrait's width. */
   @media (max-width: 767px) {
     .about {
-      --touch-font-size: calc(90vw / var(--ink-width));
       --about-text-size: 1rem;
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: none;
@@ -317,8 +316,18 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
       gap: 6vw;
     }
 
+    /* 3.9455% is 55/1394 of the width, the offset that puts the heading's ink at the content edge. */
+    .about-touch {
+      --u: calc(100cqw / 1394);
+      container-type: inline-size;
+      height: auto;
+      aspect-ratio: 1394 / 653;
+      margin-left: -3.9455%;
+    }
+
     .about-heading {
       --wordmark-stroke-width: 1px;
+      font-size: calc(100cqw / var(--ink-width));
     }
   }
 </style>
