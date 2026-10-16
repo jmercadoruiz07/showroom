@@ -4,7 +4,8 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jmr-visuals.com',
+  site: 'https://jmercadoruiz07.github.io',
+  base: '/showroom',
   output: 'static',
   image: {
     service: {
