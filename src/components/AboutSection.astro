@@ -4,11 +4,13 @@
 | AboutSection — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Collage laid out on the 1702px Figma About frame, measured in --u (one Figma
-| pixel at the current viewport width): contact details and a statement in two
-| text columns, the portrait, and the hand reaching over the outlined GET IN
-| TOUCH heading. The hand is two layers with the heading between them. Below
-| 768px the pieces stack in flow and the heading and hand scale together.
+| Contact details and a statement, the portrait, and the hand reaching over the
+| outlined GET IN TOUCH heading (the hand is two layers with the heading between
+| them). Three tiers with fixed type sizes: from 1400px a collage laid out on
+| the 1702px Figma About frame, from 768px a two-column grid with the heading
+| below, and under 768px a single column with the heading above the portrait.
+| --u is one Figma pixel; it follows the heading's fixed font size, so the
+| heading and hands always scale together.
 |
 */
 import OutlinedWordmark from './OutlinedWordmark.astro';
@@ -44,7 +46,7 @@ const headingKerns = HEADING.split(' ').flatMap((word) =>
 const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => sum + kern, 0);
 ---
 
-<section class="about" aria-label="About">
+<section class="about" aria-label="About" style={`--ink-width: ${headingInkWidth}`}>
   <h1 class="visually-hidden">About José Mercado Ruiz</h1>
 
   <div class="about-touch">
@@ -57,7 +59,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
       loading="eager"
     />
 
-    <h2 class="about-heading" aria-label="Get in touch" style={`--ink-width: ${headingInkWidth}`}>
+    <h2 class="about-heading" aria-label="Get in touch">
       <OutlinedWordmark text={HEADING} kerns={headingKerns} fillNeighbours />
     </h2>
 
@@ -84,8 +86,12 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 </section>
 
 <style>
+  /* --ink-width is the heading's ink width in em and 1394 is its width in design pixels, so --u is the
+     design-pixel size implied by the heading's font size. */
   .about {
-    --u: calc(100vw / 1702);
+    --touch-font-size: 10rem;
+    --about-text-size: 1.25rem;
+    --u: calc(var(--touch-font-size) * var(--ink-width) / 1394);
     position: relative;
     height: calc(973 * var(--u));
     overflow: hidden;
@@ -93,8 +99,8 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     color: var(--color-chalk);
   }
 
-  /* Hands and heading share one frame so they scale together: it starts at the top of the hands (y 245 in
-     the design) and ends at the bottom of the heading (y 898). */
+  /* Hands and heading share one frame: it starts at the top of the hands (y 245 in the design) and
+     ends at the bottom of the heading (y 898). */
   .about-touch {
     position: absolute;
     left: 0;
@@ -104,7 +110,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     pointer-events: none;
   }
 
-  /* --ink-width is the heading's ink width in em; the heading spans 1394 design pixels from x 55 to the photo's right edge. */
+  /* The heading spans 1394 design pixels from x 55 to the photo's right edge. */
   .about-heading {
     --wordmark-stroke-width: 2px;
     --wordmark-gap: 0.256em;
@@ -113,7 +119,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     bottom: 0;
     z-index: 1;
     margin: 0;
-    font-size: calc(1394 * var(--u) / var(--ink-width));
+    font-size: var(--touch-font-size);
     line-height: 0.8;
   }
 
@@ -148,7 +154,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     margin: 0;
     max-width: none;
     font-family: var(--font-hero-mono);
-    font-size: max(0.875rem, calc(23.458 * var(--u)));
+    font-size: var(--about-text-size);
     line-height: 1.255;
   }
 
@@ -191,23 +197,40 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     max-width: none;
   }
 
-  @media (max-width: 767px) {
+  /* Tablet: text beside the portrait, heading and hands below. */
+  @media (max-width: 1399px) {
     .about {
-      display: flex;
-      flex-direction: column;
-      gap: 6vw;
+      --touch-font-size: 5.75rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(36vw, 24rem));
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        'contact photo'
+        'statement photo'
+        'touch touch';
+      align-content: start;
+      gap: 5vw 4vw;
       height: auto;
-      padding: calc(var(--header-height) + 6vw) 6vw 6vw;
+      padding: calc(var(--header-height) + 5vw) calc(5vw + var(--wordmark-gutter)) 5vw 5vw;
     }
 
     .about-contact,
     .about-statement {
       position: static;
       width: auto;
-      font-size: max(0.875rem, 3.8vw);
+      overflow-wrap: anywhere;
+    }
+
+    .about-contact {
+      grid-area: contact;
+    }
+
+    .about-statement {
+      grid-area: statement;
     }
 
     .about-photo {
+      grid-area: photo;
       position: relative;
       left: auto;
       top: auto;
@@ -216,14 +239,34 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
       aspect-ratio: 395 / 647;
     }
 
+    /* Shifted left so the heading's ink starts at the content edge. */
     .about-touch {
-      --u: calc(88vw / 1394);
+      grid-area: touch;
       position: relative;
       left: auto;
       top: auto;
-      flex: none;
-      order: 1;
+      width: 100%;
       margin-left: calc(-55 * var(--u));
+    }
+  }
+
+  /* Mobile: one column with the heading above the portrait. */
+  @media (max-width: 767px) {
+    .about {
+      --touch-font-size: 2.5rem;
+      --about-text-size: 1rem;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: none;
+      grid-template-areas:
+        'contact'
+        'statement'
+        'touch'
+        'photo';
+      gap: 6vw;
+    }
+
+    .about-heading {
+      --wordmark-stroke-width: 1px;
     }
   }
 </style>
