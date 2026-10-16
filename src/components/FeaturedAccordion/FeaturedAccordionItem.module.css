@@ -6,12 +6,12 @@
 | Measurements come from the Figma ABOUT frame (node 198:32), where one strip
 | is 1509 design pixels wide; --u (set by FeaturedAccordion) is one of those
 | pixels. A strip is 241 tall and grows to 888 on hover (60vh from 1400px up).
-| The text block is anchored to the bottom edge, and its bottom inset moves
-| from 63 to 168 as the strip grows. Dark text stays legible over any
-| thumbnail: a white left-to-right fade (Figma node 252:117) while the strip
-| is closed, which crossfades to a radial white glow behind the text when it
-| opens. The image is always the expanded size, centred, so growing the strip
-| reveals more of it instead of scaling it.
+| The text block sits at the bottom left while closed (63 above the bottom
+| edge) and moves to the top left (54 from the corner) as the strip grows. Dark
+| text stays legible over any thumbnail: a white left-to-right fade (Figma node
+| 252:117) while the strip is closed, which crossfades to a radial white glow
+| from the top left corner when it opens. The image is always the expanded
+| size, centred, so growing the strip reveals more of it instead of scaling it.
 |
 */
 .item {
@@ -56,32 +56,33 @@
   transition: opacity var(--duration-slow) var(--ease-standard);
 }
 
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  background: radial-gradient(
+    ellipse calc(1300 * var(--u)) calc(420 * var(--u)) at top left,
+    color-mix(in srgb, var(--color-chalk) 92%, transparent),
+    color-mix(in srgb, var(--color-chalk) 85%, transparent) 70%,
+    transparent
+  );
+  transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
 .content {
   position: absolute;
   z-index: 2;
+  top: 100%;
   left: calc(54 * var(--u));
-  bottom: calc(63 * var(--u));
+  transform: translateY(calc(-100% - 63 * var(--u)));
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: calc(25 * var(--u));
-  isolation: isolate;
-  transition: bottom var(--duration-slow) var(--ease-standard);
-}
-
-.content::before {
-  content: '';
-  position: absolute;
-  inset: calc(-100 * var(--u)) calc(-200 * var(--u));
-  z-index: -1;
-  opacity: 0;
-  background: radial-gradient(
-    closest-side,
-    color-mix(in srgb, var(--color-chalk) 92%, transparent),
-    color-mix(in srgb, var(--color-chalk) 78%, transparent) 55%,
-    transparent
-  );
-  transition: opacity var(--duration-slow) var(--ease-standard);
+  transition: top var(--duration-slow) var(--ease-standard),
+              transform var(--duration-slow) var(--ease-standard);
 }
 
 .title {
@@ -124,7 +125,11 @@
   height: var(--expanded-height);
 }
 
-.item:has(.link:focus-visible) .content,
+.item:has(.link:focus-visible) .content {
+  top: 0;
+  transform: translateY(calc(54 * var(--u)));
+}
+
 .item:has(.link:focus-visible) .featured {
   bottom: calc(168 * var(--u));
 }
@@ -133,7 +138,7 @@
   opacity: 0;
 }
 
-.item:has(.link:focus-visible) .content::before {
+.item:has(.link:focus-visible) .link::after {
   opacity: 1;
 }
 
@@ -142,7 +147,11 @@
     height: var(--expanded-height);
   }
 
-  .item:hover .content,
+  .item:hover .content {
+    top: 0;
+    transform: translateY(calc(54 * var(--u)));
+  }
+
   .item:hover .featured {
     bottom: calc(168 * var(--u));
   }
@@ -151,7 +160,7 @@
     opacity: 0;
   }
 
-  .item:hover .content::before {
+  .item:hover .link::after {
     opacity: 1;
   }
 }
@@ -165,8 +174,8 @@
 @media (prefers-reduced-motion: reduce) {
   .item,
   .content,
-  .content::before,
   .link::before,
+  .link::after,
   .featured {
     transition: none;
   }
