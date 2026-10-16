@@ -5,18 +5,26 @@
 |-------------------------------------------------------------------------------
 |
 | Loads project content, sorts by order/date, derives the unique album list,
-| and renders the interactive album-filtered grid as a React island.
+| and renders the interactive album-filtered grid as a React island. When
+| `featuredPicks` is given, the first tab is FEATURED and shows those projects,
+| each with the chosen image, in an accordion.
 |
 */
 import { getCollection } from 'astro:content';
 import ProjectGallery from './ProjectGallery/ProjectGallery';
 import { sortProjectsByOrder } from '../utils/sort-projects';
 
-interface Props {
-  tightTop?: boolean;
+interface FeaturedPick {
+  id: string;
+  imageUrl: string;
 }
 
-const { tightTop = false } = Astro.props;
+interface Props {
+  tightTop?: boolean;
+  featuredPicks?: FeaturedPick[];
+}
+
+const { tightTop = false, featuredPicks } = Astro.props;
 
 const allProjects = await getCollection('projects', ({ data }) => !data.featured);
 const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
@@ -43,6 +51,27 @@ const projects = sortedProjects.map((project) => ({
 const albums = Array.from(
   new Set(projects.map((project) => project.album).filter((a) => a.length > 0)),
 );
+
+const featured = featuredPicks?.map(({ id, imageUrl }) => {
+  const project = sortedProjects.find((p) => p.id === id);
+  if (!project) {
+    throw new Error(`Featured project "${id}" is not in projects.json. Update featuredPicks to an existing project id.`);
+  }
+  const image = project.data.images.find((img) => img.url === imageUrl);
+  if (!image) {
+    throw new Error(
+      `Featured image for "${project.data.title}" (${id}) is not one of its images. Copy a URL from its "images" in projects.json; it changes when fetch-portfolio picks up a re-uploaded image.`,
+    );
+  }
+  return {
+    title: project.data.title,
+    album: project.data.albums?.[0] ?? '',
+    thumbnail: { url: image.url, width: image.width, height: image.height },
+    thumbnailAlt: `${project.data.title} featured image`,
+    href: `/projects/${project.id}`,
+    featured: project.data.featured,
+  };
+});
 ---
 
-<ProjectGallery projects={projects} albums={albums} tightTop={tightTop} client:load />
+<ProjectGallery projects={projects} albums={albums} featured={featured} tightTop={tightTop} client:load />

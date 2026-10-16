@@ -3,8 +3,9 @@
 | ProjectGallery — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Horizontal pill/tag filter (sticky below header). The FEATURED tab shows a
-| FeaturedAccordion; every album tab shows a masonry grid of project
+| Horizontal pill/tag filter (sticky below header). With `featured`, the first
+| tab is FEATURED and shows a FeaturedAccordion; without it the first tab is ALL
+| and shows every project. Album tabs show a masonry grid of project
 | cards. Each card's grid placement (column + row-start + row-span) is
 | computed by a basic shortest-column packer so the browser renders the
 | intended layout without relying on its dense-flow heuristics. Toggles
@@ -13,7 +14,7 @@
 */
 import type { CSSProperties } from 'react';
 import { useEffect, useState } from 'react';
-import FeaturedAccordion from '../FeaturedAccordion/FeaturedAccordion';
+import FeaturedAccordion, { type FeaturedAccordionProject } from '../FeaturedAccordion/FeaturedAccordion';
 import ProjectCard, { type ProjectCardThumbnail } from '../ProjectCard/ProjectCard';
 import styles from './ProjectGallery.module.css';
 
@@ -31,6 +32,8 @@ export const ALL_ALBUMS = 'all';
 interface ProjectGalleryProps {
   projects: GalleryProject[];
   albums: string[];
+  /** Projects for the FEATURED first tab; when omitted the first tab is ALL. */
+  featured?: FeaturedAccordionProject[];
   /** Drops the header offset above the filter bar on small screens. */
   tightTop?: boolean;
 }
@@ -86,7 +89,7 @@ function computePlacement(grid: HTMLElement, thumbnails: ProjectCardThumbnail[])
   });
 }
 
-export default function ProjectGallery({ projects, albums, tightTop = false }: ProjectGalleryProps) {
+export default function ProjectGallery({ projects, albums, featured, tightTop = false }: ProjectGalleryProps) {
   const [activeAlbum, setActiveAlbum] = useState<string>(ALL_ALBUMS);
   const [gridEl, setGridEl] = useState<HTMLElement | null>(null);
   const [placement, setPlacement] = useState<Slot[]>([]);
@@ -121,7 +124,7 @@ export default function ProjectGallery({ projects, albums, tightTop = false }: P
                 data-album={ALL_ALBUMS}
                 onClick={() => setActiveAlbum(ALL_ALBUMS)}
               >
-                FEATURED
+                {featured ? 'FEATURED' : 'ALL'}
               </button>
             </li>
             {albums.map((album) => (
@@ -142,9 +145,9 @@ export default function ProjectGallery({ projects, albums, tightTop = false }: P
         </nav>
       </div>
 
-      {activeAlbum === ALL_ALBUMS ? (
+      {featured && activeAlbum === ALL_ALBUMS ? (
         <div id="project-grid" className={styles.grid} aria-label="Projects">
-          <FeaturedAccordion projects={visibleProjects} />
+          <FeaturedAccordion projects={featured} />
         </div>
       ) : (
         <div

@@ -4,8 +4,8 @@
 | Home Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-window hero with rotating background images + Project Gallery
-| with album filter.
+| Full-window hero with rotating background images + Project Gallery whose
+| FEATURED tab shows four hand-picked projects, each with a chosen image.
 |
 */
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -18,6 +18,26 @@ const heroImages = [
   '/hero/slideshow_2.png',
   '/hero/slideshow_3.png',
 ];
+
+// Project ids and the image URL (from the project's "images" in projects.json) shown on each accordion item.
+const featuredPicks = [
+  {
+    id: 'xdDJRX',
+    imageUrl: 'https://cdnb.artstation.com/p/assets/images/images/102/153/627/large/jose-mercado-ruiz-blue-waves-storyboard-artboard-8.webp?1788528674',
+  },
+  {
+    id: 'PXbgxr',
+    imageUrl: 'https://cdna.artstation.com/p/assets/images/images/066/072/822/large/jose-mercado-ruiz-lego-plane-crash.jpg?1691988928',
+  },
+  {
+    id: '6vvvZO',
+    imageUrl: 'https://cdnb.artstation.com/p/assets/images/images/103/267/643/large/jose-mercado-ruiz-overview-v1.jpg?1792140882',
+  },
+  {
+    id: 'Y8Be0P',
+    imageUrl: 'https://cdnb.artstation.com/p/assets/images/images/102/156/341/large/jose-mercado-ruiz-screenshot-2026-09-05-at-1-07-44-am.webp?1788534528',
+  },
+];
 ---
 
 <BaseLayout title="JMR Visuals — Portfolio" description="Multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.">
@@ -25,7 +45,7 @@ const heroImages = [
   <HeroSection images={heroImages} />
 
   <main id="main-content" class="home-main">
-    <ProjectGallery tightTop />
+    <ProjectGallery tightTop featuredPicks={featuredPicks} />
   </main>
 </BaseLayout>
 
