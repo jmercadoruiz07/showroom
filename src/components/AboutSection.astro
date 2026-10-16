@@ -72,14 +72,16 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     />
   </div>
 
-  <div class="about-contact">
-    <p>CONTACT</p>
-    <a href={`mailto:${email}`}>{email}</a>
-  </div>
-  <p class="about-statement">{statement}</p>
+  <div class="about-columns">
+    <div class="about-contact">
+      <p>CONTACT</p>
+      <a href={`mailto:${email}`}>{email}</a>
+    </div>
+    <p class="about-statement">{statement}</p>
 
-  <div class="about-photo">
-    <img src={portrait} alt={portraitAlt} loading="eager" decoding="async" />
+    <div class="about-photo">
+      <img src={portrait} alt={portraitAlt} loading="eager" decoding="async" />
+    </div>
   </div>
 </section>
 
@@ -144,12 +146,22 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     transform: rotate(-162.47deg) scaleY(-1);
   }
 
+  /* Contact, statement and portrait share one row from the contact's left edge (x 133.5) to the portrait's
+     right edge (x 1450), with equal gaps between them. */
+  .about-columns {
+    position: absolute;
+    top: 0;
+    left: calc(133.5 * var(--u));
+    width: calc(1316.5 * var(--u));
+    z-index: 3;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
   .about-contact,
   .about-statement {
-    position: absolute;
-    top: calc(150 * var(--u));
-    z-index: 3;
-    margin: 0;
+    margin: calc(150 * var(--u)) 0 0;
     max-width: none;
     font-family: var(--font-hero-mono);
     font-size: var(--about-text-size);
@@ -157,8 +169,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
   }
 
   .about-contact {
-    left: calc(133.5 * var(--u));
-    width: calc(353 * var(--u));
+    width: max-content;
   }
 
   .about-contact p {
@@ -171,16 +182,13 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
   }
 
   .about-statement {
-    left: calc(547.5 * var(--u));
     width: calc(447 * var(--u));
   }
 
   /* The top of the portrait sits under the header. */
   .about-photo {
-    position: absolute;
-    left: calc(1055 * var(--u));
-    top: 0;
-    z-index: 3;
+    position: relative;
+    flex: none;
     width: calc(395 * var(--u));
     height: calc(647 * var(--u));
     overflow: hidden;
@@ -212,10 +220,14 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
       padding: calc(var(--header-height) + 5vw) calc(5vw + var(--wordmark-gutter)) 5vw 5vw;
     }
 
+    .about-columns {
+      display: contents;
+    }
+
     .about-contact,
     .about-statement {
-      position: static;
       width: auto;
+      margin: 0;
       overflow-wrap: anywhere;
     }
 
@@ -229,9 +241,6 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
     .about-photo {
       grid-area: photo;
-      position: relative;
-      left: auto;
-      top: auto;
       width: 100%;
       height: auto;
       aspect-ratio: 395 / 647;
