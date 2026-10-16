@@ -12,17 +12,6 @@
   background: var(--color-paper);
 }
 
-.link {
-  position: absolute;
-  inset: 0;
-  display: block;
-}
-
-.link:focus-visible {
-  outline: 2px solid var(--color-chalk);
-  outline-offset: -4px;
-}
-
 .image {
   position: absolute;
   inset: 0;

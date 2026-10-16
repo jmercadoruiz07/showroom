@@ -5,9 +5,9 @@
 |
 | Single project image filling the hero background. The projects are shuffled
 | in the browser on each page load; the image then crossfades to the next
-| project in the shuffled order every few seconds. Rotation pauses on
-| hover/focus and while the tab is hidden, and is disabled for
-| prefers-reduced-motion.
+| project in the shuffled order every few seconds. Rotation pauses on hover
+| and while the tab is hidden, and is disabled for prefers-reduced-motion.
+| The image is decorative and not interactive.
 |
 */
 import { useEffect, useState } from 'react';
@@ -92,27 +92,20 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
   return (
     <div
       className={styles.carousel}
-      role="group"
-      aria-label="Featured project"
+      aria-hidden="true"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onBlur={() => setIsPaused(false)}
     >
-      {current && (
-        <a className={styles.link} href={current.href} aria-label={`View ${current.title}`}>
-          {layers.map((layer) => (
-            <img
-              key={layer.href}
-              className={styles.image}
-              src={layer.src}
-              alt=""
-              decoding="async"
-              onAnimationEnd={() => setLayers((existing) => existing.slice(-1))}
-            />
-          ))}
-        </a>
-      )}
+      {layers.map((layer) => (
+        <img
+          key={layer.href}
+          className={styles.image}
+          src={layer.src}
+          alt=""
+          decoding="async"
+          onAnimationEnd={() => setLayers((existing) => existing.slice(-1))}
+        />
+      ))}
     </div>
   );
 }
