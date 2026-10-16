@@ -46,7 +46,7 @@ The built site has moved on from the early hero frames in places (full-window he
 | `--color-paper` | `oklch(0.28 0.008 225)` | Image placeholders, panels |
 | `--color-accent` | `#789da0` | Muted teal for focus and the card FEATURED tag |
 
-Secondary labels (card category, inactive filter tabs) are 58% white via `color-mix`.
+Secondary labels (card category) are 58% white via `color-mix`. Filter tabs are white; the selected tab is a white box with dark text and a hovered tab is a light grey box (75% white) with dark text.
 
 ### Typography
 
