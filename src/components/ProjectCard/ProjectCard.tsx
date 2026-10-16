@@ -4,8 +4,8 @@
 |-------------------------------------------------------------------------------
 |
 | Single project thumbnail with title + album. No border-radius, no default drop shadow.
-| Title overlay on hover (slides up from bottom). Slow zoom (scale 1.03 over 500ms).
-| Album tag in the hero mono font (top-right).
+| A bar with the title (left) and album (right) slides down from the top edge on hover.
+| Slow zoom (scale 1.03 over 800ms).
 |
 */
 import type { CSSProperties } from 'react';
@@ -61,18 +61,16 @@ export default function ProjectCard({
           />
         </div>
 
-        <div className={styles.overlay}>
-          {album ? (
+        <div className={styles.bar}>
+          <h2 className={styles.title}>{title}</h2>
+          {album && (
             <span className={styles.category} aria-hidden="true">
-              {album.toUpperCase()}
+              {album}
             </span>
-          ) : <div />}
-
-          <div className={styles.content}>
-            <h2 className={styles.title}>{title}</h2>
-            {featured && <span className={styles.featured}>FEATURED</span>}
-          </div>
+          )}
         </div>
+
+        {featured && <span className={styles.featured}>FEATURED</span>}
       </a>
     </article>
   );

@@ -3,12 +3,11 @@
 | ProjectCard — Component Styles
 |-------------------------------------------------------------------------------
 |
-| Plate overlay: every label sits on an opaque plate for guaranteed contrast
-| over arbitrary imagery. Title is a white plate with bold uppercase display
-| type; category and featured tags are mono labels. Hierarchy: title (P1) >
-| category (P2) > featured (P3).
-| Slow zoom (scale 1.03 over 800ms). On hover the title slides up and the
-| category tag slides down from the top, both fading in.
+| Slow zoom (scale 1.03 over 800ms). A bar in the page background colour sits
+| above the card's top edge with the title on the left and the category on the
+| right, both in the filter-tab type. On hover or focus it slides down over the
+| top of the image like an eyelid. Where hover is unavailable the bar is always
+| shown.
 |
 */
 .card {
@@ -37,70 +36,66 @@
   transition: transform var(--duration-zoom) var(--ease-standard);
 }
 
-.overlay {
+.bar {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1;
-  padding: var(--space-md);
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-bone);
+  color: var(--color-chalk);
+  font-family: var(--font-hero-mono);
+  font-size: var(--type-xs);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.2;
+  text-transform: uppercase;
+  transform: translateY(-100%);
+  transition: transform var(--duration-base) var(--ease-standard);
   pointer-events: none;
 }
 
+.title,
 .category {
-  align-self: flex-end;
-  display: inline-block;
-  background: var(--color-bone);
-  color: var(--color-chalk);
-  padding: 0.3em 0.7em;
-  font-family: var(--font-hero-mono);
-  font-size: clamp(0.75rem, 0.9vw, 0.95rem);
-  letter-spacing: var(--tracking-wide);
-  line-height: 1;
-  text-transform: uppercase;
-  transform: translateY(-8px);
-  opacity: 0;
-  transition:
-    transform var(--duration-fast) var(--ease-quick),
-    opacity var(--duration-fast) var(--ease-quick);
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
 }
 
-.content {
-  transform: translateY(8px);
-  opacity: 0;
-  transition:
-    transform var(--duration-fast) var(--ease-quick),
-    opacity var(--duration-fast) var(--ease-quick);
-}
-
-.title {
-  display: inline;
-  font-family: var(--font-hero);
-  font-size: clamp(0.9rem, 1.4vw, 1.4rem);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-tight);
-  line-height: 1.1;
-  text-transform: uppercase;
-  color: var(--color-bone);
-  background: var(--color-chalk);
-  padding: 0.15em 0.4em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  text-wrap: balance;
+.category {
+  flex: none;
 }
 
 .featured {
-  display: inline-block;
-  margin-top: var(--space-sm);
+  position: absolute;
+  left: var(--space-sm);
+  bottom: var(--space-sm);
+  z-index: 1;
   background: var(--color-accent);
   color: var(--color-bone);
   padding: 0.3em 0.7em;
   font-family: var(--font-hero-mono);
-  font-size: clamp(0.75rem, 0.9vw, 0.95rem);
+  font-size: var(--type-xs);
   letter-spacing: var(--tracking-wide);
   line-height: 1;
   text-transform: uppercase;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.card .link:focus-visible .bar {
+  transform: translateY(0);
+}
+
+.card .link:focus-visible .featured {
+  opacity: 1;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -108,29 +103,29 @@
     transform: scale(1.03);
   }
 
-  .card .link:hover .content {
+  .card .link:hover .bar {
     transform: translateY(0);
-    opacity: 1;
   }
 
-  .card .link:hover .category {
-    transform: translateY(0);
+  .card .link:hover .featured {
     opacity: 1;
   }
 }
 
 @media (hover: none) {
-  .card .content,
-  .card .category {
+  .card .bar {
     transform: none;
+  }
+
+  .card .featured {
     opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card .media img,
-  .card .content,
-  .category {
+  .bar,
+  .featured {
     transition: none;
   }
 }
