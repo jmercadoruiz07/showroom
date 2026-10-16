@@ -37,7 +37,7 @@
 .filterList {
   display: flex;
   flex-wrap: nowrap;
-  gap: calc(var(--space-2xs) * 3);
+  gap: calc(var(--space-2xs) * 7);
   list-style: none;
   margin: 0;
   padding: 0;
