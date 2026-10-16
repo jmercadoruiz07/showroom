@@ -44,11 +44,14 @@ const { images } = Astro.props;
     const hint = document.querySelector<HTMLElement>('.hero-scroll');
     if (!hint) return;
 
+    let revealed = false;
+    const update = () => hint.toggleAttribute('data-visible', revealed && window.scrollY === 0);
+
+    onScroll = update;
+    window.addEventListener('scroll', update, { passive: true });
     timer = window.setTimeout(() => {
-      if (window.scrollY > 0) return;
-      hint.toggleAttribute('data-visible', true);
-      onScroll = () => hint.toggleAttribute('data-visible', window.scrollY === 0);
-      window.addEventListener('scroll', onScroll, { passive: true });
+      revealed = true;
+      update();
     }, REVEAL_DELAY_MS);
   }
 
