@@ -256,12 +256,39 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     }
   }
 
-  /* Tablet only: the heading and hand rise so the fingertip slightly overlaps the portrait's bottom edge,
-     and the hand sits further left so its flat cut end is off screen. The text stays above the hand. */
+  /* Tablet only: the portrait runs alongside the heading row, which starts just under the statement so the
+     hand never covers text. The hand sits further left so its flat cut end is off screen. */
   @media (min-width: 768px) and (max-width: 1399px) {
+    .about {
+      grid-template-areas: none;
+      grid-template-rows: auto auto 1fr;
+    }
+
+    .about-contact {
+      grid-area: auto;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .about-statement {
+      grid-area: auto;
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .about-photo {
+      grid-area: auto;
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      align-self: start;
+    }
+
     .about-touch {
+      grid-area: auto;
+      grid-column: 1 / -1;
+      grid-row: 3;
       z-index: 1;
-      margin-top: calc(-5vw - 486 * var(--u));
+      margin-top: calc(-5vw + 12px);
     }
 
     .about-hand-behind {
@@ -270,12 +297,6 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
     .about-hand-front {
       left: calc(-168.54 * var(--u));
-    }
-
-    .about-contact,
-    .about-statement {
-      position: relative;
-      z-index: 2;
     }
   }
 
