@@ -42,7 +42,7 @@ const projects = sortedProjects.map((project) => ({
     height: project.data.thumbnail.height,
   },
   thumbnailAlt: `${project.data.title} thumbnail`,
-  href: `/projects/${project.id}`,
+  href: `/works/${project.id}`,
   featured: project.data.featured,
 }));
 
@@ -65,7 +65,7 @@ const featured = featuredPicks?.map(({ id, imageIndex }) => {
     album: project.data.albums?.[0] ?? '',
     thumbnail: { url: image.url, width: image.width, height: image.height },
     thumbnailAlt: `${project.data.title} featured image`,
-    href: `/projects/${project.id}`,
+    href: `/works/${project.id}`,
     featured: project.data.featured,
   };
 });
