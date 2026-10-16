@@ -3,7 +3,9 @@
     "id": "6vvvZO",
     "title": "CONCORD PRIME",
     "date": "2026-10-16",
-    "albums": [],
+    "albums": [
+      "Interactive"
+    ],
     "categories": [],
     "tags": [
       "Illustration",
@@ -71,15 +73,15 @@
       "poem"
     ],
     "thumbnail": {
-      "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/341/medium/jose-mercado-ruiz-screenshot-2026-09-05-at-1-07-44-am.webp?1788534528",
-      "width": 1600,
-      "height": 1133
+      "url": "https://cdnb.artstation.com/p/assets/images/images/103/272/751/medium/jose-mercado-ruiz-screenshot-2026-10-17-at-12-06-07-am.jpg?1792155987",
+      "width": 1130,
+      "height": 1600
     },
     "images": [
       {
-        "url": "https://cdnb.artstation.com/p/assets/images/images/102/156/341/large/jose-mercado-ruiz-screenshot-2026-09-05-at-1-07-44-am.webp?1788534528",
-        "width": 1472,
-        "height": 2078
+        "url": "https://cdnb.artstation.com/p/assets/images/images/103/272/751/large/jose-mercado-ruiz-screenshot-2026-10-17-at-12-06-07-am.jpg?1792155987",
+        "width": 1304,
+        "height": 1846
       },
       {
         "url": "https://cdna.artstation.com/p/assets/images/images/102/156/308/large/jose-mercado-ruiz-img-3242.webp?1788534436",
