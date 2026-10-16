@@ -22,10 +22,11 @@ interface FeaturedPick {
 
 interface Props {
   tightTop?: boolean;
+  stickyFilter?: boolean;
   featuredPicks?: FeaturedPick[];
 }
 
-const { tightTop = false, featuredPicks } = Astro.props;
+const { tightTop = false, stickyFilter = true, featuredPicks } = Astro.props;
 
 const allProjects = await getCollection('projects', ({ data }) => !data.featured);
 const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
@@ -71,4 +72,4 @@ const featured = featuredPicks?.map(({ id, imageIndex }) => {
 });
 ---
 
-<ProjectGallery projects={projects} albums={albums} featured={featured} tightTop={tightTop} client:load />
+<ProjectGallery projects={projects} albums={albums} featured={featured} tightTop={tightTop} stickyFilter={stickyFilter} client:load />

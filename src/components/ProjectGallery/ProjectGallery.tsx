@@ -36,6 +36,8 @@ interface ProjectGalleryProps {
   featured?: FeaturedAccordionProject[];
   /** Drops the header offset above the filter bar on small screens. */
   tightTop?: boolean;
+  /** Keeps the filter bar pinned below the header while scrolling. */
+  stickyFilter?: boolean;
 }
 
 /**
@@ -89,7 +91,7 @@ function computePlacement(grid: HTMLElement, thumbnails: ProjectCardThumbnail[])
   });
 }
 
-export default function ProjectGallery({ projects, albums, featured, tightTop = false }: ProjectGalleryProps) {
+export default function ProjectGallery({ projects, albums, featured, tightTop = false, stickyFilter = true }: ProjectGalleryProps) {
   const [activeAlbum, setActiveAlbum] = useState<string>(ALL_ALBUMS);
   const [gridEl, setGridEl] = useState<HTMLElement | null>(null);
   const [placement, setPlacement] = useState<Slot[]>([]);
@@ -112,7 +114,7 @@ export default function ProjectGallery({ projects, albums, featured, tightTop = 
 
   return (
     <div className={`${styles.root}${tightTop ? ` ${styles.tightTop}` : ''}`}>
-      <div className={styles.filterBar}>
+      <div className={`${styles.filterBar}${stickyFilter ? '' : ` ${styles.filterBarStatic}`}`}>
         <nav className={styles.filter} aria-label="Filter projects by album">
           <ul className={styles.filterList}>
             <li>

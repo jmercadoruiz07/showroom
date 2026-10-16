@@ -23,6 +23,10 @@
   margin: 0 0 var(--space-xl);
 }
 
+.filterBar.filterBarStatic {
+  position: static;
+}
+
 .filter {
   flex: 1;
   min-width: 0;
