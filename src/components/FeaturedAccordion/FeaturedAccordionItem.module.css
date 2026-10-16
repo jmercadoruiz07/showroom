@@ -8,9 +8,10 @@
 | pixels. A strip is 241 tall and grows to 888 on hover (60vh from 1400px up).
 | The text block is
 | anchored to the bottom edge, and its bottom inset moves from 63 to 168 as the
-| strip grows. A white fade on the left keeps the dark text legible over any
-| thumbnail. The image is always the expanded size, centred, so growing the
-| strip reveals more of it instead of scaling it.
+| strip grows. A white fade on the left and a radial white glow behind the text
+| keep the dark text legible over any thumbnail. The image is always the
+| expanded size, centred, so growing the strip reveals more of it instead of
+| scaling it.
 |
 */
 .item {
@@ -61,7 +62,21 @@
   flex-direction: column;
   align-items: flex-start;
   gap: calc(25 * var(--u));
+  isolation: isolate;
   transition: bottom var(--duration-slow) var(--ease-standard);
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  inset: calc(-80 * var(--u)) calc(-160 * var(--u));
+  z-index: -1;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--color-chalk) 85%, transparent),
+    color-mix(in srgb, var(--color-chalk) 65%, transparent) 50%,
+    transparent
+  );
 }
 
 .title {
