@@ -24,7 +24,7 @@
     </a>
   </div>
 
-  <p class="footer-wordmark" aria-hidden="true">José</p>
+  <p class="footer-wordmark" aria-hidden="true">Jose</p>
 </footer>
 
 <style>
@@ -65,14 +65,13 @@
     color: var(--color-accent);
   }
 
-  /* 2.402 is the ink width of JOSÉ in em at this letter-spacing, so the text spans the insets exactly.
-     The box is trimmed to cap height and baseline; the top padding leaves room for the accent and the bottom
-     padding for the round letters' overshoot (0.016em) and the outline stroke. Clipping stops the font's
-     descender area adding scroll height. */
+  /* 2.402 is the ink width of JOSE in em at this letter-spacing, so the text spans the insets exactly.
+     The box is trimmed to cap height and baseline; the top and bottom padding cover the round letters'
+     overshoot (0.016em) and the outline stroke. Clipping stops the font's descender area adding scroll height. */
   .footer-wordmark {
     margin: 0;
     max-width: none;
-    padding: 0.235em var(--footer-inset) calc(0.016em + 3px);
+    padding: calc(0.016em + 3px) var(--footer-inset);
     overflow: hidden;
     font-family: var(--font-hero);
     font-size: calc((100cqw - 2 * var(--footer-inset)) / 2.402);
