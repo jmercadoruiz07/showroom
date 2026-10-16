@@ -1,13 +1,15 @@
 # JMR Visuals — Portfolio
 
-Portfolio site for José Mercado Ruiz (print, 3D, motion). Astro 7 static site, with React used only for the hero image column. Dark theme only.
+Portfolio site for José Mercado Ruiz (print, 3D, motion). Astro 7 static site, with React used for the hero image carousel and the project gallery islands. Dark theme only.
 
-Figma source of truth: file `Vl3rEa0ebSFcwQGhqgbzNd` (PORTFOLIO), desktop frames are 1728px wide.
+Figma source of truth: file `Vl3rEa0ebSFcwQGhqgbzNd` (PORTFOLIO).
 
-- Hero: node `36:275`
+- Hero: node `36:275` (1728px wide)
 - Homepage with divider and masonry: node `32:230`
 - Project page: node `1:2`
-- About page: node `198:32` (1702px wide; built in `AboutSection.astro` and `ContactBlock.astro` with `--u = 100vw / 1702`, the outlined `VerticalWordmark`, and assets in `public/about/`)
+- About page: node `243:13` (1702px wide, the current design; `198:32` is the older one)
+
+The built site has moved on from the early hero frames in places (full-window hero, three slideshow images, dark header). Where this file and Figma disagree, this file describes what ships.
 
 ## Commands
 
@@ -25,80 +27,78 @@ Figma source of truth: file `Vl3rEa0ebSFcwQGhqgbzNd` (PORTFOLIO), desktop frames
 
 **Rules**
 - Dark only. No light mode, no theme toggle.
-- No rounded corners, shadows, gradients, cards, borders around images or glassmorphism.
-- Images are rectangles with their original aspect ratio, stacked with a tiny gutter (about 4px at 1728px) so the page background shows as a hairline.
+- No rounded corners, shadows, gradients, cards, borders around images or glassmorphism. (The one exception is the hover plate on project cards, which is a flat bar in the page colour.)
+- Images are rectangles stacked with a small gutter so the page background shows as a hairline.
 - Type does the decoration: very large, tight-tracked, uppercase display type next to small, plain body copy. Scale contrast is the main visual device.
-- Elements are allowed to overlap (the hand illustration crosses the title and the image column) and to be cropped by the page edge.
-- Content hangs from a left column; the right edge is held by the vertical title.
+- Elements may overlap (the hand illustration crosses the About heading) and be cropped by the page edge.
+- Every page shares one horizontal gutter (`--grid-gutter`) so dividers, the filter bar, the gallery grid and the footer row line up.
 
 ### Color
 
 | Token | Value | Use |
 | :-- | :-- | :-- |
-| `--color-bone` | `#191d1f` | Page background (cool charcoal) |
-| `--color-chalk` | `#ffffff` | Display type, nav bar, divider |
-| `--color-ink` | `oklch(0.88 0.008 75)` | Body text |
-| `--color-soot` | `oklch(0.65 0.01 75)` | Secondary text |
-| `--color-stone` | `oklch(0.35 0.01 60)` | Borders |
+| `--color-bone` | `#191d1f` | Page background (cool charcoal), header and card bar |
+| `--color-chalk` | `#ffffff` | Display type, outlines, dividers |
+| `--color-ink` | `var(--color-chalk)` | Body text and headings (white) |
+| `--color-soot` | `var(--color-chalk)` | Secondary text (also white) |
+| `--color-stone` | `oklch(0.35 0.01 60)` | Borders, image placeholders |
 | `--color-paper` | `oklch(0.28 0.008 225)` | Image placeholders, panels |
-| `--color-accent` | `#789da0` | Muted teal for hover, active and focus states (sampled from the Figma nav, not a Figma variable) |
+| `--color-accent` | `#789da0` | Muted teal for focus and the card FEATURED tag |
 
-Figma also shows secondary labels at 58% white. The old copper accent is gone.
+Secondary labels (card category, inactive filter tabs) are 58% white via `color-mix`.
 
 ### Typography
 
-| Role | Figma font | Site font (Adobe Fonts / Typekit) | Notes |
-| :-- | :-- | :-- | :-- |
-| Display (name, vertical title, nav) | LEMON MILK Bold | `widescreen` via `--font-hero` | Uppercase, weight 700 (name, nav) and 900 (vertical title) |
-| Body copy | NB Akademie Std Medium | `adelle-mono` via `--font-hero-mono` | 22px at 1728px, line-height about 1.43 |
-| Labels | NB Akademie Mono Std Medium | `adelle-mono` | 28px, uppercase, white or 58% white |
+| Role | Site font (Adobe Fonts / Typekit) | Notes |
+| :-- | :-- | :-- |
+| Display (hero name, wordmarks, About heading) | `widescreen` via `--font-hero` | Uppercase; 700 for the hero name, 900 for outlined wordmarks |
+| Body, nav, filter tabs, card labels, footer text | `adelle-mono` via `--font-hero-mono` | Nav, tabs and the footer copyright share one style: `--type-xs`, regular, `--tracking-wide`, uppercase |
 
-The Typekit stylesheet `https://use.typekit.net/ysa2ssy.css` is loaded in `src/layouts/BaseLayout.astro`. `--font-display` is `widescreen` and `--font-body` and `--font-mono` are `adelle-mono` on every page, so utilities like `.text-display` and plain headings (uppercase) follow the hero. Interactive states are inverted blocks (white plate, dark text) or teal text.
+Figma uses LEMON MILK and NB Akademie, which are not available, so `widescreen` and `adelle-mono` stand in. The Typekit stylesheet is loaded in `src/layouts/BaseLayout.astro`.
 
-Display sizes at 1728px:
-- Name "JO / SE": 644px, tracking −0.1em, line-height 0.8, two lines, second line indented one space.
-- Vertical "MERCADO RUIZ" (`VerticalWordmark.astro`): fixed to the right edge below the header, desktop only (hidden below 768px). Drawn as outlined letters; hovering a letter fills it and the letters either side (CSS only, `:hover` with `+` and `:has`). Font size is `min((100vh - header) / 8.3, 11vw)`, line-height 0.78, reads bottom to top.
-- Nav links: about 30px, uppercase.
+### Layout tokens (`src/styles/tokens.css`)
 
-### Layout system
+- `--grid-gutter`: side gutter of the gallery grid (`--space-xl`, `--space-md` at 768px and below). Used by the gallery root, filter bar, footer divider and footer row.
+- `--wordmark-width`, `--wordmark-inset`, `--wordmark-gutter` (= width + inset): the vertical wordmark's column. Pages that show it reserve `--wordmark-gutter` on the right. All three are 0 or reduced below 768px, where the wordmark is hidden.
+- `--header-height`: height of the fixed header.
 
-The home hero is a collage measured on the 1728px Figma frame. Every position and size is written as `calc(N * var(--u))`, where `--u: calc(100vw / 1728)`. Copy numbers straight from Figma and keep the same units.
+## Components
 
-Hero coordinates (relative to the frame, 1728px wide):
+### Header (`SiteHeader.astro`)
+Fixed bar in the page colour with white links (Home, Work, About; Work goes to `/projects`). On pages that contain a `.hero` it is transparent at the top and fills with `--color-bone` as soon as the page scrolls; on every other page it is always filled. Hover draws a 1px underline growing from the left (background-size transition); the current page keeps the underline. A script keyed to `astro:page-load` toggles `data-hero` and `data-scrolled` because the router swaps the header on navigation.
 
-| Element | x | y | Size |
-| :-- | :-- | :-- | :-- |
-| Nav bar (white) | 0 | 0 | full width, about 51 visible height, above everything including the wordmark |
-| Name "JO SE" | 46 | 41 | font-size 644 |
-| Image column (4 stacked) | 900 | −123, 225, 550, 923 | 571 wide; heights 345, 321, 369, 321 |
-| Vertical title | right edge | below the nav bar | fixed, `--wordmark-width` wide (0.78 × font size), fills the viewport below the header |
-| Hand illustration | placed from the right | 1081 | 1917 × 812, `rotate(171.61deg) scaleY(-1)`, above the name and images; it overlaps the bottom of the image column by about 55; its fingertip (1772 from the image's left edge) stops 6px left of the wordmark column |
-| JMR outline logo | 308 | 1711 | 285 × 285 |
-| Quote | 625 | 1887 | 799 wide, 4 lines max |
+### Hero (`HeroSection.astro`, `HeroCarousel/`)
+- Full window (`100svh`; `70svh` below 768px).
+- One background image, a random order of `public/hero/slideshow_1-3.png` shuffled in the browser, crossfading every 5s. Pauses on hover and while the tab is hidden; static with `prefers-reduced-motion`. Not clickable and hidden from assistive tech.
+- Name "JO" over "SE": desktop is vertically centred at the left, `min(50vh, 40vw)`, tracking −0.124em, line-height 0.72 (the lines overlap slightly). Below 768px the same stack is `min(58vw, 38svh)` in the bottom-right corner with a 4vw margin to the visible letters.
+- Scroll chevron, bottom centre, desktop only: appears 5s after load if the page has not been scrolled, fades out when the page leaves the top and returns when it is back at the top.
 
-Hero height is 2103 × `--u`.
+### Vertical wordmark (`VerticalWordmark.astro`)
+`MERCADO RUIZ` fixed to the right edge below the header, reading bottom to top, desktop only. Built on `OutlinedWordmark` with neighbours filling on hover. On pages with a `.hero` the letters start filled and fade to outlines as the hero scrolls away, finishing when the hero's bottom edge reaches the top of the page (`--wordmark-fill` set by a scroll handler, applied as a zero-offset `text-shadow`).
 
-Homepage frame (`32:230`) below the hero:
-- Divider: 1px white line, 1164 wide, from x 174 to 1338, directly under the logo and quote row.
-- Masonry: two columns starting 87px below the divider. Left column x 257, 560 wide. Right column x 821, 517 wide. About 4px between tiles and columns. Tiles keep their image's aspect ratio.
-- Section label row: `‘WE ARE HERE’` left in white at 28px, `PRINT` right-aligned at 58% white.
+### Outlined wordmark (`OutlinedWordmark.astro`)
+Reusable outlined text used by the vertical wordmark, the footer "JOSE" and the About heading. Props: `text`, `fillNeighbours`, `kerns` (extra em after each letter), `class`. Hovering a letter fills it. Each letter is generated content (`::before { content: attr(data-char) }`), not real text, because transparent text with a stroke vanishes when the page selection (select all) repaints it. The root's class is styled from the parent with `:global(...)` because scoped styles do not reach a child component's root. Set `--wordmark-stroke-width` and `--wordmark-gap` on the parent.
 
-Project page frame (`1:2`): blue grain background, very large uppercase section labels (PHOTOGRAPHY, MURAL, PUBLICATION, MOTION GRAPHIC) at about 88px, with short body paragraphs about 415px wide beside full-bleed images.
+### Footer (`SiteFooter.astro`)
+A 1px divider and a copyright/social row inset by `--grid-gutter`, then the outlined `JOSE` spanning the footer width. The wordmark box is trimmed to cap height and baseline (`text-box: trim-both cap alphabetic`) so it sits flush with the bottom of the page; the round letters' overshoot is covered by padding. Only the hovered letter fills. `BaseLayout` takes `footer={false}`; the About page uses it.
 
-### Navigation
+### Gallery (`ProjectGallery*`, `ProjectCard/`)
+Masonry of project thumbnails with a sticky filter bar whose width equals the grid. On hover or keyboard focus a bar in the page colour slides down from the top edge of the card (like an eyelid): title bold on the left, category regular and dimmed on the right, both in the tab type. Where hover is unavailable the bar is always shown. The FEATURED tag appears at the bottom left on hover.
 
-Fixed white bar across the top, above all other content, links in dark `--color-bone` on white, uppercase `widescreen`. On pages with the vertical wordmark (home, desktop) the gallery and footer keep clear of the wordmark column (`--wordmark-width`, 0 on mobile). Links are spread wide across the bar. The Figma frames order them differently (HOME, ABOUT, PROJECTS in the homepage frame); the site uses Home, Projects, About.
+### About page (`pages/about.astro`, `AboutSection.astro`)
+Contact (one `mailto:` link), a statement, the portrait and the "GET IN TOUCH" heading with a two-layer hand (`public/about/hand-behind.png` behind the heading, `hand-front.png` in front). No footer on this page. `--ink-width` (the heading's ink width in em, set inline on `.about`) ties everything together: `--u = --touch-font-size × --ink-width / 1394`, so the heading and the hands always scale as one picture. Heading letters fill on hover (neighbours too).
 
-### Responsive behavior
+| Tier | Width | Layout | Text | Heading size |
+| :-- | :-- | :-- | :-- | :-- |
+| Desktop | 1400px and up | Collage at a fixed scale, left aligned (the hand bleeds off the left edge). Contact, statement and portrait are three equal columns from `--grid-gutter` to `--grid-gutter + --wordmark-gutter` from the right; the portrait has a fixed height and is cropped with `object-fit: cover` | 1.25rem | 10rem |
+| Tablet | 768–1399px | Two-column grid: text left, portrait right spanning three rows. The heading row starts 12px under the statement so the hand never covers text; the hand is shifted left so its flat cut end is off screen | 1.25rem | `min(5.75rem, (90vw − gutter) / ink-width)` |
+| Mobile | under 768px | Single column: contact, statement, heading and hand, then the portrait. `.about-touch` is a size container and the heading is `100cqw / ink-width`, so its ink matches the portrait's width exactly | 1rem | container-sized |
 
-- 768px and up: the scaled collage above.
-- Below 768px: same pieces, stacked in one column. The image column is dropped (not rendered, no image requests). Name at 42vw, hand 150vw wide and overlapping the name slightly, logo and quote stacked with the full quote (no line clamp). The vertical title is hidden to keep the full width for images and content. The nav bar becomes one full-width bar.
-- Mobile layout for the masonry and project pages is not designed in Figma yet.
+## Behavior
 
-### Behavior
-
-- The four hero images are a random pick from all projects on every page load (shuffled in the browser). One slot at a time crossfades to the next project every 1.8s. Rotation pauses on hover and focus, while the tab is hidden, and with `prefers-reduced-motion`.
-- Hero hand and logo images live in `public/hero/`.
+- Hero rotation, scroll chevron and header transparency are described above.
+- Pages that use `.hero` get the filled vertical wordmark and the transparent header; any page without it gets the hollow wordmark and the filled header.
+- Hero slideshow images live in `public/hero/`; About assets in `public/about/`. `public/hero/hand-painting.png` and `jmr-outline-logo.png` are no longer used; `ContactBlock.astro` is unused.
 
 ## Project structure
 
@@ -106,7 +106,7 @@ Fixed white bar across the top, above all other content, links in dark `--color-
 src/
   components/   .astro components with scoped styles; React islands (HeroCarousel, ProjectGallery, ProjectCard, ProjectMedia) with .module.css
   content/      projects.json (Adobe Portfolio export)
-  layouts/      BaseLayout.astro, ProjectLayout.astro
+  layouts/      BaseLayout.astro (footer prop), ProjectLayout.astro
   pages/        index, about, 404, projects/
   styles/       tokens.css (design tokens), base.css (reset and global utilities)
 public/         hero/, about/, projects/images/
