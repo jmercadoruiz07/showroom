@@ -1,21 +1,23 @@
 ---
 /*
 |-------------------------------------------------------------------------------
-| Projects Index — JMR Visuals Portfolio
+| Works Index — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
 | Lists all projects with album filter.
 |
 */
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectGallery from '../../components/ProjectGallery.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import VerticalWordmark from '../components/VerticalWordmark.astro';
 ---
 
-<BaseLayout title="Projects" description="All projects by JMR Visuals — print, 3D, and motion design.">
-  <main class="projects-page" id="main-content">
-    <header class="projects-header">
-      <h1 class="projects-title text-display">Projects</h1>
-      <p class="projects-subtitle text-body">A selection of print, 3D, and motion design work.</p>
+<BaseLayout title="Works" description="All projects by JMR Visuals — print, 3D, and motion design.">
+  <VerticalWordmark />
+  <main class="works-page" id="main-content">
+    <header class="works-header">
+      <h1 class="works-title text-display">Works</h1>
+      <p class="works-subtitle text-body">A selection of print, 3D, and motion design work.</p>
     </header>
 
     <ProjectGallery />
@@ -23,16 +25,17 @@ import ProjectGallery from '../../components/ProjectGallery.astro';
 </BaseLayout>
 
 <style>
-  .projects-page {
+  .works-page {
     padding-top: var(--header-height);
+    padding-right: var(--wordmark-gutter);
   }
 
-  .projects-header {
+  .works-header {
     padding: var(--space-3xl) var(--space-xl) var(--space-xl);
     padding-left: calc(var(--space-xl) * 2);
   }
 
-  .projects-title {
+  .works-title {
     font-size: calc(var(--type-hero) * 1.6);
     font-weight: var(--font-weight-black);
     letter-spacing: -0.06em;
@@ -40,18 +43,18 @@ import ProjectGallery from '../../components/ProjectGallery.astro';
     margin: 0 0 var(--space-md);
   }
 
-  .projects-subtitle {
+  .works-subtitle {
     font-size: var(--type-md);
     color: var(--color-soot);
     margin: 0;
   }
 
   @media (max-width: 768px) {
-    .projects-header {
+    .works-header {
       padding: var(--space-2xl) var(--space-md) var(--space-lg);
     }
 
-    .projects-title {
+    .works-title {
       font-size: calc(var(--type-2xl) * 1.5);
     }
   }

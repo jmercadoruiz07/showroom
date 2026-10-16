@@ -12,21 +12,21 @@
 const pathname = Astro.url.pathname;
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/projects', label: 'Work' },
-  { href: '/about', label: 'About' },
+  { href: '/', label: 'Home', matches: ['/'] },
+  { href: '/works', label: 'Works', matches: ['/works', '/projects'] },
+  { href: '/about', label: 'About', matches: ['/about'] },
 ];
 
-const isCurrent = (href: string) =>
-  href === '/' ? pathname === '/' : pathname.startsWith(href);
+const isCurrent = (matches: string[]) =>
+  matches.some((match) => (match === '/' ? pathname === '/' : pathname.startsWith(match)));
 ---
 
 <header class="site-header" role="banner">
   <nav class="nav-primary" aria-label="Primary navigation">
     <ul class="nav-list">
-      {links.map(({ href, label }) => (
+      {links.map(({ href, label, matches }) => (
         <li>
-          <a href={href} class="nav-link" aria-current={isCurrent(href) ? 'page' : undefined}>
+          <a href={href} class="nav-link" aria-current={isCurrent(matches) ? 'page' : undefined}>
             {label}
           </a>
         </li>

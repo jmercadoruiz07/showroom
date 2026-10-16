@@ -66,7 +66,7 @@ Figma uses LEMON MILK and NB Akademie, which are not available, so `widescreen` 
 ## Components
 
 ### Header (`SiteHeader.astro`)
-Fixed bar in the page colour with white links (Home, Work, About; Work goes to `/projects`). On pages that contain a `.hero` it is transparent at the top and fills with `--color-bone` as soon as the page scrolls; on every other page it is always filled. Hover draws a 1px underline growing from the left (background-size transition); the current page keeps the underline. A script keyed to `astro:page-load` toggles `data-hero` and `data-scrolled` because the router swaps the header on navigation.
+Fixed bar in the page colour with white links (Home, Works, About; Works goes to `/works` and stays current on project pages under `/projects/<id>`). On pages that contain a `.hero` it is transparent at the top and fills with `--color-bone` as soon as the page scrolls; on every other page it is always filled. Hover draws a 1px underline growing from the left (background-size transition); the current page keeps the underline. A script keyed to `astro:page-load` toggles `data-hero` and `data-scrolled` because the router swaps the header on navigation.
 
 ### Hero (`HeroSection.astro`, `HeroCarousel/`)
 - Full window (`100svh`; `70svh` below 768px).
@@ -84,7 +84,7 @@ Reusable outlined text used by the vertical wordmark, the footer "JOSE" and the 
 A 1px divider and a copyright/social row inset by `--grid-gutter`, then the outlined `JOSE` spanning the footer width. The wordmark box is trimmed to cap height and baseline (`text-box: trim-both cap alphabetic`) so it sits flush with the bottom of the page; the round letters' overshoot is covered by padding. Only the hovered letter fills. `BaseLayout` takes `footer={false}`; the About page uses it.
 
 ### Gallery (`ProjectGallery*`, `ProjectCard/`)
-Sticky filter bar whose width equals the content. On the homepage the first tab is FEATURED: a `FeaturedAccordion` of four projects hard-coded in `pages/index.astro` (`featuredPicks`: project id plus the zero-based index of the image to show from the project's `images`; an out-of-range index falls back to the first image, an unknown id fails the build). On `/projects` the first tab is ALL, a masonry of every project. Album tabs show a masonry of that album's thumbnails.
+Sticky filter bar whose width equals the content. On the homepage the first tab is FEATURED: a `FeaturedAccordion` of four projects hard-coded in `pages/index.astro` (`featuredPicks`: project id plus the zero-based index of the image to show from the project's `images`; an out-of-range index falls back to the first image, an unknown id fails the build). On `/works` the first tab is ALL, a masonry of every project. Album tabs show a masonry of that album's thumbnails.
 
 Masonry cards: on hover or keyboard focus a bar in the page colour slides down from the top edge of the card (like an eyelid): title bold on the left, category regular and dimmed on the right, both in the tab type. Where hover is unavailable the bar is always shown. The FEATURED tag appears at the bottom left on hover.
 
@@ -112,7 +112,7 @@ src/
   components/   .astro components with scoped styles; React islands (HeroCarousel, ProjectGallery, ProjectCard, FeaturedAccordion, ProjectMedia) with .module.css
   content/      projects.json (Adobe Portfolio export)
   layouts/      BaseLayout.astro (footer prop), ProjectLayout.astro
-  pages/        index, about, 404, projects/
+  pages/        index, about, works, 404, projects/ (project detail pages)
   styles/       tokens.css (design tokens), base.css (reset and global utilities)
 public/         hero/, about/, projects/images/
 ```
