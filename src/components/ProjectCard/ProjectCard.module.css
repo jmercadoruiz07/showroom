@@ -69,8 +69,13 @@
   color: inherit;
 }
 
+.title {
+  font-weight: var(--font-weight-bold);
+}
+
 .category {
   flex: none;
+  color: color-mix(in srgb, var(--color-chalk) 58%, transparent);
 }
 
 .featured {
