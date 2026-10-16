@@ -121,24 +121,29 @@
   transition: bottom var(--duration-slow) var(--ease-standard);
 }
 
-.item:has(.link:focus-visible) {
+.item:has(.link:focus-visible),
+.item.isExpanded {
   height: var(--expanded-height);
 }
 
-.item:has(.link:focus-visible) .content {
+.item:has(.link:focus-visible) .content,
+.item.isExpanded .content {
   top: 0;
   transform: translateY(calc(54 * var(--u)));
 }
 
-.item:has(.link:focus-visible) .featured {
+.item:has(.link:focus-visible) .featured,
+.item.isExpanded .featured {
   bottom: calc(168 * var(--u));
 }
 
-.item:has(.link:focus-visible) .link::before {
+.item:has(.link:focus-visible) .link::before,
+.item.isExpanded .link::before {
   opacity: 0;
 }
 
-.item:has(.link:focus-visible) .link::after {
+.item:has(.link:focus-visible) .link::after,
+.item.isExpanded .link::after {
   opacity: 1;
 }
 
