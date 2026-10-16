@@ -92,6 +92,7 @@ const { slides, quote } = Astro.props;
     left: calc(308 * var(--u));
     top: calc(1711 * var(--u));
     display: flex;
+    align-items: flex-end;
     gap: calc(32 * var(--u));
   }
 
@@ -103,7 +104,7 @@ const { slides, quote } = Astro.props;
 
   .hero-quote {
     width: calc(799 * var(--u));
-    margin: calc(176 * var(--u)) 0 0;
+    margin: 0 0 0.42em;
     font-family: var(--font-hero-mono);
     font-size: max(0.875rem, calc(22 * var(--u)));
     line-height: 1.43;
@@ -141,6 +142,7 @@ const { slides, quote } = Astro.props;
 
     .hero-about {
       position: static;
+      align-items: stretch;
       flex-direction: column;
       gap: 6vw;
       margin-top: 8vw;
