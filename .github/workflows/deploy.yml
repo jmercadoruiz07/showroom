@@ -17,6 +17,13 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
+      # Add this step to force Node.js v22
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm' # Change to 'pnpm' or 'yarn' if you aren't using npm
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
 
