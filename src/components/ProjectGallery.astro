@@ -16,7 +16,8 @@ import { sortProjectsByOrder } from '../utils/sort-projects';
 
 interface FeaturedPick {
   id: string;
-  imageUrl: string;
+  /** Zero-based position in the project's images; falls back to 0 when out of range. */
+  imageIndex: number;
 }
 
 interface Props {
@@ -52,17 +53,13 @@ const albums = Array.from(
   new Set(projects.map((project) => project.album).filter((a) => a.length > 0)),
 );
 
-const featured = featuredPicks?.map(({ id, imageUrl }) => {
+const featured = featuredPicks?.map(({ id, imageIndex }) => {
   const project = sortedProjects.find((p) => p.id === id);
   if (!project) {
     throw new Error(`Featured project "${id}" is not in projects.json. Update featuredPicks to an existing project id.`);
   }
-  const image = project.data.images.find((img) => img.url === imageUrl);
-  if (!image) {
-    throw new Error(
-      `Featured image for "${project.data.title}" (${id}) is not one of its images. Copy a URL from its "images" in projects.json; it changes when fetch-portfolio picks up a re-uploaded image.`,
-    );
-  }
+  const { images, thumbnail } = project.data;
+  const image = images[imageIndex] ?? images[0] ?? thumbnail;
   return {
     title: project.data.title,
     album: project.data.albums?.[0] ?? '',
