@@ -6,10 +6,12 @@
 |
 | Name set vertically along the right edge of the screen, reading bottom to top,
 | drawn as outlined letters. Hovering a letter fills it and the letters either
-| side of it. Fixed below the header and above page content so it stays put
-| while the page scrolls. Size follows the viewport height via --wordmark-size;
-| pages that use it reserve --wordmark-gutter on their right side. Hidden below
-| 768px, where --wordmark-gutter is 0.
+| side of it. On pages with a .hero section the letters start filled and fade to
+| outlines as the hero scrolls away, finishing when the hero's bottom edge
+| reaches the top of the page. Fixed below the header and above page content so
+| it stays put while the page scrolls. Size follows the viewport height via
+| --wordmark-size; pages that use it reserve --wordmark-gutter on their right
+| side. Hidden below 768px, where --wordmark-gutter is 0.
 |
 */
 const text = 'Mercado Ruiz';
@@ -33,6 +35,32 @@ for (const char of text) {
   ))}
 </p>
 
+<script>
+  let onScroll: (() => void) | undefined;
+
+  function trackHero() {
+    if (onScroll) {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    }
+    onScroll = undefined;
+
+    const wordmark = document.querySelector<HTMLElement>('.vertical-wordmark');
+    const hero = document.querySelector<HTMLElement>('.hero');
+    if (!wordmark || !hero) return;
+
+    onScroll = () => {
+      const progress = Math.min(1, Math.max(0, window.scrollY / hero.offsetHeight));
+      wordmark.style.setProperty('--wordmark-fill', String(1 - progress));
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+
+  document.addEventListener('astro:page-load', trackHero);
+</script>
+
 <style>
   .vertical-wordmark {
     position: fixed;
@@ -55,6 +83,8 @@ for (const char of text) {
     text-transform: uppercase;
     white-space: nowrap;
     color: transparent;
+    /* A zero-offset shadow of the glyphs fills them without disturbing the hover colour transition. */
+    text-shadow: 0 0 0 color-mix(in srgb, var(--color-chalk) calc(var(--wordmark-fill, 0) * 100%), transparent);
     -webkit-text-stroke: 1.5px var(--color-chalk);
     pointer-events: none;
     user-select: none;
@@ -90,6 +120,11 @@ for (const char of text) {
     .letter {
       transition: none;
     }
+  }
+
+  /* Pages with a hero start filled so the letters do not flash hollow before the script runs. */
+  :global(body:has(.hero)) .vertical-wordmark {
+    --wordmark-fill: 1;
   }
 
   /* Keep the footer clear of the wordmark column. */
