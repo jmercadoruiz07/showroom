@@ -1,0 +1,119 @@
+/*
+|-------------------------------------------------------------------------------
+| FeaturedAccordionItem — Component Styles
+|-------------------------------------------------------------------------------
+|
+| Measurements come from the Figma ABOUT frame (node 198:32), where one strip
+| is 1509 design pixels wide; --u (set by FeaturedAccordion) is one of those
+| pixels. A strip is 241 tall and grows to 888 on hover. The text block is
+| anchored to the bottom edge, and its bottom inset moves from 63 to 168 as the
+| strip grows. A white fade on the left keeps the dark text legible over any
+| thumbnail.
+|
+*/
+.item {
+  position: relative;
+  height: calc(241 * var(--u));
+  overflow: hidden;
+  background-color: var(--color-stone);
+  color: var(--color-bone);
+  transition: height var(--duration-slow) var(--ease-standard);
+}
+
+.link {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: inherit;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.link::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 81%;
+  background: linear-gradient(to right, var(--color-chalk), transparent);
+}
+
+.content {
+  position: absolute;
+  left: calc(54 * var(--u));
+  bottom: calc(63 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(25 * var(--u));
+  transition: bottom var(--duration-slow) var(--ease-standard);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-hero);
+  font-size: calc(63.4 * var(--u));
+  font-weight: 500;
+  letter-spacing: -0.1em;
+  line-height: 0.8;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.category {
+  margin-left: calc(19 * var(--u));
+  font-family: var(--font-hero-mono);
+  font-size: max(0.75rem, calc(19 * var(--u)));
+  font-weight: var(--font-weight-regular);
+  line-height: 1.255;
+  text-transform: uppercase;
+}
+
+.featured {
+  position: absolute;
+  right: calc(54 * var(--u));
+  bottom: calc(63 * var(--u));
+  background: var(--color-accent);
+  color: var(--color-bone);
+  padding: 0.3em 0.7em;
+  font-family: var(--font-hero-mono);
+  font-size: var(--type-xs);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
+  text-transform: uppercase;
+  transition: bottom var(--duration-slow) var(--ease-standard);
+}
+
+.item:has(.link:focus-visible) {
+  height: calc(888 * var(--u));
+}
+
+.item:has(.link:focus-visible) .content,
+.item:has(.link:focus-visible) .featured {
+  bottom: calc(168 * var(--u));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item:hover {
+    height: calc(888 * var(--u));
+  }
+
+  .item:hover .content,
+  .item:hover .featured {
+    bottom: calc(168 * var(--u));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .content,
+  .featured {
+    transition: none;
+  }
+}

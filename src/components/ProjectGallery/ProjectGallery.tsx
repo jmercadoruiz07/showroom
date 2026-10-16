@@ -3,7 +3,8 @@
 | ProjectGallery — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Horizontal pill/tag filter (sticky below header) + masonry grid of project
+| Horizontal pill/tag filter (sticky below header). The ALL tab shows a
+| FeaturedAccordion; every album tab shows a masonry grid of project
 | cards. Each card's grid placement (column + row-start + row-span) is
 | computed by a basic shortest-column packer so the browser renders the
 | intended layout without relying on its dense-flow heuristics. Toggles
@@ -12,6 +13,7 @@
 */
 import type { CSSProperties } from 'react';
 import { useEffect, useState } from 'react';
+import FeaturedAccordion from '../FeaturedAccordion/FeaturedAccordion';
 import ProjectCard, { type ProjectCardThumbnail } from '../ProjectCard/ProjectCard';
 import styles from './ProjectGallery.module.css';
 
@@ -140,35 +142,41 @@ export default function ProjectGallery({ projects, albums, tightTop = false }: P
         </nav>
       </div>
 
-      <div
-        id="project-grid"
-        className={`${styles.grid} ${styles.masonry}${placement.length > 0 ? ` ${styles.isPacked}` : ''}`}
-        aria-label="Projects"
-        ref={setGridEl}
-      >
-        {visibleProjects.map((project, index) => {
-          const slot = placement[index];
-          const cardStyle: CSSProperties | undefined = slot
-            ? {
-                gridColumn: String(slot.column),
-                gridRowStart: slot.rowStart,
-                gridRowEnd: slot.rowStart + slot.rowSpan,
-              }
-            : undefined;
-          return (
-            <ProjectCard
-              key={project.href}
-              title={project.title}
-              album={project.album}
-              thumbnail={project.thumbnail}
-              thumbnailAlt={project.thumbnailAlt}
-              href={project.href}
-              featured={project.featured}
-              style={cardStyle}
-            />
-          );
-        })}
-      </div>
+      {activeAlbum === ALL_ALBUMS ? (
+        <div id="project-grid" className={styles.grid} aria-label="Projects">
+          <FeaturedAccordion projects={visibleProjects} />
+        </div>
+      ) : (
+        <div
+          id="project-grid"
+          className={`${styles.grid} ${styles.masonry}${placement.length > 0 ? ` ${styles.isPacked}` : ''}`}
+          aria-label="Projects"
+          ref={setGridEl}
+        >
+          {visibleProjects.map((project, index) => {
+            const slot = placement[index];
+            const cardStyle: CSSProperties | undefined = slot
+              ? {
+                  gridColumn: String(slot.column),
+                  gridRowStart: slot.rowStart,
+                  gridRowEnd: slot.rowStart + slot.rowSpan,
+                }
+              : undefined;
+            return (
+              <ProjectCard
+                key={project.href}
+                title={project.title}
+                album={project.album}
+                thumbnail={project.thumbnail}
+                thumbnailAlt={project.thumbnailAlt}
+                href={project.href}
+                featured={project.featured}
+                style={cardStyle}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
