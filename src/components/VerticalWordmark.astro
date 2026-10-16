@@ -29,7 +29,7 @@ for (const char of text) {
 
 <p class="vertical-wordmark" aria-hidden="true">
   {letters.map(({ char, gap }) => (
-    <span class:list={['letter', { 'has-gap': gap }]}>{char}</span>
+    <span class:list={['letter', { 'has-gap': gap }]} data-char={char}></span>
   ))}
 </p>
 
@@ -58,6 +58,11 @@ for (const char of text) {
     -webkit-text-stroke: 1.5px var(--color-chalk);
     pointer-events: none;
     user-select: none;
+  }
+
+  /* Generated content is never part of a text selection, which would otherwise repaint the outlined letters and hide them. */
+  .letter::before {
+    content: attr(data-char);
   }
 
   .letter {

@@ -24,7 +24,7 @@
     </a>
   </div>
 
-  <p class="footer-wordmark" aria-hidden="true">Jose</p>
+  <p class="footer-wordmark" aria-hidden="true" data-text="Jose"></p>
 </footer>
 
 <style>
@@ -85,6 +85,11 @@
     color: transparent;
     -webkit-text-stroke: 2px var(--color-chalk);
     user-select: none;
+  }
+
+  /* Generated content is never part of a text selection, which would otherwise repaint the outlined letters and hide them. */
+  .footer-wordmark::before {
+    content: attr(data-text);
   }
 
   @media (max-width: 768px) {
