@@ -4,7 +4,7 @@
 | Home Page — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-window hero with a rotating project image + Project Gallery
+| Full-window hero with rotating background images + Project Gallery
 | with album filter.
 |
 */
@@ -12,24 +12,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import VerticalWordmark from '../components/VerticalWordmark.astro';
-import { getCollection } from 'astro:content';
-import { sortProjectsByOrder } from '../utils/sort-projects';
 
-const projects = await getCollection('projects');
-
-// Portrait thumbnails would be cropped to a sliver by the full-window hero.
-const heroSlides = sortProjectsByOrder(projects)
-  .filter(({ data: { thumbnail } }) => (thumbnail.width ?? 0) >= (thumbnail.height ?? 0) * 1.3)
-  .map((project) => ({
-    src: project.data.thumbnail.url,
-    title: project.data.title,
-    href: `/projects/${project.id}`,
-  }));
+const heroImages = [
+  '/hero/slideshow_1.png',
+  '/hero/slideshow_2.png',
+  '/hero/slideshow_3.png',
+];
 ---
 
 <BaseLayout title="JMR Visuals — Portfolio" description="Multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.">
   <VerticalWordmark />
-  <HeroSection slides={heroSlides} />
+  <HeroSection images={heroImages} />
 
   <main id="main-content" class="home-main">
     <ProjectGallery tightTop />
@@ -38,7 +31,7 @@ const heroSlides = sortProjectsByOrder(projects)
 
 <style>
   .home-main {
-    padding-right: var(--wordmark-width);
+    padding-right: var(--wordmark-gutter);
   }
 </style>
 

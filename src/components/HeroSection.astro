@@ -4,20 +4,20 @@
 | HeroSection — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Full-window hero: a rotating project image behind the name.
+| Full-window hero: a rotating background image behind the name.
 |
 */
-import HeroCarousel, { type HeroSlide } from './HeroCarousel/HeroCarousel';
+import HeroCarousel from './HeroCarousel/HeroCarousel';
 
 interface Props {
-  slides: HeroSlide[];
+  images: string[];
 }
 
-const { slides } = Astro.props;
+const { images } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <HeroCarousel slides={slides} client:load />
+  <HeroCarousel images={images} client:load />
 
   <h1 id="hero-title" class="hero-name">
     <span aria-hidden="true"><span class="hero-name-line">JO</span><span class="hero-name-line">SE</span></span>

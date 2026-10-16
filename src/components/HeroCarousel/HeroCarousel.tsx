@@ -3,11 +3,11 @@
 | HeroCarousel — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Single project image filling the hero background. The projects are shuffled
-| in the browser on each page load; the image then crossfades to the next
-| project in the shuffled order every few seconds. Rotation pauses on hover
-| and while the tab is hidden, and is disabled for prefers-reduced-motion.
-| The image is decorative and not interactive.
+| Single image filling the hero background. The images are shuffled in the
+| browser on each page load; the background then crossfades to the next image
+| in the shuffled order every few seconds. Rotation pauses on hover and while
+| the tab is hidden, and is disabled for prefers-reduced-motion. The image is
+| decorative and not interactive.
 |
 */
 import { useEffect, useState } from 'react';
@@ -15,14 +15,8 @@ import styles from './HeroCarousel.module.css';
 
 const SWAP_INTERVAL_MS = 5000;
 
-export interface HeroSlide {
-  src: string;
-  title: string;
-  href: string;
-}
-
 interface HeroCarouselProps {
-  slides: HeroSlide[];
+  images: string[];
 }
 
 function shuffled<T>(items: T[]): T[] {
@@ -48,16 +42,16 @@ function useMediaQuery(query: string): boolean {
   return matches;
 }
 
-export default function HeroCarousel({ slides }: HeroCarouselProps) {
+export default function HeroCarousel({ images }: HeroCarouselProps) {
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-  const [order, setOrder] = useState<HeroSlide[] | null>(null);
+  const [order, setOrder] = useState<string[] | null>(null);
   const [swaps, setSwaps] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [layers, setLayers] = useState<HeroSlide[]>([]);
+  const [layers, setLayers] = useState<string[]>([]);
 
   useEffect(() => {
-    setOrder(shuffled(slides));
-  }, [slides]);
+    setOrder(shuffled(images));
+  }, [images]);
 
   const rotates = order !== null && order.length > 1 && !reducedMotion;
 
@@ -77,16 +71,14 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
   useEffect(() => {
     if (!current) return;
     setLayers((existing) =>
-      existing[existing.length - 1]?.href === current.href
-        ? existing
-        : [...existing.slice(-1), current],
+      existing[existing.length - 1] === current ? existing : [...existing.slice(-1), current],
     );
   }, [current]);
 
   // Fetch the next image ahead of its crossfade so it never fades in empty.
   useEffect(() => {
     if (!rotates || !order) return;
-    new Image().src = order[(swaps + 1) % order.length].src;
+    new Image().src = order[(swaps + 1) % order.length];
   }, [rotates, order, swaps]);
 
   return (
@@ -96,11 +88,11 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {layers.map((layer) => (
+      {layers.map((src) => (
         <img
-          key={layer.href}
+          key={src}
           className={styles.image}
-          src={layer.src}
+          src={src}
           alt=""
           decoding="async"
           onAnimationEnd={() => setLayers((existing) => existing.slice(-1))}

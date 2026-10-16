@@ -12,13 +12,13 @@
   color-scheme: dark;
 
   /* ─── Color Tokens (OKLCH) ────────────────────────────────────────────────
-  | Dark-only palette on a cool charcoal page with a copper accent.
+  | Dark-only palette on a cool charcoal page with white text and a teal accent.
   */
 
   /* Ink — primary text, headings */
-  --color-ink:          oklch(0.88 0.008 75);
+  --color-ink:          var(--color-chalk);
   /* Soot — secondary text, captions */
-  --color-soot:         oklch(0.65 0.01 75);
+  --color-soot:         var(--color-chalk);
   /* Stone — borders, dividers */
   --color-stone:        oklch(0.35 0.01 60);
   /* Bone — page background */
@@ -90,6 +90,10 @@
   /* Vertical wordmark fits the space below the header; the column is as wide as its line box. Hidden below 768px. */
   --wordmark-size:   min(calc((100vh - var(--header-height)) / 8.3), 11vw);
   --wordmark-width:  calc(var(--wordmark-size) * 0.78);
+  /* Gap between the wordmark and the right edge of the screen. */
+  --wordmark-inset:  var(--space-xs);
+  /* Space pages reserve on their right side for the wordmark. */
+  --wordmark-gutter: calc(var(--wordmark-width) + var(--wordmark-inset));
 
   /* ─── Motion Tokens ───────────────────────────────────────────────────────
    | Easing and duration standards.
@@ -113,5 +117,6 @@
 @media (max-width: 767px) {
   :root {
     --wordmark-width: 0px;
+    --wordmark-inset: 0px;
   }
 }
