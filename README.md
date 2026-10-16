@@ -6,7 +6,7 @@ Figma source of truth: file `Vl3rEa0ebSFcwQGhqgbzNd` (PORTFOLIO).
 
 - Hero: node `36:275` (1728px wide)
 - Homepage with divider and masonry: node `32:230`
-- Homepage ALL tab accordion (items below the tab selectors): node `198:32`
+- Homepage FEATURED tab accordion (items below the tab selectors): node `198:32`
 - Project page: node `1:2`
 - About page: node `243:13` (1702px wide, the current design; `198:32` is the older one)
 
@@ -84,7 +84,7 @@ Reusable outlined text used by the vertical wordmark, the footer "JOSE" and the 
 A 1px divider and a copyright/social row inset by `--grid-gutter`, then the outlined `JOSE` spanning the footer width. The wordmark box is trimmed to cap height and baseline (`text-box: trim-both cap alphabetic`) so it sits flush with the bottom of the page; the round letters' overshoot is covered by padding. Only the hovered letter fills. `BaseLayout` takes `footer={false}`; the About page uses it.
 
 ### Gallery (`ProjectGallery*`, `ProjectCard/`)
-Sticky filter bar whose width equals the content. The ALL tab shows a `FeaturedAccordion`; every album tab shows a masonry of project thumbnails.
+Sticky filter bar whose width equals the content. The FEATURED tab shows a `FeaturedAccordion`; every album tab shows a masonry of project thumbnails.
 
 Masonry cards: on hover or keyboard focus a bar in the page colour slides down from the top edge of the card (like an eyelid): title bold on the left, category regular and dimmed on the right, both in the tab type. Where hover is unavailable the bar is always shown. The FEATURED tag appears at the bottom left on hover.
 

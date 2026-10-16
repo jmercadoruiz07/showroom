@@ -3,7 +3,7 @@
 | ProjectGallery — JMR Visuals Portfolio
 |-------------------------------------------------------------------------------
 |
-| Horizontal pill/tag filter (sticky below header). The ALL tab shows a
+| Horizontal pill/tag filter (sticky below header). The FEATURED tab shows a
 | FeaturedAccordion; every album tab shows a masonry grid of project
 | cards. Each card's grid placement (column + row-start + row-span) is
 | computed by a basic shortest-column packer so the browser renders the
@@ -121,7 +121,7 @@ export default function ProjectGallery({ projects, albums, tightTop = false }: P
                 data-album={ALL_ALBUMS}
                 onClick={() => setActiveAlbum(ALL_ALBUMS)}
               >
-                ALL
+                FEATURED
               </button>
             </li>
             {albums.map((album) => (
