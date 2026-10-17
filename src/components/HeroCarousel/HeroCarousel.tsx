@@ -7,9 +7,9 @@
 import { useEffect, useState } from 'react';
 import styles from './HeroCarousel.module.css';
 
-interface HeroCarouselProps {
+type HeroCarouselProps = {
   images: string[];
-}
+};
 
 const SWAP_INTERVAL_MS = 4000;
 

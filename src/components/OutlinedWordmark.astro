@@ -5,13 +5,13 @@
  * The parent supplies a class for position and size, styled with `:global` since scoped styles do not reach this component's root.
  */
 
-interface Props {
+type Props = {
   text: string;
   fillNeighbours?: boolean;
   /** Extra space (em) after a letter, indexed over the letters skipping spaces. */
   kerns?: number[];
   class?: string;
-}
+};
 
 const { text, fillNeighbours = false, kerns = [], class: className } = Astro.props;
 

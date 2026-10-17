@@ -13,13 +13,13 @@ import { BIO, PROFILE_IMAGE, SITE_NAME } from '../utils/site';
 import '../styles/tokens.css';
 import '../styles/base.css';
 
-interface Props {
+type Props = {
   title: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
   footer?: boolean;
-}
+};
 
 const {
   title,

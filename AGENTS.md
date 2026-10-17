@@ -21,7 +21,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 - A parent's scoped styles do not reach a child component's root element. Style a passed-in class with `:global(...)` (see `OutlinedWordmark`).
 - Scripts that touch layout elements must run on `astro:page-load` (the client router swaps the header and page on navigation) and remove their listeners before re-adding them.
-- `.astro` files are rewritten whole with `rm` then create when an edit tool refuses; keep the file's layout: a short JSDoc, then imports, then `interface Props`, then the `Astro.props` destructuring, then everything else. Comments are simple JSDoc (`/** ... */`); CSS files have no header comment.
+- `.astro` files are rewritten whole with `rm` then create when an edit tool refuses; keep the file's layout: a short JSDoc, then imports, then `type Props`, then the `Astro.props` destructuring, then everything else. Comments are simple JSDoc (`/** ... */`); CSS files have no header comment.
 
 ## CSS and browser gotchas
 

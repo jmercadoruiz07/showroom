@@ -6,20 +6,20 @@
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 import styles from './ProjectMedia.module.css';
 
-export interface ProjectMediaImage {
+export type ProjectMediaImage = {
   url: string;
   width?: number | null;
   height?: number | null;
-}
+};
 
 export type ProjectMediaItem =
   | ({ type: 'image' } & ProjectMediaImage)
   | { type: 'video'; url: string; poster: ProjectMediaImage };
 
-interface ProjectMediaProps {
+type ProjectMediaProps = {
   media: ProjectMediaItem[];
   title: string;
-}
+};
 
 const SWIPE_DISTANCE_PX = 50;
 

@@ -10,16 +10,16 @@ import FeaturedAccordion, { type FeaturedAccordionProject } from '../FeaturedAcc
 import ProjectCard, { type ProjectCardThumbnail } from '../ProjectCard/ProjectCard';
 import styles from './ProjectGallery.module.css';
 
-export interface GalleryProject {
+export type GalleryProject = {
   title: string;
   album: string;
   thumbnail: ProjectCardThumbnail;
   thumbnailAlt?: string;
   href: string;
   featured?: boolean;
-}
+};
 
-interface ProjectGalleryProps {
+type ProjectGalleryProps = {
   projects: GalleryProject[];
   albums: string[];
   /** Projects for the FEATURED first tab; when omitted the first tab is ALL. */
@@ -28,13 +28,13 @@ interface ProjectGalleryProps {
   tightTop?: boolean;
   /** Keeps the filter bar pinned below the header while scrolling. */
   stickyFilter?: boolean;
-}
+};
 
-interface Slot {
+type Slot = {
   column: number;
   rowStart: number;
   rowSpan: number;
-}
+};
 
 export const ALL_ALBUMS = 'all';
 

@@ -6,13 +6,13 @@
 import type { CSSProperties } from 'react';
 import styles from './ProjectCard.module.css';
 
-export interface ProjectCardThumbnail {
+export type ProjectCardThumbnail = {
   url: string;
   width?: number | null;
   height?: number | null;
-}
+};
 
-export interface ProjectCardProps {
+export type ProjectCardProps = {
   title: string;
   album: string;
   thumbnail: ProjectCardThumbnail;
@@ -20,7 +20,7 @@ export interface ProjectCardProps {
   href: string;
   featured?: boolean;
   style?: CSSProperties;
-}
+};
 
 export default function ProjectCard({
   title,

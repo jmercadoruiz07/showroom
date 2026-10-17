@@ -10,17 +10,17 @@ import { sortProjectsByOrder } from '../utils/sort-projects';
 import { pageUrl } from '../utils/asset-url';
 import { firstImage, imageAssets } from '../utils/project-media';
 
-interface FeaturedPick {
+type FeaturedPick = {
   id: string;
   /** Zero-based position among the project's image assets (videos not counted); falls back to 0 when out of range. */
   imageIndex: number;
-}
+};
 
-interface Props {
+type Props = {
   tightTop?: boolean;
   stickyFilter?: boolean;
   featuredPicks?: FeaturedPick[];
-}
+};
 
 const { tightTop = false, stickyFilter = true, featuredPicks } = Astro.props;
 

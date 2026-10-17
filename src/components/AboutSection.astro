@@ -8,12 +8,12 @@ import OutlinedWordmark from './OutlinedWordmark.astro';
 import SocialLinks from './SocialLinks.astro';
 import { assetUrl } from '../utils/asset-url';
 
-interface Props {
+type Props = {
   email: string;
   statement: string;
   portrait: string;
   portraitAlt: string;
-}
+};
 
 const { email, statement, portrait, portraitAlt } = Astro.props;
 

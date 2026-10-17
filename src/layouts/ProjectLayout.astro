@@ -5,11 +5,11 @@
 
 import BaseLayout from './BaseLayout.astro';
 
-interface Props {
+type Props = {
   title: string;
   description?: string;
   ogImage?: string;
-}
+};
 
 const { title, description, ogImage } = Astro.props;
 ---

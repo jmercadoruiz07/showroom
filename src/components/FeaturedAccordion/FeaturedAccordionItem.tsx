@@ -8,14 +8,14 @@ import { useEffect, useRef, useState } from 'react';
 import type { ProjectCardProps, ProjectCardThumbnail } from '../ProjectCard/ProjectCard';
 import styles from './FeaturedAccordionItem.module.css';
 
-export interface FeaturedAccordionImages {
+export type FeaturedAccordionImages = {
   /** Every image asset of the project, in ArtStation order. */
   images?: ProjectCardThumbnail[];
   /** Position in `images` of the picture shown while the strip is closed. */
   imageIndex?: number;
-}
+};
 
-interface FeaturedAccordionItemProps extends ProjectCardProps, FeaturedAccordionImages {}
+type FeaturedAccordionItemProps = ProjectCardProps & FeaturedAccordionImages;
 
 const ROTATE_INTERVAL_MS = 1200;
 /** Longer than the strip's closing transition, so the picture does not change while it shrinks. */

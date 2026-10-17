@@ -3,10 +3,10 @@
  * Contact links on the left and a closing statement on the right, stacked below 768px.
  */
 
-interface Props {
+type Props = {
   email?: string;
   statement: string;
-}
+};
 
 const { email = 'hello@jmrvisuals.com', statement } = Astro.props;
 ---

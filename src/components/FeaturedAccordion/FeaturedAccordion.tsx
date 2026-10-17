@@ -9,9 +9,9 @@ import styles from './FeaturedAccordion.module.css';
 
 export type FeaturedAccordionProject = Omit<ProjectCardProps, 'style'> & FeaturedAccordionImages;
 
-interface FeaturedAccordionProps {
+type FeaturedAccordionProps = {
   projects: FeaturedAccordionProject[];
-}
+};
 
 export default function FeaturedAccordion({ projects }: FeaturedAccordionProps) {
   return (
