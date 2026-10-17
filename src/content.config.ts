@@ -8,6 +8,12 @@ const projectImage = z.object({
   height: z.number().nullable().optional(),
 });
 
+// Images and videos in the order ArtStation shows them. A video's `url` is the player's iframe src.
+const projectMedia = z.discriminatedUnion('type', [
+  projectImage.extend({ type: z.literal('image') }),
+  z.object({ type: z.literal('video'), url: z.string(), poster: projectImage }),
+]);
+
 const projects = defineCollection({
   loader: file('./src/content/projects.json'),
   schema: z.object({
@@ -17,9 +23,7 @@ const projects = defineCollection({
     categories: z.array(z.string()).optional().default([]),
     tags: z.array(z.string()).optional().default([]),
     thumbnail: projectImage,
-    images: z.array(projectImage).optional().default([]),
-    video: z.string().optional(),
-    videoPoster: z.string().optional(),
+    media: z.array(projectMedia).optional().default([]),
     sourceUrl: z.string().optional(),
     tools: z.array(z.string()).optional().default([]),
     description: z.string().default(''),

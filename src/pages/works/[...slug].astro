@@ -14,6 +14,7 @@ import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import ProjectMedia from '../../components/ProjectMedia/ProjectMedia';
 import { pageUrl } from '../../utils/asset-url';
+import { firstImage } from '../../utils/project-media';
 
 // Generate static paths for all projects
 export async function getStaticPaths() {
@@ -25,7 +26,8 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, date, albums, tags, images, video, videoPoster, tools, description, featured } = project.data;
+const { title, date, albums, tags, media, tools, description, featured } = project.data;
+const firstMedia = media[0];
 const displayAlbum = albums?.[0] ?? '';
 
 // Alternate layout based on order or slug
@@ -45,7 +47,7 @@ const formatDate = (date: Date) => {
 <ProjectLayout
   title={title}
   description={description}
-  ogImage={images?.[0]?.url || videoPoster}
+  ogImage={firstImage(media)?.url ?? (firstMedia?.type === 'video' ? firstMedia.poster.url : undefined)}
 >
   <main id="main-content">
   <article class="project-detail">
@@ -74,8 +76,8 @@ const formatDate = (date: Date) => {
 
     <div class="project-grid" style={`--columns: ${mediaFirst ? '3fr 2fr' : '2fr 3fr'}`}>
       <div class={`project-media ${mediaFirst ? 'media-first' : 'media-last'}`}>
-        {(images && images.length > 0) || video ? (
-          <ProjectMedia images={images} video={video} videoPoster={videoPoster} title={title} client:load />
+        {media.length > 0 ? (
+          <ProjectMedia media={media} title={title} client:load />
         ) : (
           <div class="media-placeholder">
             <p class="text-soot">No media available</p>

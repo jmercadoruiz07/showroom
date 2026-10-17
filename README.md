@@ -85,7 +85,9 @@ Reusable outlined text used by the vertical wordmark, the footer "JOSE" and the 
 A 1px divider and a copyright/social row inset by `--grid-gutter` (the icons are `SocialLinks.astro`: Instagram and ArtStation, shared with the About page), then the outlined `JOSE` spanning the footer width. The wordmark box is trimmed to cap height and baseline (`text-box: trim-both cap alphabetic`) so it sits flush with the bottom of the page; the round letters' overshoot is covered by padding. Only the hovered letter fills. `BaseLayout` takes `footer={false}`; the About page uses it.
 
 ### Gallery (`ProjectGallery*`, `ProjectCard/`)
-Filter bar whose width equals the content; it sticks below the header on `/works` but scrolls away on the homepage (`stickyFilter={false}`). On the homepage the first tab is FEATURED: a `FeaturedAccordion` of four projects hard-coded in `pages/index.astro` (`featuredPicks`: project id plus the zero-based index of the image to show from the project's `images`; an out-of-range index falls back to the first image, an unknown id fails the build). On `/works` the first tab is ALL, a masonry of every project. Album tabs show a masonry of that album's thumbnails.
+Filter bar whose width equals the content; it sticks below the header on `/works` but scrolls away on the homepage (`stickyFilter={false}`). On the homepage the first tab is FEATURED: a `FeaturedAccordion` of four projects hard-coded in `pages/index.astro` (`featuredPicks`: project id plus the zero-based index of the image to show among the project's image assets (videos not counted); an out-of-range index falls back to the first image, an unknown id fails the build). On `/works` the first tab is ALL, a masonry of every project. Album tabs show a masonry of that album's thumbnails. Each card shows the project's first `image` asset (the ArtStation cover is only a fallback for projects with no images).
+
+Project pages (`ProjectMedia/`) show the project's `media` list as one column in ArtStation's order, images and Vimeo videos mixed. A video is a poster with a play button that opens the player in the lightbox. `projects.json` stores `media` as `{ type: 'image', url, width, height }` or `{ type: 'video', url, poster }` entries (`url` is the player's iframe src, `poster` is Vimeo's 1280px thumbnail). The fetch script keeps `image` and `video` assets and skips covers and ArtStation-hosted `video_clip` assets.
 
 Masonry cards: on hover or keyboard focus a bar in the page colour slides down from the top edge of the card (like an eyelid): title bold on the left, category regular and dimmed on the right, both in the tab type. Where hover is unavailable the bar is always shown. The FEATURED tag appears at the bottom left on hover.
 
@@ -111,9 +113,9 @@ Contact (one `mailto:` link under the CONTACT label, with the `SocialLinks` icon
 ```text
 src/
   components/   .astro components with scoped styles; React islands (HeroCarousel, ProjectGallery, ProjectCard, FeaturedAccordion, ProjectMedia) with .module.css
-  content/      projects.json (Adobe Portfolio export)
+  content/      projects.json (ArtStation export from `npm run fetch-portfolio`)
   layouts/      BaseLayout.astro (footer prop), ProjectLayout.astro
   pages/        index, about, works, works/ (project detail pages), 404
   styles/       tokens.css (design tokens), base.css (reset and global utilities)
-public/         hero/, about/, projects/images/
+public/         assets/ (hero/, about/, projects/images/, favicon, logo)
 ```

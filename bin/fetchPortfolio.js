@@ -44,6 +44,33 @@ async function getImageDimensions(page, imageUrl) {
   }
 }
 
+// Pulls the iframe src out of an ArtStation `player_embedded` snippet and decodes its HTML entities.
+function getEmbedSrc(playerEmbedded) {
+  const match = playerEmbedded?.match(/src=["']([^"']+)["']/);
+  return match ? match[1].replace(/&amp;/g, '&') : null;
+}
+
+// ArtStation's video thumbnail is only 295px wide; Vimeo's oEmbed returns a much larger one.
+async function getVimeoPoster(context, embedSrc) {
+  const videoId = embedSrc.match(/player\.vimeo\.com\/video\/(\d+)/)?.[1];
+  if (!videoId) return null;
+  try {
+    const response = await context.request.get(
+      `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(`https://vimeo.com/${videoId}`)}&width=1920`
+    );
+    if (!response.ok()) return null;
+    const data = await response.json();
+    if (!data.thumbnail_url) return null;
+    return {
+      url: data.thumbnail_url,
+      width: data.thumbnail_width || null,
+      height: data.thumbnail_height || null
+    };
+  } catch (error) {
+    return null;
+  }
+}
+
 async function fetchArtStationPortfolio(username) {
   const listUrl = `https://www.artstation.com/users/${username}/projects.json`;
   
@@ -138,14 +165,32 @@ async function fetchArtStationPortfolio(username) {
         continue;
       }
 
-      // Extract high-res images as objects with dimensions
-      const images = detailData.assets
-        ?.filter(asset => asset.asset_type === 'image')
-        .map(asset => ({
-          url: asset.image_url,
-          width: asset.width || null,
-          height: asset.height || null
-        })) || [];
+      // Extract images and videos in the order ArtStation shows them. Covers and ArtStation-hosted
+      // video clips (`video_clip`) are left out.
+      const media = [];
+      const orderedAssets = [...(detailData.assets || [])].sort((a, b) => a.position - b.position);
+      for (const asset of orderedAssets) {
+        if (asset.asset_type === 'image') {
+          media.push({
+            type: 'image',
+            url: asset.image_url,
+            width: asset.width || null,
+            height: asset.height || null
+          });
+        } else if (asset.asset_type === 'video') {
+          const embedSrc = getEmbedSrc(asset.player_embedded);
+          if (!embedSrc) {
+            console.warn(`${colors.yellow}⚠️  Warning: Video asset ${asset.id} in ${hashId} has no embed URL. Skipping it.${colors.reset}`);
+            continue;
+          }
+          const poster = (await getVimeoPoster(context, embedSrc)) || {
+            url: asset.image_url,
+            width: asset.width || null,
+            height: asset.height || null
+          };
+          media.push({ type: 'video', url: embedSrc, poster });
+        }
+      }
 
       // Extract tools/software
       const tools = detailData.software_items
@@ -186,7 +231,7 @@ async function fetchArtStationPortfolio(username) {
           height: thumbHeight
         },
         
-        images: images,
+        media: media,
         sourceUrl: detailData.permalink,
         tools: tools,
         description: detailData.description || "", 

@@ -4,12 +4,12 @@
 |-------------------------------------------------------------------------------
 |
 | Scrollable gallery + lightbox overlay for a single project. Supports both
-| images and an embedded video (Vimeo). Dark backdrop, media scales to fit
+| images and embedded videos (Vimeo), in the order they are given. Dark backdrop, media scales to fit
 | viewport, keyboard navigation (Escape, arrows), click-to-close, focus
 | returns to the trigger.
 |
 */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './ProjectMedia.module.css';
 
 export interface ProjectMediaImage {
@@ -18,51 +18,25 @@ export interface ProjectMediaImage {
   height?: number | null;
 }
 
+export type ProjectMediaItem =
+  | ({ type: 'image' } & ProjectMediaImage)
+  | { type: 'video'; url: string; poster: ProjectMediaImage };
+
 interface ProjectMediaProps {
-  images: ProjectMediaImage[];
-  video?: string;
-  videoPoster?: string;
+  media: ProjectMediaItem[];
   title: string;
 }
-
-type MediaItem =
-  | { kind: 'video'; src: string; poster?: string }
-  | {
-      kind: 'image';
-      src: string;
-      width?: number | null;
-      height?: number | null;
-    };
 
 const focusableSelector =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-export default function ProjectMedia({
-  images,
-  video,
-  videoPoster,
-  title,
-}: ProjectMediaProps) {
+export default function ProjectMedia({ media, title }: ProjectMediaProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const viewerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
-
-  const media = useMemo<MediaItem[]>(() => {
-    const items: MediaItem[] = [];
-    if (video) items.push({ kind: 'video', src: video, poster: videoPoster });
-    images.forEach((img) =>
-      items.push({
-        kind: 'image',
-        src: img.url,
-        width: img.width,
-        height: img.height,
-      }),
-    );
-    return items;
-  }, [video, videoPoster, images]);
 
   const total = media.length;
   const current = media[currentIndex];
@@ -133,20 +107,18 @@ export default function ProjectMedia({
     }
   }, [isOpen]);
 
-  const firstImageSrc = images[0]?.url;
-
   return (
     <>
       <div className={styles.gallery}>
         {media.map((item, index) => (
           <figure
-            key={`${item.kind}-${item.src}-${index}`}
-            className={`${styles.item}${item.kind === 'video' ? ` ${styles.itemVideo}` : ''}`}
+            key={`${item.type}-${item.url}-${index}`}
+            className={`${styles.item}${item.type === 'video' ? ` ${styles.itemVideo}` : ''}`}
             data-index={index}
             tabIndex={0}
             role="button"
             aria-label={
-              item.kind === 'video'
+              item.type === 'video'
                 ? `Play video ${index + 1}`
                 : `Open image ${index + 1} in viewer`
             }
@@ -158,15 +130,15 @@ export default function ProjectMedia({
               }
             }}
           >
-            {item.kind === 'video' ? (
+            {item.type === 'video' ? (
               <>
                 <img
-                  src={item.poster ?? firstImageSrc}
+                  src={item.poster.url}
                   alt={`${title} - Video ${index + 1}`}
                   loading="eager"
                   decoding="async"
-                  width="800"
-                  height="600"
+                  width={item.poster.width ?? 800}
+                  height={item.poster.height ?? 600}
                 />
                 <span className={styles.play} aria-hidden="true">
                   <svg
@@ -182,7 +154,7 @@ export default function ProjectMedia({
               </>
             ) : (
               <img
-                src={item.src}
+                src={item.url}
                 alt={`${title} - Image ${index + 1}`}
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
@@ -263,10 +235,10 @@ export default function ProjectMedia({
         </button>
 
         <div className={styles.content}>
-          {isOpen && current?.kind === 'video' ? (
+          {isOpen && current?.type === 'video' ? (
             <iframe
               className={styles.video}
-              src={current.src}
+              src={current.url}
               title={`${title} - Video ${currentIndex + 1}`}
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
@@ -274,17 +246,17 @@ export default function ProjectMedia({
           ) : (
             <img
               className={styles.image}
-              src={isOpen && current?.kind === 'image' ? current.src : undefined}
+              src={isOpen && current?.type === 'image' ? current.url : undefined}
               alt={
-                isOpen && current?.kind === 'image'
+                isOpen && current?.type === 'image'
                   ? `${title} - Image ${currentIndex + 1}`
                   : ''
               }
               width={
-                isOpen && current?.kind === 'image' ? current.width ?? undefined : undefined
+                isOpen && current?.type === 'image' ? current.width ?? undefined : undefined
               }
               height={
-                isOpen && current?.kind === 'image' ? current.height ?? undefined : undefined
+                isOpen && current?.type === 'image' ? current.height ?? undefined : undefined
               }
             />
           )}

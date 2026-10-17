@@ -14,10 +14,11 @@ import { getCollection } from 'astro:content';
 import ProjectGallery from './ProjectGallery/ProjectGallery';
 import { sortProjectsByOrder } from '../utils/sort-projects';
 import { pageUrl } from '../utils/asset-url';
+import { firstImage, imageAssets } from '../utils/project-media';
 
 interface FeaturedPick {
   id: string;
-  /** Zero-based position in the project's images; falls back to 0 when out of range. */
+  /** Zero-based position among the project's image assets (videos not counted); falls back to 0 when out of range. */
   imageIndex: number;
 }
 
@@ -38,11 +39,10 @@ const sortedProjects = sortProjectsByOrder([...featuredProjects, ...allProjects]
 const projects = sortedProjects.map((project) => ({
   title: project.data.title,
   album: project.data.albums?.[0] ?? '',
-  thumbnail: {
-    url: project.data.thumbnail.url,
-    width: project.data.thumbnail.width,
-    height: project.data.thumbnail.height,
-  },
+  // The card shows the project's first image asset; the ArtStation cover is only a fallback.
+  thumbnail: (({ url, width, height }) => ({ url, width, height }))(
+    firstImage(project.data.media) ?? project.data.thumbnail,
+  ),
   thumbnailAlt: `${project.data.title} thumbnail`,
   href: pageUrl(`/works/${project.id}`),
   featured: project.data.featured,
@@ -60,8 +60,8 @@ const featured = featuredPicks?.map(({ id, imageIndex }) => {
   if (!project) {
     throw new Error(`Featured project "${id}" is not in projects.json. Update featuredPicks to an existing project id.`);
   }
-  const { images, thumbnail } = project.data;
-  const image = images[imageIndex] ?? images[0] ?? thumbnail;
+  const images = imageAssets(project.data.media);
+  const image = images[imageIndex] ?? images[0] ?? project.data.thumbnail;
   return {
     title: project.data.title,
     album: project.data.albums?.[0] ?? '',
