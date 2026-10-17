@@ -8,7 +8,7 @@
 | a fixed height. Takes the same props as ProjectCard, plus `expanded` to open
 | it without hover and `onReachCenter`, called when the strip crosses the
 | vertical centre of the viewport. While the strip is open it steps through
-| the project's `images` every 2 seconds, starting from `imageIndex`, with a
+| the project's `images` every 1.2 seconds, starting from `imageIndex`, with a
 | crossfade; it returns to `imageIndex` once the strip has closed again.
 |
 */
@@ -28,7 +28,7 @@ interface FeaturedAccordionItemProps extends ProjectCardProps, FeaturedAccordion
   onReachCenter?: () => void;
 }
 
-const ROTATE_INTERVAL_MS = 2000;
+const ROTATE_INTERVAL_MS = 1200;
 // Longer than the strip's closing transition, so the picture does not change while it shrinks.
 const RESET_DELAY_MS = 600;
 const FINE_HOVER_QUERY = '(hover: hover) and (pointer: fine)';
@@ -99,7 +99,9 @@ export default function FeaturedAccordionItem({
   }, [index]);
 
   // The next picture is mounted (and so fetched) while still hidden, so it can fade in when its turn comes.
-  const mounted = isOpen && rotates && !visited.includes(nextIndex) ? [...visited, nextIndex] : visited;
+  const mounted = Array.from(
+    new Set([...visited, index, ...(isOpen && rotates ? [nextIndex] : [])]),
+  ).sort((a, b) => a - b);
 
   const hasReachCenterHandler = Boolean(onReachCenter);
   const onReachCenterRef = useRef(onReachCenter);
