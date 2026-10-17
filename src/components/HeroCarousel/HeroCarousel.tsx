@@ -13,7 +13,7 @@
 import { useEffect, useState } from 'react';
 import styles from './HeroCarousel.module.css';
 
-const SWAP_INTERVAL_MS = 5000;
+const SWAP_INTERVAL_MS = 4000;
 
 interface HeroCarouselProps {
   images: string[];

@@ -70,7 +70,7 @@ Fixed bar in the page colour with white links (Home, Works, About; Works goes to
 
 ### Hero (`HeroSection.astro`, `HeroCarousel/`)
 - Full window (`100svh`; `70svh` below 768px).
-- One background image, a random order of `public/assets/hero/slideshow_1-3.png` shuffled in the browser, crossfading every 5s. Pauses on hover and while the tab is hidden; static with `prefers-reduced-motion`. Not clickable and hidden from assistive tech.
+- One background image, a random order of `public/assets/hero/slideshow_1-3.png` shuffled in the browser, crossfading every 4s. Pauses on hover and while the tab is hidden; static with `prefers-reduced-motion`. Not clickable and hidden from assistive tech.
 - Name "JO" over "SE": desktop is vertically centred at the left, `min(50vh, 40vw)`, tracking −0.124em, line-height 0.72 (the lines overlap slightly). Below 768px the same stack is `min(58vw, 38svh)` in the bottom-right corner with a 4vw margin to the visible letters.
 - Scroll chevron, bottom centre, desktop only: appears 5s after load if the page has not been scrolled, fades out when the page leaves the top and returns when it is back at the top.
 
