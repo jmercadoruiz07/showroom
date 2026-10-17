@@ -53,6 +53,7 @@ Secondary labels (card category) are 58% white via `color-mix`. Filter tabs are 
 | Role | Site font (Adobe Fonts / Typekit) | Notes |
 | :-- | :-- | :-- |
 | Display (hero name, wordmarks, About heading) | `widescreen` via `--font-hero` | Uppercase; 700 for the hero name, 900 for outlined wordmarks |
+| About bio and project descriptions | `swiss-721-bt` (Swiss 721 BT Medium) via `--font-text` | Only the 500 weight is in the Adobe Fonts kit, so use `--font-weight-medium` |
 | Body, nav, filter tabs, card labels, footer text | `adelle-mono` via `--font-hero-mono` | Nav, tabs and the footer copyright share one style: `--type-xs`, regular, `--tracking-wide`, uppercase |
 
 Figma uses LEMON MILK and NB Akademie, which are not available, so `widescreen` and `adelle-mono` stand in. The Typekit stylesheet is loaded in `src/layouts/BaseLayout.astro`.

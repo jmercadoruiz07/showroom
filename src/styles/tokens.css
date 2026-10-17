@@ -47,8 +47,11 @@
   /* Adobe Fonts (Typekit) families, loaded in BaseLayout */
   --font-hero:       widescreen, "Arial Black", "Helvetica Neue", sans-serif;
   --font-hero-mono:  adelle-mono, "JetBrains Mono", "Fira Mono", monospace;
+  /* Swiss 721 BT Medium: the kit only ships the 500 weight, so use it with font-weight 500 */
+  --font-text:       swiss-721-bt, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --font-weight-regular: 400;
+  --font-weight-medium:  500;
   --font-weight-bold:    700;
   --font-weight-black:   900;
 
