@@ -1,15 +1,3 @@
-/*
-|-------------------------------------------------------------------------------
-| ProjectCard — Component Styles
-|-------------------------------------------------------------------------------
-|
-| Slow zoom (scale 1.03 over 800ms). A bar in the page background colour sits
-| above the card's top edge with the title on the left and the category on the
-| right, both in the filter-tab type. On hover or focus it slides down over the
-| top of the image like an eyelid. Where hover is unavailable the bar is always
-| shown.
-|
-*/
 .card {
   position: relative;
   display: block;

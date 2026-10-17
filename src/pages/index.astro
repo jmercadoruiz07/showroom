@@ -1,13 +1,8 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| Home Page — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Full-window hero with rotating background images + Project Gallery whose
-| FEATURED tab shows four hand-picked projects, each with a chosen image.
-|
-*/
+/**
+ * Home page: full-window hero and a project gallery whose FEATURED tab shows four hand-picked projects.
+ */
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
@@ -21,7 +16,7 @@ const heroImages = [
   assetUrl('hero/slideshow_3.png'),
 ];
 
-// Project ids and the zero-based index into the project's image assets shown on each accordion item.
+/** Project ids and the zero-based index into the project's image assets shown on each accordion item. */
 const featuredPicks = [
   { id: 'xdDJRX', imageIndex: 2 },
   { id: 'PXbgxr', imageIndex: 0 },

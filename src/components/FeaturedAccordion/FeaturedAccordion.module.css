@@ -1,19 +1,9 @@
-/*
-|-------------------------------------------------------------------------------
-| FeaturedAccordion — Component Styles
-|-------------------------------------------------------------------------------
-|
-| --u is one Figma pixel of the 1509px-wide strip (ABOUT frame, node 198:32).
-| It is declared on .list because an element cannot use its own container's
-| units. Below 768px the composition is scaled up by using a 760px basis, so
-| the text stays readable.
-|
-*/
 .root {
   container-type: inline-size;
 }
 
 .list {
+  /* One Figma pixel of the 1509px-wide strip; set here because an element cannot use its own container's units. */
   --u: calc(100cqw / 1509);
   display: flex;
   flex-direction: column;
@@ -22,6 +12,7 @@
 
 @media (max-width: 767px) {
   .list {
+    /* A 760px basis scales the composition up so the text stays readable. */
     --u: calc(100cqw / 760);
   }
 }

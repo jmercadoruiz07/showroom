@@ -1,14 +1,3 @@
-/*
-|-------------------------------------------------------------------------------
-| Base Styles — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Minimal, opinionated reset followed by global utilities and component-agnostic
-| patterns. Preserves native form controls and semantic element behavior.
-| Component-specific styles live in their respective components.
-|
-*/
-
 /* ─── Box Sizing ──────────────────────────────────────────────────────────── */
 *,
 *::before,

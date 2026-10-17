@@ -1,20 +1,9 @@
-/*
-|-------------------------------------------------------------------------------
-| FeaturedAccordionItem — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Full-width project strip. Shows the thumbnail cropped to a short band with
-| the title and album over it. Takes the same props as ProjectCard, plus the
-| project's `images`. Two modes, split at 768px:
-|
-| - From 768px up the strip is closed until it is hovered or has keyboard
-|   focus, and steps through its images (every 1.2 seconds, from `imageIndex`,
-|   with a crossfade) only while open; once it has closed it returns to
-|   `imageIndex`.
-| - Below 768px every strip is always open and steps through its images only
-|   while more than half of it is in view.
-|
-*/
+/**
+ * Full-width project strip: the thumbnail cropped to a short band with the title and album over it.
+ * From 768px up it opens on hover or keyboard focus and steps through the project's `images` (every 1.2 seconds, from `imageIndex`, with a crossfade) only while open, returning to `imageIndex` once closed.
+ * Below 768px it is always open and steps through its images only while more than half of it is in view.
+ */
+
 import { useEffect, useRef, useState } from 'react';
 import type { ProjectCardProps, ProjectCardThumbnail } from '../ProjectCard/ProjectCard';
 import styles from './FeaturedAccordionItem.module.css';
@@ -29,7 +18,7 @@ export interface FeaturedAccordionImages {
 interface FeaturedAccordionItemProps extends ProjectCardProps, FeaturedAccordionImages {}
 
 const ROTATE_INTERVAL_MS = 1200;
-// Longer than the strip's closing transition, so the picture does not change while it shrinks.
+/** Longer than the strip's closing transition, so the picture does not change while it shrinks. */
 const RESET_DELAY_MS = 600;
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const MOBILE_QUERY = '(max-width: 767px)';
@@ -79,9 +68,9 @@ export default function FeaturedAccordionItem({
     return () => observer.disconnect();
   }, []);
 
-  // Open on hover or keyboard focus, and always on mobile (where the stylesheet keeps it open too).
+  /** Open on hover or keyboard focus, and always on mobile (where the stylesheet keeps it open too). */
   const isOpen = isMobile || focused || hovered;
-  // On mobile only the strips that are mostly on screen rotate.
+  /** On mobile only the strips that are mostly on screen rotate. */
   const isActive = isOpen && (!isMobile || mostlyInView);
   const rotates = slides.length > 1 && !reducedMotion;
   const nextIndex = (index + 1) % slides.length;
@@ -105,7 +94,7 @@ export default function FeaturedAccordionItem({
     setVisited((seen) => (seen.includes(index) ? seen : [...seen, index]));
   }, [index]);
 
-  // The next picture is mounted (and so fetched) while still hidden, so it can fade in when its turn comes.
+  /** The next picture is mounted (and so fetched) while still hidden, so it can fade in when its turn comes. */
   const mounted = Array.from(
     new Set([...visited, index, ...(isActive && rotates ? [nextIndex] : [])]),
   ).sort((a, b) => a - b);

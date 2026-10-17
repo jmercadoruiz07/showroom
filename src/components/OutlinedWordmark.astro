@@ -1,29 +1,21 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| OutlinedWordmark — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Text drawn as outlined letters; hovering a letter fills it, and with
-| fillNeighbours the letters either side of it fill too. kerns adds extra space
-| (em) after a letter, indexed over the letters skipping spaces. Each letter is
-| generated content because real text would be repainted by a page text
-| selection and disappear. The parent supplies a class that positions and sizes
-| it (font-size, line-height, writing mode), styled with :global since scoped
-| styles do not reach this component's root, and may set --wordmark-stroke-width
-| and --wordmark-gap (the space between words).
-|
-*/
+/**
+ * Text drawn as outlined letters. Hovering a letter fills it, and with `fillNeighbours` the letters either side fill too.
+ * Each letter is generated content, because real text would be repainted by a page text selection and disappear.
+ * The parent supplies a class for position and size, styled with `:global` since scoped styles do not reach this component's root.
+ */
+
 interface Props {
   text: string;
   fillNeighbours?: boolean;
+  /** Extra space (em) after a letter, indexed over the letters skipping spaces. */
   kerns?: number[];
   class?: string;
 }
 
 const { text, fillNeighbours = false, kerns = [], class: className } = Astro.props;
 
-// Spaces become a gap before the next letter so "adjacent" always means a visible letter.
+/** Spaces become a gap before the next letter, so "adjacent" always means a visible letter. */
 const letters: { char: string; gap: boolean; kern: number }[] = [];
 let gap = false;
 for (const char of text) {

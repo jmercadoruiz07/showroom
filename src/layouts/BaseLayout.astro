@@ -1,13 +1,18 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| BaseLayout — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Root HTML shell with <head>, font preloads, global styles, and slot for page content.
-| All pages should use this layout.
-|
-*/
+/**
+ * Root HTML shell with <head>, font preloads, global styles, and slot for page content.
+ * All pages should use this layout.
+ */
+
+import { ClientRouter } from 'astro:transitions';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { assetUrl } from '../utils/asset-url';
+import { BIO, PROFILE_IMAGE, SITE_NAME } from '../utils/site';
+
+import '../styles/tokens.css';
+import '../styles/base.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -25,14 +30,6 @@ const {
 } = Astro.props;
 
 const canonical = canonicalURL || Astro.url.href;
-import { ClientRouter } from 'astro:transitions';
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import { assetUrl } from '../utils/asset-url';
-import { BIO, PROFILE_IMAGE, SITE_NAME } from '../utils/site';
-
-import '../styles/tokens.css';
-import '../styles/base.css';
 ---
 
 <!doctype html>

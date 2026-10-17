@@ -1,23 +1,17 @@
-/*
-|-------------------------------------------------------------------------------
-| HeroCarousel — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Single image filling the hero background. The images are shuffled in the
-| browser on each page load; the background then crossfades to the next image
-| in the shuffled order every few seconds. Rotation pauses on hover and while
-| the tab is hidden, and is disabled for prefers-reduced-motion. The image is
-| decorative and not interactive.
-|
-*/
+/**
+ * Single image filling the hero background, crossfading to the next of the shuffled images every few seconds.
+ * Rotation pauses on hover and while the tab is hidden, and is off for `prefers-reduced-motion`.
+ * The image is decorative and not interactive.
+ */
+
 import { useEffect, useState } from 'react';
 import styles from './HeroCarousel.module.css';
-
-const SWAP_INTERVAL_MS = 4000;
 
 interface HeroCarouselProps {
   images: string[];
 }
+
+const SWAP_INTERVAL_MS = 4000;
 
 function shuffled<T>(items: T[]): T[] {
   const result = [...items];
@@ -67,7 +61,7 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
 
   const current = order && order.length > 0 ? order[swaps % order.length] : null;
 
-  // The previous image stays underneath until the incoming one has finished fading in.
+  /** The previous image stays underneath until the incoming one has finished fading in. */
   useEffect(() => {
     if (!current) return;
     setLayers((existing) =>
@@ -75,7 +69,7 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
     );
   }, [current]);
 
-  // Fetch the next image ahead of its crossfade so it never fades in empty.
+  /** Fetch the next image ahead of its crossfade so it never fades in empty. */
   useEffect(() => {
     if (!rotates || !order) return;
     new Image().src = order[(swaps + 1) % order.length];

@@ -1,13 +1,8 @@
-/*
-|-------------------------------------------------------------------------------
-| FeaturedAccordion — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Vertical stack of full-width project strips. From 768px up each strip is
-| closed until it is hovered or focused; below 768px every strip is always
-| open. The strips handle both themselves, see FeaturedAccordionItem.
-|
-*/
+/**
+ * Vertical stack of project strips: closed until hovered or focused from 768px up, always open below.
+ * The strips handle both themselves, see FeaturedAccordionItem.
+ */
+
 import type { ProjectCardProps } from '../ProjectCard/ProjectCard';
 import FeaturedAccordionItem, { type FeaturedAccordionImages } from './FeaturedAccordionItem';
 import styles from './FeaturedAccordion.module.css';

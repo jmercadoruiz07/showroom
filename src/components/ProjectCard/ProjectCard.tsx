@@ -1,13 +1,8 @@
-/*
-|-------------------------------------------------------------------------------
-| ProjectCard — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Single project thumbnail with title + album. No border-radius, no default drop shadow.
-| A bar with the title (left) and album (right) slides down from the top edge on hover.
-| Slow zoom (scale 1.03 over 800ms).
-|
-*/
+/**
+ * Project thumbnail with its title and album. A bar with the title and album slides down over the top edge on hover or focus,
+ * and the image zooms slowly.
+ */
+
 import type { CSSProperties } from 'react';
 import styles from './ProjectCard.module.css';
 
@@ -36,8 +31,7 @@ export default function ProjectCard({
   featured = false,
   style,
 }: ProjectCardProps) {
-  // Falls back to a 1:1 ratio when dimensions are missing so cards still
-  // reserve space and the grid stays stable on first paint.
+  /** Falls back to a 1:1 ratio when dimensions are missing so cards still reserve space and the grid stays stable on first paint. */
   const aspectRatio =
     thumbnail.width && thumbnail.height
       ? `${thumbnail.width} / ${thumbnail.height}`

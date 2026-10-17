@@ -1,11 +1,3 @@
-/*
-|-------------------------------------------------------------------------------
-| HeroCarousel — Component Styles
-|-------------------------------------------------------------------------------
-|
-| One image covering the whole hero. The hero's name and nav sit above it.
-|
-*/
 .carousel {
   position: absolute;
   inset: 0;

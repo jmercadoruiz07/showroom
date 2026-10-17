@@ -1,14 +1,8 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| SiteHeader — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Fixed navigation bar across the top, above all page content, in the page
-| background colour with white links. On pages with a .hero section it is
-| transparent at the top of the page and fills in as soon as the page scrolls.
-|
-*/
+/**
+ * Fixed navigation bar. On pages with a `.hero` it is transparent at the top and fills in once the page scrolls.
+ */
+
 import { pageUrl } from '../utils/asset-url';
 
 const trimSlash = (path: string) => path.replace(/\/$/, '');
@@ -20,7 +14,7 @@ const links = [
   { href: pageUrl('/about'), label: 'About' },
 ];
 
-// The home page opens with the links over the hero and a JMR label; both are driven by data-intro.
+/** The home page opens with the links over the hero and a JMR label; both are driven by `data-intro`. */
 const hasIntro = pathname === trimSlash(pageUrl('/'));
 
 const isCurrent = (href: string) =>

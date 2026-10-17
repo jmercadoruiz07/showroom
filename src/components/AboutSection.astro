@@ -1,18 +1,9 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| AboutSection — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Contact details and a statement, the portrait, and the hand reaching over the
-| outlined GET IN TOUCH heading (the hand is two layers with the heading between
-| them). Three tiers with fixed type sizes: from 1400px a collage laid out on
-| the 1702px Figma About frame, from 768px a two-column grid with the heading
-| below, and under 768px a single column with the heading above the portrait.
-| --u is one Figma pixel; it follows the heading's fixed font size, so the
-| heading and hands always scale together.
-|
-*/
+/**
+ * Contact details, bio and portrait, with the hand reaching over the outlined GET IN TOUCH heading.
+ * Three tiers with fixed type sizes: a collage from 1400px, a two-column grid from 768px and a single column below.
+ */
+
 import OutlinedWordmark from './OutlinedWordmark.astro';
 import SocialLinks from './SocialLinks.astro';
 import { assetUrl } from '../utils/asset-url';
@@ -26,13 +17,15 @@ interface Props {
 
 const { email, statement, portrait, portraitAlt } = Astro.props;
 
-// Ink gap between each letter pair of the heading in em, measured from widescreen Black at
-// zero tracking. Each pair is pulled to TARGET_GAP so the spacing is uniform and tight.
+/** Ink gap (em) between each letter pair of the heading, measured from widescreen Black at zero tracking. */
 const NATURAL_GAP: Record<string, number> = {
   GE: 0.095, ET: 0.035, IN: 0.125, TO: 0.015, OU: 0.079, UC: 0.086, CH: 0.072,
 };
+
+/** Each pair is pulled to this gap so the spacing is uniform and tight. */
 const TARGET_GAP = 0.05;
-// Calibrated against the rendered heading (browsers drop some pair kerning across spans).
+
+/** Calibrated against the rendered heading, since browsers drop some pair kerning across spans. */
 const NATURAL_INK_WIDTH = 7.224;
 
 const HEADING = 'GET IN TOUCH';

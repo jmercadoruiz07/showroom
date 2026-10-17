@@ -1,14 +1,3 @@
-/*
-|-------------------------------------------------------------------------------
-| ProjectMedia — Component Styles
-|-------------------------------------------------------------------------------
-|
-| Scrollable gallery column plus fixed lightbox overlay. Solid page-color
-| backdrop, media scales to fit viewport, white square controls and a display
-| font counter. On small screens the arrows sit in a row just below the media,
-| one on each side of the screen.
-|
-*/
 .gallery {
   display: flex;
   flex-direction: column;

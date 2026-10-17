@@ -1,19 +1,9 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| VerticalWordmark — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Name set vertically along the right edge of the screen, reading bottom to top,
-| as an OutlinedWordmark whose hovered letter and its neighbours fill. On pages
-| with a .hero section the letters start filled and fade to outlines as the hero
-| scrolls away, finishing when the hero's bottom edge reaches the top of the
-| page. Fixed below the header and above page content so it stays put while the
-| page scrolls. Size follows the viewport height via --wordmark-size; pages that
-| use it reserve --wordmark-gutter on their right side. Hidden below 768px, where
-| --wordmark-gutter is 0.
-|
-*/
+/**
+ * Name set vertically along the right edge, reading bottom to top, as an OutlinedWordmark.
+ * On pages with a `.hero` the letters start filled and fade to outlines as the hero scrolls away. Hidden below 768px.
+ */
+
 import OutlinedWordmark from './OutlinedWordmark.astro';
 ---
 

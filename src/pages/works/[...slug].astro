@@ -1,22 +1,18 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| Project Detail Page — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Split-screen layout (60/40 or 70/30) alternating per project.
-| Media pane: scrollable image gallery with lightbox, or embedded video.
-| Text pane: title (Display), description (Body), metadata (Mono).
-| Navigation: "← All Projects" text link.
-|
-*/
+/**
+ * Project detail page: media on one side and the title, description and tools on the other, alternating per project.
+ */
+
 import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import ProjectMedia from '../../components/ProjectMedia/ProjectMedia';
 import { pageUrl } from '../../utils/asset-url';
 import { firstImage } from '../../utils/project-media';
 
-// Generate static paths for all projects
+const { project } = Astro.props;
+const { title, date, albums, tags, media, tools, description, featured } = project.data;
+
+/** Generates a page for every project. */
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map((project) => ({
@@ -25,12 +21,10 @@ export async function getStaticPaths() {
   }));
 }
 
-const { project } = Astro.props;
-const { title, date, albums, tags, media, tools, description, featured } = project.data;
 const firstMedia = media[0];
 const displayAlbum = albums?.[0] ?? '';
 
-// Alternate layout based on order or slug
+/** Media and text swap sides on alternate projects. */
 const isEven = (project.data.order || 0) % 2 === 0;
 const mediaFirst = isEven;
 
@@ -41,7 +35,6 @@ const formatDate = (date: Date) => {
     day: 'numeric',
   }).format(date);
 };
-
 ---
 
 <ProjectLayout

@@ -1,19 +1,4 @@
-/*
-|-------------------------------------------------------------------------------
-| FeaturedAccordionItem — Component Styles
-|-------------------------------------------------------------------------------
-|
-| Measurements come from the Figma ABOUT frame (node 198:32), where one strip
-| is 1509 design pixels wide; --u (set by FeaturedAccordion) is one of those
-| pixels. A strip is 241 tall and grows to 60vh on hover (from 768px up; below 768px it is always open, at 70svh).
-| The text block sits at the bottom left while closed (63 above the bottom
-| edge) and moves to the top left (54 from the corner) as the strip grows. Dark
-| text stays legible over any thumbnail: a white left-to-right fade (Figma node
-| 252:117) while the strip is closed, which crossfades to a radial white glow
-| from the top left corner when it opens. The image is always the expanded
-| size, centred, so growing the strip reveals more of it instead of scaling it.
-|
-*/
+/* Measurements are in --u, one Figma pixel (see FeaturedAccordion.module.css). */
 .item {
   --expanded-height: 60vh;
   position: relative;

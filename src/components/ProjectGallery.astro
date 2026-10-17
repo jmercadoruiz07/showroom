@@ -1,15 +1,9 @@
 ---
-/*
-|-------------------------------------------------------------------------------
-| ProjectGallery — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Loads project content, sorts by order/date, derives the unique album list,
-| and renders the interactive album-filtered grid as a React island. When
-| `featuredPicks` is given, the first tab is FEATURED and shows those projects,
-| each with the chosen image, in an accordion.
-|
-*/
+/**
+ * Loads and sorts the projects, derives the album list and renders the album-filtered grid.
+ * With `featuredPicks` the first tab is FEATURED and shows those projects in an accordion.
+ */
+
 import { getCollection } from 'astro:content';
 import ProjectGallery from './ProjectGallery/ProjectGallery';
 import { sortProjectsByOrder } from '../utils/sort-projects';
@@ -33,13 +27,13 @@ const { tightTop = false, stickyFilter = true, featuredPicks } = Astro.props;
 const allProjects = await getCollection('projects', ({ data }) => !data.featured);
 const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
 
-// Sort by order, then date
+/** Sorted by order, then date. */
 const sortedProjects = sortProjectsByOrder([...featuredProjects, ...allProjects]);
 
 const projects = sortedProjects.map((project) => ({
   title: project.data.title,
   album: project.data.albums?.[0] ?? '',
-  // The card shows the project's first image asset; the ArtStation cover is only a fallback.
+  /** The card shows the project's first image asset; the ArtStation cover is only a fallback. */
   thumbnail: (({ url, width, height }) => ({ url, width, height }))(
     firstImage(project.data.media) ?? project.data.thumbnail,
   ),
@@ -48,9 +42,7 @@ const projects = sortedProjects.map((project) => ({
   featured: project.data.featured,
 }));
 
-// Derive the unique album list from the loaded projects, preserving the
-// order each album first appears so the filter pills stay stable across
-// re-runs of the scraper.
+/** Unique albums in the order each first appears, so the filter tabs stay stable across scraper runs. */
 const albums = Array.from(
   new Set(projects.map((project) => project.album).filter((a) => a.length > 0)),
 );
@@ -68,7 +60,7 @@ const featured = featuredPicks?.map(({ id, imageIndex }) => {
     album: project.data.albums?.[0] ?? '',
     thumbnail: { url: image.url, width: image.width, height: image.height },
     thumbnailAlt: `${project.data.title} featured image`,
-    // Every image asset, so the open strip can step through them; the picked one comes first.
+    /** Every image asset, so the open strip can step through them. */
     images: images.map(({ url, width, height }) => ({ url, width, height })),
     imageIndex: pickedIndex,
     href: pageUrl(`/works/${project.id}`),

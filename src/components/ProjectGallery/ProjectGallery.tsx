@@ -1,19 +1,9 @@
-/*
-|-------------------------------------------------------------------------------
-| ProjectGallery — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Horizontal pill/tag filter (sticky below header). When the tabs do not all fit
-| it scrolls sideways, with a fade and arrow at each end that has more tabs, and
-| choosing a tab scrolls it to the middle of the bar. With `featured`, the first
-| tab is FEATURED and shows a FeaturedAccordion; without it the first tab is ALL
-| and shows every project. Album tabs show a masonry grid of project
-| cards. Each card's grid placement (column + row-start + row-span) is
-| computed by a basic shortest-column packer so the browser renders the
-| intended layout without relying on its dense-flow heuristics. Toggles
-| visibility client-side via React state, no re-render of full list needed.
-|
-*/
+/**
+ * Album filter bar and project grid. With `featured` the first tab is FEATURED and shows a FeaturedAccordion; otherwise the first tab is ALL.
+ * When the tabs overflow the bar scrolls sideways, with an arrow at each end that has more, and choosing a tab centres it.
+ * Album tabs show a masonry grid whose card placement comes from a shortest-column packer.
+ */
+
 import type { CSSProperties, MouseEvent } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import FeaturedAccordion, { type FeaturedAccordionProject } from '../FeaturedAccordion/FeaturedAccordion';
@@ -29,8 +19,6 @@ export interface GalleryProject {
   featured?: boolean;
 }
 
-export const ALL_ALBUMS = 'all';
-
 interface ProjectGalleryProps {
   projects: GalleryProject[];
   albums: string[];
@@ -41,6 +29,14 @@ interface ProjectGalleryProps {
   /** Keeps the filter bar pinned below the header while scrolling. */
   stickyFilter?: boolean;
 }
+
+interface Slot {
+  column: number;
+  rowStart: number;
+  rowSpan: number;
+}
+
+export const ALL_ALBUMS = 'all';
 
 /**
  * Card height is fully determined by the thumbnail aspect ratio at the
@@ -57,12 +53,6 @@ function cardRowSpan(
   const height = thumbnail.height || 1;
   const cardHeight = columnWidth * (height / width);
   return Math.max(1, Math.ceil((cardHeight + gap) / rowHeight));
-}
-
-interface Slot {
-  column: number;
-  rowStart: number;
-  rowSpan: number;
 }
 
 /**
@@ -142,7 +132,7 @@ export default function ProjectGallery({ projects, albums, featured, tightTop = 
     filterListRef.current?.scrollBy({ left, behavior: reduceMotion ? 'auto' : 'smooth' });
   }, []);
 
-  // Moves the clicked tab to the middle of the bar; near either end it goes as far as the list allows.
+  /** Moves the clicked tab to the middle of the bar; near either end it goes as far as the list allows. */
   const selectAlbum = (album: string, event: MouseEvent<HTMLButtonElement>) => {
     setActiveAlbum(album);
     const list = filterListRef.current;
@@ -152,7 +142,7 @@ export default function ProjectGallery({ projects, albums, featured, tightTop = 
     scrollFilter(tab.left + tab.width / 2 - (bar.left + bar.width / 2));
   };
 
-  // Filter projects first, then compute placement for visible ones only
+  /** Filter projects first, then compute placement for visible ones only */
   const visibleProjects = projects.filter(
     (p) => activeAlbum === ALL_ALBUMS || p.album === activeAlbum,
   );

@@ -1,14 +1,8 @@
-/*
-|-------------------------------------------------------------------------------
-| ProjectMedia — JMR Visuals Portfolio
-|-------------------------------------------------------------------------------
-|
-| Scrollable gallery + lightbox overlay for a single project. Supports both
-| images and embedded videos (Vimeo), in the order they are given. Dark backdrop, media scales to fit
-| viewport, keyboard navigation (Escape, arrows), click-to-close, focus
-| returns to the trigger.
-|
-*/
+/**
+ * Scrollable gallery and lightbox for a single project, showing its images and videos in the order given.
+ * The lightbox has keyboard navigation (Escape, arrows), touch swipe, click to close, and returns focus to the trigger.
+ */
+
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 import styles from './ProjectMedia.module.css';
 
@@ -51,7 +45,7 @@ export default function ProjectMedia({ media, title }: ProjectMediaProps) {
 
   const close = () => setIsOpen(false);
 
-  // A horizontal touch drag of at least 50px, mostly sideways, moves to the neighbouring item.
+  /** A horizontal touch drag of at least 50px, mostly sideways, moves to the neighbouring item. */
   const swipeStart = useRef<{ x: number; y: number } | null>(null);
 
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {

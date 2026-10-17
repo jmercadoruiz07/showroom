@@ -8,7 +8,7 @@ const projectImage = z.object({
   height: z.number().nullable().optional(),
 });
 
-// Images and videos in the order ArtStation shows them. A video's `url` is the player's iframe src.
+/** Images and videos in the order ArtStation shows them. A video's `url` is the player's iframe src. */
 const projectMedia = z.discriminatedUnion('type', [
   projectImage.extend({ type: z.literal('image') }),
   z.object({ type: z.literal('video'), url: z.string(), poster: projectImage }),
