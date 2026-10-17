@@ -9,7 +9,7 @@
 | returns to the trigger.
 |
 */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import styles from './ProjectMedia.module.css';
 
 export interface ProjectMediaImage {
@@ -238,6 +238,11 @@ export default function ProjectMedia({ media, title }: ProjectMediaProps) {
           {isOpen && current?.type === 'video' ? (
             <iframe
               className={styles.video}
+              style={
+                current.poster.width && current.poster.height
+                  ? ({ '--video-ratio': `${current.poster.width} / ${current.poster.height}` } as CSSProperties)
+                  : undefined
+              }
               src={current.url}
               title={`${title} - Video ${currentIndex + 1}`}
               allow="autoplay; fullscreen; picture-in-picture"

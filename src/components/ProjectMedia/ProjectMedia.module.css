@@ -134,10 +134,11 @@
   user-select: none;
 }
 
+/* The frame takes the video's own aspect ratio (--video-ratio, from its poster), as large as fits the
+   viewport, so the player has no bars above or below. */
 .video {
-  width: 90vw;
-  max-width: 1280px;
-  height: 85vh;
+  width: min(90vw, 1280px, calc(85vh * var(--video-ratio, 16 / 9)));
+  aspect-ratio: var(--video-ratio, 16 / 9);
   border: none;
   background: #000;
 }
