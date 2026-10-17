@@ -4,7 +4,8 @@
 |-------------------------------------------------------------------------------
 |
 | Sticky category filter bar below the header. The nav lives inside the sticky
-| bar so it stays clickable while the grid scrolls beneath it.
+| bar so it stays clickable while the grid scrolls beneath it. When the tabs
+| overflow, an arrow with a fade appears at each end that has more tabs.
 |
 */
 .root {
@@ -28,6 +29,7 @@
 }
 
 .filter {
+  position: relative;
   flex: 1;
   min-width: 0;
   max-width: var(--max-width-full);
@@ -42,7 +44,6 @@
   margin: 0;
   padding: 0;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -71,7 +72,55 @@
   transition: color var(--duration-fast) var(--ease-quick),
               background-color var(--duration-fast) var(--ease-quick);
   white-space: nowrap;
-  scroll-snap-align: start;
+}
+
+/* Arrows sit over the ends of the list; the fade lets the tabs slide under them. */
+.filterArrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  color: var(--color-chalk);
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-standard),
+              color var(--duration-fast) var(--ease-quick);
+}
+
+.filterArrow:hover {
+  color: var(--color-accent);
+}
+
+.arrowBefore {
+  left: 0;
+  justify-content: flex-start;
+  padding-left: 0.25rem;
+  background: linear-gradient(to right, var(--color-bone) 35%, transparent);
+}
+
+.arrowAfter {
+  right: 0;
+  justify-content: flex-end;
+  padding-right: 0.25rem;
+  background: linear-gradient(to left, var(--color-bone) 35%, transparent);
+}
+
+.filter[data-more-before] .arrowBefore,
+.filter[data-more-after] .arrowAfter {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filterArrow {
+    transition: none;
+  }
 }
 
 .filterButton:hover {
