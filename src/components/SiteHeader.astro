@@ -9,16 +9,19 @@
 | transparent at the top of the page and fills in as soon as the page scrolls.
 |
 */
-const pathname = Astro.url.pathname;
+import { pageUrl } from '../utils/asset-url';
+
+const trimSlash = (path: string) => path.replace(/\/$/, '');
+const pathname = trimSlash(Astro.url.pathname);
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/works', label: 'Works' },
-  { href: '/about', label: 'About' },
+  { href: pageUrl('/'), label: 'Home' },
+  { href: pageUrl('/works'), label: 'Works' },
+  { href: pageUrl('/about'), label: 'About' },
 ];
 
 const isCurrent = (href: string) =>
-  href === '/' ? pathname === '/' : pathname.startsWith(href);
+  href === pageUrl('/') ? pathname === trimSlash(href) : pathname.startsWith(href);
 ---
 
 <header class="site-header" role="banner">

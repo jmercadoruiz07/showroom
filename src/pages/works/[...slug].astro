@@ -13,6 +13,7 @@
 import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import ProjectMedia from '../../components/ProjectMedia/ProjectMedia';
+import { pageUrl } from '../../utils/asset-url';
 
 // Generate static paths for all projects
 export async function getStaticPaths() {
@@ -49,7 +50,7 @@ const formatDate = (date: Date) => {
   <main id="main-content">
   <article class="project-detail">
     <header class="project-header">
-      <a href="/works" class="back-link text-mono">
+      <a href={pageUrl('/works')} class="back-link text-mono">
         ← All Projects
       </a>
 

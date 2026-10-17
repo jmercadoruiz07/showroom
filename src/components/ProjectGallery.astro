@@ -13,6 +13,7 @@
 import { getCollection } from 'astro:content';
 import ProjectGallery from './ProjectGallery/ProjectGallery';
 import { sortProjectsByOrder } from '../utils/sort-projects';
+import { pageUrl } from '../utils/asset-url';
 
 interface FeaturedPick {
   id: string;
@@ -43,7 +44,7 @@ const projects = sortedProjects.map((project) => ({
     height: project.data.thumbnail.height,
   },
   thumbnailAlt: `${project.data.title} thumbnail`,
-  href: `/works/${project.id}`,
+  href: pageUrl(`/works/${project.id}`),
   featured: project.data.featured,
 }));
 
@@ -66,7 +67,7 @@ const featured = featuredPicks?.map(({ id, imageIndex }) => {
     album: project.data.albums?.[0] ?? '',
     thumbnail: { url: image.url, width: image.width, height: image.height },
     thumbnailAlt: `${project.data.title} featured image`,
-    href: `/works/${project.id}`,
+    href: pageUrl(`/works/${project.id}`),
     featured: project.data.featured,
   };
 });

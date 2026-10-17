@@ -103,7 +103,7 @@ Contact (one `mailto:` link under the CONTACT label, with the `SocialLinks` icon
 
 - Hero rotation, scroll chevron and header transparency are described above.
 - Pages that use `.hero` get the filled vertical wordmark and the transparent header; any page without it gets the hollow wordmark and the filled header.
-- Hero slideshow images live in `public/assets/hero/`; About assets in `public/assets/about/`. Every static file sits under `public/assets/` and is referenced through `assetUrl()` (`src/utils/asset-url.ts`), which adds the site base (`/showroom`). `public/assets/hero/hand-painting.png` and `jmr-outline-logo.png` are no longer used; `ContactBlock.astro` is unused.
+- Hero slideshow images live in `public/assets/hero/`; About assets in `public/assets/about/`. Every static file sits under `public/assets/` and is referenced through `assetUrl()` (`src/utils/asset-url.ts`), which adds the site base (`/showroom`); internal page links go through `pageUrl()` in the same file. `public/assets/hero/hand-painting.png` and `jmr-outline-logo.png` are no longer used; `ContactBlock.astro` is unused.
 
 ## Project structure
 
