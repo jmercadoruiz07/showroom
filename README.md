@@ -96,7 +96,7 @@ Contact (one `mailto:` link under the CONTACT label, with the `SocialLinks` icon
 
 | Tier | Width | Layout | Text | Heading size |
 | :-- | :-- | :-- | :-- | :-- |
-| Desktop | 1400px and up | Collage at a fixed scale, left aligned (the hand bleeds off the left edge). Contact, statement and portrait are three equal columns from `--grid-gutter` to `--grid-gutter + --wordmark-gutter` from the right; the portrait has a fixed height and is cropped with `object-fit: cover` | 1.25rem | 10rem |
+| Desktop | 1400px and up | Collage at a fixed scale, left aligned (the hand bleeds off the left edge). Contact, statement and portrait sit in three columns from `--grid-gutter` to `--grid-gutter + --wordmark-gutter` from the right; the portrait and the statement are a third and 1.2 thirds of the width and the contact column takes the remaining 0.8 third; the portrait has a fixed height and is cropped with `object-fit: cover` | 1.25rem | 10rem |
 | Tablet | 768–1399px | Two-column grid: text left, portrait right spanning three rows. The heading row starts 12px under the statement so the hand never covers text; the hand is shifted left so its flat cut end is off screen | 1.25rem | `min(5.75rem, (90vw − gutter) / ink-width)` |
 | Mobile | under 768px | Single column: contact, statement, heading and hand, then the portrait. `.about-touch` is a size container and the heading is `100cqw / ink-width`, so its ink matches the portrait's width exactly | 1rem | container-sized |
 

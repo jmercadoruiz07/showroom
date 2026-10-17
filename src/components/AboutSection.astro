@@ -151,16 +151,21 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
     transform: rotate(-162.47deg) scaleY(-1);
   }
 
-  /* Contact, statement and portrait are three equal columns across the page gutters (the gallery grid's
-     width, leaving room for the vertical wordmark). */
+  /* Contact, statement and portrait span the page gutters (the gallery grid's width, leaving room for the
+     vertical wordmark). The portrait keeps a third of the width; the statement is 20% wider than a third
+     and the contact column gives up the same amount, so the statement grows to the left. */
   .about-columns {
+    --about-column: calc((100% - 2 * var(--grid-gutter)) / 3);
     position: absolute;
     top: 0;
     left: var(--grid-gutter);
     right: calc(var(--grid-gutter) + var(--wordmark-gutter));
     z-index: 3;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns:
+      minmax(0, calc(var(--about-column) * 0.8))
+      minmax(0, calc(var(--about-column) * 1.2))
+      minmax(0, var(--about-column));
     column-gap: var(--grid-gutter);
     align-items: start;
   }
