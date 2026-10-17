@@ -20,13 +20,14 @@ const links = [
   { href: pageUrl('/about'), label: 'About' },
 ];
 
-const isHome = pathname === trimSlash(pageUrl('/'));
+// The home page opens with the links over the hero and a JMR label; both are driven by data-intro.
+const hasIntro = pathname === trimSlash(pageUrl('/'));
 
 const isCurrent = (href: string) =>
   href === pageUrl('/') ? pathname === trimSlash(href) : pathname.startsWith(href);
 ---
 
-<header class="site-header" role="banner" data-home={isHome ? '' : undefined}>
+<header class="site-header" role="banner" data-intro={hasIntro ? '' : undefined}>
   <nav class="nav-primary" aria-label="Primary navigation">
     <ul class="nav-list">
       {links.map(({ href, label }) => (
@@ -37,6 +38,7 @@ const isCurrent = (href: string) =>
         </li>
       ))}
     </ul>
+    {hasIntro && <span class="nav-label">JMR</span>}
   </nav>
 </header>
 
@@ -74,6 +76,7 @@ const isCurrent = (href: string) =>
   }
 
   .nav-primary {
+    --nav-font-size: var(--type-xs);
     position: absolute;
     top: 0;
     left: 0;
@@ -89,7 +92,6 @@ const isCurrent = (href: string) =>
   }
 
   .nav-list {
-    --nav-font-size: var(--type-xs);
     display: flex;
     align-items: center;
     gap: 2.5vw;
@@ -101,15 +103,44 @@ const isCurrent = (href: string) =>
     transition: transform var(--duration-slow) var(--ease-standard);
   }
 
-  /* At the top of the home page the links sit over the hero, with the H's stem under the J of JOSE. The J's
-     stem starts 0.2125em into its glyph and the hero name is offset by -0.02em, both in the hero's font size;
-     the H's ink starts 0.08em into its glyph. The shift is the move from the usual left edge to that stem, plus a 4px nudge to the right. */
+  /* The intro state: at the top of a page that has one, --intro is 1 and everything keyed to it is shown or
+     shifted; scrolling clears it and the transitions below run back. */
+  .site-header[data-intro]:not([data-scrolled]) {
+    --intro: 1;
+  }
+
+  /* The links sit over the hero, with the H's stem under the J of JOSE. The J's stem starts 0.2125em into its
+     glyph and the hero name is offset by -0.02em, both in the hero's font size; the H's ink starts 0.08em
+     into its glyph. The shift is the move from the usual left edge to that stem, plus a 4px nudge to the right. */
   @media (min-width: 768px) {
-    .site-header[data-home]:not([data-scrolled]) .nav-list {
+    .nav-list {
       transform: translateX(
-        calc(0.1925 * var(--hero-name-size) - var(--space-xl) - 0.78 * var(--nav-font-size) + 4px)
+        calc(
+          var(--intro, 0) *
+            (0.1925 * var(--hero-name-size) - var(--space-xl) - 0.78 * var(--nav-font-size) + 4px)
+        )
       );
     }
+  }
+
+  /* A plain label at the right end of the bar, its right edge in line with the vertical wordmark's. The
+     trailing letter-spacing is pulled back so the J-M-R ink ends at that edge. */
+  .nav-label {
+    position: absolute;
+    top: 50%;
+    right: var(--wordmark-inset);
+    margin-right: calc(-1 * var(--tracking-wide) * 1em);
+    transform: translateY(-50%);
+    font-family: var(--font-hero-mono);
+    font-size: var(--nav-font-size);
+    letter-spacing: var(--tracking-wide);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-chalk);
+    opacity: var(--intro, 0);
+    transition: opacity var(--duration-slow) var(--ease-standard);
+    pointer-events: none;
+    user-select: none;
   }
 
   .nav-list li {
@@ -144,7 +175,8 @@ const isCurrent = (href: string) =>
 
   @media (prefers-reduced-motion: reduce) {
     .nav-link,
-    .nav-list {
+    .nav-list,
+    .nav-label {
       transition: none;
     }
   }
@@ -153,6 +185,10 @@ const isCurrent = (href: string) =>
     .nav-list {
       gap: 6vw;
       padding-left: calc(var(--space-md) + 0.7 * var(--nav-font-size));
+    }
+
+    .nav-label {
+      right: var(--space-md);
     }
   }
 </style>
