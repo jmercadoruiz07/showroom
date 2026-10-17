@@ -4,7 +4,8 @@
 |-------------------------------------------------------------------------------
 |
 | Vertical stack of full-width project strips. Each strip opens to a fixed
-| height on hover; see FeaturedAccordionItem. Where hover is unavailable,
+| height on hover; see FeaturedAccordionItem. Below 768px every strip is
+| always open. On wider screens without hover (touch tablets),
 | exactly one strip is open at any time, chosen by the scroll position: the
 | stretch of page over which the viewport centre travels through the list is
 | split into equal parts, one per strip, so every strip stays open for the
@@ -27,17 +28,29 @@ interface FeaturedAccordionProps {
 }
 
 export default function FeaturedAccordion({ projects }: FeaturedAccordionProps) {
-  const [autoExpand, setAutoExpand] = useState(false);
+  const [touchOnly, setTouchOnly] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [activeHref, setActiveHref] = useState<string | undefined>(projects[0]?.href);
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const query = window.matchMedia('(hover: none), (pointer: coarse)');
-    const update = () => setAutoExpand(query.matches);
+    const touchQuery = window.matchMedia('(hover: none), (pointer: coarse)');
+    const mobileQuery = window.matchMedia('(max-width: 767px)');
+    const update = () => {
+      setTouchOnly(touchQuery.matches);
+      setIsMobile(mobileQuery.matches);
+    };
     update();
-    query.addEventListener('change', update);
-    return () => query.removeEventListener('change', update);
+    touchQuery.addEventListener('change', update);
+    mobileQuery.addEventListener('change', update);
+    return () => {
+      touchQuery.removeEventListener('change', update);
+      mobileQuery.removeEventListener('change', update);
+    };
   }, []);
+
+  // On mobile the strips open themselves (see FeaturedAccordionItem), so only wider touch screens pick one.
+  const autoExpand = touchOnly && !isMobile;
 
   const hrefs = projects.map((project) => project.href).join('|');
 
