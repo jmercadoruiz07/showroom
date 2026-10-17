@@ -132,33 +132,28 @@
   transition: bottom var(--duration-slow) var(--ease-standard);
 }
 
-.item:has(.link:focus-visible),
-.item.isExpanded {
+.item:has(.link:focus-visible) {
   height: var(--expanded-height);
 }
 
-.item:has(.link:focus-visible) .content,
-.item.isExpanded .content {
+.item:has(.link:focus-visible) .content {
   top: 0;
   transform: translateY(calc(54 * var(--u)));
 }
 
-.item:has(.link:focus-visible) .featured,
-.item.isExpanded .featured {
+.item:has(.link:focus-visible) .featured {
   bottom: calc(168 * var(--u));
 }
 
-.item:has(.link:focus-visible) .link::before,
-.item.isExpanded .link::before {
+.item:has(.link:focus-visible) .link::before {
   opacity: 0;
 }
 
-.item:has(.link:focus-visible) .link::after,
-.item.isExpanded .link::after {
+.item:has(.link:focus-visible) .link::after {
   opacity: 1;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (min-width: 768px) {
   .item:hover {
     height: var(--expanded-height);
   }
