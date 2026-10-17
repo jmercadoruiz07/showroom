@@ -13,6 +13,7 @@ import HeroSection from '../components/HeroSection.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import VerticalWordmark from '../components/VerticalWordmark.astro';
 import { assetUrl } from '../utils/asset-url';
+import { SITE_NAME } from '../utils/site';
 
 const heroImages = [
   assetUrl('hero/slideshow_1.png'),
@@ -29,7 +30,7 @@ const featuredPicks = [
 ];
 ---
 
-<BaseLayout title="JMR Visuals — Portfolio" description="Multidisciplinary designer specializing in print, 3D, and motion design. Based in Barcelona, working globally.">
+<BaseLayout title={SITE_NAME}>
   <VerticalWordmark />
   <HeroSection images={heroImages} />
 

@@ -12,9 +12,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import AboutSection from '../components/AboutSection.astro';
 import VerticalWordmark from '../components/VerticalWordmark.astro';
 import { assetUrl } from '../utils/asset-url';
+import { BIO, PROFILE_IMAGE } from '../utils/site';
 
-const statement =
-  "Born in Lima, Peru, I now hone my craft in Design and Visual Communication at UTS. I am a multidisciplinary designer focused on creating visual experiences that communicate ideas and evoke emotion. Constantly experimenting across different mediums, my practice bridges thoughtful design and visual storytelling to deliver impactful, memorable work across digital platforms.";
+const statement = BIO;
 ---
 
 <BaseLayout title="About — JMR Visuals" description="Learn more about JMR Visuals, a multidisciplinary designer specializing in print, 3D, and motion design." footer={false}>
@@ -24,7 +24,7 @@ const statement =
     <AboutSection
       email="jmercadoruiz07@gmail.com"
       statement={statement}
-      portrait={assetUrl('about/temple-portrait.jpg')}
+      portrait={assetUrl(PROFILE_IMAGE)}
       portraitAlt="José Mercado Ruiz standing in a temple courtyard"
     />
   </main>

@@ -18,8 +18,8 @@ interface Props {
 
 const {
   title,
-  description = 'Portfolio of JMR Visuals — Print, 3D, and Motion Design',
-  ogImage = '/og-default.jpg',
+  description = BIO,
+  ogImage = assetUrl(PROFILE_IMAGE),
   canonicalURL,
   footer = true,
 } = Astro.props;
@@ -29,6 +29,7 @@ import { ClientRouter } from 'astro:transitions';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { assetUrl } from '../utils/asset-url';
+import { BIO, PROFILE_IMAGE, SITE_NAME } from '../utils/site';
 
 import '../styles/tokens.css';
 import '../styles/base.css';
@@ -41,7 +42,7 @@ import '../styles/base.css';
     <link rel="icon" type="image/x-icon" href={assetUrl('favicon.ico')} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | JMR Visuals</title>
+    <title>{title === SITE_NAME ? title : `${title} | JMR Visuals`}</title>
     <meta name="description" content={description} />
 
     <!-- Open Graph -->

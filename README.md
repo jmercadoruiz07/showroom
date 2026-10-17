@@ -115,6 +115,7 @@ src/
   components/   .astro components with scoped styles; React islands (HeroCarousel, ProjectGallery, ProjectCard, FeaturedAccordion, ProjectMedia) with .module.css
   content/      projects.json (ArtStation export from `npm run fetch-portfolio`)
   layouts/      BaseLayout.astro (footer prop), ProjectLayout.astro
+  utils/        asset-url.ts (assetUrl, pageUrl), site.ts (SITE_NAME, BIO, PROFILE_IMAGE: the home page title, and the default description and og:image of every page), sort-projects.ts
   pages/        index, about, works, works/ (project detail pages), 404
   styles/       tokens.css (design tokens), base.css (reset and global utilities)
 public/         assets/ (hero/, about/, projects/images/, favicon, logo)
