@@ -123,7 +123,7 @@ const isCurrent = (href: string) =>
     }
   }
 
-  /* A plain label at the right end of the bar, its right edge in line with the vertical wordmark's. The
+  /* A plain label at the right end of the bar (768px and up), its right edge in line with the vertical wordmark's. The
      trailing letter-spacing is pulled back so the J-M-R ink ends at that edge. */
   .nav-label {
     position: absolute;
@@ -188,7 +188,7 @@ const isCurrent = (href: string) =>
     }
 
     .nav-label {
-      right: var(--space-md);
+      display: none;
     }
   }
 </style>
