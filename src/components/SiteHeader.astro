@@ -103,11 +103,11 @@ const isCurrent = (href: string) =>
 
   /* At the top of the home page the links sit over the hero, with the H's stem under the J of JOSE. The J's
      stem starts 0.2125em into its glyph and the hero name is offset by -0.02em, both in the hero's font size;
-     the H's ink starts 0.08em into its glyph. The shift is the move from the usual left edge to that stem. */
+     the H's ink starts 0.08em into its glyph. The shift is the move from the usual left edge to that stem, plus a 4px nudge to the right. */
   @media (min-width: 768px) {
     .site-header[data-home]:not([data-scrolled]) .nav-list {
       transform: translateX(
-        calc(0.1925 * var(--hero-name-size) - var(--space-xl) - 0.78 * var(--nav-font-size))
+        calc(0.1925 * var(--hero-name-size) - var(--space-xl) - 0.78 * var(--nav-font-size) + 4px)
       );
     }
   }
