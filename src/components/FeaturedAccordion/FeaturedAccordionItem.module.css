@@ -5,7 +5,7 @@
 |
 | Measurements come from the Figma ABOUT frame (node 198:32), where one strip
 | is 1509 design pixels wide; --u (set by FeaturedAccordion) is one of those
-| pixels. A strip is 241 tall and grows to 888 on hover (60vh from 1400px up).
+| pixels. A strip is 241 tall and grows to 888 on hover (60vh from 1400px up, 75svh below 768px).
 | The text block sits at the bottom left while closed (63 above the bottom
 | edge) and moves to the top left (54 from the corner) as the strip grows. Dark
 | text stays legible over any thumbnail: a white left-to-right fade (Figma node
@@ -184,6 +184,13 @@
 @media (min-width: 1400px) {
   .item {
     --expanded-height: 60vh;
+  }
+}
+
+@media (max-width: 767px) {
+  .item {
+    --expanded-height: 75vh;
+    --expanded-height: 75svh;
   }
 }
 

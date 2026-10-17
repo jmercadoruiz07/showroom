@@ -6,13 +6,13 @@
 | Full-width project strip. Shows the thumbnail cropped to a short band with
 | the title and album over it; on hover or keyboard focus the strip grows to
 | a fixed height. Takes the same props as ProjectCard, plus `expanded` to open
-| it without hover and `onReachCenter`, called when the strip crosses the
-| vertical centre of the viewport. While the strip is open it steps through
+| it without hover (FeaturedAccordion drives it from the scroll position where
+| there is no hover). While the strip is open it steps through
 | the project's `images` every 1.2 seconds, starting from `imageIndex`, with a
 | crossfade; it returns to `imageIndex` once the strip has closed again.
 |
 */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ProjectCardProps, ProjectCardThumbnail } from '../ProjectCard/ProjectCard';
 import styles from './FeaturedAccordionItem.module.css';
 
@@ -25,7 +25,6 @@ export interface FeaturedAccordionImages {
 
 interface FeaturedAccordionItemProps extends ProjectCardProps, FeaturedAccordionImages {
   expanded?: boolean;
-  onReachCenter?: () => void;
 }
 
 const ROTATE_INTERVAL_MS = 1200;
@@ -45,9 +44,7 @@ export default function FeaturedAccordionItem({
   images,
   imageIndex = 0,
   expanded = false,
-  onReachCenter,
 }: FeaturedAccordionItemProps) {
-  const itemRef = useRef<HTMLElement>(null);
   const slides = images && images.length > 0 ? images : [thumbnail];
   const startIndex = imageIndex < slides.length ? imageIndex : 0;
   const [index, setIndex] = useState(startIndex);
@@ -103,29 +100,8 @@ export default function FeaturedAccordionItem({
     new Set([...visited, index, ...(isOpen && rotates ? [nextIndex] : [])]),
   ).sort((a, b) => a - b);
 
-  const hasReachCenterHandler = Boolean(onReachCenter);
-  const onReachCenterRef = useRef(onReachCenter);
-  onReachCenterRef.current = onReachCenter;
-
-  useEffect(() => {
-    const item = itemRef.current;
-    if (!item || !hasReachCenterHandler) return;
-    // A zero-height root along the viewport's vertical centre line.
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          onReachCenterRef.current?.();
-        }
-      },
-      { rootMargin: '-50% 0px -50% 0px' },
-    );
-    observer.observe(item);
-    return () => observer.disconnect();
-  }, [hasReachCenterHandler]);
-
   return (
     <article
-      ref={itemRef}
       className={`${styles.item}${expanded ? ` ${styles.isExpanded}` : ''}`}
       data-album={album}
       style={style}

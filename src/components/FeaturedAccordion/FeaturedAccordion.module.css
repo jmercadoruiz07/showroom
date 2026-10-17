@@ -18,6 +18,8 @@
   display: flex;
   flex-direction: column;
   gap: calc(38 * var(--u));
+  /* One strip closes as the next opens; the browser must not adjust the scroll position for that. */
+  overflow-anchor: none;
 }
 
 @media (max-width: 767px) {
