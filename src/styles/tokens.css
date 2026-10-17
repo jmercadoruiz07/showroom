@@ -50,6 +50,9 @@
   /* Swiss 721 BT Medium: the kit only ships the 500 weight, so use it with font-weight 500 */
   --font-text:       swiss-721-bt, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+  /* Hero name size; the home page header uses it to line up with the J */
+  --hero-name-size:  min(50vh, 40vw);
+
   --font-weight-regular: 400;
   --font-weight-medium:  500;
   --font-weight-bold:    700;

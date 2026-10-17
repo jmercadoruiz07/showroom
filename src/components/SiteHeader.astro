@@ -20,11 +20,13 @@ const links = [
   { href: pageUrl('/about'), label: 'About' },
 ];
 
+const isHome = pathname === trimSlash(pageUrl('/'));
+
 const isCurrent = (href: string) =>
   href === pageUrl('/') ? pathname === trimSlash(href) : pathname.startsWith(href);
 ---
 
-<header class="site-header" role="banner">
+<header class="site-header" role="banner" data-home={isHome ? '' : undefined}>
   <nav class="nav-primary" aria-label="Primary navigation">
     <ul class="nav-list">
       {links.map(({ href, label }) => (
@@ -96,6 +98,18 @@ const isCurrent = (href: string) =>
     /* Page gutter plus the gallery tab's inner padding, so links share the tab labels' left edge. */
     padding: 0 0 0 calc(var(--space-xl) + 0.7 * var(--nav-font-size));
     list-style: none;
+    transition: transform var(--duration-slow) var(--ease-standard);
+  }
+
+  /* At the top of the home page the links sit over the hero, with the H's stem under the J of JOSE. The J's
+     stem starts 0.2125em into its glyph and the hero name is offset by -0.02em, both in the hero's font size;
+     the H's ink starts 0.08em into its glyph. The shift is the move from the usual left edge to that stem. */
+  @media (min-width: 768px) {
+    .site-header[data-home]:not([data-scrolled]) .nav-list {
+      transform: translateX(
+        calc(0.1925 * var(--hero-name-size) - var(--space-xl) - 0.78 * var(--nav-font-size))
+      );
+    }
   }
 
   .nav-list li {
@@ -129,7 +143,8 @@ const isCurrent = (href: string) =>
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .nav-link {
+    .nav-link,
+    .nav-list {
       transition: none;
     }
   }

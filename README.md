@@ -67,7 +67,7 @@ Figma uses LEMON MILK and NB Akademie, which are not available, so `widescreen` 
 ## Components
 
 ### Header (`SiteHeader.astro`)
-Fixed bar in the page colour with white links (Home, Works, About; Works goes to `/works` and stays current on project pages under `/works/<id>`). On pages that contain a `.hero` it is transparent at the top and fills with `--color-bone` as soon as the page scrolls; on every other page it is always filled. Hover draws a 1px underline growing from the left (background-size transition); the current page keeps the underline. A script keyed to `astro:page-load` toggles `data-hero` and `data-scrolled` because the router swaps the header on navigation.
+Fixed bar in the page colour with white links (Home, Works, About; Works goes to `/works` and stays current on project pages under `/works/<id>`). On pages that contain a `.hero` it is transparent at the top and fills with `--color-bone` as soon as the page scrolls; on every other page it is always filled. Hover draws a 1px underline growing from the left (background-size transition); the current page keeps the underline. On the home page from 768px up, while it is at the top, the links are shifted right (`transform` on `.nav-list`, set by the server-rendered `data-home`) so the H of HOME lines up with the stem of the J in JOSE; the shift is derived from `--hero-name-size` and eases back to the usual left edge as soon as the page scrolls. A script keyed to `astro:page-load` toggles `data-hero` and `data-scrolled` because the router swaps the header on navigation.
 
 ### Hero (`HeroSection.astro`, `HeroCarousel/`)
 - Full window (`100svh`; `70svh` below 768px).
