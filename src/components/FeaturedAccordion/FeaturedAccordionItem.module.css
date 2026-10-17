@@ -27,6 +27,7 @@
 .link {
   position: absolute;
   inset: 0;
+  isolation: isolate;
   display: block;
   color: inherit;
 }
@@ -44,6 +45,16 @@
   transform: translateY(-50%);
   object-fit: cover;
   display: block;
+  /* A picture that is no longer current stays visible underneath until the new one has faded in. */
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0s var(--duration-slow);
+}
+
+.image.isCurrent {
+  z-index: 0;
+  opacity: 1;
+  transition: opacity var(--duration-slow) var(--ease-standard);
 }
 
 .link::before {
@@ -178,6 +189,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .item,
+  .image,
+  .image.isCurrent,
   .content,
   .link::before,
   .link::after,

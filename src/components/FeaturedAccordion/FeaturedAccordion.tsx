@@ -12,10 +12,10 @@
 */
 import { useEffect, useState } from 'react';
 import type { ProjectCardProps } from '../ProjectCard/ProjectCard';
-import FeaturedAccordionItem from './FeaturedAccordionItem';
+import FeaturedAccordionItem, { type FeaturedAccordionImages } from './FeaturedAccordionItem';
 import styles from './FeaturedAccordion.module.css';
 
-export type FeaturedAccordionProject = Omit<ProjectCardProps, 'style'>;
+export type FeaturedAccordionProject = Omit<ProjectCardProps, 'style'> & FeaturedAccordionImages;
 
 interface FeaturedAccordionProps {
   projects: FeaturedAccordionProject[];

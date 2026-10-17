@@ -62,11 +62,15 @@ const featured = featuredPicks?.map(({ id, imageIndex }) => {
   }
   const images = imageAssets(project.data.media);
   const image = images[imageIndex] ?? images[0] ?? project.data.thumbnail;
+  const pickedIndex = images[imageIndex] ? imageIndex : 0;
   return {
     title: project.data.title,
     album: project.data.albums?.[0] ?? '',
     thumbnail: { url: image.url, width: image.width, height: image.height },
     thumbnailAlt: `${project.data.title} featured image`,
+    // Every image asset, so the open strip can step through them; the picked one comes first.
+    images: images.map(({ url, width, height }) => ({ url, width, height })),
+    imageIndex: pickedIndex,
     href: pageUrl(`/works/${project.id}`),
     featured: project.data.featured,
   };
