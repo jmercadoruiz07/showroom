@@ -15,6 +15,7 @@
 */
 import OutlinedWordmark from './OutlinedWordmark.astro';
 import SocialLinks from './SocialLinks.astro';
+import { assetUrl } from '../utils/asset-url';
 
 interface Props {
   email: string;
@@ -52,7 +53,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
   <div class="about-touch">
     <img
       class="about-hand about-hand-behind"
-      src="/about/hand-behind.png"
+      src={assetUrl('about/hand-behind.png')}
       alt=""
       width="2050"
       height="869"
@@ -65,7 +66,7 @@ const headingInkWidth = NATURAL_INK_WIDTH + headingKerns.reduce((sum, kern) => s
 
     <img
       class="about-hand about-hand-front"
-      src="/about/hand-front.png"
+      src={assetUrl('about/hand-front.png')}
       alt=""
       width="2046"
       height="893"

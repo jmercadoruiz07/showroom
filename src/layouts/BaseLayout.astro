@@ -28,6 +28,7 @@ const canonical = canonicalURL || Astro.url.href;
 import { ClientRouter } from 'astro:transitions';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { assetUrl } from '../utils/asset-url';
 
 import '../styles/tokens.css';
 import '../styles/base.css';
@@ -37,7 +38,7 @@ import '../styles/base.css';
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href={assetUrl('favicon.ico')} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | JMR Visuals</title>

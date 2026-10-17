@@ -70,7 +70,7 @@ Fixed bar in the page colour with white links (Home, Works, About; Works goes to
 
 ### Hero (`HeroSection.astro`, `HeroCarousel/`)
 - Full window (`100svh`; `70svh` below 768px).
-- One background image, a random order of `public/hero/slideshow_1-3.png` shuffled in the browser, crossfading every 5s. Pauses on hover and while the tab is hidden; static with `prefers-reduced-motion`. Not clickable and hidden from assistive tech.
+- One background image, a random order of `public/assets/hero/slideshow_1-3.png` shuffled in the browser, crossfading every 5s. Pauses on hover and while the tab is hidden; static with `prefers-reduced-motion`. Not clickable and hidden from assistive tech.
 - Name "JO" over "SE": desktop is vertically centred at the left, `min(50vh, 40vw)`, tracking −0.124em, line-height 0.72 (the lines overlap slightly). Below 768px the same stack is `min(58vw, 38svh)` in the bottom-right corner with a 4vw margin to the visible letters.
 - Scroll chevron, bottom centre, desktop only: appears 5s after load if the page has not been scrolled, fades out when the page leaves the top and returns when it is back at the top.
 
@@ -91,7 +91,7 @@ Masonry cards: on hover or keyboard focus a bar in the page colour slides down f
 Accordion (`FeaturedAccordion/`): full-width strips that take the same props as `ProjectCard`. A strip is 241 Figma px tall and grows to 888 (60vh from 1400px up) on hover or keyboard focus (hover only where a fine pointer exists). The image keeps the expanded size and is centred, so growing the strip reveals more of it without scaling; text colour does not change on hover. Title and category sit at the bottom left over a white left-to-right fade (node `252:117`); when the strip opens they move to the top left (54 from the corner) and the fade crossfades to a radial white glow from that corner. `--u = 100cqw / 1509` (`/ 760` below 768px).
 
 ### About page (`pages/about.astro`, `AboutSection.astro`)
-Contact (one `mailto:` link under the CONTACT label, with the `SocialLinks` icons on the label's row at the right, and one line of space between label and email), a statement, the portrait and the "GET IN TOUCH" heading with a two-layer hand (`public/about/hand-behind.png` behind the heading, `hand-front.png` in front). No footer on this page. `--ink-width` (the heading's ink width in em, set inline on `.about`) ties everything together: `--u = --touch-font-size × --ink-width / 1394`, so the heading and the hands always scale as one picture. Heading letters fill on hover (neighbours too).
+Contact (one `mailto:` link under the CONTACT label, with the `SocialLinks` icons on the label's row at the right, and one line of space between label and email), a statement, the portrait and the "GET IN TOUCH" heading with a two-layer hand (`public/assets/about/hand-behind.png` behind the heading, `hand-front.png` in front). No footer on this page. `--ink-width` (the heading's ink width in em, set inline on `.about`) ties everything together: `--u = --touch-font-size × --ink-width / 1394`, so the heading and the hands always scale as one picture. Heading letters fill on hover (neighbours too).
 
 | Tier | Width | Layout | Text | Heading size |
 | :-- | :-- | :-- | :-- | :-- |
@@ -103,7 +103,7 @@ Contact (one `mailto:` link under the CONTACT label, with the `SocialLinks` icon
 
 - Hero rotation, scroll chevron and header transparency are described above.
 - Pages that use `.hero` get the filled vertical wordmark and the transparent header; any page without it gets the hollow wordmark and the filled header.
-- Hero slideshow images live in `public/hero/`; About assets in `public/about/`. `public/hero/hand-painting.png` and `jmr-outline-logo.png` are no longer used; `ContactBlock.astro` is unused.
+- Hero slideshow images live in `public/assets/hero/`; About assets in `public/assets/about/`. Every static file sits under `public/assets/` and is referenced through `assetUrl()` (`src/utils/asset-url.ts`), which adds the site base (`/showroom`). `public/assets/hero/hand-painting.png` and `jmr-outline-logo.png` are no longer used; `ContactBlock.astro` is unused.
 
 ## Project structure
 

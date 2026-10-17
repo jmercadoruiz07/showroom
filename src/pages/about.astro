@@ -11,6 +11,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AboutSection from '../components/AboutSection.astro';
 import VerticalWordmark from '../components/VerticalWordmark.astro';
+import { assetUrl } from '../utils/asset-url';
 
 const statement =
   "Born in Lima, Peru, I now hone my craft in Design and Visual Communication at UTS. I am a multidisciplinary designer focused on creating visual experiences that communicate ideas and evoke emotion. Constantly experimenting across different mediums, my practice bridges thoughtful design and visual storytelling to deliver impactful, memorable work across digital platforms.";
@@ -23,7 +24,7 @@ const statement =
     <AboutSection
       email="jmercadoruiz07@gmail.com"
       statement={statement}
-      portrait="/about/temple-portrait.jpg"
+      portrait={assetUrl('about/temple-portrait.jpg')}
       portraitAlt="José Mercado Ruiz standing in a temple courtyard"
     />
   </main>

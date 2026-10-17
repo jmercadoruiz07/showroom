@@ -12,11 +12,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import VerticalWordmark from '../components/VerticalWordmark.astro';
+import { assetUrl } from '../utils/asset-url';
 
 const heroImages = [
-  '/hero/slideshow_1.png',
-  '/hero/slideshow_2.png',
-  '/hero/slideshow_3.png',
+  assetUrl('hero/slideshow_1.png'),
+  assetUrl('hero/slideshow_2.png'),
+  assetUrl('hero/slideshow_3.png'),
 ];
 
 // Project ids and the zero-based index into the project's images shown on each accordion item.
