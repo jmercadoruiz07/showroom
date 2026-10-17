@@ -9,7 +9,7 @@
 | returns to the trigger.
 |
 */
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 import styles from './ProjectMedia.module.css';
 
 export interface ProjectMediaImage {
@@ -26,6 +26,8 @@ interface ProjectMediaProps {
   media: ProjectMediaItem[];
   title: string;
 }
+
+const SWIPE_DISTANCE_PX = 50;
 
 const focusableSelector =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -48,6 +50,24 @@ export default function ProjectMedia({ media, title }: ProjectMediaProps) {
   };
 
   const close = () => setIsOpen(false);
+
+  // A horizontal touch drag of at least 50px, mostly sideways, moves to the neighbouring item.
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+
+  const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    swipeStart.current = e.pointerType === 'touch' ? { x: e.clientX, y: e.clientY } : null;
+  };
+
+  const onPointerUp = (e: PointerEvent<HTMLDivElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+    if (!start || total < 2) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    if (Math.abs(dx) < SWIPE_DISTANCE_PX || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (dx < 0) next();
+    else prev();
+  };
 
   const prev = () => setCurrentIndex((index) => (index - 1 + total) % total);
   const next = () => setCurrentIndex((index) => (index + 1) % total);
@@ -173,6 +193,11 @@ export default function ProjectMedia({ media, title }: ProjectMediaProps) {
         role="dialog"
         aria-label={`${title} media viewer`}
         aria-hidden={!isOpen}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => {
+          swipeStart.current = null;
+        }}
       >
         <div className={styles.backdrop} aria-hidden="true" onClick={close} />
 

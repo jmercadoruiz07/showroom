@@ -5,7 +5,8 @@
 |
 | Scrollable gallery column plus fixed lightbox overlay. Solid page-color
 | backdrop, media scales to fit viewport, white square controls and a display
-| font counter. Nav arrows hidden on small screens.
+| font counter. On small screens the arrows sit in a row just below the media,
+| one on each side of the screen.
 |
 */
 .gallery {
@@ -58,6 +59,8 @@
 .viewer {
   position: fixed;
   inset: 0;
+  /* Horizontal swipes are handled by the viewer (see ProjectMedia.tsx); vertical ones stay with the browser. */
+  touch-action: pan-y;
   z-index: var(--z-modal);
   display: flex;
   align-items: center;
@@ -160,8 +163,45 @@
 }
 
 @media (max-width: 768px) {
+  /* Media on top, the two arrows in a row under it at the far left and right of the screen. */
+  .viewer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    row-gap: var(--space-md);
+  }
+
+  .content {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
+    max-height: 70svh;
+  }
+
+  .image {
+    max-height: 70svh;
+  }
+
+  .video {
+    width: min(90vw, calc(70svh * var(--video-ratio, 16 / 9)));
+  }
+
   .nav {
-    display: none;
+    position: static;
+    grid-row: 2;
+    transform: none;
+  }
+
+  .prev {
+    grid-column: 1;
+    justify-self: start;
+    margin-left: var(--space-md);
+  }
+
+  .next {
+    grid-column: 2;
+    justify-self: end;
+    margin-right: var(--space-md);
   }
 
   .close {
