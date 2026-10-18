@@ -8,7 +8,6 @@ import HeroSection from '../components/HeroSection.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import VerticalWordmark from '../components/VerticalWordmark.astro';
 import { assetUrl } from '../utils/asset-url';
-import { SITE_NAME } from '../utils/site';
 
 const heroImages = [
   assetUrl('hero/slideshow_1.png'),
@@ -25,7 +24,7 @@ const featuredPicks = [
 ];
 ---
 
-<BaseLayout title={SITE_NAME}>
+<BaseLayout title="Home">
   <VerticalWordmark />
   <HeroSection images={heroImages} />
 

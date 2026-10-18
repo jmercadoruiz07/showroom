@@ -39,7 +39,7 @@ const canonical = canonicalURL || Astro.url.href;
     <link rel="icon" type="image/x-icon" href={assetUrl('favicon.ico')} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title === SITE_NAME ? title : `${title} | JMR Visuals`}</title>
+    <title>{`${title} | ${SITE_NAME}`}</title>
     <meta name="description" content={description} />
 
     <!-- Open Graph -->

@@ -6,12 +6,13 @@
 
 import OutlinedWordmark from './OutlinedWordmark.astro';
 import SocialLinks from './SocialLinks.astro';
+import { SITE_NAME } from '../utils/site';
 ---
 
 <footer class="site-footer" role="contentinfo">
   <div class="footer-bar">
     <p class="copyright">
-      &copy; {new Date().getFullYear()} JMR Visuals. All rights reserved.
+      &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
     </p>
 
     <SocialLinks />

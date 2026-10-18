@@ -7,13 +7,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { pageUrl } from '../utils/asset-url';
 ---
 
-<BaseLayout title="404 — Page Not Found" description="Page not found. Return to the JMR Visuals portfolio.">
+<BaseLayout title="Page Not Found" description="Page not found. Return to the JMR Showroom.">
   <main class="not-found" id="main-content">
     <h1 class="not-found-code text-display">404</h1>
     <h2 class="not-found-title text-xl">Page Not Found</h2>
     <p class="not-found-message text-body">The page you're looking for doesn't exist or has been moved.</p>
     <a href={pageUrl('/')} class="not-found-link text-mono">
-      ← Back to Portfolio
+      ← Back to Showroom
     </a>
   </main>
 </BaseLayout>
