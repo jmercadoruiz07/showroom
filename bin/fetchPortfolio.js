@@ -14,9 +14,12 @@ const colors = {
   red: "\x1b[31m"
 };
 
-async function fetchJsonFromPage(page, url) {
+const FETCH_ATTEMPTS = 4;
+
+async function fetchJsonOnce(page, url) {
+  // A JSON document has nothing to wait for after the response arrives, so don't wait for network idle.
   const response = await page.goto(url, {
-    waitUntil: 'networkidle',
+    waitUntil: 'domcontentloaded',
     timeout: 30000
   });
   if (!response || !response.ok()) {
@@ -27,6 +30,19 @@ async function fetchJsonFromPage(page, url) {
     throw new Error(`Expected JSON from ${url}, got content-type: ${contentType}`);
   }
   return response.json();
+}
+
+// Retries with a growing delay, since timeouts and rate limits from shared CI runners are usually temporary.
+async function fetchJsonFromPage(page, url) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await fetchJsonOnce(page, url);
+    } catch (error) {
+      if (attempt >= FETCH_ATTEMPTS) throw error;
+      console.warn(`${colors.yellow}   ↻ Attempt ${attempt}/${FETCH_ATTEMPTS} failed for ${url}: ${error.message.split('\n')[0]}${colors.reset}`);
+      await new Promise(resolve => setTimeout(resolve, attempt * 2000));
+    }
+  }
 }
 
 async function getImageDimensions(page, imageUrl) {
