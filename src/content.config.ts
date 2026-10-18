@@ -26,7 +26,7 @@ const projects = defineCollection({
     media: z.array(projectMedia).optional().default([]),
     sourceUrl: z.string().optional(),
     tools: z.array(z.string()).optional().default([]),
-    description: z.string().default(''),
+    description: z.string().optional(),
     featured: z.boolean().optional().default(false),
     order: z.number().optional(),
     stats: z.record(z.string(), z.unknown()).optional(),

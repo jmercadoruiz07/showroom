@@ -231,9 +231,24 @@ async function fetchArtStationPortfolio(username) {
         ?.map(cat => cat.name) || [];
 
       // Format date to YYYY-MM-DD
-      const formattedDate = detailData.published_at 
+      let formattedDate = detailData.published_at 
         ? detailData.published_at.split('T')[0] 
         : null;
+
+      // A "YYYY | " prefix in the description overrides the year and is stripped.
+      // ArtStation descriptions are HTML, so the prefix follows an optional opening <p>.
+      let description = detailData.description || "";
+      const yearPrefix = description.match(/^(<p>\s*)?(\d{4})\s*\|\s*/);
+      if (yearPrefix) {
+        if (formattedDate) {
+          formattedDate = `${yearPrefix[2]}${formattedDate.slice(4)}`;
+        }
+        description = description.replace(yearPrefix[0], yearPrefix[1] || "");
+      }
+      // Left with only an empty paragraph: omit the field (undefined is dropped from the JSON).
+      if (/^<p>\s*<\/p>$/.test(description.trim())) {
+        description = undefined;
+      }
 
       const thumbnailUrl = detailData.cover_url || projectMeta.cover?.large_image_url;
       let thumbWidth = detailData.cover_width || projectMeta.cover?.width || null;
@@ -268,7 +283,7 @@ async function fetchArtStationPortfolio(username) {
         media: media,
         sourceUrl: detailData.permalink,
         tools: tools,
-        description: detailData.description || "", 
+        description: description, 
         featured: detailData.editor_pick || false,
         order: i + 1,
         

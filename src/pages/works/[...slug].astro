@@ -79,7 +79,9 @@ const formatDate = (date: Date) => {
       </div>
 
       <div class={`project-text ${mediaFirst ? 'text-last' : 'text-first'}`}>
-        <div class="project-description text-body" set:html={description} />
+        {description !== undefined && (
+          <div class="project-description text-body" set:html={description} />
+        )}
 
         {tools && tools.length > 0 && (
           <section class="project-tools">

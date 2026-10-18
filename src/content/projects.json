@@ -57,7 +57,7 @@
     "featured": false,
     "order": 1,
     "stats": {
-      "views": 6,
+      "views": 8,
       "likes": 0,
       "comments": 0
     }
@@ -120,7 +120,7 @@
     "featured": false,
     "order": 2,
     "stats": {
-      "views": 7,
+      "views": 8,
       "likes": 0,
       "comments": 0
     }
@@ -176,7 +176,7 @@
     "featured": false,
     "order": 3,
     "stats": {
-      "views": 4,
+      "views": 5,
       "likes": 0,
       "comments": 0
     }
@@ -243,7 +243,7 @@
     "featured": false,
     "order": 4,
     "stats": {
-      "views": 5,
+      "views": 6,
       "likes": 1,
       "comments": 0
     }
@@ -311,7 +311,7 @@
     "featured": false,
     "order": 5,
     "stats": {
-      "views": 3,
+      "views": 4,
       "likes": 1,
       "comments": 0
     }
@@ -338,18 +338,18 @@
     "media": [
       {
         "type": "video",
-        "url": "https://player.vimeo.com/video/1236724797?app_id=122963&dnt=1",
+        "url": "https://player.vimeo.com/video/1236725663?app_id=122963&dnt=1",
         "poster": {
-          "url": "https://i.vimeocdn.com/video/2213309971-b0005693b5dd0ebb635d1d784143366f5143ac3983b3fb10247c9cf3864115d3-d_1280?region=us",
+          "url": "https://i.vimeocdn.com/video/2213311116-792bfb34818df928c649f2eee364d9ca7e0466edca59f0f81466d7d21c55124a-d_1280?region=us",
           "width": 1280,
           "height": 720
         }
       },
       {
         "type": "video",
-        "url": "https://player.vimeo.com/video/1236725663?app_id=122963&dnt=1",
+        "url": "https://player.vimeo.com/video/1236724797?app_id=122963&dnt=1",
         "poster": {
-          "url": "https://i.vimeocdn.com/video/2213311116-792bfb34818df928c649f2eee364d9ca7e0466edca59f0f81466d7d21c55124a-d_1280?region=us",
+          "url": "https://i.vimeocdn.com/video/2213309971-b0005693b5dd0ebb635d1d784143366f5143ac3983b3fb10247c9cf3864115d3-d_1280?region=us",
           "width": 1280,
           "height": 720
         }
@@ -387,7 +387,7 @@
     "featured": false,
     "order": 6,
     "stats": {
-      "views": 5,
+      "views": 6,
       "likes": 0,
       "comments": 0
     }
@@ -436,7 +436,7 @@
     "featured": false,
     "order": 7,
     "stats": {
-      "views": 9,
+      "views": 10,
       "likes": 1,
       "comments": 0
     }
@@ -467,11 +467,10 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2023 | </p>",
     "featured": false,
     "order": 8,
     "stats": {
-      "views": 46,
+      "views": 47,
       "likes": 1,
       "comments": 0
     }
@@ -479,7 +478,7 @@
   {
     "id": "PXbgxr",
     "title": "The Aviator ",
-    "date": "2023-08-13",
+    "date": "2022-08-13",
     "albums": [
       "Render"
     ],
@@ -517,11 +516,11 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/PXbgxr",
     "tools": [],
-    "description": "<p>2022 |  A brick horizon meets a setting sky behind a lost Aviator. Adapted from 'Saharan Landing', 'The Aviator' uses a more cinematic camera angle and lighting style that gives depth and contrast to the scene. Composition was key in this render as the direction of the plane acts as a vector that leads the Aviator toward a destination, a goal, or perhaps a prince to be met...</p>",
+    "description": "<p>A brick horizon meets a setting sky behind a lost Aviator. Adapted from 'Saharan Landing', 'The Aviator' uses a more cinematic camera angle and lighting style that gives depth and contrast to the scene. Composition was key in this render as the direction of the plane acts as a vector that leads the Aviator toward a destination, a goal, or perhaps a prince to be met...</p>",
     "featured": false,
     "order": 9,
     "stats": {
-      "views": 48,
+      "views": 49,
       "likes": 1,
       "comments": 0
     }
@@ -529,7 +528,7 @@
   {
     "id": "xDovRO",
     "title": "Saharan Landing",
-    "date": "2023-08-13",
+    "date": "2022-08-13",
     "albums": [
       "Render"
     ],
@@ -554,7 +553,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2022 | A stylised isometric scene where lego comes to life as I experiment with bricks as a means of achieving a level of realism that my school laptop could handle comfortably. The brick terrain was achieved with an array modifier mapped to a an invisible landscape mesh, giving it a natural formation.</p>",
+    "description": "<p>A stylised isometric scene where lego comes to life as I experiment with bricks as a means of achieving a level of realism that my school laptop could handle comfortably. The brick terrain was achieved with an array modifier mapped to a an invisible landscape mesh, giving it a natural formation.</p>",
     "featured": false,
     "order": 10,
     "stats": {
@@ -566,7 +565,7 @@
   {
     "id": "lDlOdO",
     "title": "Kamino Lost",
-    "date": "2023-08-13",
+    "date": "2022-08-13",
     "albums": [
       "Render"
     ],
@@ -602,7 +601,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2022 | An iteration of 'Above Kamino' that depicts the fate of the fictional Tipoca city, utilising explosion-shaped emissive objects and blackened smoke clouds to convey the destruction. The implementation of nighttime lighting allows the emissive materials to direct the scene.</p>",
+    "description": "<p>An iteration of 'Above Kamino' that depicts the fate of the fictional Tipoca city, utilising explosion-shaped emissive objects and blackened smoke clouds to convey the destruction. The implementation of nighttime lighting allows the emissive materials to direct the scene.</p>",
     "featured": false,
     "order": 11,
     "stats": {
@@ -614,7 +613,7 @@
   {
     "id": "w0qvdw",
     "title": "Above Kamino",
-    "date": "2023-08-13",
+    "date": "2022-08-13",
     "albums": [
       "Render"
     ],
@@ -645,7 +644,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2022 | A more realistic take on my isometric humble beginnings where the translucent ocean cutout acts as the centrepiece that sells the realism through natural environmental reflections and light manipulation. Hull shaders also play a major role in the look of the StarWars inspired city as well as the Venators above.</p>",
+    "description": "<p>A more realistic take on my isometric humble beginnings where the translucent ocean cutout acts as the centrepiece that sells the realism through natural environmental reflections and light manipulation. Hull shaders also play a major role in the look of the StarWars inspired city as well as the Venators above.</p>",
     "featured": false,
     "order": 12,
     "stats": {
@@ -657,7 +656,7 @@
   {
     "id": "rJevL6",
     "title": "Corporate Arrival",
-    "date": "2023-08-13",
+    "date": "2022-08-13",
     "albums": [
       "Render"
     ],
@@ -709,7 +708,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2022 | A much more cinematic approach to scenery with greater attention to atmosphere and compositing inspired by Bladerunner's visuals and gloomy environments. The motion blur of the helicopter blades and flying papers accompanied by a level of grain further drives a cinematic feel that is then stylised by colour grading and smoky atmospheric effects.</p>",
+    "description": "<p>A much more cinematic approach to scenery with greater attention to atmosphere and compositing inspired by Bladerunner's visuals and gloomy environments. The motion blur of the helicopter blades and flying papers accompanied by a level of grain further drives a cinematic feel that is then stylised by colour grading and smoky atmospheric effects.</p>",
     "featured": false,
     "order": 13,
     "stats": {
@@ -721,7 +720,7 @@
   {
     "id": "493PxY",
     "title": "Viking Mech",
-    "date": "2023-08-13",
+    "date": "2022-08-13",
     "albums": [
       "Render"
     ],
@@ -764,7 +763,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/493PxY",
     "tools": [],
-    "description": "<p>2022 | The Viking transformed. A new look at the viking mech with custom detailed shaders in a step toward realism. Much experimentation ended in a weathered paint look over a stainless steel, littered with combat damage to make an interesting display of artificial texture.</p>",
+    "description": "<p>The Viking transformed. A new look at the viking mech with custom detailed shaders in a step toward realism. Much experimentation ended in a weathered paint look over a stainless steel, littered with combat damage to make an interesting display of artificial texture.</p>",
     "featured": false,
     "order": 14,
     "stats": {
@@ -776,7 +775,7 @@
   {
     "id": "GeqgKW",
     "title": "Viking MK 1",
-    "date": "2023-08-13",
+    "date": "2021-08-13",
     "albums": [
       "Render"
     ],
@@ -809,11 +808,11 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2021 | The most challenging modelling process to date, where I had to implement more advanced modelling techniques and modifiers such as bevels and booleans to achieve a sound topology that would support shaders nicely. I also intended for the craft to be able to transform into a land mech, much like the source material derived from 'Starcraft' which I used as a blueprint, so tucking away mechanics and legs was crucial in the modelling process.</p>",
+    "description": "<p>The most challenging modelling process to date, where I had to implement more advanced modelling techniques and modifiers such as bevels and booleans to achieve a sound topology that would support shaders nicely. I also intended for the craft to be able to transform into a land mech, much like the source material derived from 'Starcraft' which I used as a blueprint, so tucking away mechanics and legs was crucial in the modelling process.</p>",
     "featured": false,
     "order": 15,
     "stats": {
-      "views": 72,
+      "views": 73,
       "likes": 2,
       "comments": 0
     }
@@ -821,7 +820,7 @@
   {
     "id": "g0qV4K",
     "title": "Venator Loop",
-    "date": "2023-08-13",
+    "date": "2021-08-13",
     "albums": [
       "Render"
     ],
@@ -867,7 +866,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/g0qV4K",
     "tools": [],
-    "description": "<p>2021 | My first loop animation where I subtly animate volumetric procedural clouds to create a hovering effect. It included my most complex model at the time; the Venator Star Destroyer inspired by Starwars which involved a lengthy hard-surface modelling process from reference to produce the craft which was then complemented by custom materials and hull shaders.</p>",
+    "description": "<p>My first loop animation where I subtly animate volumetric procedural clouds to create a hovering effect. It included my most complex model at the time; the Venator Star Destroyer inspired by Starwars which involved a lengthy hard-surface modelling process from reference to produce the craft which was then complemented by custom materials and hull shaders.</p>",
     "featured": false,
     "order": 16,
     "stats": {
@@ -879,7 +878,7 @@
   {
     "id": "zPnkdw",
     "title": "Industrial Future",
-    "date": "2023-08-13",
+    "date": "2021-08-13",
     "albums": [
       "Render"
     ],
@@ -904,7 +903,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2021 | One of my favourite low-poly diorama renders where I explore the implementations of lighting to create unique illuminations of the industrial future which are further complemented by a vast use of metallic materials. I also implemented an improved and modified version of the recurring Dodge which serves as a motif of my learning journey throughout the years.</p>",
+    "description": "<p>One of my favourite low-poly diorama renders where I explore the implementations of lighting to create unique illuminations of the industrial future which are further complemented by a vast use of metallic materials. I also implemented an improved and modified version of the recurring Dodge which serves as a motif of my learning journey throughout the years.</p>",
     "featured": false,
     "order": 17,
     "stats": {
@@ -916,7 +915,7 @@
   {
     "id": "dK3GoK",
     "title": "World Engine Scene",
-    "date": "2023-08-13",
+    "date": "2020-08-13",
     "albums": [
       "Render"
     ],
@@ -947,7 +946,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2020 | A far more ambitious isometric render where I modelled various buildings and miniature vehicles to populate the cityscape of my 'world engine scene' replica from Man of Steel 2013. Utilising techniques previously discovered such as cell fracture and volumetric materials,  I pushed the boundaries of what my school laptop could handle.</p>",
+    "description": "<p>A far more ambitious isometric render where I modelled various buildings and miniature vehicles to populate the cityscape of my 'world engine scene' replica from Man of Steel 2013. Utilising techniques previously discovered such as cell fracture and volumetric materials,  I pushed the boundaries of what my school laptop could handle.</p>",
     "featured": false,
     "order": 18,
     "stats": {
@@ -959,7 +958,7 @@
   {
     "id": "Rye58X",
     "title": "The Hunt",
-    "date": "2023-08-13",
+    "date": "2020-08-13",
     "albums": [
       "Render"
     ],
@@ -984,7 +983,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2020 | An attempt to replicate the typical hollywood explosion scene and create the impression of motion through a still frame. Elements like the flying rock particles (created with a cell fracture modifier) and the translucent trails where efforts to convey such movement.</p>",
+    "description": "<p>An attempt to replicate the typical hollywood explosion scene and create the impression of motion through a still frame. Elements like the flying rock particles (created with a cell fracture modifier) and the translucent trails where efforts to convey such movement.</p>",
     "featured": false,
     "order": 19,
     "stats": {
@@ -996,7 +995,7 @@
   {
     "id": "XgzD5n",
     "title": "The Trip Home",
-    "date": "2023-08-13",
+    "date": "2019-08-13",
     "albums": [
       "Render"
     ],
@@ -1021,7 +1020,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2019 | The second low-poly style scene where I implemented the original rough-edge version of the Dodge to complement the countryside greenery. An improved water material is also used to elevate the tranquil vibe that is conveyed.</p>",
+    "description": "<p>The second low-poly style scene where I implemented the original rough-edge version of the Dodge to complement the countryside greenery. An improved water material is also used to elevate the tranquil vibe that is conveyed.</p>",
     "featured": false,
     "order": 20,
     "stats": {
@@ -1033,7 +1032,7 @@
   {
     "id": "ZazRwX",
     "title": "Cosmic Dodge",
-    "date": "2023-08-13",
+    "date": "2019-08-13",
     "albums": [
       "Render"
     ],
@@ -1070,7 +1069,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/ZazRwX",
     "tools": [],
-    "description": "<p>2019 | The first car I modelled from scratch, in a scene where I experimented heavily with lights and reflections. To my disappointment, Rookie topology resulted in notable surface tearing after the shading was made smooth; A problem for 'more experienced me' to solve.</p>",
+    "description": "<p>The first car I modelled from scratch, in a scene where I experimented heavily with lights and reflections. To my disappointment, Rookie topology resulted in notable surface tearing after the shading was made smooth; A problem for 'more experienced me' to solve.</p>",
     "featured": false,
     "order": 21,
     "stats": {
@@ -1082,7 +1081,7 @@
   {
     "id": "obdZLk",
     "title": "Ancient Ruins",
-    "date": "2023-08-13",
+    "date": "2019-08-13",
     "albums": [
       "Render"
     ],
@@ -1119,7 +1118,7 @@
     "tools": [
       "Blender"
     ],
-    "description": "<p>2019 | Where it all started. After being inspired by videos from Polygon Runway, I endeavoured Into blender, applying basic lessons learnt and techniques to create my first unique render along with its variations which manipulated lighting to create different atmospheres.</p>",
+    "description": "<p>Where it all started. After being inspired by videos from Polygon Runway, I endeavoured Into blender, applying basic lessons learnt and techniques to create my first unique render along with its variations which manipulated lighting to create different atmospheres.</p>",
     "featured": false,
     "order": 22,
     "stats": {
@@ -1158,7 +1157,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/PXBma1",
     "tools": [],
-    "description": "<p>2023 | A HSC major work reflecting on inner dreams and aspirations through painted expression and drawn thoughts on a 1.2x2.1m triptych. Spanning over 80 hours worth of work, the symbiotic relationship between ones dreams and the self is reflected as a source of resilience in the face of adversity; the light at the end of the tunnel, giving us meaning in our daily struggles. </p>",
+    "description": "<p>A HSC major work reflecting on inner dreams and aspirations through painted expression and drawn thoughts on a 1.2x2.1m triptych. Spanning over 80 hours worth of work, the symbiotic relationship between ones dreams and the self is reflected as a source of resilience in the face of adversity; the light at the end of the tunnel, giving us meaning in our daily struggles. </p>",
     "featured": false,
     "order": 23,
     "stats": {
@@ -1191,7 +1190,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/WBx2ly",
     "tools": [],
-    "description": "<p>2023 | Another step into illustrative styles as I take a spontaneous approach toward ink drawings that feels freehand, inspired by the works of Quentin Blake. Strong points of contrast also differentiate 'Swaying' from my other works as it appeals to viewers, evoking nostalgic links to children's picture books.</p>",
+    "description": "<p>Another step into illustrative styles as I take a spontaneous approach toward ink drawings that feels freehand, inspired by the works of Quentin Blake. Strong points of contrast also differentiate 'Swaying' from my other works as it appeals to viewers, evoking nostalgic links to children's picture books.</p>",
     "featured": false,
     "order": 24,
     "stats": {
@@ -1203,7 +1202,7 @@
   {
     "id": "8bLlrG",
     "title": "Odyssey",
-    "date": "2023-09-04",
+    "date": "2022-09-04",
     "albums": [
       "Physical Mediums"
     ],
@@ -1224,7 +1223,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/8bLlrG",
     "tools": [],
-    "description": "<p>2022 | Visions of an alien world presented through an early endeavour into alcohol-based markers where soft tones create a calm atmosphere and scene. Inspired by sci-fi titles like 'No man's sky', Odyssey marked a turning point when it came to colour application on paper as I further experimented with markers.</p>",
+    "description": "<p>Visions of an alien world presented through an early endeavour into alcohol-based markers where soft tones create a calm atmosphere and scene. Inspired by sci-fi titles like 'No man's sky', Odyssey marked a turning point when it came to colour application on paper as I further experimented with markers.</p>",
     "featured": false,
     "order": 25,
     "stats": {
@@ -1236,7 +1235,7 @@
   {
     "id": "BXJmwA",
     "title": "Uncut Edges",
-    "date": "2023-09-04",
+    "date": "2021-09-04",
     "albums": [
       "Physical Mediums"
     ],
@@ -1257,7 +1256,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/BXJmwA",
     "tools": [],
-    "description": "<p>2021 | 'Uncut Edges' subverts the Flow of architecture through its aggressive geometry that roars at the viewer as striking perspective creates a sense of intimidating scale. Belonging to the same body of work as 'Flow', The two pieces are essentially a response to one another that complements the feats of modern architecture.</p>",
+    "description": "<p>'Uncut Edges' subverts the Flow of architecture through its aggressive geometry that roars at the viewer as striking perspective creates a sense of intimidating scale. Belonging to the same body of work as 'Flow', The two pieces are essentially a response to one another that complements the feats of modern architecture.</p>",
     "featured": false,
     "order": 26,
     "stats": {
@@ -1269,7 +1268,7 @@
   {
     "id": "xDKzBO",
     "title": "Flow",
-    "date": "2023-09-04",
+    "date": "2021-09-04",
     "albums": [
       "Physical Mediums"
     ],
@@ -1290,7 +1289,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/xDKzBO",
     "tools": [],
-    "description": "<p>2021 | The built landscape explored in depictions of subtly dreamy surfaces achieved through architectural ingenuity. Soft shades and fine pen outlines help to enhance the organic shape and tranquil aesthetic of the Azerbaijani cultural centre.</p>",
+    "description": "<p>The built landscape explored in depictions of subtly dreamy surfaces achieved through architectural ingenuity. Soft shades and fine pen outlines help to enhance the organic shape and tranquil aesthetic of the Azerbaijani cultural centre.</p>",
     "featured": false,
     "order": 27,
     "stats": {
@@ -1302,7 +1301,7 @@
   {
     "id": "8bLlrO",
     "title": "Solitary Connection",
-    "date": "2023-09-04",
+    "date": "2021-09-04",
     "albums": [
       "Physical Mediums"
     ],
@@ -1335,7 +1334,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/8bLlrO",
     "tools": [],
-    "description": "<p>2021 | A drawing collection completed in the light of lockdown, where visions of solitary yet connected life is conveyed through a series of drawn works outlined in fine liners for a more detailed illustrative look.</p>",
+    "description": "<p>A drawing collection completed in the light of lockdown, where visions of solitary yet connected life is conveyed through a series of drawn works outlined in fine liners for a more detailed illustrative look.</p>",
     "featured": false,
     "order": 28,
     "stats": {
@@ -1347,7 +1346,7 @@
   {
     "id": "QXBmb8",
     "title": "Shatter",
-    "date": "2023-09-04",
+    "date": "2021-09-04",
     "albums": [
       "Physical Mediums"
     ],
@@ -1368,7 +1367,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/QXBmb8",
     "tools": [],
-    "description": "<p>2021 | My first Acrylic portrait where I experimented with the palette knife style to achieve emotion through an expressive application of paint and colours rather than a realistic approach to paint. This work ultimately opened me up to enjoy the paint medium significantly such that I returned to refine older pieces such as 'scenic Launch'.</p>",
+    "description": "<p>My first Acrylic portrait where I experimented with the palette knife style to achieve emotion through an expressive application of paint and colours rather than a realistic approach to paint. This work ultimately opened me up to enjoy the paint medium significantly such that I returned to refine older pieces such as 'scenic Launch'.</p>",
     "featured": false,
     "order": 29,
     "stats": {
@@ -1380,7 +1379,7 @@
   {
     "id": "XgYB1L",
     "title": "Scenic Launch",
-    "date": "2023-09-04",
+    "date": "2020-09-04",
     "albums": [],
     "categories": [],
     "tags": [],
@@ -1399,7 +1398,7 @@
     ],
     "sourceUrl": "https://www.artstation.com/artwork/XgYB1L",
     "tools": [],
-    "description": "<p>2020 | An introduction to acrylic mediums in high school gave way to early landscape works such as 'scenic launch' which was modified after marking to include launching rockets and a more refined look with lessons learnt during the creation of works such as 'shatter'.</p>",
+    "description": "<p>An introduction to acrylic mediums in high school gave way to early landscape works such as 'scenic launch' which was modified after marking to include launching rockets and a more refined look with lessons learnt during the creation of works such as 'shatter'.</p>",
     "featured": false,
     "order": 30,
     "stats": {
