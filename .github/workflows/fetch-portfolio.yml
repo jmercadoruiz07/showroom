@@ -1,0 +1,59 @@
+name: Fetch and Update Portfolio
+
+on:
+  workflow_dispatch: # Enables manual trigger from the GitHub web UI
+
+permissions:
+  contents: write # Push the updated projects.json back to the repo
+  actions: write # Dispatch the deploy workflow after pushing
+
+concurrency:
+  group: fetch-portfolio
+  cancel-in-progress: false
+
+jobs:
+  update-projects:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run fetch script
+        run: npm run fetch-portfolio
+
+      - name: Commit and Push projects.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/projects.json
+
+          # Only commit and push if there are staged changes
+          if git diff --cached --quiet; then
+            echo "No changes to projects.json. Skipping commit."
+          else
+            git commit -m "chore: auto-update projects.json"
+            git push
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+        id: commit
+
+      # Pushes made with GITHUB_TOKEN do not trigger other workflows, so start the deploy explicitly.
+      - name: Trigger deploy
+        if: steps.commit.outputs.pushed == 'true'
+        run: gh workflow run deploy.yml --ref "${{ github.ref_name }}"
+        env:
+          GH_TOKEN: ${{ github.token }}

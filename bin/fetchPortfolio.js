@@ -256,6 +256,7 @@ async function fetchArtStationPortfolio(username) {
 
   } catch (error) {
     console.error(`\n${colors.red}❌ Error fetching portfolio:${colors.reset}`, error);
+    process.exitCode = 1;
   } finally {
     await browser.close();
   }
