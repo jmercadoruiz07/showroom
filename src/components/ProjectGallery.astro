@@ -16,13 +16,17 @@ type FeaturedPick = {
   imageIndex: number;
 };
 
+type AlbumTabOrder = 'recent' | 'projectCount' | 'alphabetical';
+
 type Props = {
   tightTop?: boolean;
   stickyFilter?: boolean;
   featuredPicks?: FeaturedPick[];
+  /** Order of the album tabs after the first (ALL / FEATURED) tab: newest project first, most projects first, or A to Z. */
+  albumTabOrder?: AlbumTabOrder;
 };
 
-const { tightTop = false, stickyFilter = true, featuredPicks } = Astro.props;
+const { tightTop = false, stickyFilter = true, featuredPicks, albumTabOrder = 'projectCount' } = Astro.props;
 
 const allProjects = await getCollection('projects', ({ data }) => !data.featured);
 const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
@@ -47,10 +51,22 @@ for (const { album } of projects) {
   if (album) projectCounts.set(album, (projectCounts.get(album) ?? 0) + 1);
 }
 
-/** Albums with the most projects first; ties keep the order in which each album first appears. */
-const albums = [...projectCounts.keys()].sort(
-  (a, b) => projectCounts.get(b)! - projectCounts.get(a)!,
-);
+/** Date of each album's newest project. */
+const latestDates = new Map<string, number>();
+for (const project of sortedProjects) {
+  const album = project.data.albums?.[0];
+  if (!album) continue;
+  latestDates.set(album, Math.max(latestDates.get(album) ?? 0, project.data.date.getTime()));
+}
+
+const albumComparators: Record<AlbumTabOrder, (a: string, b: string) => number> = {
+  recent: (a, b) => latestDates.get(b)! - latestDates.get(a)!,
+  projectCount: (a, b) => projectCounts.get(b)! - projectCounts.get(a)!,
+  alphabetical: (a, b) => a.localeCompare(b),
+};
+
+/** Ties keep the order in which each album first appears. */
+const albums = [...projectCounts.keys()].sort(albumComparators[albumTabOrder]);
 
 const featured = featuredPicks?.map(({ id, imageIndex }) => {
   const project = sortedProjects.find((p) => p.id === id);
