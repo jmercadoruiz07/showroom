@@ -82,6 +82,13 @@ async function fetchArtStationPortfolio(username) {
   });
   const page = await context.newPage();
 
+  // Anything that would leave the portfolio incomplete is recorded here; the file is only written if this stays empty.
+  const problems = [];
+  const reportProblem = (message) => {
+    problems.push(message);
+    console.warn(`${colors.red}⚠️  ${message}${colors.reset}`);
+  };
+
   try {
     // 1. Fetch user's albums mapping
     console.log(`${colors.blue}📂 Mapping user albums...${colors.reset}`);
@@ -90,7 +97,7 @@ async function fetchArtStationPortfolio(username) {
     try {
       quickData = await fetchJsonFromPage(page, quickUrl);
     } catch (err) {
-      console.warn(`${colors.yellow}⚠️  Warning: Could not fetch albums (quick.json). Albums will be empty.${colors.reset}`);
+      reportProblem(`Could not fetch albums (quick.json): ${err.message}`);
     }
     
     // Parse the correct property from quick.json
@@ -129,6 +136,7 @@ async function fetchArtStationPortfolio(username) {
               pageNum++;
             }
           } catch (err) {
+            reportProblem(`Could not fetch page ${pageNum} of album "${album.title}": ${err.message}`);
             hasMore = false;
           }
           await new Promise(resolve => setTimeout(resolve, 300));
@@ -141,7 +149,13 @@ async function fetchArtStationPortfolio(username) {
     // 2. Fetch the user's main project index
     console.log(`${colors.blue}📥 Fetching main project index...${colors.reset}\n`);
     const listData = await fetchJsonFromPage(page, listUrl);
-    const projects = listData.data; 
+    const projects = listData.data;
+    if (!Array.isArray(projects) || projects.length === 0) {
+      throw new Error('The project index is empty.');
+    }
+    if (listData.total_count && listData.total_count !== projects.length) {
+      reportProblem(`The index returned ${projects.length} of ${listData.total_count} projects (more pages?).`);
+    }
     const fullPortfolio = [];
 
     console.log(`${colors.green}✅ Successfully fetched index! Found ${colors.bright}${projects.length}${colors.reset}${colors.green} projects.${colors.reset}\n`);
@@ -161,7 +175,7 @@ async function fetchArtStationPortfolio(username) {
       try {
         detailData = await fetchJsonFromPage(page, detailUrl);
       } catch (err) {
-        console.warn(`${colors.red}⚠️  Warning: Failed to fetch details for ${hashId}. Skipping...${colors.reset}`);
+        reportProblem(`Failed to fetch details for "${projectMeta.title}" (${hashId}): ${err.message}`);
         continue;
       }
 
@@ -180,7 +194,7 @@ async function fetchArtStationPortfolio(username) {
         } else if (asset.asset_type === 'video') {
           const embedSrc = getEmbedSrc(asset.player_embedded);
           if (!embedSrc) {
-            console.warn(`${colors.yellow}⚠️  Warning: Video asset ${asset.id} in ${hashId} has no embed URL. Skipping it.${colors.reset}`);
+            reportProblem(`Video asset ${asset.id} in "${projectMeta.title}" (${hashId}) has no embed URL.`);
             continue;
           }
           const poster = (await getVimeoPoster(context, embedSrc)) || {
@@ -208,6 +222,10 @@ async function fetchArtStationPortfolio(username) {
       const thumbnailUrl = detailData.cover_url || projectMeta.cover?.large_image_url;
       let thumbWidth = detailData.cover_width || projectMeta.cover?.width || null;
       let thumbHeight = detailData.cover_height || projectMeta.cover?.height || null;
+
+      if (!thumbnailUrl) {
+        reportProblem(`"${projectMeta.title}" (${hashId}) has no thumbnail.`);
+      }
 
       // If dimensions are missing, use Playwright to measure the image
       if (thumbnailUrl && (!thumbWidth || !thumbHeight)) {
@@ -250,6 +268,13 @@ async function fetchArtStationPortfolio(username) {
 
       // Polite delay (500ms) to avoid rate limits
       await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    if (problems.length > 0) {
+      console.error(`\n${colors.red}❌ ${problems.length} problem(s) found, so the portfolio file was not updated:${colors.reset}`);
+      problems.forEach(message => console.error(`   - ${message}`));
+      process.exitCode = 1;
+      return;
     }
 
     return fullPortfolio;
