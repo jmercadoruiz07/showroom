@@ -1,122 +1,88 @@
-# JMR Visuals — Portfolio
+# JMR Showroom
 
-Portfolio site for José Mercado Ruiz (print, 3D, motion). Astro 7 static site, with React used for the hero image carousel and the project gallery islands. Dark theme only.
+A dark, editorial portfolio site for José Mercado Ruiz, a multidisciplinary designer working across print, 3D and motion. Live at [jmercadoruiz07.github.io/showroom](https://jmercadoruiz07.github.io/showroom).
 
-Figma source of truth: file `Vl3rEa0ebSFcwQGhqgbzNd` (PORTFOLIO).
+The site is fully static, and its project data is scraped from the owner's [ArtStation](https://www.artstation.com/jmr_visuals) profile, so the portfolio is managed in one place and the site follows it.
 
-- Hero: node `36:275` (1728px wide)
-- Homepage with divider and masonry: node `32:230`
-- Homepage FEATURED tab accordion (items below the tab selectors): node `198:32`
-- Project page: node `1:2`
-- About page: node `243:13` (1702px wide, the current design; `198:32` is the older one)
+## ✨ Highlights
 
-The built site has moved on from the early hero frames in places (full-window hero, three slideshow images, dark header). Where this file and Figma disagree, this file describes what ships.
+- Full-window hero with a crossfading slideshow and oversized outlined wordmarks
+- Filterable project gallery (masonry by album) with a hand-picked FEATURED accordion
+- Project pages that mix images and Vimeo videos, with a lightbox that supports swipe on mobile
+- Responsive from phone to wide desktop; respects `prefers-reduced-motion`
+- Dark only, by design
 
-## Commands
+## 🧱 Tech stack
 
-| Command | Action |
-| :-- | :-- |
-| `npm install` | Install dependencies |
-| `astro dev --background` | Dev server at `localhost:4321` (`astro dev stop`, `status`, `logs`) |
-| `npm run build` | Production build to `dist/` |
-| `npx astro check` | Type check |
-| `npm run fetch-portfolio` | Refresh `src/content/projects.json` from ArtStation (needs `npx playwright install chromium-headless-shell` once) |
+- [Astro 7](https://astro.build) in static output mode
+- React 19 islands for the interactive parts (hero carousel, gallery, lightbox); everything else is server-rendered Astro
+- Content collections with a zod schema for the project data
+- [Playwright](https://playwright.dev) for the ArtStation scraper
+- GitHub Actions and GitHub Pages for deployment
 
-## Design style (use this when prompting)
+## 🏗️ How it works
 
-**Feel:** dark, editorial, poster-like. Oversized wordmark type, photographic and illustrated work shown edge to edge, layers that overlap and bleed off the canvas. Confident and sparse, never decorative.
+```mermaid
+flowchart LR
+  A[ArtStation JSON endpoints] -->|Playwright scraper| B[src/content/projects.json]
+  B -->|content collection| C[Astro static build]
+  C -->|GitHub Actions| D[GitHub Pages]
+```
 
-**Rules**
-- Dark only. No light mode, no theme toggle.
-- No rounded corners, shadows, gradients, cards, borders around images or glassmorphism. (The one exception is the hover plate on project cards, which is a flat bar in the page colour.)
-- Images are rectangles stacked with a small gutter so the page background shows as a hairline.
-- Type does the decoration: very large, tight-tracked, uppercase display type next to small, plain body copy. Scale contrast is the main visual device.
-- Elements may overlap (the hand illustration crosses the About heading) and be cropped by the page edge.
-- Every page shares one horizontal gutter (`--grid-gutter`) so dividers, the filter bar, the gallery grid and the footer row line up.
+### ArtStation scraping
 
-### Color
+ArtStation is the single source of truth for the work. `bin/fetchPortfolio.js` drives a headless Chromium browser (Playwright) against ArtStation's public JSON endpoints and turns them into `src/content/projects.json`:
 
-| Token | Value | Use |
-| :-- | :-- | :-- |
-| `--color-bone` | `#191d1f` | Page background (cool charcoal), header and card bar |
-| `--color-chalk` | `#ffffff` | Display type, outlines, dividers |
-| `--color-ink` | `var(--color-chalk)` | Body text and headings (white) |
-| `--color-soot` | `var(--color-chalk)` | Secondary text (also white) |
-| `--color-stone` | `oklch(0.35 0.01 60)` | Borders, image placeholders |
-| `--color-paper` | `oklch(0.28 0.008 225)` | Image placeholders, panels |
-| `--color-accent` | `#789da0` | Muted teal for focus and the card FEATURED tag |
+- Reads the user's custom albums and maps every project to the albums it belongs to
+- Fetches the details of each project: title, date, tags, tools, description, images and Vimeo videos in their original order
+- Retries flaky requests, and spaces them out to stay polite
+- Applies small content conventions, such as a `2021 | ` prefix in a description setting the project's year
+- Is all-or-nothing: if anything fails, the existing file is left untouched, so a partial scrape never ships
 
-Secondary labels (card category) are 58% white via `color-mix`. Filter tabs are white; the selected tab is a white box with dark text and a hovered tab is a light grey box (75% white) with dark text.
+Refreshing the content is a manual GitHub Actions run. It scrapes, commits the updated `projects.json` and triggers a deploy.
 
-### Typography
+### Static build
 
-| Role | Site font (Adobe Fonts / Typekit) | Notes |
-| :-- | :-- | :-- |
-| Display (hero name, wordmarks, About heading) | `widescreen` via `--font-hero` | Uppercase; 700 for the hero name, 900 for outlined wordmarks |
-| About bio and project descriptions | `swiss-721-bt` (Swiss 721 BT Medium) via `--font-text` | Only the 500 weight is in the Adobe Fonts kit, so use `--font-weight-medium` |
-| Body, nav, filter tabs, card labels, footer text | `adelle-mono` via `--font-hero-mono` | Nav, tabs and the footer copyright share one style: `--type-xs`, regular, `--tracking-wide`, uppercase |
+At build time Astro loads `projects.json` as a content collection, validates it, and generates the home page, the works page and one page per project. Images are served from ArtStation's CDN and nothing talks to a backend at runtime.
 
-Figma uses LEMON MILK and NB Akademie, which are not available, so `widescreen` and `adelle-mono` stand in. The Typekit stylesheet is loaded in `src/layouts/BaseLayout.astro`.
+### Deployment
 
-### Layout tokens (`src/styles/tokens.css`)
+Pushing to `main` builds the site and publishes it to GitHub Pages.
 
-- `--grid-gutter`: side gutter of the gallery grid (`--space-xl`, `--space-md` at 768px and below). Used by the gallery root, filter bar, footer divider and footer row.
-- `--wordmark-width`, `--wordmark-inset`, `--wordmark-gutter` (= width + inset): the vertical wordmark's column. Pages that show it reserve `--wordmark-gutter` on the right. All three are 0 or reduced below 768px, where the wordmark is hidden.
-- `--header-height`: height of the fixed header.
+## 🚀 Getting started
 
-## Components
+Requires Node 22.12 or newer.
 
-### Header (`SiteHeader.astro`)
-Fixed bar in the page colour with white links (Home, Works, About; Works goes to `/works` and stays current on project pages under `/works/<id>`). On pages that contain a `.hero` it is transparent at the top and fills with `--color-bone` as soon as the page scrolls; on every other page it is always filled. Hover draws a 1px underline growing from the left (background-size transition); the current page keeps the underline. The home page has an intro state: the server-rendered `data-intro` (set only there) plus no `data-scrolled` sets `--intro: 1` on the header, and both effects read it. From 768px up the links shift right (`transform` on `.nav-list`) so the H of HOME lines up with the stem of the J in JOSE (nudged 4px right; derived from `--hero-name-size`), and a plain `JMR` label (`.nav-label`, not a link, rendered only when `data-intro` is set) shows at the right end of the bar from 768px up, its right edge in line with the vertical wordmark. As soon as the page scrolls the links ease back to the usual left edge and the label fades out over `--duration-slow`. A script keyed to `astro:page-load` toggles `data-hero` and `data-scrolled` because the router swaps the header on navigation.
+```sh
+npm install
+npm run dev          # http://localhost:4321/showroom
+npm run build        # production build to dist/
+npm run preview      # serve the production build
+npx astro check      # type check
+```
 
-### Hero (`HeroSection.astro`, `HeroCarousel/`)
-- Full window (`100svh`; `70svh` below 768px).
-- One background image, a random order of `public/assets/hero/slideshow_1-3.png` shuffled in the browser, crossfading every 4s. Pauses on hover and while the tab is hidden; static with `prefers-reduced-motion`. Not clickable and hidden from assistive tech.
-- Name "JO" over "SE": desktop is vertically centred at the left, `min(50vh, 40vw)`, tracking −0.124em, line-height 0.72 (the lines overlap slightly). Below 768px the same stack is `min(58vw, 38svh)` in the bottom-right corner with a 4vw margin to the visible letters.
-- Scroll chevron, bottom centre, desktop only: appears 5s after load if the page has not been scrolled, fades out when the page leaves the top and returns when it is back at the top.
+To refresh the content from ArtStation locally:
 
-### Vertical wordmark (`VerticalWordmark.astro`)
-`MERCADO RUIZ` fixed to the right edge below the header, reading bottom to top, desktop only. Built on `OutlinedWordmark` with neighbours filling on hover. On pages with a `.hero` the letters start filled and fade to outlines as the hero scrolls away, finishing when the hero's bottom edge reaches the top of the page (`--wordmark-fill` set by a scroll handler, applied as a zero-offset `text-shadow`).
+```sh
+npx playwright install chromium-headless-shell   # once
+npm run fetch-portfolio
+```
 
-### Outlined wordmark (`OutlinedWordmark.astro`)
-Reusable outlined text used by the vertical wordmark, the footer "JOSE" and the About heading. Props: `text`, `fillNeighbours`, `kerns` (extra em after each letter), `class`. Hovering a letter fills it. Each letter is generated content (`::before { content: attr(data-char) }`), not real text, because transparent text with a stroke vanishes when the page selection (select all) repaints it. The root's class is styled from the parent with `:global(...)` because scoped styles do not reach a child component's root. Set `--wordmark-stroke-width` and `--wordmark-gap` on the parent.
-
-### Footer (`SiteFooter.astro`)
-A 1px divider and a copyright/social row inset by `--grid-gutter` (the icons are `SocialLinks.astro`: Instagram and ArtStation, shared with the About page), then the outlined `JOSE` spanning the footer width. The wordmark box is trimmed to cap height and baseline (`text-box: trim-both cap alphabetic`) so it sits flush with the bottom of the page; the round letters' overshoot is covered by padding. Only the hovered letter fills. `BaseLayout` takes `footer={false}`; the About page uses it.
-
-### Gallery (`ProjectGallery*`, `ProjectCard/`)
-Filter bar whose width equals the content. When the tabs do not all fit the bar scrolls sideways: an arrow with a fade (flat bone fading to transparent) appears at each end that has more tabs, and clicking one scrolls by 60% of the bar. Clicking a tab scrolls it to the middle of the bar (as near as the list allows at either end; instant under `prefers-reduced-motion`), so there is no scroll snapping; it sticks below the header on `/works` but scrolls away on the homepage (`stickyFilter={false}`). On the homepage the first tab is FEATURED: a `FeaturedAccordion` of four projects hard-coded in `pages/index.astro` (`featuredPicks`: project id plus the zero-based index of the image to show among the project's image assets (videos not counted); an out-of-range index falls back to the first image, an unknown id fails the build). On `/works` the first tab is ALL, a masonry of every project. After the first tab the album tabs follow the `albumTabOrder` prop of `ProjectGallery.astro`: `'projectCount'` (default; most projects first), `'recent'` (album with the newest project first) or `'alphabetical'`; ties keep the order in which each album first appears. The homepage uses `'projectCount'` and `/works` uses `'recent'`. Album tabs show a masonry of that album's thumbnails. Each card shows the project's first `image` asset (the ArtStation cover is only a fallback for projects with no images).
-
-Project pages (`ProjectMedia/`) show the project's `media` list as one column in ArtStation's order, images and Vimeo videos mixed. A video is a poster with a play button that opens the player in the lightbox, in a frame with the video's own aspect ratio (from the poster's size, 16:9 if unknown) so the player has no bars. In the lightbox, desktop has the arrows at the screen sides; at 768px and below the arrows sit in a row just under the media (left and right of the screen) and the media spans exactly from the left edge of the left arrow to the right edge of the right one and a touch swipe of at least 50px, mostly horizontal, moves to the previous or next item (swipes on a video's player itself are taken by the player, so use the arrows there). `projects.json` stores `media` as `{ type: 'image', url, width, height }` or `{ type: 'video', url, poster }` entries (`url` is the player's iframe src, `poster` is Vimeo's 1280px thumbnail). The fetch script keeps `image` and `video` assets and skips covers and ArtStation-hosted `video_clip` assets.
-
-Masonry cards: on hover or keyboard focus a bar in the page colour slides down from the top edge of the card (like an eyelid): title bold on the left, category regular and dimmed on the right, both in the tab type. Where hover is unavailable the bar is always shown. The FEATURED tag appears at the bottom left on hover.
-
-Accordion (`FeaturedAccordion/`): full-width strips that take the same props as `ProjectCard`. A strip is 241 Figma px tall and grows to 60vh on hover or keyboard focus (from 768px up). The split is by width, not by input device: from 768px up a strip is closed until hovered or focused and only rotates its images while open; below 768px every strip is always open at 70svh and only rotates while more than half of it is in view. The image keeps the expanded size and is centred, so growing the strip reveals more of it without scaling; text colour does not change on hover. Title and category sit at the bottom left over a white left-to-right fade (node `252:117`); when the strip opens they move to the top left (54 from the corner) and the fade crossfades to a radial white glow from that corner. `--u = 100cqw / 1509` (`/ 760` below 768px). While a strip is open (hover, keyboard focus, or the touch auto-open) it steps through all of the project's image assets every 1.2s with a 500ms crossfade, starting from the picked image, and returns to the picked image after it closes; nothing rotates under `prefers-reduced-motion`.
-
-### About page (`pages/about.astro`, `AboutSection.astro`)
-Contact (one `mailto:` link under the CONTACT label, with the `SocialLinks` icons on the label's row at the right, and one line of space between label and email), a statement, the portrait and the "GET IN TOUCH" heading with a two-layer hand (`public/assets/about/hand-behind.png` behind the heading, `hand-front.png` in front). No footer on this page. `--ink-width` (the heading's ink width in em, set inline on `.about`) ties everything together: `--u = --touch-font-size × --ink-width / 1394`, so the heading and the hands always scale as one picture. Heading letters fill on hover (neighbours too).
-
-| Tier | Width | Layout | Text | Heading size |
-| :-- | :-- | :-- | :-- | :-- |
-| Desktop | 1400px and up | Collage at a fixed scale, left aligned (the hand bleeds off the left edge). Contact, statement and portrait sit in three columns from `--grid-gutter` to `--grid-gutter + --wordmark-gutter` from the right; the portrait and the statement are a third and 1.2 thirds of the width and the contact column takes the remaining 0.8 third; the portrait has a fixed height and is cropped with `object-fit: cover` | 1.25rem | 10rem |
-| Tablet | 768–1399px | Two-column grid: text left, portrait right spanning three rows. The heading row starts 12px under the statement so the hand never covers text; the hand is shifted left so its flat cut end is off screen | 1.25rem | `min(5.75rem, (90vw − gutter) / ink-width)` |
-| Mobile | under 768px | Single column: contact, statement, heading and hand, then the portrait. `.about-touch` is a size container and the heading is `100cqw / ink-width`, so its ink matches the portrait's width exactly | 1rem | container-sized |
-
-## Behavior
-
-- Hero rotation, scroll chevron and header transparency are described above.
-- Pages that use `.hero` get the filled vertical wordmark and the transparent header; any page without it gets the hollow wordmark and the filled header.
-- Hero slideshow images live in `public/assets/hero/`; About assets in `public/assets/about/`. Every static file sits under `public/assets/` and is referenced through `assetUrl()` (`src/utils/asset-url.ts`), which adds the site base (`/showroom`); internal page links go through `pageUrl()` in the same file. `public/assets/hero/hand-painting.png` and `jmr-outline-logo.png` are no longer used; `ContactBlock.astro` is unused.
-
-## Project structure
+## 📁 Project structure
 
 ```text
+bin/          ArtStation scraper
+public/       Static assets (hero, about, favicon)
 src/
-  components/   .astro components with scoped styles; React islands (HeroCarousel, ProjectGallery, ProjectCard, FeaturedAccordion, ProjectMedia) with .module.css
-  content/      projects.json (ArtStation export from `npm run fetch-portfolio`)
-  layouts/      BaseLayout.astro (footer prop), ProjectLayout.astro
-  utils/        asset-url.ts (assetUrl, pageUrl), site.ts (SITE_NAME, BIO, PROFILE_IMAGE: the home page title, and the default description and og:image of every page), sort-projects.ts
-  pages/        index, about, works, works/ (project detail pages), 404
-  styles/       tokens.css (design tokens), base.css (reset and global utilities)
-public/         assets/ (hero/, about/, projects/images/, favicon, logo)
+  components/ Astro components and React islands
+  content/    projects.json (generated)
+  layouts/    Page shells
+  pages/      Routes: home, works, project pages, about, 404
+  styles/     Design tokens and base styles
+  utils/      Small shared helpers
+.github/      Deploy and content-refresh workflows
 ```
+
+## 🤖 Working with agents
+
+Implementation details, design-system rules and project conventions are in [AGENTS.md](./AGENTS.md).
