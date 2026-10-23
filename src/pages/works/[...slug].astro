@@ -8,9 +8,12 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import ProjectMedia from '../../components/ProjectMedia/ProjectMedia';
 import { pageUrl } from '../../utils/asset-url';
 import { firstImage } from '../../utils/project-media';
+import { extractActions } from '../../utils/project-actions';
 
 const { project } = Astro.props;
-const { title, date, albums, tags, media, tools, description, featured } = project.data;
+const { title, date, albums, tags, media, tools, featured } = project.data;
+const { description, actions } = extractActions(project.data.description);
+const hasDescription = description !== undefined && description.trim() !== '' && !/^(<p>\s*<\/p>\s*)+$/.test(description.trim());
 
 /** Generates a page for every project. */
 export async function getStaticPaths() {
@@ -79,8 +82,28 @@ const formatDate = (date: Date) => {
       </div>
 
       <div class={`project-text ${mediaFirst ? 'text-last' : 'text-first'}`}>
-        {description !== undefined && (
+        {hasDescription && (
           <div class="project-description text-body" set:html={description} />
+        )}
+
+        {actions.length > 0 && (
+          <div class="project-actions">
+            {actions.map((action) => (
+              <a
+                class="action-button text-mono"
+                href={action.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {action.icon === 'play' && (
+                  <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M7 4v16l13-8z" fill="currentColor" />
+                  </svg>
+                )}
+                {action.label}
+              </a>
+            ))}
+          </div>
         )}
 
         {tools && tools.length > 0 && (
@@ -231,6 +254,50 @@ const formatDate = (date: Date) => {
   .project-description p {
     margin-bottom: var(--space-md);
     max-width: none;
+  }
+
+  .project-description:has(+ .project-actions) {
+    margin-bottom: var(--space-lg);
+  }
+
+  .project-description:has(+ .project-actions) :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--type-xs);
+    letter-spacing: var(--tracking-wide);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-bone);
+    background: var(--color-chalk);
+    padding: 0.9em 1.4em;
+    transition: background-color var(--duration-fast) var(--ease-quick);
+  }
+
+  .action-button:hover {
+    background: color-mix(in srgb, var(--color-chalk) 75%, var(--color-bone));
+  }
+
+  .action-button:focus-visible {
+    outline: 2px solid var(--color-chalk);
+    outline-offset: 2px;
+  }
+
+  .action-icon {
+    width: 1.1em;
+    height: 1.1em;
+    flex: none;
   }
 
   .project-tools {
