@@ -99,7 +99,7 @@ const formatDate = (date: Date) => {
         )}
 
         {tags && tags.length > 0 && (
-          <section class="project-tags-section">
+          <section class="project-section">
             <h2 class="section-title text-mono">TAGS</h2>
             <ul class="project-tags">
               {tags.map((tag) => (
@@ -110,7 +110,7 @@ const formatDate = (date: Date) => {
         )}
 
         {tools && tools.length > 0 && (
-          <section class="project-tools">
+          <section class="project-section">
             <h2 class="section-title text-mono">TOOLS</h2>
             <ul class="tools-list">
               {tools.map((tool) => (
@@ -251,7 +251,7 @@ const formatDate = (date: Date) => {
     font-weight: var(--font-weight-medium);
     font-size: var(--type-base);
     line-height: var(--line-height-relaxed);
-    margin-bottom: var(--space-2xl);
+    margin-bottom: calc(var(--space-2xl) / 2);
   }
 
   .project-description p {
@@ -294,10 +294,9 @@ const formatDate = (date: Date) => {
     flex: none;
   }
 
-  .project-tags-section,
-  .project-tools {
-    margin-bottom: var(--space-2xl);
-    padding-top: var(--space-xl);
+  .project-section {
+    margin-block: calc(var(--space-2xl) / 2);
+    padding-top: calc(var(--space-xl) / 2);
     border-top: 1px solid var(--color-chalk);
   }
 
