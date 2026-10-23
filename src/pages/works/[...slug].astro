@@ -61,12 +61,24 @@ const formatDate = (date: Date) => {
 
       <h1 class="project-title text-display">{title}</h1>
 
-      {tags && tags.length > 0 && (
-        <ul class="project-tags" aria-label="Project tags">
-          {tags.map((tag) => (
-            <li><span class="tag text-mono">{tag.toUpperCase()}</span></li>
+      {actions.length > 0 && (
+        <div class="project-actions">
+          {actions.map((action) => (
+            <a
+              class="action-button text-mono"
+              href={action.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {action.icon === 'play' && (
+                <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M7 4v16l13-8z" fill="currentColor" />
+                </svg>
+              )}
+              {action.label}
+            </a>
           ))}
-        </ul>
+        </div>
       )}
     </header>
 
@@ -86,29 +98,20 @@ const formatDate = (date: Date) => {
           <div class="project-description text-body" set:html={description} />
         )}
 
-        {actions.length > 0 && (
-          <div class="project-actions">
-            {actions.map((action) => (
-              <a
-                class="action-button text-mono"
-                href={action.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {action.icon === 'play' && (
-                  <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M7 4v16l13-8z" fill="currentColor" />
-                  </svg>
-                )}
-                {action.label}
-              </a>
-            ))}
-          </div>
+        {tags && tags.length > 0 && (
+          <section class="project-tags-section">
+            <h2 class="section-title text-mono">TAGS</h2>
+            <ul class="project-tags">
+              {tags.map((tag) => (
+                <li><span class="tag text-mono">{tag.toUpperCase()}</span></li>
+              ))}
+            </ul>
+          </section>
         )}
 
         {tools && tools.length > 0 && (
           <section class="project-tools">
-            <h2 class="tools-title text-mono">TOOLS</h2>
+            <h2 class="section-title text-mono">TOOLS</h2>
             <ul class="tools-list">
               {tools.map((tool) => (
                 <li><span class="tool text-mono">{tool}</span></li>
@@ -256,19 +259,10 @@ const formatDate = (date: Date) => {
     max-width: none;
   }
 
-  .project-description:has(+ .project-actions) {
-    margin-bottom: var(--space-lg);
-  }
-
-  .project-description:has(+ .project-actions) :global(p:last-child) {
-    margin-bottom: 0;
-  }
-
   .project-actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
-    margin-bottom: var(--space-2xl);
   }
 
   .action-button {
@@ -300,13 +294,14 @@ const formatDate = (date: Date) => {
     flex: none;
   }
 
+  .project-tags-section,
   .project-tools {
     margin-bottom: var(--space-2xl);
     padding-top: var(--space-xl);
     border-top: 1px solid var(--color-chalk);
   }
 
-  .tools-title {
+  .section-title {
     font-size: var(--type-xs);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
